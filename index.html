@@ -3,55 +3,67 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Антифрод Центр Казахстан — Проверка и возврат средств</title>
-    <meta name="description" content="Проверка финансовых организаций, определение стадии мошенничества, помощь в возврате средств">
+    <title>Антифрод Центр Казахстан — Помощь жертвам мошенничества</title>
+    <meta name="description" content="Проверка организаций, помощь в возврате средств, юридическая консультация. Бесплатно.">
     <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
     <script src="https://cdn.tailwindcss.com"></script>
-    <script>
-        tailwind.config = {
-            theme: {
-                extend: {
-                    colors: {
-                        primary: '#B80018',
-                        gold: '#C8A000',
-                        dark: '#1A1A1A',
-                        darker: '#000000'
-                    },
-                    fontFamily: {
-                        heading: ['Oswald', 'sans-serif'],
-                        body: ['PT Sans', 'sans-serif']
-                    }
-                }
-            }
-        }
-    </script>
+    <script>tailwind.config={theme:{extend:{colors:{primary:'#B80018',gold:'#C8A000',dark:'#1A1A1A',darker:'#000000'},fontFamily:{heading:['Oswald','sans-serif'],body:['PT Sans','sans-serif']}}}}</script>
     <link rel="stylesheet" href="/antifraud-kz/assets/css/styles.css">
 </head>
 <body class="bg-darker text-white font-body">
 
 <!-- Hero -->
-<section class="relative min-h-screen flex items-center justify-center pt-20 bg-gradient-to-br from-darker via-dark to-darker">
+<section class="relative min-h-[90vh] flex items-center pt-20 overflow-hidden">
+    <div class="absolute inset-0 bg-gradient-to-b from-darker via-dark to-darker"></div>
+    <div class="absolute inset-0 opacity-5" style="background-image:url('data:image/svg+xml,%3Csvg width=&quot;60&quot; height=&quot;60&quot; viewBox=&quot;0 0 60 60&quot; xmlns=&quot;http://www.w3.org/2000/svg&quot;%3E%3Cg fill=&quot;none&quot; fill-rule=&quot;evenodd&quot;%3E%3Cg fill=&quot;%23B80018&quot; fill-opacity=&quot;0.3&quot;%3E%3Cpath d=&quot;M36 34v-4h-2v4h-4v2h4v4h2v-4h4v-2h-4zm0-30V0h-2v4h-4v2h4v4h2V6h4V4h-4zM6 34v-4H4v4H0v2h4v4h2v-4h4v-2H6zM6 4V0H4v4H0v2h4v4h2V6h4V4H6z&quot;/%3E%3C/g%3E%3C/g%3E%3C/svg%3E')"></div>
     <div class="container mx-auto px-4 py-20 relative z-10">
         <div class="max-w-4xl mx-auto text-center">
-            <div class="inline-block bg-primary/20 border border-primary/50 rounded-full px-6 py-2 mb-6">
+            <div class="inline-flex items-center gap-2 bg-primary/20 border border-primary/30 rounded-full px-5 py-2 mb-8">
+                <div class="w-2 h-2 bg-primary rounded-full animate-pulse"></div>
                 <span class="text-primary font-heading text-sm tracking-wider">АНТИФРОД ЦЕНТР КАЗАХСТАН</span>
             </div>
-            <h1 class="font-heading text-4xl md:text-6xl lg:text-7xl font-bold mb-6 leading-tight">
-                ПРОВЕРИТЬ И
-                <span class="text-primary">ВЕРНУТЬ</span>
+            <h1 class="font-heading text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-bold mb-6 leading-tight">
+                ВАС ПРОСЯТ ЗАПЛАТИТЬ<br>
+                <span class="text-primary">ЧТОБЫ ПОЛУЧИТЬ</span><br>
+                СВОИ ЖЕ ДЕНЬГИ?
             </h1>
-            <p class="text-xl md:text-2xl text-gray-300 mb-10 max-w-2xl mx-auto">
-                Проверьте организацию, определите стадию ситуации и получите помощь专业ных юристов
+            <p class="text-lg md:text-xl text-gray-300 mb-10 max-w-2xl mx-auto leading-relaxed">
+                Это повторное мошенничество. <strong class="text-white">Не переводите деньги.</strong> Мы поможем вернуть средства через законные каналы — бесплатно оценим шансы и составим план действий.
             </p>
-            <div class="flex flex-col sm:flex-row gap-4 justify-center">
-                <a href="/antifraud-kz/check.html" class="bg-primary hover:bg-primary/80 px-8 py-4 rounded-lg font-heading text-lg transition transform hover:scale-105">
+            <div class="flex flex-col sm:flex-row gap-4 justify-center mb-16">
+                <a href="/antifraud-kz/quiz.html" class="bg-primary hover:bg-primary/80 px-8 py-4 rounded-lg font-heading text-lg transition transform hover:scale-105 shadow-lg shadow-primary/25">
+                    ОСТАВИТЬ ЗАЯВКУ
+                </a>
+                <a href="/antifraud-kz/check.html" class="border-2 border-white/20 hover:border-white/40 hover:bg-white/5 px-8 py-4 rounded-lg font-heading text-lg transition">
                     ПРОВЕРИТЬ ОРГАНИЗАЦИЮ
                 </a>
-                <a href="/antifraud-kz/contacts.html" class="border-2 border-gold hover:bg-gold/10 px-8 py-4 rounded-lg font-heading text-lg transition">
-                    ОСТАВИТЬ ЗАЯВКУ
+            </div>
+        </div>
+
+        <!-- 4 Situation Cards -->
+        <div class="max-w-5xl mx-auto">
+            <h2 class="text-center text-gray-400 text-sm font-bold tracking-wider mb-6">ВАС КАСАЕТСЯ ОДНА ИЗ ЭТИХ СИТУАЦИЙ?</h2>
+            <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-4">
+                <a href="/antifraud-kz/check.html" class="bg-dark/80 p-5 rounded-xl border border-gray-800 hover:border-primary transition group text-center">
+                    <div class="text-3xl mb-3">🚫</div>
+                    <h3 class="font-heading text-sm font-bold mb-1 group-hover:text-primary transition">НЕ ЗНАЮ ЛИЦЕНЗИЮ</h3>
+                    <p class="text-gray-500 text-xs">Проверим организацию по базам АРРФР</p>
+                </a>
+                <a href="/antifraud-kz/quiz.html" class="bg-dark/80 p-5 rounded-xl border border-gray-800 hover:border-primary transition group text-center">
+                    <div class="text-3xl mb-3">💸</div>
+                    <h3 class="font-heading text-sm font-bold mb-1 group-hover:text-primary transition">ПРОСЯТ ДОПЛАТИТЬ</h3>
+                    <p class="text-gray-500 text-xs">«Налог», «комиссия», «страховка» — это мошенничество</p>
+                </a>
+                <a href="/antifraud-kz/quiz.html" class="bg-dark/80 p-5 rounded-xl border border-gray-800 hover:border-primary transition group text-center">
+                    <div class="text-3xl mb-3">🔒</div>
+                    <h3 class="font-heading text-sm font-bold mb-1 group-hover:text-primary transition">НЕ ВЫВОДЯТ ДЕНЬГИ</h3>
+                    <p class="text-gray-500 text-xs">Заблокировали вывод средств с платформы</p>
+                </a>
+                <a href="/antifraud-kz/quiz.html" class="bg-dark/80 p-5 rounded-xl border border-gray-800 hover:border-primary transition group text-center">
+                    <div class="text-3xl mb-3">👻</div>
+                    <h3 class="font-heading text-sm font-bold mb-1 group-hover:text-primary transition">ИСЧЕЗЛИ</h3>
+                    <p class="text-gray-500 text-xs">Перестали отвечать, сайт удалён</p>
                 </a>
             </div>
         </div>
@@ -59,99 +71,131 @@
 </section>
 
 <!-- Stats -->
-<section class="py-16 bg-dark">
+<section class="py-12 bg-dark border-y border-gray-800">
     <div class="container mx-auto px-4">
-        <div class="grid grid-cols-2 md:grid-cols-4 gap-8">
+        <div class="grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+            <div><div class="font-heading text-3xl md:text-4xl text-primary font-bold">184K+</div><div class="text-gray-500 text-sm">Дел рассмотрено</div></div>
+            <div><div class="font-heading text-3xl md:text-4xl text-gold font-bold">87%</div><div class="text-gray-500 text-sm">Без суда</div></div>
+            <div><div class="font-heading text-3xl md:text-4xl text-primary font-bold">24ч</div><div class="text-gray-500 text-sm">Реакция</div></div>
+            <div><div class="font-heading text-3xl md:text-4xl text-gold font-bold">316 млрд ₸</div><div class="text-gray-500 text-sm">Возвращено</div></div>
+        </div>
+    </div>
+</section>
+
+<!-- 3 Steps -->
+<section class="py-20 bg-darker">
+    <div class="container mx-auto px-4">
+        <h2 class="font-heading text-3xl md:text-4xl font-bold text-center mb-12">3 <span class="text-primary">ШАГА</span> К ВОЗВРАТУ</h2>
+        <div class="grid md:grid-cols-3 gap-8 max-w-4xl mx-auto">
             <div class="text-center">
-                <div class="font-heading text-4xl md:text-5xl text-primary font-bold mb-2">184K+</div>
-                <div class="text-gray-400">Дел рассмотрено</div>
+                <div class="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4"><span class="font-heading text-2xl text-primary font-bold">1</span></div>
+                <h3 class="font-heading text-lg font-bold mb-2">ОСТАВЬТЕ ЗАЯВКУ</h3>
+                <p class="text-gray-400 text-sm">Пройдите короткий опрос — 2 минуты</p>
             </div>
             <div class="text-center">
-                <div class="font-heading text-4xl md:text-5xl text-gold font-bold mb-2">87%</div>
-                <div class="text-gray-400">Без суда</div>
+                <div class="w-16 h-16 bg-gold/20 rounded-full flex items-center justify-center mx-auto mb-4"><span class="font-heading text-2xl text-gold font-bold">2</span></div>
+                <h3 class="font-heading text-lg font-bold mb-2">КОНСУЛЬТАЦИЯ</h3>
+                <p class="text-gray-400 text-sm">Наш юрист свяжется и оценит ситуацию</p>
             </div>
             <div class="text-center">
-                <div class="font-heading text-4xl md:text-5xl text-primary font-bold mb-2">24ч</div>
-                <div class="text-gray-400">Реакция</div>
-            </div>
-            <div class="text-center">
-                <div class="font-heading text-4xl md:text-5xl text-gold font-bold mb-2">316 млрд ₸</div>
-                <div class="text-gray-400">Возвращено</div>
+                <div class="w-16 h-16 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4"><span class="font-heading text-2xl text-primary font-bold">3</span></div>
+                <h3 class="font-heading text-lg font-bold mb-2">ВОЗВРАТ</h3>
+                <p class="text-gray-400 text-sm">Подаём документы и контролируем процесс</p>
             </div>
         </div>
     </div>
 </section>
 
 <!-- Services -->
-<section class="py-20 bg-darker">
+<section class="py-20 bg-dark">
     <div class="container mx-auto px-4">
-        <div class="text-center mb-16">
-            <h2 class="font-heading text-3xl md:text-5xl font-bold mb-4">НАШИ <span class="text-primary">УСЛУГИ</span></h2>
-            <p class="text-gray-400 max-w-2xl mx-auto">Комплексная помощь на каждом этапе</p>
-        </div>
-        <div class="grid md:grid-cols-3 gap-8">
-            <a href="/antifraud-kz/check.html" class="bg-dark p-8 rounded-2xl border border-gray-800 hover:border-primary transition group">
-                <div class="text-4xl mb-4">🔍</div>
-                <h3 class="font-heading text-xl font-bold mb-3 group-hover:text-primary transition">ПРОВЕРКА ОРГАНИЗАЦИИ</h3>
-                <p class="text-gray-400 mb-4">Проверяем по базам АРРФР, НБ РК и международным реестрам</p>
-                <span class="text-primary font-heading text-sm">Проверить →</span>
+        <h2 class="font-heading text-3xl md:text-4xl font-bold text-center mb-4">ЧТО МЫ <span class="text-gold">ДЕЛАЕМ</span></h2>
+        <p class="text-gray-400 text-center mb-12 max-w-xl mx-auto">Комплексная помощь на каждом этапе</p>
+        <div class="grid md:grid-cols-3 gap-6 max-w-5xl mx-auto">
+            <a href="/antifraud-kz/check.html" class="bg-darker p-6 rounded-xl border border-gray-800 hover:border-primary transition group">
+                <div class="text-3xl mb-3">🔍</div>
+                <h3 class="font-heading text-lg font-bold mb-2 group-hover:text-primary transition">ПРОВЕРКА</h3>
+                <p class="text-gray-400 text-sm">Проверяем организации по базам АРРФР, НБ РК</p>
             </a>
-            <a href="/antifraud-kz/quiz.html" class="bg-dark p-8 rounded-2xl border border-gray-800 hover:border-gold transition group">
-                <div class="text-4xl mb-4">🎯</div>
-                <h3 class="font-heading text-xl font-bold mb-3 group-hover:text-gold transition">ОПРЕДЕЛИТЬ СТАДИЮ</h3>
-                <p class="text-gray-400 mb-4">Ответьте на 5 вопросов и получите план действий</p>
-                <span class="text-gold font-heading text-sm">Пройти тест →</span>
+            <a href="/antifraud-kz/services.html" class="bg-darker p-6 rounded-xl border border-gray-800 hover:border-gold transition group">
+                <div class="text-3xl mb-3">📄</div>
+                <h3 class="font-heading text-lg font-bold mb-2 group-hover:text-gold transition">ДОКУМЕНТЫ</h3>
+                <p class="text-gray-400 text-sm">Составляем заявления, жалобы, иски</p>
             </a>
-            <a href="/antifraud-kz/contacts.html" class="bg-dark p-8 rounded-2xl border border-gray-800 hover:border-primary transition group">
-                <div class="text-4xl mb-4">📝</div>
-                <h3 class="font-heading text-xl font-bold mb-3 group-hover:text-primary transition">ОСТАВИТЬ ЗАЯВКУ</h3>
-                <p class="text-gray-400 mb-4">Бесплатная консультация и оценка шансов на возврат</p>
-                <span class="text-primary font-heading text-sm">Оставить заявку →</span>
+            <a href="/antifraud-kz/services.html" class="bg-darker p-6 rounded-xl border border-gray-800 hover:border-primary transition group">
+                <div class="text-3xl mb-3">🏦</div>
+                <h3 class="font-heading text-lg font-bold mb-2 group-hover:text-primary transition">ЧАРДЖБЭК</h3>
+                <p class="text-gray-400 text-sm">Оспариваем транзакции через банк</p>
             </a>
         </div>
     </div>
 </section>
 
-<!-- How We Work -->
-<section class="py-20 bg-dark">
+<!-- Cases -->
+<section class="py-20 bg-darker">
     <div class="container mx-auto px-4">
-        <div class="text-center mb-16">
-            <h2 class="font-heading text-3xl md:text-5xl font-bold mb-4">КАК МЫ <span class="text-gold">РАБОТАЕМ</span></h2>
+        <h2 class="font-heading text-3xl md:text-4xl font-bold text-center mb-12">РЕАЛЬНЫЕ <span class="text-primary">КЕЙСЫ</span></h2>
+        <div class="grid md:grid-cols-2 gap-6 max-w-4xl mx-auto">
+            <div class="bg-dark p-6 rounded-xl border border-gray-800">
+                <div class="flex items-center gap-3 mb-3"><span class="px-3 py-1 rounded-full text-xs font-bold bg-green-500/20 text-green-400">✓ Возврат</span><span class="text-gray-500 text-sm">Январь 2026</span></div>
+                <h3 class="font-heading text-lg font-bold mb-2">Инвестиционная платформа</h3>
+                <p class="text-gray-400 text-sm mb-3">Клиент перевёл 2.5 млн ₸ на фейковую платформу. Заблокировали через чарджбэк.</p>
+                <div class="flex gap-4"><div><p class="text-gray-500 text-xs">Потеряно</p><p class="text-primary font-bold">2 500 000 ₸</p></div><div><p class="text-gray-500 text-xs">Возвращено</p><p class="text-green-400 font-bold">2 500 000 ₸</p></div></div>
+            </div>
+            <div class="bg-dark p-6 rounded-xl border border-gray-800">
+                <div class="flex items-center gap-3 mb-3"><span class="px-3 py-1 rounded-full text-xs font-bold bg-green-500/20 text-green-400">✓ Возврат</span><span class="text-gray-500 text-sm">Декабрь 2025</span></div>
+                <h3 class="font-heading text-lg font-bold mb-2">Криптообменник</h3>
+                <p class="text-gray-400 text-sm mb-3">Фейковый обменник завладел 5 млн ₸. Возврат через банк-посредник.</p>
+                <div class="flex gap-4"><div><p class="text-gray-500 text-xs">Потеряно</p><p class="text-primary font-bold">5 000 000 ₸</p></div><div><p class="text-gray-500 text-xs">Возвращено</p><p class="text-gold font-bold">4 200 000 ₸</p></div></div>
+            </div>
         </div>
-        <div class="grid md:grid-cols-4 gap-8">
-            <div class="text-center">
-                <div class="w-20 h-20 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4"><span class="font-heading text-2xl text-primary font-bold">01</span></div>
-                <h3 class="font-heading text-lg font-bold mb-2">КОНСУЛЬТАЦИЯ</h3>
-                <p class="text-gray-400 text-sm">Оцениваем ситуацию и шансы на возврат</p>
+        <div class="text-center mt-8"><a href="/antifraud-kz/cases.html" class="text-primary hover:text-primary/80 font-heading text-sm">Все кейсы →</a></div>
+    </div>
+</section>
+
+<!-- FAQ -->
+<section class="py-20 bg-dark">
+    <div class="container mx-auto px-4 max-w-3xl">
+        <h2 class="font-heading text-3xl md:text-4xl font-bold text-center mb-12">ЧАСТЫЕ <span class="text-gold">ВОПРОСЫ</span></h2>
+        <div class="space-y-3">
+            <div class="bg-darker rounded-xl border border-gray-800 overflow-hidden faq-item">
+                <button class="faq-toggle w-full p-5 text-left flex items-center justify-between font-bold" onclick="this.nextElementSibling.classList.toggle('hidden');this.querySelector('svg').classList.toggle('rotate-180')">
+                    <span>Можно ли вернуть деньги?</span>
+                    <svg class="w-5 h-5 text-primary transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="hidden px-5 pb-5 text-gray-400 text-sm">Да, в 87% случаев удаётся вернуть средства без суда. Шансы зависят от суммы, времени обращения и наличия доказательств. Чем быстрее — тем выше результат.</div>
             </div>
-            <div class="text-center">
-                <div class="w-20 h-20 bg-gold/20 rounded-full flex items-center justify-center mx-auto mb-4"><span class="font-heading text-2xl text-gold font-bold">02</span></div>
-                <h3 class="font-heading text-lg font-bold mb-2">АНАЛИЗ</h3>
-                <p class="text-gray-400 text-sm">Собираем документы и доказательства</p>
+            <div class="bg-darker rounded-xl border border-gray-800 overflow-hidden faq-item">
+                <button class="faq-toggle w-full p-5 text-left flex items-center justify-between font-bold" onclick="this.nextElementSibling.classList.toggle('hidden');this.querySelector('svg').classList.toggle('rotate-180')">
+                    <span>Сколько стоит консультация?</span>
+                    <svg class="w-5 h-5 text-primary transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="hidden px-5 pb-5 text-gray-400 text-sm">Первая консультация бесплатна. Мы оценим ситуацию и предложим план действий. Оплата по результату — вы платите только после получения средств.</div>
             </div>
-            <div class="text-center">
-                <div class="w-20 h-20 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4"><span class="font-heading text-2xl text-primary font-bold">03</span></div>
-                <h3 class="font-heading text-lg font-bold mb-2">ЗАЯВЛЕНИЯ</h3>
-                <p class="text-gray-400 text-sm">Подаём в банк, АРРФР, полицию</p>
+            <div class="bg-darker rounded-xl border border-gray-800 overflow-hidden faq-item">
+                <button class="faq-toggle w-full p-5 text-left flex items-center justify-between font-bold" onclick="this.nextElementSibling.classList.toggle('hidden');this.querySelector('svg').classList.toggle('rotate-180')">
+                    <span>Что если мошенники за рубежом?</span>
+                    <svg class="w-5 h-5 text-primary transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="hidden px-5 pb-5 text-gray-400 text-sm">Работаем через международные каналы: зарубежные регуляторы, корреспондентские банки, Interpol. Успешно возвращаем средства даже из-за рубежа.</div>
             </div>
-            <div class="text-center">
-                <div class="w-20 h-20 bg-gold/20 rounded-full flex items-center justify-center mx-auto mb-4"><span class="font-heading text-2xl text-gold font-bold">04</span></div>
-                <h3 class="font-heading text-lg font-bold mb-2">ВОЗВРАТ</h3>
-                <p class="text-gray-400 text-sm">Контролируем процесс до результата</p>
+            <div class="bg-darker rounded-xl border border-gray-800 overflow-hidden faq-item">
+                <button class="faq-toggle w-full p-5 text-left flex items-center justify-between font-bold" onclick="this.nextElementSibling.classList.toggle('hidden');this.querySelector('svg').classList.toggle('rotate-180')">
+                    <span>Как быстро будет результат?</span>
+                    <svg class="w-5 h-5 text-primary transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                </button>
+                <div class="hidden px-5 pb-5 text-gray-400 text-sm">Чарджбэк — от 30 до 90 дней. АРРФР — от 30 дней. Суд — от 2 месяцев. Мы ускоряем процесс и контролируем каждый этап.</div>
             </div>
         </div>
     </div>
 </section>
 
 <!-- CTA -->
-<section class="py-20 bg-gradient-to-r from-primary/20 to-gold/20 border-y border-gray-800">
+<section class="py-16 bg-gradient-to-r from-primary/20 to-gold/20 border-y border-gray-800">
     <div class="container mx-auto px-4 text-center">
-        <h2 class="font-heading text-3xl md:text-5xl font-bold mb-6">СТАЛИ ЖЕРТВОЙ <span class="text-primary">МОШЕННИЧЕСТВА</span>?</h2>
-        <p class="text-xl text-gray-300 mb-10 max-w-2xl mx-auto">Не теряйте время — чем раньше обратитесь, тем выше шансы на возврат средств</p>
-        <div class="flex flex-col sm:flex-row gap-4 justify-center">
-            <a href="/antifraud-kz/contacts.html" class="bg-primary hover:bg-primary/80 px-8 py-4 rounded-lg font-heading text-lg transition transform hover:scale-105">ОСТАВИТЬ ЗАЯВКУ</a>
-            <a href="tel:1434" class="border-2 border-white hover:bg-white/10 px-8 py-4 rounded-lg font-heading text-lg transition">ПОЗВОНИТЬ: 1434</a>
-        </div>
+        <h2 class="font-heading text-3xl md:text-4xl font-bold mb-4">НЕ ЗНАЕТЕ ЧТО ДЕЛАТЬ?</h2>
+        <p class="text-gray-300 mb-8 max-w-xl mx-auto">Оставьте заявку — мы бесплатно оценим ситуацию и предложим план действий</p>
+        <a href="/antifraud-kz/quiz.html" class="bg-primary hover:bg-primary/80 px-8 py-4 rounded-lg font-heading text-lg transition inline-block">ОСТАВИТЬ ЗАЯВКУ</a>
     </div>
 </section>
 

@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Отслеживание дела — Антифрод Центр Казахстан</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📋</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#B80018',gold:'#C8A000',dark:'#1A1A1A',darker:'#000000'},fontFamily:{heading:['Oswald','sans-serif'],body:['PT Sans','sans-serif']}}}}</script>
+<style>
+body{background:#000;padding-bottom:70px}
+.case{max-width:700px;margin:0 auto;padding:clamp(20px,5vw,40px) clamp(16px,4vw,20px)}
+.case h1{font-size:clamp(1.4rem,4vw,1.8rem);font-weight:900;margin-bottom:8px;text-align:center}
+.case>p{color:#7a8ba3;text-align:center;margin-bottom:24px;font-size:.88rem}
+.case-id-display{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:16px;text-align:center;margin-bottom:24px}
+.case-id-label{font-size:.72rem;color:#7a8ba3;text-transform:uppercase;letter-spacing:1px;margin-bottom:4px}
+.case-id-value{font-size:1.5rem;font-weight:800;color:#fff}
+.case-status{display:inline-block;padding:6px 16px;border-radius:100px;font-size:.82rem;font-weight:700;margin-top:8px}
+.status-new{background:rgba(99,102,241,.1);color:#818cf8;border:1px solid rgba(99,102,241,.2)}
+.status-process{background:rgba(245,158,11,.1);color:#fbbf24;border:1px solid rgba(245,158,11,.2)}
+.status-return{background:rgba(16,185,129,.1);color:#6ee7b7;border:1px solid rgba(16,185,129,.2)}
+.status-done{background:rgba(16,185,129,.2);color:#34d399;border:1px solid rgba(16,185,129,.3)}
+.progress-bar{height:6px;background:rgba(255,255,255,.06);border-radius:4px;overflow:hidden;margin:20px 0}
+.progress-fill{height:100%;background:linear-gradient(90deg,#B80018,#C8A000);border-radius:4px;transition:width 1s ease}
+.case-details{background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:16px;margin-bottom:20px}
+.case-detail-row{display:flex;justify-content:space-between;padding:8px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:.85rem}
+.case-detail-row:last-child{border-bottom:none}
+.case-detail-label{color:#7a8ba3}
+.case-detail-value{color:#fff;font-weight:600}
+.timeline{position:relative;padding-left:30px}
+.timeline::before{content:'';position:absolute;left:11px;top:0;bottom:0;width:2px;background:rgba(255,255,255,.06)}
+.timeline-item{position:relative;margin-bottom:20px;padding:12px 16px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.06);border-radius:10px}
+.timeline-dot{position:absolute;left:-24px;top:14px;width:12px;height:12px;border-radius:50%;border:2px solid rgba(255,255,255,.1)}
+.timeline-dot.active{background:#B80018;border-color:#B80018}
+.timeline-dot.done{background:#10b981;border-color:#10b981}
+.timeline-dot.pending{background:rgba(255,255,255,.1);border-color:rgba(255,255,255,.1)}
+.timeline-date{font-size:.72rem;color:#7a8ba3;margin-bottom:4px}
+.timeline-title{font-weight:700;font-size:.88rem;color:#fff;margin-bottom:2px}
+.timeline-desc{font-size:.8rem;color:#e8ecf4}
+.no-case{text-align:center;padding:60px 20px}
+.no-case-icon{font-size:4rem;margin-bottom:16px}
+.no-case h2{font-size:1.3rem;font-weight:800;color:#fff;margin-bottom:8px}
+.no-case p{color:#7a8ba3;font-size:.88rem;margin-bottom:20px}
+.no-case-btn{display:inline-flex;align-items:center;gap:8px;padding:12px 24px;background:linear-gradient(135deg,#B80018,#C8A000);color:#fff;border-radius:10px;font-weight:700;text-decoration:none;transition:all .2s}
+.no-case-btn:hover{transform:translateY(-1px);color:#fff;text-decoration:none}
+.search-box{display:flex;gap:10px;margin-bottom:24px}
+.search-input{flex:1;padding:14px 18px;background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.08);border-radius:12px;font-size:.95rem;font-family:'PT Sans',sans-serif;color:#fff}
+.search-input::placeholder{color:#7a8ba3}
+.search-input:focus{border-color:rgba(184,0,24,.4);outline:none}
+.search-btn{padding:14px 24px;background:linear-gradient(135deg,#B80018,#C8A000);color:#fff;border:none;border-radius:12px;font-weight:700;cursor:pointer;font-family:'PT Sans',sans-serif;transition:all .2s}
+.search-btn:hover{transform:translateY(-1px)}
+</style>
+</head>
+<body class="bg-darker text-white font-body">
+<div class="case pt-24">
+    <h1 class="font-heading">📋 Отслеживание дела</h1>
+    <p>Введите номер дела чтобы увидеть статус и таймлайн</p>
+
+    <div id="searchSection">
+        <div class="search-box">
+            <input type="text" class="search-input" id="caseInput" placeholder="Номер дела: AF-2026-0001">
+            <button class="search-btn" onclick="findCase()">Найти</button>
+        </div>
+        <p style="font-size:.75rem;color:#7a8ba3;text-align:center">Пример: AF-2026-0847, AF-2026-0001</p>
+    </div>
+
+    <div id="caseResult"></div>
+</div>
+
+<script>
+var CASES={
+    'AF-2026-0847':{client:'Абай К.',platform:'InvestPro Capital',amount:'2 500 000 ₸',status:'return',statusText:'Возврат средств',progress:75,timeline:[
+        {date:'15.01.2026',title:'Заявка получена',desc:'Клиент обратился с жалобой на инвест. платформу',status:'done'},
+        {date:'16.01.2026',title:'Анализ ситуации',desc:'Проверена платформа — в чёрном списке АРРФР',status:'done'},
+        {date:'18.01.2026',title:'Заявление в банк',desc:'Подано заявление на чарджбэк в банк клиента',status:'done'},
+        {date:'25.01.2026',title:'Банк принял заявку',desc:'Банк начал процесс оспаривания транзакции',status:'done'},
+        {date:'10.02.2026',title:'Ожидание решения',desc:'Банк запрашивает дополнительные документы',status:'active'},
+        {date:'—',title:'Возврат средств',desc:'Ожидаем поступления средств на счёт',status:'pending'},
+        {date:'—',title:'Завершение дела',desc:'Подтверждение возврата средств',status:'pending'}
+    ]},
+    'AF-2026-0001':{client:'Мария С.',platform:'CryptoGain KZ',amount:'5 000 000 ₸',status:'process',statusText:'В работе',progress:30,timeline:[
+        {date:'01.01.2026',title:'Заявка получена',desc:'Клиент потерял средства на фейковой криптобирже',status:'done'},
+        {date:'02.01.2026',title:'Сбор доказательств',desc:'Собраны переписки, чеки, выписки по счёту',status:'done'},
+        {date:'05.01.2026',title:'Заявление в АРРФР',desc:'Подана жалоба в АРРФР и НБ РК',status:'active'},
+        {date:'—',title:'Рассмотрение АРРФР',desc:'Ожидание ответа от регулятора',status:'pending'},
+        {date:'—',title:'Судебный процесс',desc:'Подготовка иска в случае отказа',status:'pending'},
+        {date:'—',title:'Возврат средств',desc:'Контроль возврата',status:'pending'}
+    ]},
+    'AF-2026-0123':{client:'Даулет Н.',platform:'GlobalTrade FX',amount:'750 000 ₸',status:'done',statusText:'Завершено',progress:100,timeline:[
+        {date:'10.12.2025',title:'Заявка получена',desc:'Жалоба на Forex-брокер',status:'done'},
+        {date:'12.12.2025',title:'Чарджбэк',desc:'Подано заявление в банк',status:'done'},
+        {date:'20.12.2025',title:'Банк одобрил',desc:'Транзакция оспорена',status:'done'},
+        {date:'05.01.2026',title:'Возврат средств',desc:'680 000 ₸ возвращено на счёт клиента',status:'done'}
+    ]}
+};
+
+function findCase(){
+    var id=document.getElementById('caseInput').value.trim().toUpperCase();
+    var c=CASES[id];
+    if(!c){
+        document.getElementById('caseResult').innerHTML='<div class="no-case"><div class="no-case-icon">🔍</div><h2>Дело не найдено</h2><p>Проверьте номер дела или обратитесь к специалисту</p><a href="/antifraud-kz/contacts.html" class="no-case-btn">📝 Связаться со специалистом</a></div>';
+        return;
+    }
+    var statusClasses={new:'status-new',process:'status-process',return:'status-return',done:'status-done'};
+    var dotClasses={done:'done',active:'active',pending:'pending'};
+    var h='<div class="case-id-display"><div class="case-id-label">Номер дела</div><div class="case-id-value">'+id+'</div><div class="case-status '+statusClasses[c.status]+'">'+c.statusText+'</div></div>';
+    h+='<div class="progress-bar"><div class="progress-fill" style="width:'+c.progress+'%"></div></div>';
+    h+='<div class="case-details">';
+    h+='<div class="case-detail-row"><span class="case-detail-label">Клиент</span><span class="case-detail-value">'+c.client+'</span></div>';
+    h+='<div class="case-detail-row"><span class="case-detail-label">Платформа</span><span class="case-detail-value">'+c.platform+'</span></div>';
+    h+='<div class="case-detail-row"><span class="case-detail-label">Сумма</span><span class="case-detail-value">'+c.amount+'</span></div>';
+    h+='<div class="case-detail-row"><span class="case-detail-label">Прогресс</span><span class="case-detail-value">'+c.progress+'%</span></div>';
+    h+='</div>';
+    h+='<h3 style="font-weight:800;margin-bottom:16px;font-size:1rem">Таймлайн дела</h3>';
+    h+='<div class="timeline">';
+    c.timeline.forEach(function(t){
+        h+='<div class="timeline-item"><div class="timeline-dot '+dotClasses[t.status]+'"></div>';
+        h+='<div class="timeline-date">'+t.date+'</div>';
+        h+='<div class="timeline-title">'+t.title+'</div>';
+        h+='<div class="timeline-desc">'+t.desc+'</div>';
+        h+='</div>';
+    });
+    h+='</div>';
+    h+='<div style="text-align:center;margin-top:20px"><a href="/antifraud-kz/contacts.html" class="no-case-btn">📝 Связаться со специалистом</a></div>';
+    document.getElementById('caseResult').innerHTML=h;
+}
+
+// Auto-detect case ID from URL
+var urlParams=new URLSearchParams(window.location.search);
+var caseId=urlParams.get('id');
+if(caseId){
+    document.getElementById('caseInput').value=caseId;
+    findCase();
+}
+</script>
+<script src="/antifraud-kz/assets/js/nav.js"></script>
+</body>
+</html>
