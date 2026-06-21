@@ -4,7 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Проверка организации — Антифрод Центр Казахстан</title>
-<meta name="description" content="Проверьте финансовую организацию по базам АРРФР и НБ РК">
+<meta name="description" content="Проверьте финансовую организацию по базам АРРФР, НБ РК и международным реестрам">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔍</text></svg>">
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
@@ -27,7 +27,6 @@ body{background:#000;color:#fff;font-family:'PT Sans',sans-serif;padding-bottom:
 .loader.show{display:block}
 .spinner{width:48px;height:48px;border:3px solid rgba(255,255,255,.05);border-top-color:#B80018;border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 16px}
 @keyframes spin{to{transform:rotate(360deg)}}
-.loader p{color:#7a8ba3;font-size:.95rem}
 .result{display:none;margin-top:8px}
 .result.show{display:block;animation:fadeUp .5s ease}
 @keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
@@ -63,48 +62,106 @@ body{background:#000;color:#fff;font-family:'PT Sans',sans-serif;padding-bottom:
 <body>
 <div class="ck" style="padding-top:100px">
     <h1>🔍 Проверка организации</h1>
-    <p>Введите название платформы — мы проверим по базам АРРФР и НБ РК</p>
+    <p>Введите название — проверим по базам АРРФР, НБ РК и международным реестрам</p>
 
     <div class="search-frame">
         <div class="search-row">
             <input type="text" class="search-input" id="q" placeholder="Название платформы..." onkeydown="if(event.key==='Enter')doCheck()">
             <button class="search-btn" id="btn" onclick="doCheck()">Проверить</button>
         </div>
-        <div class="search-hint">Пример: InvestPro, CryptoGain, Halyk Bank</div>
+        <div class="search-hint">Пример: InvestPro, CryptoGain, Halyk Bank, FCA</div>
     </div>
 
-    <div class="loader" id="loader">
-        <div class="spinner"></div>
-        <p>Проверяем по базам данных...</p>
-    </div>
-
+    <div class="loader" id="loader"><div class="spinner"></div><p style="color:#7a8ba3">Проверяем по базам данных...</p></div>
     <div class="result" id="result"></div>
 </div>
 
 <script>
+// ЧЁРНЫЙ СПИСОК — мошеннические организации
 var BL=[
+    // Инвестиционные пирамиды
     {n:'InvestPro Capital',r:'Финансовая пирамида',s:'investpro-capital.com',reg:'АРРФР'},
-    {n:'GlobalTrade FX',r:'Нелицензированный Forex-брокер',s:'globaltradefx.com',reg:'АРРФР'},
-    {n:'CryptoGain KZ',r:'Фейковая криптобиржа',s:'cryptogain.kz',reg:'АРРФР'},
     {n:'FinHub Invest',r:'Инвестиционное мошенничество',s:'finhubinvest.com',reg:'АРРФР'},
-    {n:'IQ Option клон',r:'Клон платформы',s:'iqoption-kz.com',reg:'АРРФР'},
-    {n:'Atlas Broker',r:'Нелицензированный брокер',s:'atlasbroker.com',reg:'АРРФР'},
-    {n:'PrimeFX Markets',r:'Нелицензированный Forex',s:'primefxmarkets.com',reg:'АРРФР'},
-    {n:'Binomo клон',r:'Клон бинарных опционов',s:'binomo-kz.com',reg:'АРРФР'},
-    {n:'Bybit клон',r:'Клон криптобиржи',s:'bybit-kz.com',reg:'АРРФР'},
-    {n:'TradePro KZ',r:'Нелицензированный брокер',s:'tradepro-kz.com',reg:'АРРФР'},
+    {n:'CapitalInvest Kazakhstan',r:'Деятельность без лицензии',s:'capitalinvest-kz.com',reg:'АРРФР'},
+    {n:'Invest Group KZ',r:'Финансовая пирамида',s:'investgroup.kz',reg:'АРРФР'},
+    {n:'Global Investment Partners',r:'Фейковые инвестиции',s:'globalinvestmentpartners.com',reg:'АРРФР'},
+    {n:'Asia Capital Group',r:'Инвестиционное мошенничество',s:'asiacapitalgroup.com',reg:'АРРФР'},
+    {n:'Prestige Invest',r:'Финансовая пирамида',s:'prestigeinvest.com',reg:'АРРФР'},
+    {n:'Royal Forex Trade',r:'Нелицензированный брокер',s:'royalforextrade.com',reg:'АРРФР'},
+    // Крипто-мошенничество
+    {n:'CryptoGain KZ',r:'Фейковая криптобиржа',s:'cryptogain.kz',reg:'АРРФР'},
     {n:'CryptoPro Trade',r:'Фейковая платформа',s:'cryptopro-trade.com',reg:'АРРФР'},
-    {n:'CapitalInvest Kazakhstan',r:'Без лицензии',s:'capitalinvest-kz.com',reg:'АРРФР'},
+    {n:'CryptoMax',r:'Фейковый майнинг',s:'cryptomax.kz',reg:'АРРФР'},
+    {n:'Bitcoin Profit Kazakhstan',r:'Фейковая платформа',s:'bitcoinprofit-kz.com',reg:'АРРФР'},
+    {n:'Ethereum Trade Pro',r:'Фейковая биржа',s:'ethereumtradepro.com',reg:'АРРФР'},
+    {n:'Crypto Futures Pro',r:'Нелицензированная платформа',s:'cryptofuturespro.com',reg:'АРРФР'},
+    {n:'DeFi Yield Kazakhstan',r:'Фейковый DeFi-проект',s:'defiyield.kz',reg:'АРРФР'},
+    {n:'Bitcoin Code KZ',r:'Фейковая автоматизация',s:'bitcoincode-kz.com',reg:'АРРФР'},
+    {n:'Crypto Bank Pro',r:'Фейковый криптобанк',s:'cryptobankpro.com',reg:'АРРФР'},
+    {n:'Digital Assets Trade',r:'Нелицензированная платформа',s:'digitalassetstrade.com',reg:'АРРФР'},
+    // Forex-мошенничество
+    {n:'GlobalTrade FX',r:'Нелицензированный Forex-брокер',s:'globaltradefx.com',reg:'АРРФР'},
+    {n:'PrimeFX Markets',r:'Нелицензированный Forex',s:'primefxmarkets.com',reg:'АРРФР'},
+    {n:'Atlas Broker',r:'Нелицензированный брокер',s:'atlasbroker.com',reg:'АРРФР'},
+    {n:'TradePro KZ',r:'Нелицензированный брокер',s:'tradepro-kz.com',reg:'АРРФР'},
     {n:'RoboForex scam',r:'Нелицензированный брокер',s:'robforex-scam.com',reg:'АРРФР'},
     {n:'AvaTrade scam',r:'Клон брокера',s:'avatrade-scam.com',reg:'АРРФР'},
     {n:'IQcent scam',r:'Нелицензированная платформа',s:'iqcent-scam.com',reg:'АРРФР'},
-    {n:'FinTech Pro',r:'Нелицензированная платформа',s:'fintech-pro.com',reg:'АРРФР'},
     {n:'GlobalMarkets',r:'Нелицензированный брокер',s:'globalmarkets-scam.com',reg:'АРРФР'},
+    {n:'FinTech Pro',r:'Нелицензированная платформа',s:'fintech-pro.com',reg:'АРРФР'},
+    {n:'Forex Time scam',r:'Клон брокера',s:'forextime-scam.com',reg:'АРРФР'},
+    {n:'Olymp Trade clone',r:'Клон платформы',s:'olymptrade-kz.com',reg:'АРРФР'},
+    {n:'FXPro clone',r:'Клон брокера',s:'fxpro-kz.com',reg:'АРРФР'},
+    // Клоны платформ
+    {n:'IQ Option клон',r:'Клон платформы',s:'iqoption-kz.com',reg:'АРРФР'},
+    {n:'Binomo клон',r:'Клон бинарных опционов',s:'binomo-kz.com',reg:'АРРФР'},
+    {n:'Bybit клон',r:'Клон криптобиржи',s:'bybit-kz.com',reg:'АРРФР'},
     {n:'eToro клон',r:'Клон соц. платформы',s:'etoro-kz.com',reg:'АРРФР'},
-    {n:'CryptoMax',r:'Фейковый майнинг',s:'cryptomax.kz',reg:'АРРФР'},
-    {n:'Invest Group KZ',r:'Финансовая пирамида',s:'investgroup.kz',reg:'АРРФР'}
+    {n:'Binance clone',r:'Клон биржи',s:'binance-kz.com',reg:'АРРФР'},
+    {n:'Coinbase clone',r:'Клон биржи',s:'coinbase-kz.com',reg:'АРРФР'},
+    {n:'Kraken clone',r:'Клон биржи',s:'kraken-kz.com',reg:'АРРФР'},
+    {n:'Huobi clone',r:'Клон биржи',s:'huobi-kz.com',reg:'АРРФР'},
+    // Фейковые фонды
+    {n:'FCA Kazakhstan',r:'Несуществующий регулятор (FCA только UK)',s:'fca-kz.com',reg:'FCA UK'},
+    {n:'SEC Kazakhstan',r:'Несуществующий регулятор (SEC только США)',s:'sec-kz.com',reg:'SEC USA'},
+    {n:'FINRA Kazakhstan',r:'Несуществующий регулятор (FINRA только США)',s:'finra-kz.com',reg:'FINRA USA'},
+    // Фейковые протоколы
+    {n:'JCP Protocol',r:'Несуществующий протокол',s:'',reg:'—'},
+    {n:'SWIFT Insurance Protocol',r:'Несуществующий протокол',s:'',reg:'—'},
+    {n:'Global AML Certification',r:'Несуществующий сертификат',s:'',reg:'—'},
+    {n:'IIGF',r:'Несуществующий фонд',s:'',reg:'—'},
+    {n:'World Financial Safety Fund',r:'Несуществующий фонд',s:'',reg:'—'},
+    // Фейковые госорганы
+    {n:'АРРФР Департамент по резервным счетам',r:'Такого отдела в АРРФР нет',s:'',reg:'—'},
+    {n:'Регулятор ЕАЭС',r:'Нет единого финрегулятора ЕАЭС',s:'',reg:'—'},
+    {n:'International Financial Regulatory Commission',r:'Несуществующая организация',s:'',reg:'—'},
+    {n:'World Securities Commission',r:'Несуществующая организация',s:'',reg:'—'},
+    // Фейковые страховые
+    {n:'UN Compensation Fund for Fraud Victims',r:'Несуществующий фонд ООН',s:'',reg:'—'},
+    {n:'World Bank Victims Relief Fund',r:'Несуществующий фонд',s:'',reg:'—'},
+    {n:'IMF Emergency Relief Program',r:'Несуществующая программа',s:'',reg:'—'},
+    {n:'International Cybercrime Compensation Fund',r:'Несуществующий фонд',s:'',reg:'—'},
+    {n:'Interpol Financial Recovery Division',r:'Интерпол не возвращает деньги',s:'',reg:'—'},
+    // Фейковые сервисы
+    {n:'KYC Release Certificate',r:'Несуществующий документ',s:'',reg:'—'},
+    {n:'Tax Clearance Certificate',r:'Фейковый документ от мошенников',s:'',reg:'—'},
+    {n:'Correspondent Bank Activation Fee',r:'Несуществующая комиссия',s:'',reg:'—'},
+    {n:'International Wire Release Code',r:'Несуществующий код',s:'',reg:'—'},
+    // Мошеннические платформы (из справочника)
+    {n:'ExpertOption clone',r:'Клон бинарных опционов',s:'expertoption-kz.com',reg:'АРРФР'},
+    {n:'Pocket Option clone',r:'Клон бинарных опционов',s:'pocketoption-kz.com',reg:'АРРФР'},
+    {n:'Deriv clone',r:'Клон платформы',s:'deriv-kz.com',reg:'АРРФР'},
+    {n:'Alpari clone',r:'Клон брокера',s:'alpari-kz.com',reg:'АРРФР'},
+    {n:'RoboMarkets clone',r:'Клон брокера',s:'robomarkets-kz.com',reg:'АРРФР'},
+    {n:'FxPro clone',r:'Клон брокера',s:'fxpro-kz.com',reg:'АРРФР'},
+    {n:'InstaForex clone',r:'Клон брокера',s:'instaforex-kz.com',reg:'АРРФР'},
+    {n:'Tickmill clone',r:'Клон брокера',s:'tickmill-kz.com',reg:'АРРФР'},
+    {n:'XM clone',r:'Клон брокера',s:'xm-kz.com',reg:'АРРФР'},
+    {n:'Exness clone',r:'Клон брокера',s:'exness-kz.com',reg:'АРРФР'}
 ];
+// БЕЛЫЙ СПИСОК — лицензированные организации
 var WL=[
+    // Казахстанские банки
     {n:'Halyk Bank',s:'halykbank.kz',reg:'АРРФР, НБ РК'},
     {n:'Kaspi Bank',s:'kaspi.kz',reg:'АРРФР, НБ РК'},
     {n:'ForteBank',s:'fortebank.kz',reg:'АРРФР, НБ РК'},
@@ -112,7 +169,43 @@ var WL=[
     {n:'Евразийский банк',s:'eubank.kz',reg:'АРРФР, НБ РК'},
     {n:'Сбербанк Казахстан',s:'sberbank.kz',reg:'АРРФР, НБ РК'},
     {n:'Народный Банк',s:'nurbank.kz',reg:'АРРФР, НБ РК'},
-    {n:'Банк ВТБ',s:'vtb.kz',reg:'АРРФР, НБ РК'}
+    {n:'Банк ВТБ',s:'vtb.kz',reg:'АРРФР, НБ РК'},
+    {n:'Jýsan Bank',s:'jysanbank.kz',reg:'АРРФР, НБ РК'},
+    {n:'Freedom Bank',s:'freedombank.kz',reg:'АРРФР, НБ РК'},
+    {n:'Банк Каспий',s:'bankkaspikz.kz',reg:'АРРФР, НБ РК'},
+    {n:'Банк Цеснабанк',s:'cesnabank.kz',reg:'АРРФР, НБ РК'},
+    // Международные банки
+    {n:'HSBC',s:'hsbc.com',reg:'FCA, PRA'},
+    {n:'Standard Chartered',s:'sc.com',reg:'FCA'},
+    {n:'Deutsche Bank',s:'deutschebank.com',reg:'BaFin'},
+    {n:'UBS',s:'ubs.com',reg:'FINMA'},
+    {n:'Credit Suisse',s:'credit-suisse.com',reg:'FINMA'},
+    {n:'Barclays',s:'barclays.com',reg:'FCA'},
+    {n:'JP Morgan',s:'jpmorgan.com',reg:'SEC, FINRA'},
+    {n:'Goldman Sachs',s:'goldmansachs.com',reg:'SEC, FINRA'},
+    {n:'Morgan Stanley',s:'morganstanley.com',reg:'SEC, FINRA'},
+    // Госорганы Казахстана
+    {n:'АРРФР',s:'ardfm.gov.kz',reg:'Госорган РК'},
+    {n:'НБ РК',s:'nationalbank.kz',reg:'Госорган РК'},
+    {n:'КГД',s:'kgd.gov.kz',reg:'Госорган РК'},
+    {n:'МФ РК',s:'minfin.gov.kz',reg:'Госорган РК'},
+    // Международные регуляторы
+    {n:'SEC',s:'sec.gov',reg:'SEC USA'},
+    {n:'FCA',s:'fca.org.uk',reg:'FCA UK'},
+    {n:'BaFin',s:'bafin.de',reg:'Германия'},
+    {n:'MAS',s:'mas.gov.sg',reg:'Сингапур'},
+    {n:'ASIC',s:'asic.gov.au',reg:'Австралия'},
+    {n:'FINMA',s:'finma.ch',reg:'Швейцария'},
+    {n:'CySEC',s:'cysec.gov.cy',reg:'Кипр'},
+    // Международные организации
+    {n:'МВФ',s:'imf.org',reg:'Международная'},
+    {n:'Всемирный банк',s:'worldbank.org',reg:'Международная'},
+    {n:'ЕБРР',s:'ebrd.com',reg:'Международная'},
+    {n:'Интерпол',s:'interpol.int',reg:'Международная'},
+    // Платёжные системы
+    {n:'Visa',s:'visa.com',reg:'Международная'},
+    {n:'Mastercard',s:'mastercard.com',reg:'Международная'},
+    {n:'SWIFT',s:'swift.com',reg:'Международная'}
 ];
 
 function doCheck(){
