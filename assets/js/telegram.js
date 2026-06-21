@@ -9,23 +9,34 @@ function sendToTelegram(d) {
     var reports = {none:'❌ Нигде',bank:'📞 Только банк',police:'👮 Полиция',arrfr:'🏛️ АРРФР',lawyer:'👨‍⚖️ Юрист'};
     var evidences = {no:'❌ Нет',partial:'📱 Частично',full:'✅ Всё сохранил'};
 
-    var m = '🔔 <b>НОВАЯ ЗАЯВКА</b>\n';
+    var m = '🔔 НОВАЯ ЗАЯВКА\n';
     m += '━━━━━━━━━━━━━━━━━\n\n';
-    m += '👤 <b>' + d.fio + '</b>\n';
+    m += '👤 ' + d.fio + '\n';
     m += '📱 ' + d.phone + '\n\n';
-    m += '🚨 <b>Что произошло:</b>\n';
+    m += '🚨 Что произошло:\n';
     m += '  • Тип: ' + (types[d.type]||d.type) + '\n';
     m += '  • Сумма: ' + (amounts[d.amount]||d.amount) + '\n';
     m += '  • Когда: ' + (times[d.time]||d.time) + '\n\n';
-    m += '📋 <b>Статус:</b>\n';
+    m += '📋 Статус:\n';
     m += '  • Карта: ' + (blocks[d.blocked]||d.blocked) + '\n';
     m += '  • Обращения: ' + (reports[d.reported]||d.reported) + '\n';
     m += '  • Доказательства: ' + (evidences[d.evidence]||d.evidence) + '\n\n';
     m += '🕐 ' + new Date().toLocaleString('ru-RU');
 
-    return fetch('https://api.telegram.org/bot' + TG_BOT_TOKEN + '/sendMessage', {
+    var url = 'https://api.telegram.org/bot' + TG_BOT_TOKEN + '/sendMessage';
+    var body = JSON.stringify({chat_id: TG_CHAT_ID, text: m});
+    
+    console.log('Sending to Telegram:', url, body);
+    
+    return fetch(url, {
         method: 'POST',
-        headers: {'Content-Type':'application/json'},
-        body: JSON.stringify({chat_id: TG_CHAT_ID, text: m, parse_mode: 'HTML'})
+        headers: {'Content-Type': 'application/json'},
+        body: body
+    }).then(function(r) {
+        console.log('Telegram response:', r.status);
+        return r.json();
+    }).then(function(data) {
+        console.log('Telegram result:', data);
+        return data;
     });
 }

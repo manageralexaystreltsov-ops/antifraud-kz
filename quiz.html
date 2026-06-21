@@ -227,13 +227,15 @@ function send(){
     apps.push(d);
     localStorage.setItem('applications',JSON.stringify(apps));
     document.getElementById('queueNum').textContent=apps.length;
-    sendToTelegram(d).then(function(){
+    sendToTelegram(d).then(function(resp){
+        console.log("TG sent:",resp);
         setTimeout(function(){
             document.getElementById('loader').classList.remove('active');
             document.getElementById('done').classList.add('active');
             document.getElementById('bar').style.width='100%';
         },2000);
     }).catch(function(e){
+        console.log("TG error:",e);
         console.log(e);
         setTimeout(function(){
             document.getElementById('loader').classList.remove('active');
