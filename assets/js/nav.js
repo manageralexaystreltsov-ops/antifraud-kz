@@ -1,25 +1,28 @@
-// Navigation Component - shared across all pages
+// Navigation Component
 (function() {
     var navHTML = `
 <header class="fixed top-0 left-0 right-0 bg-dark/95 backdrop-blur-sm z-50 border-b border-gray-800">
     <div class="container mx-auto px-4 py-3">
         <div class="flex items-center justify-between">
             <a href="/antifraud-kz/" class="flex items-center space-x-3">
-                <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center"><span class="text-2xl">⚠️</span></div>
-                <div><h1 class="font-heading text-xl font-bold">АНТИ-ФРОД</h1><p class="text-xs text-gray-400">Казахстан</p></div>
+                <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center">
+                    <svg class="w-7 h-7 text-white" fill="currentColor" viewBox="0 0 24 24">
+                        <path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/>
+                    </svg>
+                </div>
+                <div><h1 class="font-heading text-xl font-bold">АНТИФРОД</h1><p class="text-xs text-gray-400">Казахстан</p></div>
             </a>
             <nav class="hidden md:flex items-center space-x-6" id="desktop-nav">
                 <a href="/antifraud-kz/" class="hover:text-primary transition nav-link" data-page="home">Главная</a>
-                <a href="/antifraud-kz/schemes/" class="hover:text-primary transition nav-link" data-page="schemes">Схемы</a>
-                <a href="/antifraud-kz/documents/" class="hover:text-primary transition nav-link" data-page="documents">Документы</a>
-                <a href="/antifraud-kz/organizations/" class="hover:text-primary transition nav-link" data-page="organizations">Организации</a>
-                <a href="/antifraud-kz/guides/" class="hover:text-primary transition nav-link" data-page="guides">Пособия</a>
                 <a href="/antifraud-kz/check.html" class="hover:text-primary transition nav-link" data-page="check">Проверка</a>
-                <a href="/antifraud-kz/quiz/" class="hover:text-primary transition nav-link" data-page="quiz">Квиз</a>
+                <a href="/antifraud-kz/quiz.html" class="hover:text-primary transition nav-link" data-page="quiz">Определить стадию</a>
+                <a href="/antifraud-kz/services.html" class="hover:text-primary transition nav-link" data-page="services">Услуги</a>
+                <a href="/antifraud-kz/team.html" class="hover:text-primary transition nav-link" data-page="team">Команда</a>
+                <a href="/antifraud-kz/cases.html" class="hover:text-primary transition nav-link" data-page="cases">Кейсы</a>
                 <a href="/antifraud-kz/contacts.html" class="hover:text-primary transition nav-link" data-page="contacts">Контакты</a>
             </nav>
             <div class="flex items-center space-x-4">
-                <a href="/antifraud-kz/apply.html" class="hidden sm:inline-block bg-primary hover:bg-primary/80 px-4 py-2 rounded-lg font-heading text-sm transition">ПОМОЧЬ</a>
+                <a href="/antifraud-kz/contacts.html" class="hidden sm:inline-block bg-primary hover:bg-primary/80 px-4 py-2 rounded-lg font-heading text-sm transition">ЗАЯВКА</a>
                 <button id="mobileMenuBtn" class="md:hidden text-white">
                     <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
@@ -31,24 +34,59 @@
     <div id="mobileMenu" class="hidden md:hidden bg-dark border-t border-gray-800">
         <nav class="container mx-auto px-4 py-4 flex flex-col space-y-3" id="mobile-nav">
             <a href="/antifraud-kz/" class="py-2 hover:text-primary transition nav-link" data-page="home">Главная</a>
-            <a href="/antifraud-kz/schemes/" class="py-2 hover:text-primary transition nav-link" data-page="schemes">Схемы обмана</a>
-            <a href="/antifraud-kz/documents/" class="py-2 hover:text-primary transition nav-link" data-page="documents">Фейковые документы</a>
-            <a href="/antifraud-kz/organizations/" class="py-2 hover:text-primary transition nav-link" data-page="organizations">Фейковые организации</a>
-            <a href="/antifraud-kz/guides/" class="py-2 hover:text-primary transition nav-link" data-page="guides">Полные пособия</a>
-            <a href="/antifraud-kz/check.html" class="py-2 hover:text-primary transition nav-link" data-page="check">Проверка</a>
-            <a href="/antifraud-kz/quiz/" class="py-2 hover:text-primary transition nav-link" data-page="quiz">Квиз</a>
+            <a href="/antifraud-kz/check.html" class="py-2 hover:text-primary transition nav-link" data-page="check">Проверка организации</a>
+            <a href="/antifraud-kz/quiz.html" class="py-2 hover:text-primary transition nav-link" data-page="quiz">Определить стадию</a>
+            <a href="/antifraud-kz/services.html" class="py-2 hover:text-primary transition nav-link" data-page="services">Услуги и цены</a>
+            <a href="/antifraud-kz/team.html" class="py-2 hover:text-primary transition nav-link" data-page="team">Команда</a>
+            <a href="/antifraud-kz/cases.html" class="py-2 hover:text-primary transition nav-link" data-page="cases">Кейсы</a>
             <a href="/antifraud-kz/contacts.html" class="py-2 hover:text-primary transition nav-link" data-page="contacts">Контакты</a>
-            <a href="/antifraud-kz/apply.html" class="bg-primary py-3 text-center rounded-lg font-heading">ПОМОЧЬ</a>
+            <a href="/antifraud-kz/contacts.html" class="bg-primary py-3 text-center rounded-lg font-heading">ОСТАВИТЬ ЗАЯВКУ</a>
         </nav>
     </div>
 </header>`;
 
     var footerHTML = `
 <footer class="py-12 bg-darker border-t border-gray-800">
-    <div class="container mx-auto px-4 text-center">
-        <p class="text-gray-400 mb-4">⚠️ Анти-фрод Казахстан · Пособие по защите от мошенников</p>
-        <p class="text-gray-500 text-sm">Если вы стали жертвой — <a href="tel:+77754194917" class="text-gold hover:underline">звоните юристу</a> или <a href="tel:102" class="text-gold hover:underline">в полицию</a></p>
-        <p class="text-gray-600 text-xs mt-4">&copy; 2026 Анти-фрод Казахстан</p>
+    <div class="container mx-auto px-4">
+        <div class="grid md:grid-cols-4 gap-8 mb-8">
+            <div>
+                <div class="flex items-center space-x-3 mb-4">
+                    <div class="w-10 h-10 bg-primary rounded-full flex items-center justify-center">
+                        <svg class="w-6 h-6 text-white" fill="currentColor" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4zm-2 16l-4-4 1.41-1.41L10 14.17l6.59-6.59L18 9l-8 8z"/></svg>
+                    </div>
+                    <div><h3 class="font-heading text-lg font-bold">АНТИФРОД</h3><p class="text-xs text-gray-400">Казахстан</p></div>
+                </div>
+                <p class="text-gray-400 text-sm">Центр помощи жертвам финансового мошенничества в Казахстане</p>
+            </div>
+            <div>
+                <h4 class="font-heading font-bold mb-3">Навигация</h4>
+                <ul class="space-y-2 text-sm text-gray-400">
+                    <li><a href="/antifraud-kz/" class="hover:text-primary transition">Главная</a></li>
+                    <li><a href="/antifraud-kz/check.html" class="hover:text-primary transition">Проверка</a></li>
+                    <li><a href="/antifraud-kz/quiz.html" class="hover:text-primary transition">Определить стадию</a></li>
+                    <li><a href="/antifraud-kz/services.html" class="hover:text-primary transition">Услуги</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-heading font-bold mb-3">Контакты</h4>
+                <ul class="space-y-2 text-sm text-gray-400">
+                    <li>Горячая линия: <a href="tel:1434" class="text-gold">1434</a></li>
+                    <li>Полиция: <a href="tel:102" class="text-gold">102</a></li>
+                    <li>Киберпреступность: <a href="tel:115" class="text-gold">115</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4 class="font-heading font-bold mb-3">Ресурсы</h4>
+                <ul class="space-y-2 text-sm text-gray-400">
+                    <li><a href="https://www.gov.kz/memleket/entities/ardfm" target="_blank" class="hover:text-primary transition">АРРФР</a></li>
+                    <li><a href="https://egov.kz" target="_blank" class="hover:text-primary transition">ЕГРПБ</a></li>
+                    <li><a href="https://www.nationalbank.kz" target="_blank" class="hover:text-primary transition">НБ РК</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="border-t border-gray-800 pt-8 text-center text-gray-500 text-sm">
+            <p>© 2026 Антифрод Центр Казахстан</p>
+        </div>
     </div>
 </footer>
 
@@ -59,19 +97,14 @@
     // Determine current page
     var path = window.location.pathname;
     var currentPage = 'home';
-    if (path.includes('/schemes/')) currentPage = 'schemes';
-    else if (path.includes('/documents/')) currentPage = 'documents';
-    else if (path.includes('/organizations/')) currentPage = 'organizations';
-    else if (path.includes('/guides/')) currentPage = 'guides';
-    else if (path.includes('/quiz/')) currentPage = 'quiz';
-    else if (path.includes('check.html')) currentPage = 'check';
+    if (path.includes('check.html')) currentPage = 'check';
+    else if (path.includes('quiz.html')) currentPage = 'quiz';
+    else if (path.includes('services.html')) currentPage = 'services';
+    else if (path.includes('team.html')) currentPage = 'team';
+    else if (path.includes('cases.html')) currentPage = 'cases';
     else if (path.includes('contacts.html')) currentPage = 'contacts';
-    else if (path.includes('apply.html')) currentPage = 'apply';
 
-    // Insert nav at start of body
     document.body.insertAdjacentHTML('afterbegin', navHTML);
-
-    // Insert footer before closing body
     document.body.insertAdjacentHTML('beforeend', footerHTML);
 
     // Highlight active page

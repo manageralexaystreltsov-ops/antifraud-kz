@@ -3,29 +3,12 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Проверка организации — Анти-Фрод Казахстан</title>
-<meta name="description" content="Проверьте организацию по базам данных АРРФР и НБ РК">
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚠️</text></svg>">
+<title>Проверка организации — Антифрод Центр Казахстан</title>
+<meta name="description" content="Проверьте финансовую организацию по базам АРРФР и НБ РК">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🔍</text></svg>">
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
-<script>
-    tailwind.config = {
-        theme: {
-            extend: {
-                colors: {
-                    primary: '#B80018',
-                    gold: '#C8A000',
-                    dark: '#1A1A1A',
-                    darker: '#000000'
-                },
-                fontFamily: {
-                    heading: ['Oswald', 'sans-serif'],
-                    body: ['PT Sans', 'sans-serif']
-                }
-            }
-        }
-    }
-</script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#B80018',gold:'#C8A000',dark:'#1A1A1A',darker:'#000000'},fontFamily:{heading:['Oswald','sans-serif'],body:['PT Sans','sans-serif']}}}}</script>
 <link rel="stylesheet" href="/antifraud-kz/assets/css/styles.css">
 <style>
 body{background:#000;padding-bottom:70px}
@@ -36,9 +19,9 @@ body{background:#000;padding-bottom:70px}
 .ck-input-wrap{display:flex;gap:10px;margin-bottom:12px}
 .ck-input{flex:1;padding:14px 18px;background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.08);border-radius:12px;font-size:1rem;font-family:'PT Sans',sans-serif;color:#fff;transition:all .3s}
 .ck-input::placeholder{color:#7a8ba3}
-.ck-input:focus{border-color:rgba(184,0,24,.4);outline:none;box-shadow:0 0 24px rgba(184,0,24,.1)}
-.ck-btn{padding:14px 28px;background:linear-gradient(135deg,#B80018,#C8A000);color:#fff;border:none;border-radius:12px;font-weight:700;font-size:.95rem;cursor:pointer;font-family:'PT Sans',sans-serif;transition:all .3s;box-shadow:0 4px 20px rgba(184,0,24,.25)}
-.ck-btn:hover{box-shadow:0 6px 30px rgba(184,0,24,.35);transform:translateY(-1px)}
+.ck-input:focus{border-color:rgba(184,0,24,.4);outline:none}
+.ck-btn{padding:14px 28px;background:linear-gradient(135deg,#B80018,#C8A000);color:#fff;border:none;border-radius:12px;font-weight:700;font-size:.95rem;cursor:pointer;transition:all .3s}
+.ck-btn:hover{transform:translateY(-1px)}
 .ck-btn:disabled{opacity:.4;cursor:not-allowed}
 .ck-hint{font-size:.72rem;color:#7a8ba3;text-align:center}
 .ck-result{display:none;margin-top:20px}
@@ -65,64 +48,34 @@ body{background:#000;padding-bottom:70px}
 .ck-result-advice{padding:14px;background:rgba(255,255,255,.02);border-radius:10px;border-left:3px solid rgba(184,0,24,.3);font-size:.85rem;color:#e8ecf4;line-height:1.7;margin-top:16px}
 .ck-result-actions{display:flex;gap:10px;margin-top:16px;flex-wrap:wrap}
 .ck-action-btn{padding:10px 20px;border-radius:10px;font-size:.85rem;font-weight:600;text-decoration:none;transition:all .3s;display:inline-flex;align-items:center;gap:6px}
-.ck-action-btn.primary{background:linear-gradient(135deg,#B80018,#C8A000);color:#fff;box-shadow:0 4px 16px rgba(184,0,24,.2)}
-.ck-action-btn.primary:hover{box-shadow:0 6px 24px rgba(184,0,24,.3);color:#fff;text-decoration:none;transform:translateY(-1px)}
+.ck-action-btn.primary{background:linear-gradient(135deg,#B80018,#C8A000);color:#fff}
+.ck-action-btn.primary:hover{transform:translateY(-1px);color:#fff;text-decoration:none}
 .ck-action-btn.secondary{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:#e8ecf4}
-.ck-action-btn.secondary:hover{background:rgba(255,255,255,.08);color:#fff;text-decoration:none}
 .ck-loader{display:none;text-align:center;padding:40px}
 .ck-loader.show{display:block}
 .ck-spinner{width:40px;height:40px;border:3px solid rgba(255,255,255,.05);border-top-color:#B80018;border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 12px}
 @keyframes spin{to{transform:rotate(360deg)}}
 .ck-loader-text{color:#7a8ba3;font-size:.85rem}
-.ck-how{margin-top:48px}
-.ck-how h2{font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:20px;text-align:center}
-.ck-steps{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px}
-.ck-step{text-align:center;padding:20px 16px;background:rgba(26,26,26,.95);border:1px solid rgba(255,255,255,.08);border-radius:12px;transition:all .3s}
-.ck-step:hover{border-color:rgba(184,0,24,.15);transform:translateY(-2px)}
-.ck-step-num{width:36px;height:36px;background:linear-gradient(135deg,#B80018,#C8A000);border-radius:10px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.9rem;color:#fff;margin:0 auto 10px}
-.ck-step-title{font-size:.85rem;font-weight:700;color:#fff;margin-bottom:4px}
-.ck-step-desc{font-size:.75rem;color:#7a8ba3;line-height:1.5}
 @media(max-width:480px){.ck-input-wrap{flex-direction:column}}
 </style>
 </head>
 <body class="bg-darker text-white font-body">
-
-
 <div class="ck pt-24">
     <h1 class="font-heading">🔍 Проверка организации</h1>
-    <p>Введите название платформы или организации — мы проверим, есть ли она в реестре АРРФР</p>
-
+    <p>Введите название платформы — проверим по базам АРРФР и НБ РК</p>
     <div class="ck-search">
         <div class="ck-input-wrap">
             <input type="text" class="ck-input" id="ck-input" placeholder="Название платформы или организации">
             <button class="ck-btn" id="ck-btn" onclick="doCheck()">Проверить</button>
         </div>
-        <div class="ck-hint">Например: InvestPro Capital, GlobalTrade FX, CryptoGain KZ</div>
+        <div class="ck-hint">Например: InvestPro Capital, CryptoGain KZ, Halyk Bank</div>
     </div>
-
-    <div class="ck-loader" id="ck-loader">
-        <div class="ck-spinner"></div>
-        <div class="ck-loader-text">Проверяем по базам данных АРРФР, НБ РК и международных реестров...</div>
-    </div>
-
+    <div class="ck-loader" id="ck-loader"><div class="ck-spinner"></div><div class="ck-loader-text">Проверяем по базам данных...</div></div>
     <div class="ck-result" id="ck-result"></div>
-
-    <div class="ck-how">
-        <h2>Как работает проверка</h2>
-        <div class="ck-steps">
-            <div class="ck-step"><div class="ck-step-num">1</div><div class="ck-step-title">Поиск по реестрам</div><div class="ck-step-desc">Проверяем наличие лицензии в базе АРРФР и НБ РК</div></div>
-            <div class="ck-step"><div class="ck-step-num">2</div><div class="ck-step-title">Анализ домена</div><div class="ck-step-desc">Проверяем возраст сайта и регистрационные данные</div></div>
-            <div class="ck-step"><div class="ck-step-num">3</div><div class="ck-step-title">Жалобы клиентов</div><div class="ck-step-desc">Сравниваем с базой жалоб и чёрных списков</div></div>
-            <div class="ck-step"><div class="ck-step-num">4</div><div class="ck-step-title">Заключение</div><div class="ck-step-desc">Выдаём результат и рекомендации по дальнейшим действиям</div></div>
-        </div>
-    </div>
 </div>
-
-
-
 <script>
 var BLACKLIST=[
-    {name:'InvestPro Capital',reason:'Финансовая пирамида под видом инвестиционного фонда',site:'investpro-capital.com',regulator:'АРРФР'},
+    {name:'InvestPro Capital',reason:'Финансовая пирамида',site:'investpro-capital.com',regulator:'АРРФР'},
     {name:'GlobalTrade FX',reason:'Нелицензированный Forex-брокер',site:'globaltradefx.com',regulator:'АРРФР'},
     {name:'CryptoGain KZ',reason:'Фейковая криптобиржа',site:'cryptogain.kz',regulator:'АРРФР'},
     {name:'FinHub Invest',reason:'Инвестиционное мошенничество',site:'finhubinvest.com',regulator:'АРРФР'},
@@ -131,11 +84,8 @@ var BLACKLIST=[
     {name:'PrimeFX Markets',reason:'Нелицензированный Forex-брокер',site:'primefxmarkets.com',regulator:'АРРФР'},
     {name:'Binomo клон',reason:'Клон бинарных опционов',site:'binomo-kz.com',regulator:'АРРФР'},
     {name:'Bybit клон',reason:'Клон криптобиржи',site:'bybit-kz.com',regulator:'АРРФР'},
-    {name:'eToro клон',reason:'Клон социальной торговой платформы',site:'etoro-kz.com',regulator:'АРРФР'},
-    {name:'RoboForex scam',reason:'Нелицензированный брокер',site:'robforex-scam.com',regulator:'АРРФР'},
     {name:'TradePro KZ',reason:'Нелицензированный брокер',site:'tradepro-kz.com',regulator:'АРРФР'},
     {name:'CryptoPro Trade',reason:'Фейковая криптоплатформа',site:'cryptopro-trade.com',regulator:'АРРФР'},
-    {name:'FinTech Pro',reason:'Нелицензированная платформа',site:'fintech-pro.com',regulator:'АРРФР'},
     {name:'CapitalInvest Kazakhstan',reason:'Деятельность без лицензии',site:'capitalinvest-kz.com',regulator:'АРРФР'}
 ];
 var WHITELIST=[
@@ -146,7 +96,6 @@ var WHITELIST=[
     {name:'Евразийский банк',site:'eubank.kz',regulator:'АРРФР, НБ РК'},
     {name:'Сбербанк Казахстан',site:'sberbank.kz',regulator:'АРРФР, НБ РК'}
 ];
-
 function doCheck(){
     var q=document.getElementById('ck-input').value.trim().toLowerCase();
     if(!q||q.length<2)return;
@@ -159,33 +108,29 @@ function doCheck(){
         var safe=WHITELIST.find(function(c){return c.name.toLowerCase().indexOf(q)>=0});
         document.getElementById('ck-loader').classList.remove('show');
         document.getElementById('ck-btn').disabled=false;
-        if(found){showResult(found,'danger')}
-        else if(safe){showResult(safe,'safe')}
-        else{showResult({name:document.getElementById('ck-input').value.trim(),category:'unknown'},'warn')}
+        if(found)showResult(found,'danger');
+        else if(safe)showResult(safe,'safe');
+        else showResult({name:document.getElementById('ck-input').value.trim()},'warn');
     },1500);
 }
-
 function showResult(org,type){
-    var h='<div class="ck-result-card '+type+'">';
-    h+='<div class="ck-result-header">';
-    if(type==='danger'){h+='<div class="ck-result-icon">🚫</div><div><div class="ck-result-title">'+org.name+'</div><div class="ck-result-subtitle">'+org.regulator+'</div><div class="ck-result-badge badge-danger">В ЧЁРНОМ СПИСКЕ</div></div>'}
-    else if(type==='safe'){h+='<div class="ck-result-icon">✅</div><div><div class="ck-result-title">'+org.name+'</div><div class="ck-result-subtitle">'+org.regulator+'</div><div class="ck-result-badge badge-safe">ЛИЦЕНЗИРОВАНА</div></div>'}
-    else{h+='<div class="ck-result-icon">⚠️</div><div><div class="ck-result-title">'+org.name+'</div><div class="ck-result-subtitle">Не найдена в реестрах</div><div class="ck-result-badge badge-warn">НЕ НАЙДЕНА</div></div>'}
+    var h='<div class="ck-result-card '+type+'"><div class="ck-result-header">';
+    if(type==='danger')h+='<div class="ck-result-icon">🚫</div><div><div class="ck-result-title">'+org.name+'</div><div class="ck-result-subtitle">'+org.regulator+'</div><div class="ck-result-badge badge-danger">В ЧЁРНОМ СПИСКЕ</div></div>';
+    else if(type==='safe')h+='<div class="ck-result-icon">✅</div><div><div class="ck-result-title">'+org.name+'</div><div class="ck-result-subtitle">'+org.regulator+'</div><div class="ck-result-badge badge-safe">ЛИЦЕНЗИРОВАНА</div></div>';
+    else h+='<div class="ck-result-icon">⚠️</div><div><div class="ck-result-title">'+org.name+'</div><div class="ck-result-subtitle">Не найдена в реестрах</div><div class="ck-result-badge badge-warn">НЕ НАЙДЕНА</div></div>';
     h+='</div>';
     h+='<div class="ck-detail"><span class="ck-detail-label">Реестр АРРФР</span><span class="ck-detail-value '+(type==='safe'?'safe':type==='danger'?'danger':'warn')+'">'+(type==='safe'?'✓ Лицензия найдена':type==='danger'?'✗ Нет лицензии':'? Не найдено')+'</span></div>';
     if(org.reason)h+='<div class="ck-detail"><span class="ck-detail-label">Причина</span><span class="ck-detail-value danger">'+org.reason+'</span></div>';
-    if(type==='danger'){h+='<div class="ck-result-advice"><strong>⚠️ ВНИМАНИЕ:</strong> Эта организация находится в чёрном списке. Если вы перевели им средства — немедленно подайте заявку через нашу форму.</div>'}
-    else if(type==='safe'){h+='<div class="ck-result-advice"><strong>✅ ОРГАНИЗАЦИЯ ЛЕГИТИМНА:</strong> Имеет действующую лицензию. Если у вас возникли проблемы — обратитесь напрямую в банк.</div>'}
-    else{h+='<div class="ck-result-advice"><strong>⚠️ ОСТОРОЖНО:</strong> Организация не найдена в реестре АРРФР. Рекомендуем воздержаться от сотрудничества.</div>'}
-    h+='<div class="ck-result-actions">';
-    h+='<a href="/antifraud-kz/contacts.html" class="ck-action-btn primary">📝 Оставить заявку</a>';
+    if(type==='danger')h+='<div class="ck-result-advice"><strong>⚠️ ВНИМАНИЕ:</strong> Организация в чёрном списке. Немедленно подайте заявку.</div>';
+    else if(type==='safe')h+='<div class="ck-result-advice"><strong>✅ ЛЕГИТИМНА:</strong> Имеет действующую лицензию.</div>';
+    else h+='<div class="ck-result-advice"><strong>⚠️ ОСТОРОЖНО:</strong> Не найдена в реестре. Рекомендуем воздержаться от сотрудничества.</div>';
+    h+='<div class="ck-result-actions"><a href="/antifraud-kz/contacts.html" class="ck-action-btn primary">📝 Оставить заявку</a>';
     if(org.site)h+='<a href="https://'+org.site+'" target="_blank" class="ck-action-btn secondary">🌐 Сайт</a>';
     h+='</div></div>';
     document.getElementById('ck-result').innerHTML=h;
     document.getElementById('ck-result').classList.add('show');
     document.getElementById('ck-result').scrollIntoView({behavior:'smooth',block:'start'});
 }
-
 document.getElementById('ck-input').addEventListener('keydown',function(e){if(e.key==='Enter')doCheck()});
 </script>
 <script src="/antifraud-kz/assets/js/nav.js"></script>
