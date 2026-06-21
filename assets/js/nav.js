@@ -35,6 +35,8 @@
             <a href="/antifraud-kz/services.html" class="nav-link px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-white/5 transition" data-page="services">Услуги</a>
             <a href="/antifraud-kz/team.html" class="nav-link px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-white/5 transition" data-page="team">Команда</a>
             <a href="/antifraud-kz/cases.html" class="nav-link px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-white/5 transition" data-page="cases">Кейсы</a>
+            <a href="/antifraud-kz/organizations.html" class="nav-link px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-white/5 transition" data-page="organizations">Реестр</a>
+            <a href="/antifraud-kz/articles.html" class="nav-link px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-white/5 transition" data-page="articles">Статьи</a>
             <a href="/antifraud-kz/contacts.html" class="nav-link px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-white/5 transition" data-page="contacts">Контакты</a>
             <a href="/antifraud-kz/client/login.html" class="nav-link px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-white/5 transition" data-page="client">Кабинет</a>
             <a href="/antifraud-kz/admin.html" class="nav-link px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-white/5 transition text-gray-500" data-page="admin">⚙</a>
@@ -49,6 +51,8 @@
             <a href="/antifraud-kz/services.html" class="py-3 px-3 hover:bg-white/5 rounded-lg transition nav-link" data-page="services">📋 Услуги и цены</a>
             <a href="/antifraud-kz/team.html" class="py-3 px-3 hover:bg-white/5 rounded-lg transition nav-link" data-page="team">👨‍⚖️ Команда</a>
             <a href="/antifraud-kz/cases.html" class="py-3 px-3 hover:bg-white/5 rounded-lg transition nav-link" data-page="cases">✨ Кейсы</a>
+            <a href="/antifraud-kz/organizations.html" class="py-3 px-3 hover:bg-white/5 rounded-lg transition nav-link" data-page="organizations">🏛️ Реестр организаций</a>
+            <a href="/antifraud-kz/articles.html" class="py-3 px-3 hover:bg-white/5 rounded-lg transition nav-link" data-page="articles">📰 Статьи</a>
             <a href="/antifraud-kz/contacts.html" class="py-3 px-3 hover:bg-white/5 rounded-lg transition nav-link" data-page="contacts">✉️ Контакты</a>
             <a href="/antifraud-kz/client/login.html" class="py-3 px-3 hover:bg-white/5 rounded-lg transition nav-link" data-page="client">🔐 Личный кабинет</a>
             <a href="/antifraud-kz/admin.html" class="py-3 px-3 hover:bg-white/5 rounded-lg transition nav-link text-gray-500" data-page="admin">⚙ Админ</a>
@@ -82,6 +86,8 @@
                     <li><a href="/antifraud-kz/check.html" class="hover:text-primary transition">Проверка организации</a></li>
                     <li><a href="/antifraud-kz/quiz.html" class="hover:text-primary transition">Оставить заявку</a></li>
                     <li><a href="/antifraud-kz/services.html" class="hover:text-primary transition">Услуги и цены</a></li>
+                    <li><a href="/antifraud-kz/organizations.html" class="hover:text-primary transition">Реестр организаций</a></li>
+                    <li><a href="/antifraud-kz/articles.html" class="hover:text-primary transition">Статьи</a></li>
                     <li><a href="/antifraud-kz/cases.html" class="hover:text-primary transition">Кейсы клиентов</a></li>
                     <li><a href="/antifraud-kz/client/login.html" class="hover:text-primary transition">Личный кабинет</a></li>
                 </ul>
@@ -121,6 +127,8 @@
     else if (path.includes('team.html')) currentPage = 'team';
     else if (path.includes('cases.html')) currentPage = 'cases';
     else if (path.includes('contacts.html')) currentPage = 'contacts';
+    else if (path.includes('organizations.html')) currentPage = 'organizations';
+    else if (path.includes('articles.html')) currentPage = 'articles';
     else if (path.includes('case.html')) currentPage = 'cases';
     else if (path.includes('admin.html')) currentPage = 'admin';
     else if (path.includes('client/')) currentPage = 'client';
