@@ -55,12 +55,14 @@ document.getElementById('contactForm').addEventListener('submit',function(e){
     var data={type:document.getElementById('contactType').value,name:this.name.value,phone:this.phone.value,email:this.email.value,platform:this.platform.value,amount:this.amount.value,details:this.details.value,timestamp:new Date().toISOString()};
     var apps=JSON.parse(localStorage.getItem('applications')||'[]');
     apps.push(data);
-    localStorage.setItem('applications',JSON.stringify(apps));
+    localStorage.setItem("applications",JSON.stringify(apps));
+    if(typeof sendToTelegram==="function"){sendToTelegram({fio:this.name.value,phone:this.phone.value,phone2:"",messenger:"",fraudType:document.getElementById("contactType").value,platform:this.platform.value,amount:this.amount.value,timeFrame:"week",blocked:"unknown",reported:"none",evidence:"unknown",details:this.details.value}).catch(function(e){console.log("TG error:",e)})}
     this.style.display='none';
     document.getElementById('formSuccess').classList.remove('hidden');
 });
 document.querySelector('.contact-type').click();
 </script>
+<script src="/antifraud-kz/assets/js/telegram.js"></script>
 <script src="/antifraud-kz/assets/js/nav.js"></script>
 </body>
 </html>

