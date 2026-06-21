@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Проверка организации | Анти-Фрод Казахстан</title>
+    <meta name="description" content="Проверьте финансовую организацию на наличие лицензии и репутации перед сотрудничеством">
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⚠️</text></svg>">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#B80018',
+                        gold: '#C8A000',
+                        dark: '#1A1A1A',
+                        darker: '#000000'
+                    },
+                    fontFamily: {
+                        heading: ['Oswald', 'sans-serif'],
+                        body: ['PT Sans', 'sans-serif']
+                    }
+                }
+            }
+        }
+    </script>
+    <link rel="stylesheet" href="assets/css/styles.css">
+</head>
+<body class="bg-darker text-white font-body">
+    <!-- Header -->
+    <header class="fixed top-0 left-0 right-0 bg-dark/95 backdrop-blur-sm z-50 border-b border-gray-800">
+        <div class="container mx-auto px-4 py-3">
+            <div class="flex items-center justify-between">
+                <a href="/" class="flex items-center space-x-3">
+                    <div class="w-12 h-12 bg-primary rounded-full flex items-center justify-center">
+                        <span class="text-2xl">⚠️</span>
+                    </div>
+                    <div>
+                        <h1 class="font-heading text-xl font-bold">АНТИ-ФРОД</h1>
+                        <p class="text-xs text-gray-400">Казахстан</p>
+                    </div>
+                </a>
+                
+                <nav class="hidden md:flex items-center space-x-6">
+                    <a href="/" class="hover:text-primary transition">Главная</a>
+                    <a href="/schemes/" class="hover:text-primary transition">Схемы</a>
+                    <a href="/documents/" class="hover:text-primary transition">Документы</a>
+                    <a href="/organizations/" class="hover:text-primary transition">Организации</a>
+                    <a href="/guides/" class="hover:text-primary transition">Пособия</a>
+                    <a href="/check.html" class="text-primary font-bold">Проверка</a>
+                    <a href="/contacts.html" class="hover:text-primary transition">Контакты</a>
+                </nav>
+                
+                <div class="flex items-center space-x-4">
+                    <a href="/apply.html" class="hidden sm:inline-block bg-primary hover:bg-primary/80 px-4 py-2 rounded-lg font-heading text-sm transition">
+                        ПОМОЧЬ
+                    </a>
+                    <button id="mobileMenuBtn" class="md:hidden text-white">
+                        <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Menu -->
+        <div id="mobileMenu" class="hidden md:hidden bg-dark border-t border-gray-800">
+            <nav class="container mx-auto px-4 py-4 flex flex-col space-y-3">
+                <a href="/" class="py-2 hover:text-primary transition">Главная</a>
+                <a href="/schemes/" class="py-2 hover:text-primary transition">Схемы обмана</a>
+                <a href="/documents/" class="py-2 hover:text-primary transition">Фейковые документы</a>
+                <a href="/organizations/" class="py-2 hover:text-primary transition">Фейковые организации</a>
+                <a href="/guides/" class="py-2 hover:text-primary transition">Полные пособия</a>
+                <a href="/check.html" class="py-2 text-primary font-bold">Проверка</a>
+                <a href="/contacts.html" class="py-2 hover:text-primary transition">Контакты</a>
+                <a href="/apply.html" class="bg-primary py-3 text-center rounded-lg font-heading">ПОМОЧЬ</a>
+            </nav>
+        </div>
+    </header>
+
+    <!-- Main Content -->
+    <main class="pt-24 pb-16">
+        <div class="container mx-auto px-4">
+            <!-- Page Header -->
+            <div class="text-center mb-12">
+                <h1 class="font-heading text-4xl md:text-5xl font-bold mb-4">ПРОВЕРКА <span class="text-primary">ОРГАНИЗАЦИИ</span></h1>
+                <p class="text-xl text-gray-400 max-w-2xl mx-auto">Проверьте лицензию и репутацию финансовой организации перед сотрудничеством</p>
+            </div>
+
+            <!-- How to Check -->
+            <div class="max-w-4xl mx-auto mb-12">
+                <h2 class="font-heading text-2xl font-bold mb-6">КАК ПРОВЕРИТЬ?</h2>
+                <div class="grid md:grid-cols-3 gap-6">
+                    <div class="bg-dark p-6 rounded-xl border border-gray-800">
+                        <div class="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mb-4">
+                            <span class="font-heading text-xl text-primary font-bold">1</span>
+                        </div>
+                        <h3 class="font-heading text-lg font-bold mb-2">Проверьте лицензию</h3>
+                        <p class="text-gray-400 text-sm mb-4">Любая финансовая компания должна иметь лицензию АРРФР</p>
+                        <a href="https://www.gov.kz/memleket/entities/ardfm" target="_blank" class="text-primary hover:text-primary/80 font-heading text-sm inline-flex items-center gap-2">
+                            Перейти на gov.kz
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="bg-dark p-6 rounded-xl border border-gray-800">
+                        <div class="w-12 h-12 bg-gold/20 rounded-full flex items-center justify-center mb-4">
+                            <span class="font-heading text-xl text-gold font-bold">2</span>
+                        </div>
+                        <h3 class="font-heading text-lg font-bold mb-2">Проверьте домен</h3>
+                        <p class="text-gray-400 text-sm mb-4">WHOIS-проверка домена. Если зарегистрирован менее года назад — подозрительно</p>
+                        <a href="https://who.is" target="_blank" class="text-gold hover:text-gold/80 font-heading text-sm inline-flex items-center gap-2">
+                            Перейти на who.is
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                            </svg>
+                        </a>
+                    </div>
+                    <div class="bg-dark p-6 rounded-xl border border-gray-800">
+                        <div class="w-12 h-12 bg-primary/20 rounded-full flex items-center justify-center mb-4">
+                            <span class="font-heading text-xl text-primary font-bold">3</span>
+                        </div>
+                        <h3 class="font-heading text-lg font-bold mb-2">Проверьте отзывы</h3>
+                        <p class="text-gray-400 text-sm mb-4">Ищите отзывы на независимых площадках. Фейковые отзывы — на сайте компании</p>
+                        <a href="https://2gis.kz" target="_blank" class="text-primary hover:text-primary/80 font-heading text-sm inline-flex items-center gap-2">
+                            Проверить на 2GIS
+                            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                            </svg>
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Warning Signs -->
+            <div class="max-w-4xl mx-auto mb-12">
+                <h2 class="font-heading text-2xl font-bold mb-6">ПРИЗНАКИ МОШЕННИЧЕСТВА</h2>
+                <div class="bg-dark p-6 rounded-xl border border-gray-800">
+                    <ul class="space-y-4">
+                        <li class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                            </svg>
+                            <div>
+                                <h3 class="font-bold">Обещание гарантированной доходности</h3>
+                                <p class="text-gray-400 text-sm">Никто не может гарантировать доходность инвестиций. Это нарушение закона РК.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                            </svg>
+                            <div>
+                                <h3 class="font-bold">Давление и срочность</h3>
+                                <p class="text-gray-400 text-sm">«Акция только сегодня», «последний шанс», «рынок растёт». Мошенники создают иллюзию нехватки времени.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                            </svg>
+                            <div>
+                                <h3 class="font-bold">Невозможность вывода средств</h3>
+                                <p class="text-gray-400 text-sm">«Заплатите налог», «комиссия», «заморозка». Любые причины для блокировки вывода — мошенничество.</p>
+                            </div>
+                        </li>
+                        <li class="flex items-start gap-3">
+                            <svg class="w-6 h-6 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 9v2m0 4h.01m-6.938 4h13.856c1.54 0 2.502-1.667 1.732-3L13.732 4c-.77-1.333-2.694-1.333-3.464 0L3.34 16c-.77 1.333.192 3 1.732 3z"/>
+                            </svg>
+                            <div>
+                                <h3 class="font-bold">Отсутствие лицензии</h3>
+                                <p class="text-gray-400 text-sm">Проверьте наличие лицензии АРРФР. Если её нет — компания работает незаконно.</p>
+                            </div>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+
+            <!-- Links to Official Resources -->
+            <div class="max-w-4xl mx-auto">
+                <h2 class="font-heading text-2xl font-bold mb-6">ОФИЦИАЛЬНЫЕ РЕСУРСЫ</h2>
+                <div class="grid md:grid-cols-2 gap-6">
+                    <a href="https://www.gov.kz/memleket/entities/ardfm" target="_blank" class="bg-dark p-6 rounded-xl border border-gray-800 hover:border-primary transition group">
+                        <h3 class="font-heading text-lg font-bold mb-2 group-hover:text-primary transition">АРРФР</h3>
+                        <p class="text-gray-400 text-sm">Агентство Республики Казахстан по регулированию и развитию финансового рынка</p>
+                    </a>
+                    <a href="https://egov.kz/cms/ru/articles/egrpb" target="_blank" class="bg-dark p-6 rounded-xl border border-gray-800 hover:border-gold transition group">
+                        <h3 class="font-heading text-lg font-bold mb-2 group-hover:text-gold transition">ЕГРПБ</h3>
+                        <p class="text-gray-400 text-sm">Единый государственный реестр юридических лиц</p>
+                    </a>
+                    <a href="https://www.nationalbank.kz" target="_blank" class="bg-dark p-6 rounded-xl border border-gray-800 hover:border-primary transition group">
+                        <h3 class="font-heading text-lg font-bold mb-2 group-hover:text-primary transition">НБ РК</h3>
+                        <p class="text-gray-400 text-sm">Национальный банк Республики Казахстан</p>
+                    </a>
+                    <a href="https://who.is" target="_blank" class="bg-dark p-6 rounded-xl border border-gray-800 hover:border-gold transition group">
+                        <h3 class="font-heading text-lg font-bold mb-2 group-hover:text-gold transition">WHOIS</h3>
+                        <p class="text-gray-400 text-sm">Проверка домена и информации о сайте</p>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="py-12 bg-darker border-t border-gray-800">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-gray-400 mb-4">⚠️ Анти-фрод Казахстан · Пособие по защите от мошенников</p>
+            <p class="text-gray-500 text-sm">Если вы стали жертвой — <a href="tel:+77754194917" class="text-gold hover:underline">звоните юристу</a> или <a href="tel:102" class="text-gold hover:underline">в полицию</a></p>
+            <p class="text-gray-600 text-xs mt-4">&copy; 2026 Анти-фрод Казахстан</p>
+        </div>
+    </footer>
+
+    <!-- WhatsApp Button -->
+    <a href="https://wa.me/77001234567" target="_blank" class="fixed bottom-4 right-4 z-50 bg-green-500 hover:bg-green-600 w-14 h-14 rounded-full flex items-center justify-center shadow-lg transition transform hover:scale-110">
+        <svg class="w-8 h-8 text-white" fill="currentColor" viewBox="0 0 24 24">
+            <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+        </svg>
+    </a>
+
+    <script src="assets/js/main.js"></script>
+</body>
+</html>
