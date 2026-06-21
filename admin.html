@@ -174,7 +174,7 @@ function loadCases(){
         h+='<td>'+c.platform+'</td>';
         h+='<td>'+c.amount+'</td>';
         h+='<td><span class="badge '+(statusClasses[c.status]||'')+'">'+(statusNames[c.status]||c.status)+'</span></td>';
-        h+='<td><button class="btn-sm btn-secondary" onclick="window.open(\'/antifraud-kz/case/?id='+c.id+'\',\'_blank\')">🔗 Ссылка</button></td></tr>';
+        h+='<td><button class="btn-sm btn-secondary" onclick="window.open(\'/antifraud-kz/case.html?id='+c.id+'\',\'_blank\')">🔗 Ссылка</button></td></tr>';
     });
     document.getElementById('casesTable').innerHTML=h||'<tr><td colspan="6" style="text-align:center;color:#7a8ba3;padding:20px">Нет дел</td></tr>';
 }
@@ -188,7 +188,7 @@ function addCase(){
     var cases=JSON.parse(localStorage.getItem('cases')||'[]');
     cases.push({id:id,client:client,platform:platform,amount:amount,status:status,timeline:[]});
     localStorage.setItem('cases',JSON.stringify(cases));
-    document.getElementById('caseLink').innerHTML='<a href="/antifraud-kz/case/?id='+id+'" target="_blank" style="color:#B80018">/antifraud-kz/case/?id='+id+'</a>';
+    document.getElementById('caseLink').innerHTML='<a href="/antifraud-kz/case.html?id='+id+'" target="_blank" style="color:#B80018">/antifraud-kz/case.html?id='+id+'</a>';
     loadCases();
     document.getElementById('newCaseId').value='';
     document.getElementById('newCaseClient').value='';
