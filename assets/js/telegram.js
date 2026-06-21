@@ -1,69 +1,69 @@
 // Telegram Bot Integration
-// Отправка заявок в Telegram при заполнении формы
-
-var TG_BOT_TOKEN = 'ВСТАВЬТЕ_ВАШ_ТОКЕН_БОТА';
-var TG_CHAT_ID = 'ВСТАВЬТЕ_ВАШ_CHAT_ID';
+var TG_BOT_TOKEN = '8829750295:AAEdnt-7FPCVuVbgj6tgn7eC2_2LpY5VHCk';
+var TG_CHAT_ID = '8471070560';
 
 function sendToTelegram(data) {
     var typeNames = {
         invest: '📊 Инвестиции',
-        crypto: '₿ Крипто',
-        forex: '📈 Forex/опционы',
-        mfo: '🏦 Микрозайм/банк',
+        crypto: '₿ Крипто/Биржа',
+        forex: '📈 Forex/Опционы',
+        mfo: '🏦 Микрозайм/Банк',
+        credit: '💳 Кредит/Карта',
         other: '📋 Другое'
     };
+    var amountNames = {
+        small: 'до 500 000 ₸',
+        medium: '500 000 — 2 000 000 ₸',
+        large: '2 000 000 — 10 000 000 ₸',
+        huge: 'свыше 10 000 000 ₸'
+    };
     var timeNames = {
-        '24h': 'менее 24 часов',
-        week: '1-7 дней',
-        month: '1-4 недели',
-        old: 'более месяца'
+        today: '🟢 Сегодня',
+        week: '🟡 1-7 дней',
+        month: '🟠 1-4 недели',
+        old: '🔴 Более месяца'
     };
     var blockNames = {
         no: '❌ Нет',
-        late: '⚠️ Да, поздно',
-        early: '✅ Да, вовремя',
-        partial: '🔄 Частично'
+        late: '⚠️ Да, но деньги ушли',
+        early: '✅ Да, вовремя'
     };
     var reportNames = {
-        none: 'Нигде',
-        bank: 'В банк',
-        police: 'В полицию',
-        arrfr: 'В АРРФР',
-        all: 'Во все инстанции'
+        none: '❌ Нигде',
+        bank: '📞 Только банк',
+        police: '👮 Полиция',
+        arrfr: '🏛️ АРРФР',
+        lawyer: '👨‍⚖️ Юрист'
     };
     var evidenceNames = {
         no: '❌ Нет',
-        partial: '⚠️ Частично',
-        full: '✅ Сохранил всё',
-        ready: '✅ Готов предоставить'
+        partial: '📱 Частично',
+        full: '✅ Всё сохранил'
     };
 
-    var msg = '🔔 <b>НОВАЯ ЗАЯВКА</b>\n\n';
-    msg += '👤 <b>ФИО:</b> ' + data.fio + '\n';
-    msg += '📱 <b>Телефон:</b> ' + data.phone + '\n';
-    if (data.phone2) msg += '📱 <b>Запасной:</b> ' + data.phone2 + '\n';
-    if (data.messenger) msg += '💬 <b>Мессенджер:</b> ' + data.messenger + '\n';
+    var msg = '🔔 <b>НОВАЯ ЗАЯВКА</b>\n';
+    msg += '━━━━━━━━━━━━━━━━━\n\n';
+    msg += '👤 <b>' + data.fio + '</b>\n';
+    msg += '📱 ' + data.phone + '\n';
+    if (data.phone2) msg += '📱 Доп: ' + data.phone2 + '\n';
+    if (data.messenger) msg += '💬 ' + data.messenger + '\n';
     msg += '\n';
-    msg += '🚨 <b>Тип:</b> ' + (typeNames[data.fraudType] || data.fraudType) + '\n';
-    if (data.platform) msg += '🏢 <b>Платформа:</b> ' + data.platform + '\n';
-    msg += '💰 <b>Сумма:</b> ' + data.amount + ' ₸\n';
-    msg += '⏰ <b>Платёж:</b> ' + (timeNames[data.timeFrame] || data.timeFrame) + '\n';
-    msg += '🔒 <b>Карта:</b> ' + (blockNames[data.blocked] || data.blocked) + '\n';
-    msg += '📋 <b>Обращения:</b> ' + (reportNames[data.reported] || data.reported) + '\n';
-    msg += '📎 <b>Доказательства:</b> ' + (evidenceNames[data.evidence] || data.evidence) + '\n';
-    if (data.details) msg += '\n📝 <b>Детали:</b>\n' + data.details + '\n';
-    msg += '\n🕐 <b>Дата:</b> ' + new Date().toLocaleString('ru-RU');
+    msg += '🚨 <b>Что произошло:</b>\n';
+    msg += '  • Тип: ' + (typeNames[data.fraudType] || data.fraudType) + '\n';
+    if (data.platform) msg += '  • Платформа: ' + data.platform + '\n';
+    msg += '  • Сумма: ' + (amountNames[data.amount] || data.amount) + '\n';
+    msg += '  • Когда: ' + (timeNames[data.timeFrame] || data.timeFrame) + '\n';
+    msg += '\n';
+    msg += '📋 <b>Статус:</b>\n';
+    msg += '  • Карта: ' + (blockNames[data.blocked] || data.blocked) + '\n';
+    msg += '  • Обращения: ' + (reportNames[data.reported] || data.reported) + '\n';
+    msg += '  • Доказательства: ' + (evidenceNames[data.evidence] || evidenceNames[data.evidence]) + '\n';
+    msg += '\n';
+    msg += '🕐 ' + new Date().toLocaleString('ru-RU');
 
-    var url = 'https://api.telegram.org/bot' + TG_BOT_TOKEN + '/sendMessage';
-    var body = {
-        chat_id: TG_CHAT_ID,
-        text: msg,
-        parse_mode: 'HTML'
-    };
-
-    return fetch(url, {
+    return fetch('https://api.telegram.org/bot' + TG_BOT_TOKEN + '/sendMessage', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify(body)
+        body: JSON.stringify({ chat_id: TG_CHAT_ID, text: msg, parse_mode: 'HTML' })
     });
 }

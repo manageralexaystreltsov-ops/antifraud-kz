@@ -3,8 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Онлайн-заявка — Антифрод Центр Казахстан</title>
-<meta name="description" content="Заполните форму и получите бесплатную консультацию по возврату средств">
+<title>Быстрая заявка — Антифрод Центр Казахстан</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📝</text></svg>">
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
@@ -12,346 +11,204 @@
 <link rel="stylesheet" href="/antifraud-kz/assets/css/styles.css">
 <style>
 body{background:#000;padding-bottom:70px}
-.qz{max-width:640px;margin:0 auto;padding:clamp(24px,5vw,48px) clamp(16px,4vw,20px)}
-.qz h1{font-size:clamp(1.5rem,4vw,2rem);font-weight:900;margin-bottom:8px;text-align:center}
-.qz>p{color:#7a8ba3;text-align:center;margin-bottom:32px;font-size:.92rem}
-.qz-progress{margin-bottom:32px}
-.qz-bar{height:4px;background:rgba(255,255,255,.06);border-radius:4px;overflow:hidden;margin-bottom:8px}
+.qz{max-width:500px;margin:0 auto;padding:clamp(20px,5vw,40px) clamp(16px,4vw,20px)}
+.qz h1{font-size:clamp(1.4rem,4vw,1.8rem);font-weight:900;margin-bottom:6px;text-align:center}
+.qz>p{color:#7a8ba3;text-align:center;margin-bottom:24px;font-size:.88rem}
+.qz-progress{margin-bottom:24px}
+.qz-bar{height:3px;background:rgba(255,255,255,.06);border-radius:4px;overflow:hidden}
 .qz-bar-fill{height:100%;background:linear-gradient(90deg,#B80018,#C8A000);border-radius:4px;transition:width .5s}
-.qz-bar-text{font-size:.72rem;color:#7a8ba3;text-align:center}
-.qz-card{background:rgba(26,26,26,.95);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:clamp(20px,4vw,32px);margin-bottom:16px}
-.qz-q{font-size:1.1rem;font-weight:800;color:#fff;margin-bottom:20px;line-height:1.4}
-.qz-options{display:grid;gap:10px}
-.qz-opt{padding:14px 18px;background:rgba(255,255,255,.02);border:1.5px solid rgba(255,255,255,.08);border-radius:12px;cursor:pointer;transition:all .3s;font-size:.88rem;color:#e8ecf4;text-align:left;font-family:'PT Sans',sans-serif;width:100%}
-.qz-opt:hover{border-color:rgba(184,0,24,.25);background:rgba(184,0,24,.04);color:#fff}
-.qz-opt.selected{border-color:#B80018;background:rgba(184,0,24,.08);color:#fff}
-.qz-input{width:100%;padding:14px 18px;background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.08);border-radius:12px;font-size:.95rem;font-family:'PT Sans',sans-serif;color:#fff;transition:all .3s;margin-bottom:12px}
+.qz-step{display:none}
+.qz-step.active{display:block}
+.qz-q{font-size:1rem;font-weight:800;color:#fff;margin-bottom:16px;line-height:1.4;text-align:center}
+.qz-opts{display:grid;gap:8px}
+.qz-opt{padding:14px 16px;background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.08);border-radius:12px;cursor:pointer;transition:all .2s;font-size:.88rem;color:#e8ecf4;text-align:center;font-family:'PT Sans',sans-serif;width:100%}
+.qz-opt:hover{border-color:rgba(184,0,24,.3);background:rgba(184,0,24,.05);color:#fff}
+.qz-opt:active{transform:scale(.98)}
+.qz-input{width:100%;padding:13px 16px;background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.08);border-radius:10px;font-size:.92rem;font-family:'PT Sans',sans-serif;color:#fff;transition:all .2s;margin-bottom:10px}
 .qz-input::placeholder{color:#7a8ba3}
 .qz-input:focus{border-color:rgba(184,0,24,.4);outline:none}
-.qz-input.error{border-color:rgba(239,68,68,.5)}
-.qz-label{font-size:.82rem;color:#7a8ba3;margin-bottom:6px;display:block}
-.qz-row{display:grid;grid-template-columns:1fr 1fr;gap:12px}
-.qz-result{display:none}
-.qz-result.show{display:block}
-.qz-result-card{background:rgba(26,26,26,.95);border:1px solid rgba(255,255,255,.08);border-radius:16px;padding:clamp(24px,5vw,36px);text-align:center}
-.qz-stage-icon{font-size:4rem;margin-bottom:12px}
-.qz-stage-badge{display:inline-block;padding:6px 16px;border-radius:100px;font-size:.82rem;font-weight:700;margin-bottom:16px}
-.qz-stage-title{font-size:1.3rem;font-weight:800;color:#fff;margin-bottom:8px}
-.qz-stage-desc{color:#e8ecf4;font-size:.92rem;line-height:1.7;margin-bottom:20px}
-.qz-stage-hope{background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);border-radius:12px;padding:16px;margin-bottom:20px;text-align:left}
-.qz-stage-hope-title{color:#6ee7b7;font-weight:700;font-size:.9rem;margin-bottom:6px}
-.qz-stage-hope-text{color:#e8ecf4;font-size:.85rem;line-height:1.6}
-.qz-summary{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:16px;margin-bottom:20px;text-align:left}
-.qz-summary-title{font-weight:700;color:#fff;margin-bottom:8px;font-size:.9rem}
-.qz-summary-item{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.03);font-size:.82rem}
-.qz-summary-item:last-child{border-bottom:none}
-.qz-summary-label{color:#7a8ba3}
-.qz-summary-value{color:#fff;font-weight:600}
-.qz-steps{display:grid;gap:10px;text-align:left;margin-bottom:24px}
-.qz-step{display:flex;gap:12px;padding:12px 14px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.08);border-radius:10px}
-.qz-step-num{width:28px;height:28px;background:linear-gradient(135deg,#B80018,#C8A000);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.75rem;color:#fff;flex-shrink:0}
-.qz-step-text{font-size:.85rem;color:#e8ecf4;flex:1}
-.qz-step-text strong{color:#fff}
-.qz-btn{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;background:linear-gradient(135deg,#B80018,#C8A000);color:#fff;border-radius:12px;font-weight:700;font-size:.95rem;text-decoration:none;transition:all .3s;box-shadow:0 4px 20px rgba(184,0,24,.25);border:none;cursor:pointer;font-family:'PT Sans',sans-serif}
-.qz-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(184,0,24,.35)}
-.qz-btn:disabled{opacity:.4;cursor:not-allowed}
-.qz-btn-full{width:100%}
-.qz-next{width:100%;margin-top:16px}
-.qz-back{background:transparent;border:1px solid rgba(255,255,255,.1);color:#7a8ba3;padding:10px 20px;border-radius:10px;cursor:pointer;font-size:.85rem;margin-top:12px;font-family:'PT Sans',sans-serif}
-.qz-back:hover{color:#fff;border-color:rgba(255,255,255,.2)}
-.qz-contact-btns{display:grid;grid-template-columns:1fr 1fr;gap:12px;margin-top:20px}
-.qz-contact-btn{display:flex;align-items:center;justify-content:center;gap:10px;padding:16px;border-radius:12px;font-weight:700;text-decoration:none;transition:all .3s;font-size:.95rem}
-.qz-wa{background:#25D366;color:#fff}
-.qz-wa:hover{background:#128C7E;transform:translateY(-2px)}
-.qz-tg{background:#0088cc;color:#fff}
-.qz-tg:hover{background:#006daa;transform:translateY(-2px)}
-.qz-restart{margin-top:12px;font-size:.82rem;color:#7a8ba3;cursor:pointer;transition:color .2s}
-.qz-restart:hover{color:#fff}
-@media(max-width:480px){.qz-row{grid-template-columns:1fr}}
+.qz-label{font-size:.78rem;color:#7a8ba3;margin-bottom:4px;display:block}
+.qz-row{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.qz-btn{padding:13px;background:linear-gradient(135deg,#B80018,#C8A000);color:#fff;border:none;border-radius:10px;font-weight:700;font-size:.9rem;cursor:pointer;transition:all .2s;font-family:'PT Sans',sans-serif;width:100%}
+.qz-btn:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(184,0,24,.3)}
+.qz-btn:disabled{opacity:.3;cursor:not-allowed}
+.qz-back{background:transparent;border:1px solid rgba(255,255,255,.1);color:#7a8ba3;padding:10px;border-radius:10px;cursor:pointer;font-size:.82rem;font-family:'PT Sans',sans-serif}
+.qz-back:hover{color:#fff}
+/* Result */
+.qz-done{display:none;text-align:center}
+.qz-done.active{display:block}
+.qz-done-icon{font-size:4rem;margin-bottom:12px}
+.qz-done-title{font-size:1.3rem;font-weight:800;color:#fff;margin-bottom:8px}
+.qz-done-desc{color:#e8ecf4;font-size:.88rem;line-height:1.6;margin-bottom:16px}
+.qz-done-badge{display:inline-block;padding:6px 16px;border-radius:100px;font-size:.78rem;font-weight:700;margin-bottom:16px}
+.qz-done-badge.hope{background:rgba(16,185,129,.1);color:#6ee7b7;border:1px solid rgba(16,185,129,.2)}
+.qz-done-badge.info{background:rgba(99,102,241,.1);color:#818cf8;border:1px solid rgba(99,102,241,.2)}
+.qz-done-contact{display:flex;gap:10px;justify-content:center;margin-top:16px}
+.qz-done-wa{background:#25D366;color:#fff;padding:12px 24px;border-radius:10px;font-weight:700;text-decoration:none;display:flex;align-items:center;gap:8px;transition:all .2s}
+.qz-done-wa:hover{background:#128C7E;transform:translateY(-1px)}
+.qz-done-tg{background:#0088cc;color:#fff;padding:12px 24px;border-radius:10px;font-weight:700;text-decoration:none;display:flex;align-items:center;gap:8px;transition:all .2s}
+.qz-done-tg:hover{background:#006daa;transform:translateY(-1px)}
+.qz-spinner{width:32px;height:32px;border:3px solid rgba(255,255,255,.05);border-top-color:#B80018;border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 12px}
+@keyframes spin{to{transform:rotate(360deg)}}
+.qz-loader{display:none;text-align:center;padding:30px}
+.qz-loader.active{display:block}
 </style>
 </head>
 <body class="bg-darker text-white font-body">
 <div class="qz pt-24">
-    <h1 class="font-heading">📝 Онлайн-заявка</h1>
-    <p>Заполните форму — мы оценим ситуацию и свяжемся с вами</p>
-    <div class="qz-progress">
-        <div class="qz-bar"><div class="qz-bar-fill" id="qz-bar" style="width:0%"></div></div>
-        <div class="qz-bar-text" id="qz-bar-text">Шаг 1 из 4</div>
-    </div>
-    <div id="qz-steps">
-        <!-- Step 1: Contact Info -->
-        <div class="qz-card" id="step1">
-            <div class="qz-q">Как с вами связаться?</div>
-            <label class="qz-label">ФИО *</label>
-            <input type="text" class="qz-input" id="fio" placeholder="Иванов Иван Иванович">
-            <label class="qz-label">Телефон *</label>
-            <input type="tel" class="qz-input" id="phone" placeholder="+7 (___) ___-__-__">
-            <label class="qz-label">Запасной телефон</label>
-            <input type="tel" class="qz-input" id="phone2" placeholder="+7 (___) ___-__-__">
-            <label class="qz-label">WhatsApp / Telegram</label>
-            <input type="text" class="qz-input" id="messenger" placeholder="@username или номер">
-            <button class="qz-btn qz-btn-full qz-next" onclick="goStep(2)">Далее →</button>
-        </div>
+    <h1 class="font-heading">📝 Быстрая заявка</h1>
+    <p>Ответьте на несколько вопросов — мы свяжемся с вами</p>
+    <div class="qz-progress"><div class="qz-bar"><div class="qz-bar-fill" id="bar" style="width:0%"></div></div></div>
 
-        <!-- Step 2: Situation -->
-        <div class="qz-card" id="step2" style="display:none">
-            <div class="qz-q">Расскажите о ситуации</div>
-            <label class="qz-label">Как вас обманули? *</label>
-            <div class="qz-options" id="fraudType">
-                <button class="qz-opt" data-val="invest">Инвестиционная платформа</button>
-                <button class="qz-opt" data-val="crypto">Криптобиржа / DeFi / майнинг</button>
-                <button class="qz-opt" data-val="forex">Forex / бинарные опционы</button>
-                <button class="qz-opt" data-val="mfo">Микрозайм / банк</button>
-                <button class="qz-opt" data-val="other">Другое</button>
-            </div>
-            <label class="qz-label" style="margin-top:16px">Название платформы / организации</label>
-            <input type="text" class="qz-input" id="platform" placeholder="Название или сайт">
-            <label class="qz-label">Сумма потерь (тенге) *</label>
-            <input type="text" class="qz-input" id="amount" placeholder="Например: 2 500 000">
-            <label class="qz-label">Когда перевели последние деньги? *</label>
-            <div class="qz-options" id="timeFrame">
-                <button class="qz-opt" data-val="24h">Менее 24 часов</button>
-                <button class="qz-opt" data-val="week">1-7 дней</button>
-                <button class="qz-opt" data-val="month">1-4 недели</button>
-                <button class="qz-opt" data-val="old">Более месяца</button>
-            </div>
-            <div class="qz-row">
-                <button class="qz-back" onclick="goStep(1)">← Назад</button>
-                <button class="qz-btn qz-next" onclick="goStep(3)">Далее →</button>
-            </div>
-        </div>
-
-        <!-- Step 3: Actions Taken -->
-        <div class="qz-card" id="step3" style="display:none">
-            <div class="qz-q">Что вы уже сделали?</div>
-            <label class="qz-label">Заблокировали карту? *</label>
-            <div class="qz-options" id="blocked">
-                <button class="qz-opt" data-val="no">Нет, ещё не заблокировал(а)</button>
-                <button class="qz-opt" data-val="late">Да, но деньги уже ушли</button>
-                <button class="qz-opt" data-val="early">Да, вовремя</button>
-                <button class="qz-opt" data-val="partial">Частично</button>
-            </div>
-            <label class="qz-label" style="margin-top:16px">Куда обращались? *</label>
-            <div class="qz-options" id="reported">
-                <button class="qz-opt" data-val="none">Нигде ещё не обращался</button>
-                <button class="qz-opt" data-val="bank">Только в банк</button>
-                <button class="qz-opt" data-val="police">В полицию</button>
-                <button class="qz-opt" data-val="arrfr">В АРРФР (1434)</button>
-                <button class="qz-opt" data-val="all">Во все инстанции</button>
-            </div>
-            <label class="qz-label" style="margin-top:16px">Есть ли доказательства? *</label>
-            <div class="qz-options" id="evidence">
-                <button class="qz-opt" data-val="no">Нет, всё удалил(а)</button>
-                <button class="qz-opt" data-val="partial">Частично есть</button>
-                <button class="qz-opt" data-val="full">Да, сохранил(а) всё</button>
-                <button class="qz-opt" data-val="ready">Да, готов(а) предоставить</button>
-            </div>
-            <label class="qz-label" style="margin-top:16px">Дополнительная информация</label>
-            <textarea class="qz-input" id="details" rows="3" placeholder="Опишите ситуацию подробнее..."></textarea>
-            <div class="qz-row">
-                <button class="qz-back" onclick="goStep(2)">← Назад</button>
-                <button class="qz-btn qz-next" onclick="goStep(4)">Далее →</button>
-            </div>
-        </div>
-
-        <!-- Step 4: Summary & Send -->
-        <div class="qz-card" id="step4" style="display:none">
-            <div class="qz-q">Проверьте данные и отправьте</div>
-            <div class="qz-summary" id="summary"></div>
-            <div id="sending" style="display:none;text-align:center;padding:20px"><div class="qz-spinner" style="width:40px;height:40px;border:3px solid rgba(255,255,255,.05);border-top-color:#B80018;border-radius:50%;animation:spin .7s linear infinite;margin:0 auto 12px"></div><p style="color:#7a8ba3">Отправляем заявку...</p></div>
-            <div id="sentMsg" style="display:none;text-align:center;padding:20px"><div style="font-size:3rem;margin-bottom:12px">✅</div><h3 style="font-weight:800;margin-bottom:8px">Заявка отправлена!</h3><p style="color:#7a8ba3;margin-bottom:20px">Мы свяжемся с вами в ближайшее время</p></div>
-            <div id="sendBtns">
-                <button class="qz-btn qz-btn-full" onclick="sendApplication()">📨 Отправить заявку</button>
-                <div class="qz-contact-btns">
-                    <a href="https://wa.me/77001234567?text=Здравствуйте,%20хочу%20оставить%20заявку%20на%20возврат%20средств" target="_blank" class="qz-contact-btn qz-wa">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
-                        WhatsApp
-                    </a>
-                    <a href="https://t.me/antifraud_kz" target="_blank" class="qz-contact-btn qz-tg">
-                        <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
-                        Telegram
-                    </a>
-                </div>
-            </div>
-            <div class="qz-row" style="margin-top:12px">
-                <button class="qz-back" onclick="goStep(3)">← Назад</button>
-            </div>
+    <!-- STEP 1: What happened -->
+    <div class="qz-step active" id="s1">
+        <div class="qz-q">Что с вами произошло?</div>
+        <div class="qz-opts">
+            <button class="qz-opt" onclick="set('type','invest',2)">📊 Инвестиции — обещали доходность</button>
+            <button class="qz-opt" onclick="set('type','crypto',2)">₿ Криптовалюта / биржа / майнинг</button>
+            <button class="qz-opt" onclick="set('type','forex',2)">📈 Forex / бинарные опционы</button>
+            <button class="qz-opt" onclick="set('type','mfo',2)">🏦 Микрозайм / банк навязали услугу</button>
+            <button class="qz-opt" onclick="set('type','credit',2)">💳 Кредит / карты / кража</button>
+            <button class="qz-opt" onclick="set('type','other',2)">📋 Другое</button>
         </div>
     </div>
 
-    <!-- Result after sending -->
-    <div class="qz-result" id="qz-result"></div>
+    <!-- STEP 2: How much -->
+    <div class="qz-step" id="s2">
+        <div class="qz-q">Сколько вы потеряли?</div>
+        <div class="qz-opts">
+            <button class="qz-opt" onclick="set('amount','small',3)">💰 До 500 000 ₸</button>
+            <button class="qz-opt" onclick="set('amount','medium',3)">💰💰 500 000 — 2 000 000 ₸</button>
+            <button class="qz-opt" onclick="set('amount','large',3)">💰💰💰 2 000 000 — 10 000 000 ₸</button>
+            <button class="qz-opt" onclick="set('amount','huge',3)">💰💰💰💰 Свыше 10 000 000 ₸</button>
+        </div>
+        <button class="qz-back" onclick="go(1)" style="margin-top:12px">← Назад</button>
+    </div>
+
+    <!-- STEP 3: FIO -->
+    <div class="qz-step" id="s3">
+        <div class="qz-q">Как вас зовут?</div>
+        <input class="qz-input" id="fio" placeholder="Фамилия Имя Отчество">
+        <button class="qz-btn" onclick="if(document.getElementById('fio').value.trim()){go(4)}">Далее →</button>
+        <button class="qz-back" onclick="go(2)" style="margin-top:8px">← Назад</button>
+    </div>
+
+    <!-- STEP 4: Phone -->
+    <div class="qz-step" id="s4">
+        <div class="qz-q">Ваш телефон</div>
+        <input class="qz-input" id="phone" type="tel" placeholder="+7 (___) ___-__-__">
+        <button class="qz-btn" onclick="if(document.getElementById('phone').value.trim()){go(5)}">Далее →</button>
+        <button class="qz-back" onclick="go(3)" style="margin-top:8px">← Назад</button>
+    </div>
+
+    <!-- STEP 5: When -->
+    <div class="qz-step" id="s5">
+        <div class="qz-q">Когда перевели последние деньги?</div>
+        <div class="qz-opts">
+            <button class="qz-opt" onclick="set('time','today',6)">🟢 Сегодня</button>
+            <button class="qz-opt" onclick="set('time','week',6)">🟡 1-7 дней назад</button>
+            <button class="qz-opt" onclick="set('time','month',6)">🟠 1-4 недели назад</button>
+            <button class="qz-opt" onclick="set('time','old',6)">🔴 Более месяца</button>
+        </div>
+        <button class="qz-back" onclick="go(4)" style="margin-top:12px">← Назад</button>
+    </div>
+
+    <!-- STEP 6: Blocked card -->
+    <div class="qz-step" id="s6">
+        <div class="qz-q">Заблокировали карту?</div>
+        <div class="qz-opts">
+            <button class="qz-opt" onclick="set('blocked','no',7)">❌ Нет</button>
+            <button class="qz-opt" onclick="set('blocked','late',7)">⚠️ Да, но деньги ушли</button>
+            <button class="qz-opt" onclick="set('blocked','early',7)">✅ Да, вовремя</button>
+        </div>
+        <button class="qz-back" onclick="go(5)" style="margin-top:12px">← Назад</button>
+    </div>
+
+    <!-- STEP 7: Reported -->
+    <div class="qz-step" id="s7">
+        <div class="qz-q">Куда обращались?</div>
+        <div class="qz-opts">
+            <button class="qz-opt" onclick="set('reported','none',8)">❌ Нигде ещё</button>
+            <button class="qz-opt" onclick="set('reported','bank',8)">📞 Только в банк</button>
+            <button class="qz-opt" onclick="set('reported','police',8)">👮 В полицию</button>
+            <button class="qz-opt" onclick="set('reported','arrfr',8)">🏛️ В АРРФР</button>
+            <button class="qz-opt" onclick="set('reported','lawyer',8)">👨‍⚖️ К юристу</button>
+        </div>
+        <button class="qz-back" onclick="go(6)" style="margin-top:12px">← Назад</button>
+    </div>
+
+    <!-- STEP 8: Evidence -->
+    <div class="qz-step" id="s8">
+        <div class="qz-q">Есть ли доказательства?</div>
+        <div class="qz-opts">
+            <button class="qz-opt" onclick="set('evidence','no',9)">❌ Нет, всё удалил(а)</button>
+            <button class="qz-opt" onclick="set('evidence','partial',9)">📱 Частично есть</button>
+            <button class="qz-opt" onclick="set('evidence','full',9)">✅ Сохранил(а) всё</button>
+        </div>
+        <button class="qz-back" onclick="go(7)" style="margin-top:12px">← Назад</button>
+    </div>
+
+    <!-- LOADER -->
+    <div class="qz-loader" id="loader">
+        <div class="qz-spinner"></div>
+        <p style="color:#7a8ba3;font-size:.85rem">Отправляем заявку...</p>
+    </div>
+
+    <!-- DONE -->
+    <div class="qz-done" id="done">
+        <div class="qz-done-icon">✅</div>
+        <div class="qz-done-badge hope">💚 Заявка принята!</div>
+        <div class="qz-done-title">Мы свяжемся с вами</div>
+        <div class="qz-done-desc">Наш специалист позвонит вам в ближайшее время, чтобы обсудить ситуацию и предложить план действий</div>
+        <div class="qz-done-badge info">📞 Ожидайте звонка</div>
+        <div class="qz-done-contact">
+            <a href="https://wa.me/77001234567" target="_blank" class="qz-done-wa">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>
+                WhatsApp
+            </a>
+            <a href="https://t.me/antifraud_kz" target="_blank" class="qz-done-tg">
+                <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>
+                Telegram
+            </a>
+        </div>
+        <p style="margin-top:16px;font-size:.75rem;color:#7a8ba3">Нажмите «Отправить» ещё раз — данные уже доставлены</p>
+    </div>
 </div>
-<style>@keyframes spin{to{transform:rotate(360deg)}}</style>
-<script>
-var data={fio:'',phone:'',phone2:'',messenger:'',fraudType:'',platform:'',amount:'',timeFrame:'',blocked:'',reported:'',evidence:'',details:''};
-var selectedOpts={};
 
-function selectOption(groupId,val){
-    var group=document.getElementById(groupId);
-    group.querySelectorAll('.qz-opt').forEach(function(b){b.classList.remove('selected')});
-    event.target.classList.add('selected');
-    data[groupId==='fraudType'?'fraudType':groupId==='timeFrame'?'timeFrame':groupId==='blocked'?'blocked':groupId==='reported'?'reported':'evidence']=val;
-    selectedOpts[groupId]=val;
-}
-
-function goStep(n){
-    if(n===2){
-        if(!document.getElementById('fio').value.trim()){document.getElementById('fio').classList.add('error');return}
-        if(!document.getElementById('phone').value.trim()){document.getElementById('phone').classList.add('error');return}
-        data.fio=document.getElementById('fio').value.trim();
-        data.phone=document.getElementById('phone').value.trim();
-        data.phone2=document.getElementById('phone2').value.trim();
-        data.messenger=document.getElementById('messenger').value.trim();
-    }
-    if(n===3){
-        if(!data.fraudType){alert('Выберите тип мошенничества');return}
-        if(!document.getElementById('amount').value.trim()){document.getElementById('amount').classList.add('error');return}
-        if(!data.timeFrame){alert('Выберите когда перевели');return}
-        data.platform=document.getElementById('platform').value.trim();
-        data.amount=document.getElementById('amount').value.trim();
-    }
-    if(n===4){
-        if(!data.blocked){alert('Выберите заблокировали ли карту');return}
-        if(!data.reported){alert('Выберите куда обращались');return}
-        if(!data.evidence){alert('Выберите есть ли доказательства');return}
-        data.details=document.getElementById('details').value.trim();
-        renderSummary();
-    }
-    document.querySelectorAll('.qz-card').forEach(function(c){c.style.display='none'});
-    document.getElementById('step'+n).style.display='block';
-    var pct=((n-1)/3)*100;
-    document.getElementById('qz-bar').style.width=pct+'%';
-    document.getElementById('qz-bar-text').textContent='Шаг '+n+' из 4';
-    window.scrollTo({top:0,behavior:'smooth'});
-}
-
-function renderSummary(){
-    var typeNames={invest:'Инвестиции',crypto:'Крипто',forex:'Forex/опционы',mfo:'Микрозайм/банк',other:'Другое'};
-    var timeNames={week:'1-7 дней',month:'1-4 недели',old:'более месяца','24h':'менее 24ч'};
-    var blockNames={no:'Нет',late:'Да, поздно',early:'Да, вовремя',partial:'Частично'};
-    var reportNames={none:'Нигде',bank:'В банк',police:'В полицию',arrfr:'В АРРФР',all:'Во все инстанции'};
-    var evidenceNames={no:'Нет',partial:'Частично',full:'Да, всё',ready:'Готов предоставить'};
-    var h='<div class="qz-summary-title">📋 Ваши данные:</div>';
-    h+='<div class="qz-summary-item"><span class="qz-summary-label">ФИО</span><span class="qz-summary-value">'+data.fio+'</span></div>';
-    h+='<div class="qz-summary-item"><span class="qz-summary-label">Телефон</span><span class="qz-summary-value">'+data.phone+'</span></div>';
-    if(data.phone2)h+='<div class="qz-summary-item"><span class="qz-summary-label">Запасной</span><span class="qz-summary-value">'+data.phone2+'</span></div>';
-    if(data.messenger)h+='<div class="qz-summary-item"><span class="qz-summary-label">Мессенджер</span><span class="qz-summary-value">'+data.messenger+'</span></div>';
-    h+='<div class="qz-summary-item"><span class="qz-summary-label">Тип мошенничества</span><span class="qz-summary-value">'+typeNames[data.fraudType]+'</span></div>';
-    if(data.platform)h+='<div class="qz-summary-item"><span class="qz-summary-label">Платформа</span><span class="qz-summary-value">'+data.platform+'</span></div>';
-    h+='<div class="qz-summary-item"><span class="qz-summary-label">Сумма потерь</span><span class="qz-summary-value">'+data.amount+' ₸</span></div>';
-    h+='<div class="qz-summary-item"><span class="qz-summary-label">Последний платёж</span><span class="qz-summary-value">'+timeNames[data.timeFrame]+'</span></div>';
-    h+='<div class="qz-summary-item"><span class="qz-summary-label">Карта заблокирована</span><span class="qz-summary-value">'+blockNames[data.blocked]+'</span></div>';
-    h+='<div class="qz-summary-item"><span class="qz-summary-label">Обращения</span><span class="qz-summary-value">'+reportNames[data.reported]+'</span></div>';
-    h+='<div class="qz-summary-item"><span class="qz-summary-label">Доказательства</span><span class="qz-summary-value">'+evidenceNames[data.evidence]+'</span></div>';
-    if(data.details)h+='<div class="qz-summary-item"><span class="qz-summary-label">Детали</span><span class="qz-summary-value" style="max-width:60%;text-align:right">'+data.details+'</span></div>';
-    document.getElementById('summary').innerHTML=h;
-}
-
-function sendApplication(){
-    if(typeof sendToTelegram==="function"){sendToTelegram(data).catch(function(e){console.log("TG error:",e)})}
-    document.getElementById('sendBtns').style.display='none';
-    document.getElementById('sending').style.display='block';
-    data.timestamp=new Date().toISOString();
-    var apps=JSON.parse(localStorage.getItem('applications')||'[]');
-    apps.push(data);
-    localStorage.setItem('applications',JSON.stringify(apps));
-    setTimeout(function(){
-        document.getElementById('sending').style.display='none';
-        document.getElementById('sentMsg').style.display='block';
-        showResult(data);
-    },1500);
-}
-
-function showResult(d){
-    var totalScore=0;
-    if(d.timeFrame==='24h')totalScore+=4;
-    else if(d.timeFrame==='week')totalScore+=3;
-    else if(d.timeFrame==='month')totalScore+=2;
-    else totalScore+=1;
-    if(d.blocked==='no')totalScore+=4;
-    else if(d.blocked==='late')totalScore+=3;
-    else if(d.blocked==='partial')totalScore+=2;
-    else totalScore+=1;
-    if(d.reported==='none')totalScore+=4;
-    else if(d.reported==='bank')totalScore+=3;
-    else if(d.reported==='police'||d.reported==='arrfr')totalScore+=2;
-    else totalScore+=1;
-    if(d.evidence==='no')totalScore+=4;
-    else if(d.evidence==='partial')totalScore+=3;
-    else if(d.evidence==='full')totalScore+=2;
-    else totalScore+=1;
-    var avg=totalScore/4;
-    var stage,icon,title,desc,hope,steps;
-    if(avg>=3.2){
-        stage='critical';icon='🚨';title='Ситуация требует немедленного реагирования';
-        desc='Мошенники активно работают. Каждый день промедления снижает шансы на возврат.';
-        hope='Данные показывают: при обращении в первые 72 часа шансы на возврат составляют до 78%. Вы ещё можете успеть!';
-        steps=[
-            {n:'1',t:'<strong>НЕ ПЕРЕВОДИТЕ больше денег</strong> — это повторное мошенничество'},
-            {n:'2',t:'<strong>Заблокируйте карту</strong> немедленно'},
-            {n:'3',t:'<strong>Сохраните ВСЁ</strong> — скриншоты, чеки, выписки'},
-            {n:'4',t:'<strong>Свяжитесь с нами</strong> — мы начнём работу немедленно'}
-        ];
-    }else if(avg>=2.2){
-        stage='active';icon='⚠️';title='Есть время для грамотных действий';
-        desc='Ситуация серьёзная, но可控. У вас есть возможность вернуть средства.';
-        hope='У вас уже есть доказательства и вы начали действовать. Шансы на возврат высоки.';
-        steps=[
-            {n:'1',t:'<strong>Зафиксируйте доказательства</strong>'},
-            {n:'2',t:'<strong>Обратитесь в банк</strong> с заявлением'},
-            {n:'3',t:'<strong>Подайте заявление</strong> в АРРФР и полицию'},
-            {n:'4',t:'<strong>Проконсультируйтесь</strong> с нами'}
-        ];
-    }else{
-        stage='process';icon='📋';title='Процесс идёт правильно';
-        desc='Вы уже сделали правильные шаги. Продолжайте и мы поможем довести до результата.';
-        hope='Вы прошли самое сложное. При правильном сопровождении шансы очень высоки.';
-        steps=[
-            {n:'1',t:'<strong>Проверьте статус заявлений</strong>'},
-            {n:'2',t:'<strong>Контролируйте банк</strong>'},
-            {n:'3',t:'<strong>Подготовьте документы</strong> для суда'},
-            {n:'4',t:'<strong>Обратитесь к нам</strong> для сопровождения'}
-        ];
-    }
-    var h='<div class="qz-result-card">';
-    h+='<div class="qz-stage-icon">'+icon+'</div>';
-    h+='<div class="qz-stage-badge" style="background:rgba(184,0,24,.1);color:#fca5a5;border:1px solid rgba(184,0,24,.2)">'+title+'</div>';
-    h+='<div class="qz-stage-title">'+title+'</div>';
-    h+='<div class="qz-stage-desc">'+desc+'</div>';
-    h+='<div class="qz-stage-hope"><div class="qz-stage-hope-title">💚 Хорошая новость:</div><div class="qz-stage-hope-text">'+hope+'</div></div>';
-    h+='<div class="qz-steps">';
-    steps.forEach(function(s){h+='<div class="qz-step"><div class="qz-step-num">'+s.n+'</div><div class="qz-step-text">'+s.t+'</div></div>'});
-    h+='</div>';
-    h+='<div class="qz-contact-btns">';
-    h+='<a href="https://wa.me/77001234567?text=Здравствуйте,%20мое%20 имя%20'+encodeURIComponent(d.fio)+'%2C%20потерял(а)%20'+encodeURIComponent(d.amount)+'%20₸.%20Хочу%20оставить%20заявку." target="_blank" class="qz-contact-btn qz-wa"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/></svg>WhatsApp</a>';
-    h+='<a href="https://t.me/antifraud_kz" target="_blank" class="qz-contact-btn qz-tg"><svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24"><path d="M11.944 0A12 12 0 0 0 0 12a12 12 0 0 0 12 12 12 12 0 0 0 12-12A12 12 0 0 0 12 0a12 12 0 0 0-.056 0zm4.962 7.224c.1-.002.321.023.465.14a.506.506 0 0 1 .171.325c.016.093.036.306.02.472-.18 1.898-.962 6.502-1.36 8.627-.168.9-.499 1.201-.82 1.23-.696.065-1.225-.46-1.9-.902-1.056-.693-1.653-1.124-2.678-1.8-1.185-.78-.417-1.21.258-1.91.177-.184 3.247-2.977 3.307-3.23.007-.032.014-.15-.056-.212s-.174-.041-.249-.024c-.106.024-1.793 1.14-5.061 3.345-.479.33-.913.49-1.302.48-.428-.008-1.252-.241-1.865-.44-.752-.245-1.349-.374-1.297-.789.027-.216.325-.437.893-.663 3.498-1.524 5.83-2.529 6.998-3.014 3.332-1.386 4.025-1.627 4.476-1.635z"/></svg>Telegram</a>';
-    h+='</div>';
-    h+='<div class="qz-restart" onclick="location.reload()">Заполнить заново</div>';
-    h+='</div>';
-    var resultDiv=document.getElementById('qz-result');
-    resultDiv.innerHTML=h;
-    resultDiv.classList.add('show');
-    setTimeout(function(){resultDiv.scrollIntoView({behavior:'smooth',block:'start'})},100);
-}
-
-document.querySelectorAll('.qz-options').forEach(function(group){
-    group.querySelectorAll('.qz-opt').forEach(function(btn){
-        btn.addEventListener('click',function(){
-            group.querySelectorAll('.qz-opt').forEach(function(b){b.classList.remove('selected')});
-            btn.classList.add('selected');
-            var id=group.id;
-            var key=id==='fraudType'?'fraudType':id==='timeFrame'?'timeFrame':id==='blocked'?'blocked':id==='reported'?'reported':'evidence';
-            data[key]=btn.getAttribute('data-val');
-        });
-    });
-});
-
-document.querySelectorAll('.qz-input').forEach(function(inp){
-    inp.addEventListener('input',function(){inp.classList.remove('error')});
-});
-</script>
 <script src="/antifraud-kz/assets/js/telegram.js"></script>
+<script>
+var d={type:'',amount:'',fio:'',phone:'',time:'',blocked:'',reported:'',evidence:''};
+function set(k,v,next){
+    d[k]=v;
+    go(next);
+}
+function go(n){
+    document.querySelectorAll('.qz-step').forEach(function(s){s.classList.remove('active')});
+    document.getElementById('s'+n).classList.add('active');
+    document.getElementById('bar').style.width=((n-1)/8*100)+'%';
+    window.scrollTo({top:0,behavior:'smooth'});
+    if(n===9)send();
+}
+function send(){
+    document.querySelectorAll('.qz-step').forEach(function(s){s.classList.remove('active')});
+    document.getElementById('loader').classList.add('active');
+    d.fio=document.getElementById('fio').value.trim();
+    d.phone=document.getElementById('phone').value.trim();
+    var apps=JSON.parse(localStorage.getItem('applications')||'[]');
+    apps.push(d);
+    localStorage.setItem('applications',JSON.stringify(apps));
+    sendToTelegram(d).then(function(){
+        document.getElementById('loader').classList.remove('active');
+        document.getElementById('done').classList.add('active');
+        document.getElementById('bar').style.width='100%';
+    }).catch(function(e){
+        console.log(e);
+        document.getElementById('loader').classList.remove('active');
+        document.getElementById('done').classList.add('active');
+        document.getElementById('bar').style.width='100%';
+    });
+}
+</script>
 <script src="/antifraud-kz/assets/js/nav.js"></script>
 </body>
 </html>
