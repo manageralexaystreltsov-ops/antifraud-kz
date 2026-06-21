@@ -113,7 +113,7 @@
     else if (path.includes('team.html')) currentPage = 'team';
     else if (path.includes('cases.html')) currentPage = 'cases';
     else if (path.includes('contacts.html')) currentPage = 'contacts';
-    else if (path.includes('/case/')) currentPage = 'cases';
+    else if (path.includes('case.html')) currentPage = 'cases';
     else if (path.includes('admin.html')) currentPage = 'admin';
 
     document.body.insertAdjacentHTML('afterbegin', navHTML + warningBanner);
