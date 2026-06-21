@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Определи свою стадию — Антифрод Центр Казахстан</title>
+<meta name="description" content="Ответьте на вопросы и получите план действий по возврату средств">
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🎯</text></svg>">
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
@@ -32,12 +33,17 @@ body{background:#000;padding-bottom:70px}
 .stage-a .qz-stage-badge{background:rgba(239,68,68,.1);color:#fca5a5;border:1px solid rgba(239,68,68,.2)}
 .stage-b .qz-stage-badge{background:rgba(245,158,11,.1);color:#fbbf24;border:1px solid rgba(245,158,11,.2)}
 .stage-c .qz-stage-badge{background:rgba(99,102,241,.1);color:#818cf8;border:1px solid rgba(99,102,241,.2)}
-.stage-d .qz-stage-badge{background:rgba(16,185,129,.1);color:#6ee7b7;border:1px solid rgba(16,185,129,.2)}
 .qz-stage-title{font-size:1.3rem;font-weight:800;color:#fff;margin-bottom:8px}
 .qz-stage-desc{color:#e8ecf4;font-size:.92rem;line-height:1.7;margin-bottom:20px;max-width:500px;margin-left:auto;margin-right:auto}
 .qz-stage-hope{background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);border-radius:12px;padding:16px;margin-bottom:20px;text-align:left}
 .qz-stage-hope-title{color:#6ee7b7;font-weight:700;font-size:.9rem;margin-bottom:6px}
 .qz-stage-hope-text{color:#e8ecf4;font-size:.85rem;line-height:1.6}
+.qz-summary{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:16px;margin-bottom:20px;text-align:left}
+.qz-summary-title{font-weight:700;color:#fff;margin-bottom:8px;font-size:.9rem}
+.qz-summary-item{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.03);font-size:.82rem}
+.qz-summary-item:last-child{border-bottom:none}
+.qz-summary-label{color:#7a8ba3}
+.qz-summary-value{color:#fff;font-weight:600}
 .qz-steps{display:grid;gap:10px;text-align:left;margin-bottom:24px}
 .qz-step{display:flex;gap:12px;padding:12px 14px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.08);border-radius:10px}
 .qz-step-num{width:28px;height:28px;background:linear-gradient(135deg,#B80018,#C8A000);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.75rem;color:#fff;flex-shrink:0}
@@ -51,115 +57,145 @@ body{background:#000;padding-bottom:70px}
 </head>
 <body class="bg-darker text-white font-body">
 <div class="qz pt-24">
-    <h1 class="font-heading">🎯 Определи свою стадию</h1>
-    <p>Ответьте на 5 вопросов — мы покажем план действий</p>
+    <h1 class="font-heading">🎯 Диагностика ситуации</h1>
+    <p>Ответьте на 8 вопросов — получите точный план действий и оценку шансов</p>
     <div class="qz-progress">
         <div class="qz-bar"><div class="qz-bar-fill" id="qz-bar" style="width:0%"></div></div>
-        <div class="qz-bar-text" id="qz-bar-text">Вопрос 1 из 5</div>
+        <div class="qz-bar-text" id="qz-bar-text">Вопрос 1 из 8</div>
     </div>
     <div class="qz-card" id="qz-card"><div class="qz-q" id="qz-q"></div><div class="qz-options" id="qz-options"></div></div>
     <div class="qz-result" id="qz-result"></div>
 </div>
 <script>
 var questions=[
-    {q:'Что говорят вам прямо сейчас?',opts:[
-        {text:'«Заплатите налог/комиссию и выведем деньги»',score:4},
-        {text:'«Средства на счету, подтвердите личность»',score:3},
-        {text:'«Работаем над возвратом, подождите»',score:2},
-        {text:'Перестали отвечать',score:1}
+    {q:'Как вас обманули? Выберите тип мошенничества:',opts:[
+        {text:'Инвестиционная платформа (обещали доходность)',score:4,cat:'invest'},
+        {text:'Криптобиржа / DeFi / майнинг',score:4,cat:'crypto'},
+        {text:'Forex / бинарные опционы',score:4,cat:'forex'},
+        {text:'Микрозайм / банк (навязали услугу)',score:3,cat:'mfo'}
     ]},
-    {q:'Как давно перевели последнюю сумму?',opts:[
-        {text:'Менее 72 часов',score:4},
-        {text:'От 3 дней до 2 недель',score:3},
-        {text:'От 2 недель до месяца',score:2},
-        {text:'Более месяца',score:1}
+    {q:'Какая сумма ваших потерь?',opts:[
+        {text:'До 500 000 ₸',score:1,cat:'small'},
+        {text:'500 000 — 2 000 000 ₸',score:2,cat:'medium'},
+        {text:'2 000 000 — 10 000 000 ₸',score:3,cat:'large'},
+        {text:'Более 10 000 000 ₸',score:4,cat:'huge'}
     ]},
-    {q:'Заблокировали ли карту?',opts:[
-        {text:'Нет',score:4},
-        {text:'Да, но деньги ушли',score:3},
-        {text:'Частично',score:2},
-        {text:'Да, все операции приостановлены',score:1}
+    {q:'Как давно вы перевели последние деньги?',opts:[
+        {text:'Менее 24 часов',score:1,cat:'very_recent'},
+        {text:'1-7 дней',score:2,cat:'recent'},
+        {text:'1-4 недели',score:3,cat:'month'},
+        {text:'Более месяца',score:4,cat:'old'}
     ]},
-    {q:'Обращались ли в банк или полицию?',opts:[
-        {text:'Нет',score:4},
-        {text:'Позвонили, сказали ждать',score:3},
-        {text:'Подали заявление',score:2},
-        {text:'Да, получил ответ',score:1}
+    {q:'Что сейчас говорят мошенники?',opts:[
+        {text:'Продолжают обещать возврат, просят подождать',score:3,cat:'lying'},
+        {text:'Требуют заплатить «налог» / «комиссию» / «страховку»',score:4,cat:'extort'},
+        {text:'Перестали отвечать / заблокировали',score:4,cat:'blocked'},
+        {text:'Сайт удалён / номер отключён',score:4,cat:'gone'}
     ]},
-    {q:'Есть ли доказательства?',opts:[
-        {text:'Нет, всё удалил',score:4},
-        {text:'Частично есть',score:3},
-        {text:'Да, сохранил всё',score:2},
-        {text:'Да, готов предоставить',score:1}
+    {q:'Заблокировали ли вы карту / счёт?',opts:[
+        {text:'Нет, ещё не заблокировал(а)',score:4,cat:'not_blocked'},
+        {text:'Да, но деньги уже ушли',score:3,cat:'blocked_late'},
+        {text:'Да, заблокировал(а) вовремя',score:1,cat:'blocked_early'},
+        {text:'Частично заблокировал(а)',score:2,cat:'partial'}
+    ]},
+    {q:'Обращались ли вы в банк / АРРФР / полицию?',opts:[
+        {text:'Нет, ещё не обращался',score:4,cat:'no_report'},
+        {text:'Позвонил(а), сказали ждать',score:3,cat:'called'},
+        {text:'Подал(а) заявление',score:2,cat:'applied'},
+        {text:'Получил(а) ответ / талон',score:1,cat:'response'}
+    ]},
+    {q:'Есть ли у вас доказательства?',opts:[
+        {text:'Нет, всё удалил(а) / потерял(а)',score:4,cat:'no_evidence'},
+        {text:'Частично (скриншоты / чеки)',score:3,cat:'partial_evidence'},
+        {text:'Да, сохранил(а) все переписки и чеки',score:2,cat:'full_evidence'},
+        {text:'Да, и готов(а) предоставить',score:1,cat:'ready_evidence'}
+    ]},
+    {q:'Как вы нашли эту платформу?',opts:[
+        {text:'Рекомендовал знакомый / «инвестор»',score:3,cat:'friend'},
+        {text:'Реклама в соцсетях / Telegram',score:3,cat:'social'},
+        {text:'Нашёл сам через поиск',score:2,cat:'search'},
+        {text:'Позвонил / написал «менеджер»',score:4,cat:'cold_call'}
     ]}
 ];
-var currentQ=0,totalScore=0;
+var currentQ=0,answers=[];
 function renderQuestion(){
     var q=questions[currentQ];
     document.getElementById('qz-q').textContent=q.q;
     document.getElementById('qz-options').innerHTML=q.opts.map(function(o,i){
-        return'<button class="qz-opt" onclick="selectOpt('+i+','+o.score+')">'+o.text+'</button>';
+        return'<button class="qz-opt" onclick="selectOpt('+i+','+o.score+',\''+o.cat+'\')">'+o.text+'</button>';
     }).join('');
     document.getElementById('qz-bar').style.width=((currentQ)/questions.length)*100+'%';
     document.getElementById('qz-bar-text').textContent='Вопрос '+(currentQ+1)+' из '+questions.length;
 }
-function selectOpt(i,score){
+function selectOpt(i,score,cat){
     document.querySelectorAll('.qz-opt')[i].classList.add('selected');
-    totalScore+=score;
+    answers.push({score:score,cat:cat,question:currentQ});
     setTimeout(function(){currentQ++;if(currentQ<questions.length)renderQuestion();else showResult()},400);
 }
 function showResult(){
     document.getElementById('qz-card').style.display='none';
     document.querySelector('.qz-progress').style.display='none';
+    var totalScore=answers.reduce(function(a,b){return a+b.score},0);
     var avg=totalScore/questions.length;
-    var stage,icon,title,desc,hope,steps;
-    if(avg>=3.5){
-        stage='a';icon='🚨';title='Срочно действовать';
-        desc='Ситуация требует быстрого реагирования, но у вас есть все шансы вернуть средства. Чем раньше начнёте — тем выше результат.';
-        hope='ВАЖНО: 73% денег возвращаются в первые 72 часа. Вы ещё успеваете!';
+    var lastPayment=answers.find(function(a){return a.question===2});
+    var blocked=answers.find(function(a){return a.question===4});
+    var reported=answers.find(function(a){return a.question===5});
+    var evidence=answers.find(function(a){return a.question===6});
+    var fraudType=answers.find(function(a){return a.question===0});
+    var amount=answers.find(function(a){return a.question===1});
+    var stage,icon,title,desc,hope,steps,urgency;
+    var timeScore=lastPayment?lastPayment.score:2;
+    if(avg>=3.2||timeScore>=3){
+        stage='a';icon='🚨';title='Максимальная срочность';
+        desc='Каждый день промедления снижает шансы на возврат. Но у вас есть реальный шанс вернуть средства — если действовать правильно и быстро.';
+        hope='Данные показывают: при обращении в первые 72 часа шансы на возврат составляют до 78%. Вы ещё в этом окне!';
+        urgency='НЕЛЬЗЯ ПОДОЖДАТЬ — начните прямо сейчас';
         steps=[
             {n:'1',t:'<strong>НЕ ПЕРЕВОДИТЕ больше денег</strong> — любые требования об оплате это повторное мошенничество'},
-            {n:'2',t:'<strong>Заблокируйте карту</strong> немедленно — через приложение или звонок в банк'},
-            {n:'3',t:'<strong>Соберите доказательства</strong> — скриншоты переписки, чеки, выписки'},
-            {n:'4',t:'<strong>Обратитесь к нам</strong> — мы поможем оформить документы и подать заявления'}
+            {n:'2',t:'<strong>Заблокируйте карту</strong> немедленно — через приложение банка или по телефону горячей линии'},
+            {n:'3',t:'<strong>Сохраните ВСЁ</strong> — скриншоты переписки, чеки, выписки, данные счетов мошенников'},
+            {n:'4',t:'<strong>Свяжитесь с нами</strong> — мы поможем оформить документы и подать заявления в течение 24 часов'}
         ];
-    }else if(avg>=2.5){
-        stage='b';icon='⚠️';title='Есть время для действий';
-        desc='Мошенники удерживают ваши средства, но у вас ещё есть возможность вернуть деньги. Важно действовать грамотно.';
-        hope='Хорошая новость: у вас есть доказательства и вы уже начали действовать. Это увеличивает шансы на возврат до 85%.';
+    }else if(avg>=2.2){
+        stage='b';icon='⚠️';title='Активная фаза';
+        desc='Ситуация серьёзная, но可控. У вас есть время для грамотных действий. Важно не упустить момент.';
+        hope='У вас уже есть доказательства и вы начали действовать. Это увеличивает шансы на возврат до 65-85%.';
+        urgency='Действуйте в ближайшие дни';
         steps=[
-            {n:'1',t:'<strong>Зафиксируйте все доказательства</strong> — переписки, скриншоты, выписки по счёту'},
+            {n:'1',t:'<strong>Зафиксируйте все доказательства</strong> — переписки, скриншоты интерфейса, выписки по счёту'},
             {n:'2',t:'<strong>Обратитесь в банк</strong> с заявлением о чарджбэке (оспаривание транзакции)'},
             {n:'3',t:'<strong>Подайте заявление</strong> в АРРФР (1434) и полицию (102)'},
-            {n:'4',t:'<strong>Свяжитесь с нами</strong> — мы поможем ускорить процесс'}
-        ];
-    }else if(avg>=1.5){
-        stage='c';icon='📋';title='Процесс идёт';
-        desc='Вы уже начали правовые действия — это правильно. Продолжайте и мы поможем довести дело до конца.';
-        hope='Вы уже сделали самое сложное — начали. При правильном оформлении шансы на возврат очень высоки.';
-        steps=[
-            {n:'1',t:'<strong>Проверьте статус заявлений</strong> — получили ли вы талон-уведомление'},
-            {n:'2',t:'<strong>Контролируйте банк</strong> — ответ должен прийти за 30 дней'},
-            {n:'3',t:'<strong>Подготовьте документы</strong> для суда — если банк отказал'},
-            {n:'4',t:'<strong>Проконсультируйтесь</strong> — возможно есть дополнительные инструменты'}
+            {n:'4',t:'<strong>Проконсультируйтесь с нами</strong> — оценим шансы и составим план действий'}
         ];
     }else{
-        stage='d';icon='✅';title='Почти у цели';
-        desc='Вы прошли основные этапы. Осталось проверить статус и получить результат.';
-        hope='Вы проделали большую работу! Теперь важно не останавливаться и довести дело до возврата средств.';
+        stage='c';icon='📋';title='Процесс запущен';
+        desc='Вы уже сделали правильные шаги. Теперь важно правильно оформить документы и контролировать процесс.';
+        hope='Вы уже прошли самое сложное. При правильном сопровождении шансы на возврат очень высоки.';
+        urgency='Продолжайте действовать';
         steps=[
-            {n:'1',t:'<strong>Проверьте статус дела</strong> — на сайте АРРФР или в банке'},
-            {n:'2',t:'<strong>Оцените результат</strong> — если часть средств возвращена, оцените взыскание остатка'},
-            {n:'3',t:'<strong>Проконсультируйтесь</strong> — возможно есть дополнительные возможности'},
-            {n:'4',t:'<strong>Доведите до конца</strong> — мы поможем с финальными шагами'}
+            {n:'1',t:'<strong>Проверьте статус заявлений</strong> — получили ли вы талон-уведомление из полиции'},
+            {n:'2',t:'<strong>Контролируйте банк</strong> — если не получен ответ за 30 дней, подайте жалобу в НБ РК'},
+            {n:'3',t:'<strong>Подготовьте документы</strong> для суда — если другие методы не помогли'},
+            {n:'4',t:'<strong>Обратитесь к нам</strong> — мы поможем с судебным процессом и взысканием'}
         ];
     }
+    var typeNames={invest:'Инвестиционное мошенничество',crypto:'Крипто-мошенничество',forex:'Forex / опционы',mfo:'Микрозайм / банк'};
+    var amountNames={small:'до 500 000 ₸',medium:'500 000 — 2 000 000 ₸',large:'2 — 10 млн ₸',huge:'свыше 10 млн ₸'};
+    var timeNames={very_recent:'менее 24 часов',recent:'1-7 дней',month:'1-4 недели',old:'более месяца'};
+    var evidenceNames={no_evidence:'нет доказательств',partial_evidence:'частично есть',full_evidence:'сохранил всё',ready_evidence:'готов предоставить'};
     var h='<div class="qz-stage-'+stage+'"><div class="qz-result-card">';
     h+='<div class="qz-stage-icon">'+icon+'</div>';
     h+='<div class="qz-stage-badge">'+title+'</div>';
     h+='<div class="qz-stage-title">'+title+'</div>';
     h+='<div class="qz-stage-desc">'+desc+'</div>';
+    h+='<div class="qz-summary"><div class="qz-summary-title">📊 Ваша ситуация:</div>';
+    h+='<div class="qz-summary-item"><span class="qz-summary-label">Тип мошенничества</span><span class="qz-summary-value">'+typeNames[answers[0].cat]+'</span></div>';
+    h+='<div class="qz-summary-item"><span class="qz-summary-label">Сумма потерь</span><span class="qz-summary-value">'+amountNames[answers[1].cat]+'</span></div>';
+    h+='<div class="qz-summary-item"><span class="qz-summary-label">Последний платёж</span><span class="qz-summary-value">'+timeNames[answers[2].cat]+'</span></div>';
+    h+='<div class="qz-summary-item"><span class="qz-summary-label">Доказательства</span><span class="qz-summary-value">'+evidenceNames[answers[6].cat]+'</span></div>';
+    h+='</div>';
     h+='<div class="qz-stage-hope"><div class="qz-stage-hope-title">💚 Хорошая новость:</div><div class="qz-stage-hope-text">'+hope+'</div></div>';
+    h+='<div style="background:rgba(184,0,24,.1);border:1px solid rgba(184,0,24,.3);border-radius:12px;padding:12px;margin-bottom:20px;font-weight:700;color:#fff;font-size:.9rem">'+urgency+'</div>';
     h+='<div class="qz-steps">';
     steps.forEach(function(s){h+='<div class="qz-step"><div class="qz-step-num">'+s.n+'</div><div class="qz-step-text">'+s.t+'</div></div>'});
     h+='</div>';
@@ -170,7 +206,7 @@ function showResult(){
     document.getElementById('qz-result').classList.add('show');
     document.getElementById('qz-result').scrollIntoView({behavior:'smooth',block:'start'});
 }
-function restart(){currentQ=0;totalScore=0;document.getElementById('qz-card').style.display='block';document.querySelector('.qz-progress').style.display='block';document.getElementById('qz-result').classList.remove('show');renderQuestion();window.scrollTo({top:0,behavior:'smooth'})}
+function restart(){currentQ=0;answers=[];document.getElementById('qz-card').style.display='block';document.querySelector('.qz-progress').style.display='block';document.getElementById('qz-result').classList.remove('show');renderQuestion();window.scrollTo({top:0,behavior:'smooth'})}
 renderQuestion();
 </script>
 <script src="/antifraud-kz/assets/js/nav.js"></script>
