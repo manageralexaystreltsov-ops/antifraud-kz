@@ -8,35 +8,217 @@
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <script>tailwind.config={theme:{extend:{colors:{primary:'#B80018',gold:'#C8A000',dark:'#1A1A1A',darker:'#000000'},fontFamily:{heading:['Oswald','sans-serif'],body:['PT Sans','sans-serif']}}}}</script>
-<link rel="stylesheet" href="/antifraud-kz/assets/css/styles.css">
+<style>
+body{background:#000;color:#fff;font-family:'PT Sans',sans-serif;padding-bottom:80px}
+.wrap{max-width:900px;margin:0 auto;padding:clamp(20px,5vw,40px) clamp(16px,4vw,20px)}
+.wrap h1{font-size:clamp(1.8rem,5vw,2.5rem);font-weight:700;text-align:center;margin-bottom:8px}
+.wrap>p{color:#7a8ba3;text-align:center;margin-bottom:32px;font-size:1.05rem;line-height:1.6}
+.cat-title{font-family:'Oswald',sans-serif;font-weight:700;font-size:1.1rem;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;gap:10px}
+.svc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
+.svc{background:#1A1A1A;border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:16px;transition:all .2s}
+.svc:hover{border-color:rgba(184,0,24,.2)}
+.svc-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px}
+.svc-name{font-weight:700;font-size:.92rem;flex:1}
+.svc-price{font-family:'Oswald',sans-serif;font-weight:700;color:#C8A000;font-size:.95rem;white-space:nowrap;margin-left:12px}
+.svc-desc{font-size:.82rem;color:#7a8ba3;line-height:1.5}
+.svc-free{color:#6ee7b7}
+.faq{background:#1A1A1A;border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:16px;margin-bottom:12px}
+.faq-q{font-weight:700;font-size:.95rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
+.faq-q svg{width:20px;height:20px;color:#B80018;transition:transform .3s;flex-shrink:0}
+.faq-q svg.open{transform:rotate(180deg)}
+.faq-a{max-height:0;overflow:hidden;transition:max-height .3s}
+.faq-a.open{max-height:300px}
+.faq-a p{padding-top:12px;color:#7a8ba3;font-size:.88rem;line-height:1.6}
+@media(max-width:500px){.svc-grid{grid-template-columns:1fr}}
+</style>
 </head>
-<body class="bg-darker text-white font-body">
-<main class="pt-24 pb-16">
-    <div class="container mx-auto px-4 max-w-4xl">
-        <div class="text-center mb-12">
-            <div class="inline-block bg-green-500/20 border border-green-500/30 rounded-full px-4 py-1 mb-4"><span class="text-green-400 text-sm font-bold">0 ₸ — Бесплатная консультация</span></div>
-            <h1 class="font-heading text-4xl md:text-5xl font-bold mb-4">УСЛУГИ И <span class="text-primary">ЦЕНЫ</span></h1>
-            <p class="text-xl text-gray-400">Прозрачные цены. Без скрытых платежей.</p>
-        </div>
-        <div class="grid md:grid-cols-2 gap-6">
-            <div class="bg-dark p-6 rounded-xl border border-gray-800"><div class="text-2xl mb-3">📄</div><h3 class="font-heading text-lg font-bold mb-2">Подготовка заявления</h3><p class="text-gray-400 text-sm mb-3">Составление заявлений в банк, АРРФР, полицию</p><div class="font-heading text-2xl text-gold font-bold">25 000 ₸</div></div>
-            <div class="bg-dark p-6 rounded-xl border border-gray-800"><div class="text-2xl mb-3">🏦</div><h3 class="font-heading text-lg font-bold mb-2">Чарджбэк</h3><p class="text-gray-400 text-sm mb-3">Оспаривание транзакции через банк</p><div class="font-heading text-2xl text-gold font-bold">50 000 ₸</div></div>
-            <div class="bg-dark p-6 rounded-xl border border-gray-800"><div class="text-2xl mb-3">🏛️</div><h3 class="font-heading text-lg font-bold mb-2">Жалоба в АРРФР</h3><p class="text-gray-400 text-sm mb-3">Подача жалобы в регулирующий орган</p><div class="font-heading text-2xl text-gold font-bold">35 000 ₸</div></div>
-            <div class="bg-dark p-6 rounded-xl border border-gray-800"><div class="text-2xl mb-3">⚖️</div><h3 class="font-heading text-lg font-bold mb-2">Подготовка иска</h3><p class="text-gray-400 text-sm mb-3">Составление и подача иска в суд</p><div class="font-heading text-2xl text-gold font-bold">75 000 ₸</div></div>
-            <div class="bg-dark p-6 rounded-xl border border-gray-800"><div class="text-2xl mb-3">₿</div><h3 class="font-heading text-lg font-bold mb-2">Трекинг крипто</h3><p class="text-gray-400 text-sm mb-3">Отслеживание криптоплатежей</p><div class="font-heading text-2xl text-gold font-bold">40 000 ₸</div></div>
-            <div class="bg-dark p-6 rounded-xl border border-gray-800"><div class="text-2xl mb-3">🔄</div><h3 class="font-heading text-lg font-bold mb-2">Полное ведение</h3><p class="text-gray-400 text-sm mb-3">Комплексное сопровождение дела</p><div class="font-heading text-2xl text-gold font-bold">от 150 000 ₸</div></div>
-        </div>
-        <div class="mt-12 bg-dark p-8 rounded-xl border border-gray-800">
-            <h2 class="font-heading text-2xl font-bold mb-6">ЧАСТЫЕ ВОПРОСЫ</h2>
-            <div class="space-y-4">
-                <div class="border-b border-gray-800 pb-4"><h3 class="font-bold mb-2">Можно ли вернуть деньги?</h3><p class="text-gray-400 text-sm">Да, в 87% случаев удаётся вернуть средства без суда. Шансы зависят от суммы, времени и наличия доказательств.</p></div>
-                <div class="border-b border-gray-800 pb-4"><h3 class="font-bold mb-2">Сколько стоит консультация?</h3><p class="text-gray-400 text-sm">Первая консультация бесплатна. Мы оценим ситуацию и предложим план действий.</p></div>
-                <div class="border-b border-gray-800 pb-4"><h3 class="font-bold mb-2">Работаете с криптой?</h3><p class="text-gray-400 text-sm">Да, отслеживаем криптоплатежи и помогаем с возвратом через международные каналы.</p></div>
-                <div class="border-b border-gray-800 pb-4"><h3 class="font-bold mb-2">Предоплата?</h3><p class="text-gray-400 text-sm">Оплата по результату. Вы платите только после получения средств.</p></div>
-            </div>
-        </div>
+<body>
+<div class="wrap" style="padding-top:100px">
+    <h1>Услуги и <span style="color:#B80018">цены</span></h1>
+    <p>Прозрачные цены. Без скрытых платежей. Первая консультация — бесплатно.</p>
+
+    <!-- КОНСУЛЬТАЦИИ -->
+    <div class="cat-title">💬 Консультации</div>
+    <div class="svc-grid" id="cat1"></div>
+
+    <!-- ПРОВЕРКА -->
+    <div class="cat-title">🔍 Проверка и анализ</div>
+    <div class="svc-grid" id="cat2"></div>
+
+    <!-- ДОКУМЕНТЫ -->
+    <div class="cat-title">📄 Подготовка документов</div>
+    <div class="svc-grid" id="cat3"></div>
+
+    <!-- БАНКИ -->
+    <div class="cat-title">🏦 Работа с банками</div>
+    <div class="svc-grid" id="cat4"></div>
+
+    <!-- ГОСОРГАНЫ -->
+    <div class="cat-title">🏛️ Государственные органы</div>
+    <div class="svc-grid" id="cat5"></div>
+
+    <!-- СУД -->
+    <div class="cat-title">⚖️ Суд</div>
+    <div class="svc-grid" id="cat6"></div>
+
+    <!-- КРИПТО -->
+    <div class="cat-title">₿ Криптовалюты</div>
+    <div class="svc-grid" id="cat7"></div>
+
+    <!-- МЕЖДУНАРОДНЫЕ -->
+    <div class="cat-title">🌍 Международные</div>
+    <div class="svc-grid" id="cat8"></div>
+
+    <!-- ПОЛНОЕ ВЕДЕНИЕ -->
+    <div class="cat-title">🔄 Комплексные пакеты</div>
+    <div class="svc-grid" id="cat9"></div>
+
+    <!-- FAQ -->
+    <div style="margin-top:48px">
+        <h2 style="font-family:Oswald,sans-serif;font-weight:700;font-size:1.5rem;margin-bottom:20px">Частые вопросы</h2>
+        <div id="faqContainer"></div>
     </div>
-</main>
+
+    <!-- CTA -->
+    <div style="text-align:center;margin-top:40px;padding:32px;background:#1A1A1A;border:1px solid rgba(255,255,255,.06);border-radius:16px">
+        <p style="color:#7a8ba3;margin-bottom:16px;font-size:1rem">Начните с бесплатной консультации — мы оценим ситуацию</p>
+        <a href="/antifraud-kz/quiz.html" style="display:inline-flex;align-items:center;gap:10px;padding:16px 32px;background:linear-gradient(135deg,#B80018,#8B0012);color:#fff;border-radius:12px;font-family:Oswald,sans-serif;font-weight:700;font-size:1rem;text-decoration:none;transition:all .2s">ОСТАВИТЬ ЗАЯВКУ</a>
+    </div>
+</div>
+
+<script>
+var services=[
+    // КОНСУЛЬТАЦИИ
+    {cat:1,n:'Первичная консультация',d:'Бесплатная оценка ситуации и план действий',p:'0 ₸',free:true},
+    {cat:1,n:'Расширенная консультация',d:'Детальный анализ ситуации с рекомендациями',p:'15 000 ₸'},
+    {cat:1,n:'Консультация по чарджбэку',d:'Объяснение процесса и шансов',p:'10 000 ₸'},
+    {cat:1,n:'Консультация по крипте',d:'Разбор ситуации с криптоплатформами',p:'20 000 ₸'},
+    {cat:1,n:'Консультация по суду',d:'Оценка перспектив судебного дела',p:'25 000 ₸'},
+    {cat:1,n:'Выездная консультация',d:'Встреча в офисе или по видеосвязи',p:'30 000 ₸'},
+    {cat:1,n:'Экстренная консультация',d:'Срочная помощь при давлении мошенников',p:'25 000 ₸'},
+    {cat:1,n:'Консультация для бизнеса',d:'Помощь организациям-жертвам мошенничества',p:'50 000 ₸'},
+
+    // ПРОВЕРКА И АНАЛИЗ
+    {cat:2,n:'Проверка организации',d:'Поиск в реестре АРРФР и НБ РК',p:'0 ₸',free:true},
+    {cat:2,n:'Проверка домена (WHOIS)',d:'Анализ возраста и владельца сайта',p:'5 000 ₸'},
+    {cat:2,n:'Анализ контракта',d:'Юридический анализ договора с организацией',p:'20 000 ₸'},
+    {cat:2,n:'Анализ переписки',d:'Выявление признаков мошенничества в переписке',p:'10 000 ₸'},
+    {cat:2,n:'Анализ документов',d:'Проверка подлинности документов',p:'15 000 ₸'},
+    {cat:2,n:'Полный аудит',d:'Комплексный анализ ситуации с заключением',p:'50 000 ₸'},
+    {cat:2,n:'Проверка ИНН/БИН организации',d:'Проверка регистрации юрлица',p:'5 000 ₸'},
+    {cat:2,n:'Анализ финансовых потоков',d:'Трассировка движений средств',p:'35 000 ₸'},
+    {cat:2,n:'Оценка шансов на возврат',d:'Расчёт вероятности возврата средств',p:'15 000 ₸'},
+    {cat:2,n:'Проверка лицензии',d:'Подтверждение наличия лицензии у брокера',p:'10 000 ₸'},
+
+    // ДОКУМЕНТЫ
+    {cat:3,n:'Заявление в банк',d:'Составление заявления на возврат средств',p:'15 000 ₸'},
+    {cat:3,n:'Заявление в полицию',d:'Составление заявления о мошенничестве',p:'20 000 ₸'},
+    {cat:3,n:'Жалоба в АРРФР',d:'Подготовка жалобы в регулятор',p:'25 000 ₸'},
+    {cat:3,n:'Жалоба в НБ РК',d:'Подготовка жалобы в Национальный банк',p:'25 000 ₸'},
+    {cat:3,n:'Исковое заявление',d:'Подготовка иска в суд',p:'75 000 ₸'},
+    {cat:3,n:'Апелляционная жалоба',d:'Обжалование решения суда',p:'60 000 ₸'},
+    {cat:3,n:'Кассационная жалоба',d:'Обжалование в кассационном порядке',p:'80 000 ₸'},
+    {cat:3,n:'Заявление о преступлении',d:'Подготовка заявления в правоохранительные органы',p:'20 000 ₸'},
+    {cat:3,n:'Чарджбэк-заявление',d:'Заявление на оспаривание транзакции',p:'25 000 ₸'},
+    {cat:3,n:'Заявление в прокуратуру',d:'Подготовка заявления генеральному прокурору',p:'30 000 ₸'},
+    {cat:3,n:'Жалоба в суд',d:'Подготовка жалобы на действия государственных органов',p:'45 000 ₸'},
+    {cat:3,n:'Ходатайство',d:'Составление ходатайства в рамках дела',p:'20 000 ₸'},
+    {cat:3,n:'Отзыв на иск',d:'Подготовка отзыва на исковое заявление',p:'35 000 ₸'},
+    {cat:3,n:'Контройск',d:'Подготовка встречного иска',p:'50 000 ₸'},
+    {cat:3,n:'Заявление об обеспечительных мерах',d:'Арест счетов, имущества мошенников',p:'40 000 ₸'},
+
+    // БАНКИ
+    {cat:4,n:'Чарджбэк — 1 транзакция',d:'Оспаривание одного платежа через банк',p:'50 000 ₸'},
+    {cat:4,n:'Чарджбэк — 2 транзакции',d:'Оспаривание двух платежей',p:'80 000 ₸'},
+    {cat:4,n:'Чарджбэк — 3+ транзакции',d:'Комплексный чарджбэк',p:'от 100 000 ₸'},
+    {cat:4,n:'Жалоба на банк в НБ РК',d:'Если банк отказывает в чарджбэке',p:'35 000 ₸'},
+    {cat:4,n:'Блокировка счета мошенников',d:'Помощь в блокировке подозрительных счетов',p:'20 000 ₸'},
+    {cat:4,n:'Розыск счетов',d:'Поиск счетов, на которые шли переводы',p:'25 000 ₸'},
+    {cat:4,n:'Переговоры с банком',d:'Досудебное урегулирование с банком',p:'40 000 ₸'},
+
+    // ГОСОРГАНЫ
+    {cat:5,n:'Подача в АРРФР',d:'Полное сопровождение жалобы в АРРФР',p:'35 000 ₸'},
+    {cat:5,n:'Подача в полицию',d:'Сопровождение заявления в полицию',p:'30 000 ₸'},
+    {cat:5,n:'Подача в прокуратуру',d:'Жалоба в генеральную прокуратуру',p:'40 000 ₸'},
+    {cat:5,n:'Контроль рассмотрения',d:'Мониторинг сроков и статуса заявлений',p:'15 000 ₸/мес'},
+    {cat:5,n:'Обжалование бездействия',d:'Жалоба на бездействие правоохранительных органов',p:'45 000 ₸'},
+    {cat:5,n:'Подача в КГД',d:'Жалоба в Комитет государственных доходов',p:'30 000 ₸'},
+    {cat:5,n:'Обращение в Центр противодействия киберпреступности',d:'Подача заявления по интернет-мошенничеству',p:'25 000 ₸'},
+
+    // СУД
+    {cat:6,n:'Представительство в суде (1 инстанция)',d:'Полное ведение дела в суде первой инстанции',p:'от 150 000 ₸'},
+    {cat:6,n:'Представительство в апелляции',d:'Обжалование решения суда',p:'от 100 000 ₸'},
+    {cat:6,n:'Представительство в кассации',d:'Кассационное обжалование',p:'от 120 000 ₸'},
+    {cat:6,n:'Участие в одном заседании',d:'Юрист на одном судебном заседании',p:'50 000 ₸'},
+    {cat:6,n:'Медиация',d:'Досудебное урегулирование через медиатора',p:'60 000 ₸'},
+    {cat:6,n:'Исполнительное производство',d:'Контроль исполнения решения суда',p:'40 000 ₸'},
+    {cat:6,n:'Судебная экспертиза',d:'Организация и проведение экспертизы',p:'от 80 000 ₸'},
+
+    // КРИПТО
+    {cat:7,n:'Трекинг криптокошелька',d:'Отслеживание транзакций по адресу кошелька',p:'40 000 ₸'},
+    {cat:7,n:'Анализ транзакции',d:'Детальный разбор одной транзакции',p:'25 000 ₸'},
+    {cat:7,n:'Поиск мошенника по крипте',d:'Розыск личности по криптокошельку',p:'от 60 000 ₸'},
+    {cat:7,n:'Заморозка токенов',d:'Помощь в заморозке украденных токенов',p:'от 50 000 ₸'},
+    {cat:7,n:'Консультация по DeFi',d:'Разбор ситуации с DeFi-проектами',p:'20 000 ₸'},
+    {cat:7,n:'Работа с биржей',d:'Обращение на биржу для возврата средств',p:'35 000 ₸'},
+    {cat:7,n:'Анализ смарт-контракта',d:'Проверка кода смарт-контракта на уязвимости',p:'45 000 ₸'},
+
+    // МЕЖДУНАРОДНЫЕ
+    {cat:8,n:'Обращение в зарубежный регулятор',d:'Подача жалобы в FCA, SEC, ASIC и др.',p:'от 80 000 ₸'},
+    {cat:8,n:'Международный чарджбэк',d:'Оспаривание через корреспондентский банк',p:'от 100 000 ₸'},
+    {cat:8,n:'Работа с Интерполом',d:'Обращение через национальное бюро',p:'от 150 000 ₸'},
+    {cat:8,n:'Юридическая помощь за рубежом',d:'Координация с зарубежными юристами',p:'по договорённости'},
+    {cat:8,n:'Перевод документов',d:'Нотариальный перевод на английский',p:'15 000 ₸/документ'},
+    {cat:8,n:'Апостиль документов',d:'Установка апостиля на документы',p:'10 000 ₸/документ'},
+
+    // КОМПЛЕКСНЫЕ ПАКЕТЫ
+    {cat:9,n:'Пакет «Стандарт»',d:'Консультация + документы + 1 заявление',p:'60 000 ₸'},
+    {cat:9,n:'Пакет «Оптимальный»',d:'Чарджбэк + документы + сопровождение',p:'120 000 ₸'},
+    {cat:9,n:'Пакет «Полный»',d:'Все документы + чарджбэк + АРРФР + полиция',p:'200 000 ₸'},
+    {cat:9,n:'Пакет «Судебный»',d:'Включает представительство в суде',p:'от 300 000 ₸'},
+    {cat:9,n:'Пакет «Крипто»',d:'Трекинг + обращение на биржу + документы',p:'от 180 000 ₸'},
+    {cat:9,n:'Пакет «Международный»',d:'Работа с зарубежными регуляторами',p:'от 250 000 ₸'},
+    {cat:9,n:'Полное ведение дела',d:'Всё включено: от консультации до возврата',p:'по договорённости'}
+];
+
+var faqs=[
+    {q:'Можно ли вернуть деньги?',a:'Да, в 87% случаев удаётся вернуть средства без суда. Шансы зависят от суммы, времени обращения и наличия доказательств. Чем быстрее — тем выше результат.'},
+    {q:'Сколько стоит консультация?',a:'Первая консультация бесплатна. Мы оценим ситуацию и предложим план действий. Оплата по результату — вы платите только после получения средств.'},
+    {q:'Работаете с криптой?',a:'Да, отслеживаем криптоплатежи через Etherscan, BSCScan, Solscan. Помогаем с обращением на биржи и заморозкой токенов.'},
+    {q:'Предоплата?',a:'Для части услуг — предоплата 50%. Для чарджбэка — оплата по результату. Точные условия обсуждаются на консультации.'},
+    {q:'Как быстро будет результат?',a:'Чарджбэк — от 30 до 90 дней. АРРФР — от 30 дней. Суд — от 2 месяцев. Мы ускоряем процесс и контролируем каждый этап.'},
+    {q:'Что если мошенники за рубежом?',a:'Работаем через международные каналы: зарубежные регуляторы (FCA, SEC, ASIC), корреспондентские банки, Интерпол. Успешно возвращаем средства даже из-за рубежа.'},
+    {q:'Какие документы нужны?',a:'Для начала работы: паспорт, договор с организацией (если есть), переписки, чеки об оплате, скриншоты. Мы поможем собрать недостающие.'},
+    {q:'Вы гарантируете результат?',a:'Мы честно оцениваем шансы и не даём пустых обещаний. В 87% случаев удаётся вернуть часть или все средства. Точные шансы озвучиваем после анализа.'}
+];
+
+function renderServices(){
+    for(var cat=1;cat<=9;cat++){
+        var el=document.getElementById('cat'+cat);
+        if(!el)continue;
+        var items=services.filter(function(s){return s.cat===cat});
+        el.innerHTML=items.map(function(s){
+            return '<div class="svc"><div class="svc-header"><div class="svc-name">'+s.n+'</div><div class="svc-price'+(s.free?' svc-free':'')+'">'+s.p+'</div></div><div class="svc-desc">'+s.d+'</div></div>';
+        }).join('');
+    }
+}
+
+function renderFAQ(){
+    document.getElementById('faqContainer').innerHTML=faqs.map(function(f,i){
+        return '<div class="faq"><div class="faq-q" onclick="toggleFAQ('+i+')"><span>'+f.q+'</span><svg id="faqSvg'+i+'" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg></div><div class="faq-a" id="faqA'+i+'"><p>'+f.a+'</p></div></div>';
+    }).join('');
+}
+
+function toggleFAQ(i){
+    var a=document.getElementById('faqA'+i);
+    var s=document.getElementById('faqSvg'+i);
+    a.classList.toggle('open');
+    s.classList.toggle('open');
+}
+
+renderServices();
+renderFAQ();
+</script>
 <script src="/antifraud-kz/assets/js/nav.js"></script>
 </body>
 </html>
