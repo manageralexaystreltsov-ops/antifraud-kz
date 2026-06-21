@@ -9,46 +9,52 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <script>tailwind.config={theme:{extend:{colors:{primary:'#B80018',gold:'#C8A000',dark:'#1A1A1A',darker:'#000000'},fontFamily:{heading:['Oswald','sans-serif'],body:['PT Sans','sans-serif']}}}}</script>
 <style>
-body{background:#000;color:#fff;font-family:'PT Sans',sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center}
-.login-box{width:100%;max-width:420px;padding:40px 32px;background:#1A1A1A;border:1px solid rgba(255,255,255,.06);border-radius:20px;margin:20px}
+body{background:#000;color:#fff;font-family:'PT Sans',sans-serif;padding-bottom:40px}
+.wrap{max-width:600px;margin:0 auto;padding:20px 16px}
+.login-box{background:#1A1A1A;border:1px solid rgba(255,255,255,.06);border-radius:20px;padding:32px;margin-bottom:20px}
 .logo{text-align:center;margin-bottom:24px}
-.logo-icon{width:64px;height:64px;background:linear-gradient(135deg,#B80018,#8B0012);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 12px}
-.logo h1{font-family:'Oswald',sans-serif;font-size:1.3rem;font-weight:700}
-.logo p{color:#7a8ba3;font-size:.85rem}
-.tabs{display:flex;gap:4px;margin-bottom:24px;background:rgba(255,255,255,.03);border-radius:10px;padding:4px}
-.tab{flex:1;padding:10px;text-align:center;border-radius:8px;cursor:pointer;font-size:.82rem;font-weight:600;color:#7a8ba3;transition:all .2s;border:none;background:transparent;font-family:'PT Sans',sans-serif}
+.logo-icon{width:56px;height:56px;background:linear-gradient(135deg,#B80018,#8B0012);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 12px}
+.logo h1{font-family:'Oswald',sans-serif;font-size:1.2rem;font-weight:700}
+.logo p{color:#7a8ba3;font-size:.82rem}
+.tabs{display:flex;gap:4px;margin-bottom:20px;background:rgba(255,255,255,.03);border-radius:10px;padding:4px}
+.tab{flex:1;padding:10px;text-align:center;border-radius:8px;cursor:pointer;font-size:.82rem;font-weight:600;color:#7a8ba3;border:none;background:transparent;font-family:'PT Sans',sans-serif;transition:all .2s}
 .tab.active{color:#fff;background:rgba(184,0,24,.15);border:1px solid rgba(184,0,24,.3)}
-.tab:hover:not(.active){color:#fff}
-.form-group{margin-bottom:16px}
-.form-label{display:block;font-size:.82rem;color:#7a8ba3;margin-bottom:6px}
-.form-input{width:100%;padding:14px 16px;background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.08);border-radius:12px;font-size:1rem;color:#fff;font-family:'PT Sans',sans-serif;transition:all .2s}
+.form-input{width:100%;padding:14px 16px;background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.08);border-radius:12px;font-size:1rem;color:#fff;font-family:'PT Sans',sans-serif;margin-bottom:12px}
 .form-input::placeholder{color:#555}
 .form-input:focus{border-color:rgba(184,0,24,.4);outline:none}
-.form-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
-.submit-btn{width:100%;padding:16px;background:linear-gradient(135deg,#B80018,#8B0012);color:#fff;border:none;border-radius:12px;font-family:'Oswald',sans-serif;font-weight:700;font-size:1rem;cursor:pointer;transition:all .2s;margin-top:8px}
+.form-label{display:block;font-size:.82rem;color:#7a8ba3;margin-bottom:6px}
+.submit-btn{width:100%;padding:14px;background:linear-gradient(135deg,#B80018,#8B0012);color:#fff;border:none;border-radius:12px;font-family:'Oswald',sans-serif;font-weight:700;font-size:.95rem;cursor:pointer;transition:all .2s}
 .submit-btn:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(184,0,24,.3)}
-.login-footer{text-align:center;margin-top:16px;font-size:.82rem;color:#7a8ba3}
-.login-footer a{color:#B80018;text-decoration:none}
 .error{color:#fca5a5;font-size:.82rem;margin-top:8px;display:none}
-.success{color:#6ee7b7;font-size:.82rem;margin-top:8px;display:none}
-#smsSection{display:none}
-.sms-code{display:flex;gap:8px;justify-content:center;margin:16px 0}
-.sms-digit{width:48px;height:56px;background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.08);border-radius:12px;font-size:1.5rem;text-align:center;color:#fff;font-family:'Oswald',sans-serif}
-.sms-digit:focus{border-color:rgba(184,0,24,.4);outline:none}
-.hint{font-size:.75rem;color:#555;text-align:center;margin-top:12px}
+.hint{font-size:.72rem;color:#555;text-align:center;margin:8px 0}
+.footer-link{text-align:center;margin-top:12px;font-size:.82rem;color:#7a8ba3}
+.footer-link a{color:#B80018;text-decoration:none}
+.client-list{max-height:400px;overflow-y:auto;border:1px solid rgba(255,255,255,.06);border-radius:12px;margin-top:16px}
+.client-list::-webkit-scrollbar{width:6px}
+.client-list::-webkit-scrollbar-track{background:rgba(255,255,255,.02)}
+.client-list::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:3px}
+.client-item{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.04);cursor:pointer;transition:background .2s;font-size:.88rem}
+.client-item:hover{background:rgba(255,255,255,.03)}
+.client-item:last-child{border-bottom:none}
+.client-name{font-weight:600;color:#fff}
+.client-meta{font-size:.78rem;color:#7a8ba3}
+.client-status{font-size:.72rem;padding:3px 8px;border-radius:100px;font-weight:600}
+.s-done{background:rgba(16,185,129,.1);color:#6ee7b7}
+.s-process{background:rgba(245,158,11,.1);color:#fbbf24}
+.client-count{font-size:.78rem;color:#7a8ba3;text-align:center;padding:8px;border-bottom:1px solid rgba(255,255,255,.04)}
 </style>
 </head>
 <body>
-<div class="login-box">
-    <div class="logo">
-        <div class="logo-icon">
-            <svg style="width:32px;height:32px;color:#fff" fill="currentColor" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+<div class="wrap" style="padding-top:40px">
+    <div class="login-box">
+        <div class="logo">
+            <div class="logo-icon">
+                <svg style="width:28px;height:28px;color:#fff" fill="currentColor" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+            </div>
+            <h1>АНТИФРОД ЦЕНТР</h1>
+            <p>Личный кабинет клиента</p>
         </div>
-        <h1>АНТИФРОД ЦЕНТР</h1>
-        <p>Личный кабинет клиента</p>
-    </div>
 
-    <div id="loginForm">
         <div class="tabs">
             <button class="tab active" onclick="switchTab('iin',this)">По ИИН</button>
             <button class="tab" onclick="switchTab('case',this)">По номеру дела</button>
@@ -56,61 +62,35 @@ body{background:#000;color:#fff;font-family:'PT Sans',sans-serif;min-height:100v
         </div>
 
         <div id="tab-iin">
-            <div class="form-group">
-                <label class="form-label">ИИН (12 цифр)</label>
-                <input type="text" class="form-input" id="iinInput" placeholder="920515301456" maxlength="12" oninput="this.value=this.value.replace(/[^0-9]/g,'')">
-            </div>
+            <label class="form-label">ИИН (12 цифр)</label>
+            <input type="text" class="form-input" id="iinInput" placeholder="920515301456" maxlength="12" oninput="this.value=this.value.replace(/[^0-9]/g,'');filterClients()">
         </div>
         <div id="tab-case" style="display:none">
-            <div class="form-group">
-                <label class="form-label">Номер дела</label>
-                <input type="text" class="form-input" id="caseInput" placeholder="AF-2026-0847">
-            </div>
+            <label class="form-label">Номер дела</label>
+            <input type="text" class="form-input" id="caseInput" placeholder="AF-2026-0847" oninput="filterClients()">
         </div>
         <div id="tab-phone" style="display:none">
-            <div class="form-group">
-                <label class="form-label">Телефон</label>
-                <input type="text" class="form-input" id="phoneInput" placeholder="+7 701 234 56 78">
-            </div>
+            <label class="form-label">Телефон</label>
+            <input type="text" class="form-input" id="phoneInput" placeholder="+7 701 234 56 78" oninput="filterClients()">
         </div>
 
         <div id="loginError" class="error"></div>
-        <button class="submit-btn" id="findBtn" onclick="findCase()">НАЙТИ МОЁ ДЕЛО →</button>
-        <div class="hint">Демо: введите любые 12 цифр (ИИН) или номер дела</div>
-        <div class="login-footer">Нет номера дела? <a href="/antifraud-kz/quiz.html">Оставьте заявку</a> или позвоните: <strong style="color:#C8A000">1434</strong></div>
+        <button class="submit-btn" onclick="findCase()">НАЙТИ МОЁ ДЕЛО →</button>
+        <div class="footer-link">Нет номера дела? <a href="/antifraud-kz/quiz.html">Оставьте заявку</a> или позвоните: <strong style="color:#C8A000">1434</strong></div>
     </div>
 
-    <div id="smsSection">
-        <div style="text-align:center;margin-bottom:20px">
-            <div style="font-size:2rem;margin-bottom:8px">📱</div>
-            <h2 style="font-family:Oswald,sans-serif;font-size:1.2rem;font-weight:700">Код подтверждения</h2>
-            <p style="color:#7a8ba3;font-size:.85rem;margin-top:4px">Отправлен на <span id="maskedPhone"></span></p>
-        </div>
-        <div class="sms-code">
-            <input type="text" class="sms-digit" maxlength="1" oninput="nextDigit(this,0)" data-idx="0">
-            <input type="text" class="sms-digit" maxlength="1" oninput="nextDigit(this,1)" data-idx="1">
-            <input type="text" class="sms-digit" maxlength="1" oninput="nextDigit(this,2)" data-idx="2">
-            <input type="text" class="sms-digit" maxlength="1" oninput="nextDigit(this,3)" data-idx="3">
-        </div>
-        <div id="smsError" class="error" style="text-align:center"></div>
-        <button class="submit-btn" onclick="verifySms()">ВОЙТИ →</button>
-        <div class="login-footer" style="margin-top:12px"><span id="resendTimer">Отправить повторно через 60 сек</span></div>
+    <!-- Список клиентов -->
+    <div class="client-list" id="clientList">
+        <div class="client-count" id="clientCount"></div>
+        <div id="clientItems"></div>
     </div>
 </div>
 
 <script>
 var currentTab='iin';
-var demoCases={
-    '920515301456':{id:'AF-2026-0847',name:'Нурланова Асель',phone:'+7 701 234 56 78'},
-    'AF-2026-0847':{id:'AF-2026-0847',name:'Нурланова Асель',phone:'+7 701 234 56 78'},
-    'AF-2026-0001':{id:'AF-2026-0001',name:'Мария Сергеевна',phone:'+7 705 345 67 89'},
-    'AF-2026-0123':{id:'AF-2026-0123',name:'Даулет Нурланович',phone:'+7 707 456 78 90'},
-    '+7 701 234 56 78':{id:'AF-2026-0847',name:'Нурланова Асель',phone:'+7 701 234 56 78'},
-    '+7 705 345 67 89':{id:'AF-2026-0001',name:'Мария Сергеевна',phone:'+7 705 345 67 89'},
-    '+7 707 456 78 90':{id:'AF-2026-0123',name:'Даулет Нурланович',phone:'+7 707 456 78 90'}
-};
+var allClients=[];
 
-// Генерация 1000+ фейковых клиентов
+// Генерация 1000+ клиентов
 (function(){
     var fn=['Абай','Мария','Даулет','Асель','Серик','Гулнара','Руслан','Динара','Ербол','Жанна','Нурлан','Айгуль','Тимур','Айжан','Бауыржан','Гульмира','Данияр','Ержан','Камила','Лаура','Мадина','Нуржан','Олег','Ринат','Сауле','Талгат','Улжан','Фарид','Халида','Азамат','Ботир','Гаухар','Дархан','Елена','Жанат','Игорь','Кристина','Лев','Оксана','Пётр','Роман','Светлана','Татьяна','Улан','Фёдор','Хасен','Шерзод','Эдуард','Юрий','Ярослав','Алмаз','Булат','Виктор','Григорий','Дмитрий','Евгений','Ильяс','Канат','Марат','Олжас','Павел','Рустам','Сергей','Тимофей','Филипп','Хамит','Шерзод','Эрлан','Андрей','Борис','Валерий','Геннадий','Денис','Иван','Константин','Михаил','Николай'];
     var ln=['Кажибаев','Серикова','Нурланов','Маратова','Алибеков','Жумабаева','Ахметов','Касымова','Байжанов','Иманова','Турсунов','Абдрахманова','Сагинов','Калиева','Оразов','Муканова','Есентаев','Бектуров','Садыкова','Шарипов','Кенжебаев','Мамырова','Токтосунов','Жаксылыкова','Берденов','Назарова','Сулеев','Курманова','Алпысов','Жолдыбаев'];
@@ -118,18 +98,43 @@ var demoCases={
     var st=['done','process','done','done','process'];
     var am=['150 тыс ₸','320 тыс ₸','500 тыс ₸','780 тыс ₸','1.2 млн ₸','1.8 млн ₸','2.5 млн ₸','3.1 млн ₸','4.5 млн ₸','6.2 млн ₸','890 тыс ₸','1.5 млн ₸'];
     for(var i=0;i<1000;i++){
-        var name=fn[Math.floor(Math.random()*fn.length)]+' '+ln[Math.floor(Math.random()*ln.length)].charAt(0)+'.';
+        var name=fn[Math.floor(Math.random()*fn.length)]+' '+ln[Math.floor(Math.random()*ln.length)];
         var city=ci[Math.floor(Math.random()*ci.length)];
         var status=st[Math.floor(Math.random()*st.length)];
         var amount=am[Math.floor(Math.random()*am.length)];
         var num=String(i+1).padStart(4,'0');
         var iin=String(900000000000+i).substring(0,12);
         var phone='+7 70'+String(10+Math.floor(Math.random()*90))+' '+String(Math.floor(Math.random()*900)+100)+' '+String(Math.floor(Math.random()*90)+10)+' '+String(Math.floor(Math.random()*90)+10);
-        demoCases[iin]={id:'AF-2026-'+num,name:name,phone:phone};
-        demoCases['AF-2026-'+num]={id:'AF-2026-'+num,name:name,phone:phone};
-        demoCases[phone]={id:'AF-2026-'+num,name:name,phone:phone};
+        allClients.push({id:'AF-2026-'+num,name:name,city:city,status:status,amount:amount,iin:iin,phone:phone});
     }
+    renderClients(allClients);
 })();
+
+function renderClients(list){
+    document.getElementById('clientCount').textContent='Показано '+list.length+' из '+allClients.length+' клиентов';
+    var html='';
+    list.slice(0,50).forEach(function(c){
+        var sc=c.status==='done'?'s-done':'s-process';
+        var sl=c.status==='done'?'Завершено':'В работе';
+        html+='<div class="client-item" onclick="loginAs(\''+c.iin+'\')">';
+        html+='<div><div class="client-name">'+c.name+'</div><div class="client-meta">'+c.id+' · '+c.city+' · '+c.amount+'</div></div>';
+        html+='<span class="client-status '+sc+'">'+sl+'</span>';
+        html+='</div>';
+    });
+    document.getElementById('clientItems').innerHTML=html;
+}
+
+function filterClients(){
+    var q='';
+    if(currentTab==='iin')q=document.getElementById('iinInput').value.trim().toLowerCase();
+    else if(currentTab==='case')q=document.getElementById('caseInput').value.trim().toLowerCase();
+    else q=document.getElementById('phoneInput').value.trim().toLowerCase();
+    if(!q){renderClients(allClients);return}
+    var filtered=allClients.filter(function(c){
+        return c.iin.indexOf(q)>=0||c.id.toLowerCase().indexOf(q)>=0||c.phone.indexOf(q)>=0||c.name.toLowerCase().indexOf(q)>=0;
+    });
+    renderClients(filtered);
+}
 
 function switchTab(tab,btn){
     currentTab=tab;
@@ -138,6 +143,15 @@ function switchTab(tab,btn){
     document.getElementById('tab-iin').style.display=tab==='iin'?'block':'none';
     document.getElementById('tab-case').style.display=tab==='case'?'block':'none';
     document.getElementById('tab-phone').style.display=tab==='phone'?'block':'none';
+    filterClients();
+}
+
+function loginAs(iin){
+    var c=allClients.find(function(x){return x.iin===iin});
+    if(c){
+        localStorage.setItem('currentCase',JSON.stringify({id:c.id,name:c.name,phone:c.phone}));
+        window.location.href='/antifraud-kz/client/dashboard.html?id='+c.id;
+    }
 }
 
 function findCase(){
@@ -145,47 +159,16 @@ function findCase(){
     if(currentTab==='iin')key=document.getElementById('iinInput').value.trim();
     else if(currentTab==='case')key=document.getElementById('caseInput').value.trim().toUpperCase();
     else key=document.getElementById('phoneInput').value.trim();
-    if(!key||key.length<5){document.getElementById('loginError').textContent='Введите данные для поиска';document.getElementById('loginError').style.display='block';return}
-    var found=demoCases[key];
+    if(!key){document.getElementById('loginError').textContent='Введите данные';document.getElementById('loginError').style.display='block';return}
+    var found=allClients.find(function(c){return c.iin===key||c.id===key||c.phone===key});
     if(!found){
-        // Генерируем нового клиента для любого ввода
         var num=String(Math.floor(Math.random()*1000)+1).padStart(4,'0');
-        var fn=['Абай','Мария','Даулет','Асель','Серик','Гулнара','Руслан','Динара'][Math.floor(Math.random()*8)];
-        var ln=['Кажибаев','Серикова','Нурланов','Маратова'][Math.floor(Math.random()*4)];
-        var phone='+7 70'+String(10+Math.floor(Math.random()*90))+' '+String(Math.floor(Math.random()*900)+100)+' '+String(Math.floor(Math.random()*90)+10)+' '+String(Math.floor(Math.random()*90)+10);
-        found={id:'AF-2026-'+num,name:fn+' '+ln.charAt(0)+'.',phone:phone};
+        var fn=['Абай','Мария','Даулет','Асель','Серик'][Math.floor(Math.random()*5)];
+        var ln=['Кажибаев','Серикова','Нурланов','Маратова','Алибеков'][Math.floor(Math.random()*5)];
+        found={id:'AF-2026-'+num,name:fn+' '+ln,phone:'+7 701 234 56 78'};
     }
-    localStorage.setItem('currentCase',JSON.stringify(found));
-    showSms(found.phone);
-}
-
-function showSms(phone){
-    document.getElementById('loginForm').style.display='none';
-    document.getElementById('smsSection').style.display='block';
-    document.getElementById('maskedPhone').textContent=phone.substring(0,5)+'***'+phone.slice(-2);
-    startTimer();
-}
-
-function nextDigit(el,idx){
-    el.value=el.value.replace(/[^0-9]/g,'');
-    if(el.value&&idx<3)document.querySelectorAll('.sms-digit')[idx+1].focus();
-}
-
-function verifySms(){
-    var code='';
-    document.querySelectorAll('.sms-digit').forEach(function(d){code+=d.value});
-    if(code.length<4){document.getElementById('smsError').textContent='Введите 4 цифры';document.getElementById('smsError').style.display='block';return}
-    var c=JSON.parse(localStorage.getItem('currentCase'));
-    window.location.href='/antifraud-kz/client/dashboard.html?id='+c.id;
-}
-
-function startTimer(){
-    var sec=60;
-    var timer=setInterval(function(){
-        sec--;
-        if(sec<=0){clearInterval(timer);document.getElementById('resendTimer').textContent='Отправить повторно';}
-        else{document.getElementById('resendTimer').textContent='Отправить повторно через '+sec+' сек';}
-    },1000);
+    localStorage.setItem('currentCase',JSON.stringify({id:found.id,name:found.name,phone:found.phone}));
+    window.location.href='/antifraud-kz/client/dashboard.html?id='+found.id;
 }
 </script>
 </body>
