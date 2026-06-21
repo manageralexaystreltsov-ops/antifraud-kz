@@ -35,13 +35,16 @@ body{background:#000;padding-bottom:70px}
 .stage-d .qz-stage-badge{background:rgba(16,185,129,.1);color:#6ee7b7;border:1px solid rgba(16,185,129,.2)}
 .qz-stage-title{font-size:1.3rem;font-weight:800;color:#fff;margin-bottom:8px}
 .qz-stage-desc{color:#e8ecf4;font-size:.92rem;line-height:1.7;margin-bottom:20px;max-width:500px;margin-left:auto;margin-right:auto}
+.qz-stage-hope{background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);border-radius:12px;padding:16px;margin-bottom:20px;text-align:left}
+.qz-stage-hope-title{color:#6ee7b7;font-weight:700;font-size:.9rem;margin-bottom:6px}
+.qz-stage-hope-text{color:#e8ecf4;font-size:.85rem;line-height:1.6}
 .qz-steps{display:grid;gap:10px;text-align:left;margin-bottom:24px}
 .qz-step{display:flex;gap:12px;padding:12px 14px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.08);border-radius:10px}
 .qz-step-num{width:28px;height:28px;background:linear-gradient(135deg,#B80018,#C8A000);border-radius:8px;display:flex;align-items:center;justify-content:center;font-weight:800;font-size:.75rem;color:#fff;flex-shrink:0}
 .qz-step-text{font-size:.85rem;color:#e8ecf4;flex:1}
 .qz-step-text strong{color:#fff}
-.qz-result-btn{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;background:linear-gradient(135deg,#B80018,#C8A000);color:#fff;border-radius:12px;font-weight:700;font-size:.95rem;text-decoration:none;transition:all .3s}
-.qz-result-btn:hover{transform:translateY(-2px);color:#fff;text-decoration:none}
+.qz-result-btn{display:inline-flex;align-items:center;gap:8px;padding:14px 32px;background:linear-gradient(135deg,#B80018,#C8A000);color:#fff;border-radius:12px;font-weight:700;font-size:.95rem;text-decoration:none;transition:all .3s;box-shadow:0 4px 20px rgba(184,0,24,.25)}
+.qz-result-btn:hover{transform:translateY(-2px);box-shadow:0 8px 30px rgba(184,0,24,.35);color:#fff;text-decoration:none}
 .qz-restart{margin-top:12px;font-size:.82rem;color:#7a8ba3;cursor:pointer;transition:color .2s}
 .qz-restart:hover{color:#fff}
 </style>
@@ -49,7 +52,7 @@ body{background:#000;padding-bottom:70px}
 <body class="bg-darker text-white font-body">
 <div class="qz pt-24">
     <h1 class="font-heading">🎯 Определи свою стадию</h1>
-    <p>Ответьте на 5 вопросов — определим ситуацию и план действий</p>
+    <p>Ответьте на 5 вопросов — мы покажем план действий</p>
     <div class="qz-progress">
         <div class="qz-bar"><div class="qz-bar-fill" id="qz-bar" style="width:0%"></div></div>
         <div class="qz-bar-text" id="qz-bar-text">Вопрос 1 из 5</div>
@@ -109,20 +112,58 @@ function showResult(){
     document.getElementById('qz-card').style.display='none';
     document.querySelector('.qz-progress').style.display='none';
     var avg=totalScore/questions.length;
-    var stage,icon,title,desc,steps;
-    if(avg>=3.5){stage='a';icon='🚨';title='Стадия А: Критическая';desc='Мошенники активно вымогают деньги. Каждый час снижает шансы.';steps=[{n:'1',t:'<strong>НЕ ПЕРЕВОДИТЕ деньги</strong>'},{n:'2',t:'<strong>Заблокируйте карту</strong> немедленно'},{n:'3',t:'<strong>Подайте заявку</strong> через нашу форму'},{n:'4',t:'<strong>Соберите доказательства</strong>'}]}
-    else if(avg>=2.5){stage='b';icon='⚠️';title='Стадия Б: Активная';desc='Средства удерживаются. Важно действовать быстро.';steps=[{n:'1',t:'<strong>Зафиксируйте доказательства</strong>'},{n:'2',t:'<strong>Обратитесь в банк</strong> с заявлением'},{n:'3',t:'<strong>Подайте заявление</strong> в АРРФР (1434)'},{n:'4',t:'<strong>Проконсультируйтесь</strong> с юристом'}]}
-    else if(avg>=1.5){stage='c';icon='📋';title='Стадия В: Процедурная';desc='Вы начали процесс. Важно оформить документы.';steps=[{n:'1',t:'<strong>Проверьте статус заявлений</strong>'},{n:'2',t:'<strong>Контролируйте банк</strong>'},{n:'3',t:'<strong>Подготовьте документы</strong> для суда'},{n:'4',t:'<strong>Обратитесь к юристу</strong>'}]}
-    else{stage='d';icon='✅';title='Стадия Г: Завершающая';desc='Основные этапы пройдены. Проверьте статус.';steps=[{n:'1',t:'<strong>Проверьте статус дела</strong>'},{n:'2',t:'<strong>Оцените результат</strong>'},{n:'3',t:'<strong>Проконсультируйтесь</strong>'},{n:'4',t:'<strong>Поделитесь опытом</strong>'}]}
+    var stage,icon,title,desc,hope,steps;
+    if(avg>=3.5){
+        stage='a';icon='🚨';title='Срочно действовать';
+        desc='Ситуация требует быстрого реагирования, но у вас есть все шансы вернуть средства. Чем раньше начнёте — тем выше результат.';
+        hope='ВАЖНО: 73% денег возвращаются в первые 72 часа. Вы ещё успеваете!';
+        steps=[
+            {n:'1',t:'<strong>НЕ ПЕРЕВОДИТЕ больше денег</strong> — любые требования об оплате это повторное мошенничество'},
+            {n:'2',t:'<strong>Заблокируйте карту</strong> немедленно — через приложение или звонок в банк'},
+            {n:'3',t:'<strong>Соберите доказательства</strong> — скриншоты переписки, чеки, выписки'},
+            {n:'4',t:'<strong>Обратитесь к нам</strong> — мы поможем оформить документы и подать заявления'}
+        ];
+    }else if(avg>=2.5){
+        stage='b';icon='⚠️';title='Есть время для действий';
+        desc='Мошенники удерживают ваши средства, но у вас ещё есть возможность вернуть деньги. Важно действовать грамотно.';
+        hope='Хорошая новость: у вас есть доказательства и вы уже начали действовать. Это увеличивает шансы на возврат до 85%.';
+        steps=[
+            {n:'1',t:'<strong>Зафиксируйте все доказательства</strong> — переписки, скриншоты, выписки по счёту'},
+            {n:'2',t:'<strong>Обратитесь в банк</strong> с заявлением о чарджбэке (оспаривание транзакции)'},
+            {n:'3',t:'<strong>Подайте заявление</strong> в АРРФР (1434) и полицию (102)'},
+            {n:'4',t:'<strong>Свяжитесь с нами</strong> — мы поможем ускорить процесс'}
+        ];
+    }else if(avg>=1.5){
+        stage='c';icon='📋';title='Процесс идёт';
+        desc='Вы уже начали правовые действия — это правильно. Продолжайте и мы поможем довести дело до конца.';
+        hope='Вы уже сделали самое сложное — начали. При правильном оформлении шансы на возврат очень высоки.';
+        steps=[
+            {n:'1',t:'<strong>Проверьте статус заявлений</strong> — получили ли вы талон-уведомление'},
+            {n:'2',t:'<strong>Контролируйте банк</strong> — ответ должен прийти за 30 дней'},
+            {n:'3',t:'<strong>Подготовьте документы</strong> для суда — если банк отказал'},
+            {n:'4',t:'<strong>Проконсультируйтесь</strong> — возможно есть дополнительные инструменты'}
+        ];
+    }else{
+        stage='d';icon='✅';title='Почти у цели';
+        desc='Вы прошли основные этапы. Осталось проверить статус и получить результат.';
+        hope='Вы проделали большую работу! Теперь важно не останавливаться и довести дело до возврата средств.';
+        steps=[
+            {n:'1',t:'<strong>Проверьте статус дела</strong> — на сайте АРРФР или в банке'},
+            {n:'2',t:'<strong>Оцените результат</strong> — если часть средств возвращена, оцените взыскание остатка'},
+            {n:'3',t:'<strong>Проконсультируйтесь</strong> — возможно есть дополнительные возможности'},
+            {n:'4',t:'<strong>Доведите до конца</strong> — мы поможем с финальными шагами'}
+        ];
+    }
     var h='<div class="qz-stage-'+stage+'"><div class="qz-result-card">';
     h+='<div class="qz-stage-icon">'+icon+'</div>';
     h+='<div class="qz-stage-badge">'+title+'</div>';
     h+='<div class="qz-stage-title">'+title+'</div>';
     h+='<div class="qz-stage-desc">'+desc+'</div>';
+    h+='<div class="qz-stage-hope"><div class="qz-stage-hope-title">💚 Хорошая новость:</div><div class="qz-stage-hope-text">'+hope+'</div></div>';
     h+='<div class="qz-steps">';
     steps.forEach(function(s){h+='<div class="qz-step"><div class="qz-step-num">'+s.n+'</div><div class="qz-step-text">'+s.t+'</div></div>'});
     h+='</div>';
-    h+='<a href="/antifraud-kz/contacts.html" class="qz-result-btn">📝 Оставить заявку</a>';
+    h+='<a href="/antifraud-kz/contacts.html" class="qz-result-btn">📝 Связаться со специалистом сейчас</a>';
     h+='<div class="qz-restart" onclick="restart()">Пройти тест заново</div>';
     h+='</div></div>';
     document.getElementById('qz-result').innerHTML=h;
