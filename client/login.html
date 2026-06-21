@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Вход — Личный кабинет — Антифрод Центр</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#B80018',gold:'#C8A000',dark:'#1A1A1A',darker:'#000000'},fontFamily:{heading:['Oswald','sans-serif'],body:['PT Sans','sans-serif']}}}}</script>
+<style>
+body{background:#000;color:#fff;font-family:'PT Sans',sans-serif;min-height:100vh;display:flex;align-items:center;justify-content:center}
+.login-box{width:100%;max-width:420px;padding:40px 32px;background:#1A1A1A;border:1px solid rgba(255,255,255,.06);border-radius:20px;margin:20px}
+.logo{text-align:center;margin-bottom:24px}
+.logo-icon{width:64px;height:64px;background:linear-gradient(135deg,#B80018,#8B0012);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 12px}
+.logo h1{font-family:'Oswald',sans-serif;font-size:1.3rem;font-weight:700}
+.logo p{color:#7a8ba3;font-size:.85rem}
+.tabs{display:flex;gap:4px;margin-bottom:24px;background:rgba(255,255,255,.03);border-radius:10px;padding:4px}
+.tab{flex:1;padding:10px;text-align:center;border-radius:8px;cursor:pointer;font-size:.82rem;font-weight:600;color:#7a8ba3;transition:all .2s;border:none;background:transparent;font-family:'PT Sans',sans-serif}
+.tab.active{color:#fff;background:rgba(184,0,24,.15);border:1px solid rgba(184,0,24,.3)}
+.tab:hover:not(.active){color:#fff}
+.form-group{margin-bottom:16px}
+.form-label{display:block;font-size:.82rem;color:#7a8ba3;margin-bottom:6px}
+.form-input{width:100%;padding:14px 16px;background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.08);border-radius:12px;font-size:1rem;color:#fff;font-family:'PT Sans',sans-serif;transition:all .2s}
+.form-input::placeholder{color:#555}
+.form-input:focus{border-color:rgba(184,0,24,.4);outline:none}
+.form-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px}
+.submit-btn{width:100%;padding:16px;background:linear-gradient(135deg,#B80018,#8B0012);color:#fff;border:none;border-radius:12px;font-family:'Oswald',sans-serif;font-weight:700;font-size:1rem;cursor:pointer;transition:all .2s;margin-top:8px}
+.submit-btn:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(184,0,24,.3)}
+.submit-btn:disabled{opacity:.3;cursor:not-allowed}
+.login-footer{text-align:center;margin-top:16px;font-size:.82rem;color:#7a8ba3}
+.login-footer a{color:#B80018;text-decoration:none}
+.error{color:#fca5a5;font-size:.82rem;margin-top:8px;display:none}
+.success{color:#6ee7b7;font-size:.82rem;margin-top:8px;display:none}
+#smsSection{display:none}
+.sms-code{display:flex;gap:8px;justify-content:center;margin:16px 0}
+.sms-digit{width:48px;height:56px;background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.08);border-radius:12px;font-size:1.5rem;text-align:center;color:#fff;font-family:'Oswald',sans-serif}
+.sms-digit:focus{border-color:rgba(184,0,24,.4);outline:none}
+</style>
+</head>
+<body>
+<div class="login-box">
+    <div class="logo">
+        <div class="logo-icon">
+            <svg style="width:32px;height:32px;color:#fff" fill="currentColor" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
+        </div>
+        <h1>АНТИФРОД ЦЕНТР</h1>
+        <p>Личный кабинет клиента</p>
+    </div>
+
+    <!-- Login Form -->
+    <div id="loginForm">
+        <div class="tabs">
+            <button class="tab active" onclick="switchTab('iin',this)">По ИИН</button>
+            <button class="tab" onclick="switchTab('case',this)">По номеру дела</button>
+            <button class="tab" onclick="switchTab('phone',this)">По телефону</button>
+        </div>
+
+        <div id="tab-iin">
+            <div class="form-group">
+                <label class="form-label">ИИН (12 цифр)</label>
+                <input type="text" class="form-input" id="iinInput" placeholder="920515301456" maxlength="12" oninput="this.value=this.value.replace(/[^0-9]/g,'')">
+            </div>
+            <div class="form-group">
+                <label class="form-label">Дата рождения</label>
+                <div class="form-row">
+                    <input type="text" class="form-input" id="dayInput" placeholder="ДД" maxlength="2">
+                    <input type="text" class="form-input" id="monthInput" placeholder="ММ" maxlength="2">
+                    <input type="text" class="form-input" id="yearInput" placeholder="ГГГГ" maxlength="4">
+                </div>
+            </div>
+        </div>
+
+        <div id="tab-case" style="display:none">
+            <div class="form-group">
+                <label class="form-label">Номер дела</label>
+                <input type="text" class="form-input" id="caseInput" placeholder="AF-2026-0847">
+            </div>
+        </div>
+
+        <div id="tab-phone" style="display:none">
+            <div class="form-group">
+                <label class="form-label">Телефон</label>
+                <input type="text" class="form-input" id="phoneInput" placeholder="+7 701 234 56 78">
+            </div>
+        </div>
+
+        <div id="loginError" class="error"></div>
+        <div id="loginSuccess" class="success"></div>
+
+        <button class="submit-btn" id="findBtn" onclick="findCase()">НАЙТИ МОЁ ДЕЛО →</button>
+
+        <div class="login-footer">
+            Нет номера дела? <a href="/antifraud-kz/quiz.html">Оставьте заявку</a> или позвоните: <strong style="color:#C8A000">1434</strong>
+        </div>
+    </div>
+
+    <!-- SMS Verification -->
+    <div id="smsSection">
+        <div style="text-align:center;margin-bottom:20px">
+            <div style="font-size:2rem;margin-bottom:8px">📱</div>
+            <h2 style="font-family:'Oswald',sans-serif;font-size:1.2rem;font-weight:700">Код подтверждения</h2>
+            <p style="color:#7a8ba3;font-size:.85rem;margin-top:4px">Отправлен на <span id="maskedPhone"></span></p>
+        </div>
+        <div class="sms-code">
+            <input type="text" class="sms-digit" maxlength="1" oninput="nextDigit(this,0)" data-idx="0">
+            <input type="text" class="sms-digit" maxlength="1" oninput="nextDigit(this,1)" data-idx="1">
+            <input type="text" class="sms-digit" maxlength="1" oninput="nextDigit(this,2)" data-idx="2">
+            <input type="text" class="sms-digit" maxlength="1" oninput="nextDigit(this,3)" data-idx="3">
+        </div>
+        <div id="smsError" class="error" style="text-align:center"></div>
+        <button class="submit-btn" onclick="verifySms()">ВОЙТИ →</button>
+        <div class="login-footer" style="margin-top:12px">
+            <span id="resendTimer">Отправить повторно через 60 сек</span>
+            <a href="#" id="resendLink" style="display:none" onclick="resendSms()">Отправить повторно</a>
+        </div>
+    </div>
+</div>
+
+<script>
+var currentTab='iin';
+var demoCases={
+    '920515301456':{id:'AF-2026-0847',name:'Нурланова Асель',phone:'+7 701 234 56 78'},
+    'AF-2026-0847':{id:'AF-2026-0847',name:'Нурланова Асель',phone:'+7 701 234 56 78'},
+    'AF-2026-0001':{id:'AF-2026-0001',name:'Мария Сергеевна',phone:'+7 705 345 67 89'},
+    'AF-2026-0123':{id:'AF-2026-0123',name:'Даулет Нурланович',phone:'+7 707 456 78 90'},
+    '+7 701 234 56 78':{id:'AF-2026-0847',name:'Нурланова Асель',phone:'+7 701 234 56 78'},
+    '+7 705 345 67 89':{id:'AF-2026-0001',name:'Мария Сергеевна',phone:'+7 705 345 67 89'},
+    '+7 707 456 78 90':{id:'AF-2026-0123',name:'Даулет Нурланович',phone:'+7 707 456 78 90'}
+};
+
+function switchTab(tab,btn){
+    currentTab=tab;
+    document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active')});
+    btn.classList.add('active');
+    document.getElementById('tab-iin').style.display=tab==='iin'?'block':'none';
+    document.getElementById('tab-case').style.display=tab==='case'?'block':'none';
+    document.getElementById('tab-phone').style.display=tab==='phone'?'block':'none';
+}
+
+function findCase(){
+    var key='';
+    if(currentTab==='iin')key=document.getElementById('iinInput').value.trim();
+    else if(currentTab==='case')key=document.getElementById('caseInput').value.trim().toUpperCase();
+    else key=document.getElementById('phoneInput').value.trim();
+    
+    if(!key||key.length<5){
+        document.getElementById('loginError').textContent='Введите данные для поиска';
+        document.getElementById('loginError').style.display='block';
+        return;
+    }
+    
+    var found=demoCases[key];
+    if(!found){
+        document.getElementById('loginError').textContent='Дело не найдено. Проверьте данные или обратитесь по телефону 1434';
+        document.getElementById('loginError').style.display='block';
+        return;
+    }
+    
+    localStorage.setItem('currentCase',JSON.stringify(found));
+    showSms(found.phone);
+}
+
+function showSms(phone){
+    document.getElementById('loginForm').style.display='none';
+    document.getElementById('smsSection').style.display='block';
+    document.getElementById('maskedPhone').textContent=phone.substring(0,5)+'***'+phone.slice(-2);
+    startTimer();
+}
+
+function nextDigit(el,idx){
+    el.value=el.value.replace(/[^0-9]/g,'');
+    if(el.value&&idx<3){
+        document.querySelectorAll('.sms-digit')[idx+1].focus();
+    }
+}
+
+function verifySms(){
+    var code='';
+    document.querySelectorAll('.sms-digit').forEach(function(d){code+=d.value});
+    if(code.length<4){
+        document.getElementById('smsError').textContent='Введите 4 цифры';
+        document.getElementById('smsError').style.display='block';
+        return;
+    }
+    // Demo: any 4-digit code works
+    var c=JSON.parse(localStorage.getItem('currentCase'));
+    window.location.href='/antifraud-kz/client/dashboard.html?id='+c.id;
+}
+
+function startTimer(){
+    var sec=60;
+    var timer=setInterval(function(){
+        sec--;
+        if(sec<=0){
+            clearInterval(timer);
+            document.getElementById('resendTimer').style.display='none';
+            document.getElementById('resendLink').style.display='inline';
+        }else{
+            document.getElementById('resendTimer').textContent='Отправить повторно через '+sec+' сек';
+        }
+    },1000);
+}
+
+function resendSms(){
+    document.getElementById('resendLink').style.display='none';
+    document.getElementById('resendTimer').style.display='inline';
+    startTimer();
+    showToast('Код отправлен повторно');
+}
+
+function showToast(msg){
+    var t=document.createElement('div');
+    t.style.cssText='position:fixed;bottom:20px;left:50%;transform:translateX(-50%);background:#10b981;color:#fff;padding:12px 24px;border-radius:10px;font-size:.85rem;z-index:100';
+    t.textContent=msg;
+    document.body.appendChild(t);
+    setTimeout(function(){t.remove()},2000);
+}
+</script>
+</body>
+</html>
