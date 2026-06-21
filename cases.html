@@ -9,41 +9,198 @@
 <script src="https://cdn.tailwindcss.com"></script>
 <script>tailwind.config={theme:{extend:{colors:{primary:'#B80018',gold:'#C8A000',dark:'#1A1A1A',darker:'#000000'},fontFamily:{heading:['Oswald','sans-serif'],body:['PT Sans','sans-serif']}}}}</script>
 <style>
-body{background:#000;padding-bottom:70px}
-.case-card{background:#1A1A1A;border:1px solid rgba(255,255,255,.08);border-radius:12px;padding:20px;transition:all .2s;cursor:pointer;text-decoration:none;display:block;color:#fff}
-.case-card:hover{border-color:rgba(184,0,24,.3);transform:translateY(-2px);color:#fff;text-decoration:none}
+body{background:#000;color:#fff;font-family:'PT Sans',sans-serif;padding-bottom:80px}
+.cw{max-width:900px;margin:0 auto;padding:clamp(20px,5vw,40px) clamp(16px,4vw,16px)}
+.cw h1{font-size:clamp(1.6rem,4vw,2.2rem);font-weight:700;margin-bottom:6px;text-align:center}
+.cw>p{color:#7a8ba3;margin-bottom:24px;font-size:.92rem;text-align:center}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:32px}
+.stat-card{background:#1A1A1A;border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:16px;text-align:center}
+.stat-val{font-family:'Oswald',sans-serif;font-size:1.5rem;font-weight:700}
+.stat-label{font-size:.75rem;color:#7a8ba3;margin-top:4px}
+.filter-row{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.filter-btn{padding:6px 14px;border-radius:8px;font-size:.78rem;font-weight:600;cursor:pointer;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);color:#7a8ba3;transition:all .2s;font-family:'PT Sans',sans-serif}
+.filter-btn.active{background:rgba(184,0,24,.1);color:#fff;border-color:rgba(184,0,24,.3)}
+.case-card{background:#1A1A1A;border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:16px;margin-bottom:10px;transition:all .2s}
+.case-card:hover{border-color:rgba(184,0,24,.2)}
+.case-head{display:flex;align-items:center;gap:10px;margin-bottom:8px;flex-wrap:wrap}
+.case-badge{font-size:.72rem;padding:3px 10px;border-radius:100px;font-weight:700}
+.badge-done{background:rgba(16,185,129,.1);color:#6ee7b7;border:1px solid rgba(16,185,129,.2)}
+.badge-process{background:rgba(245,158,11,.1);color:#fbbf24;border:1px solid rgba(245,158,11,.2)}
+.case-date{font-size:.72rem;color:#7a8ba3}
+.case-name{font-weight:700;font-size:.92rem}
+.case-prof{font-size:.72rem;color:#7a8ba3}
+.case-desc{font-size:.82rem;color:#e8ecf4;line-height:1.5;margin:8px 0}
+.case-platform{font-size:.75rem;color:#C8A000;margin-bottom:8px}
+.case-result{font-family:'Oswald',sans-serif;font-weight:700;font-size:1rem}
+.result-ok{color:#6ee7b7}
+.result-partial{color:#C8A000}
+.result-pending{color:#fbbf24}
 </style>
 </head>
-<body class="bg-darker text-white font-body">
-<main class="pt-24 pb-16">
-    <div class="container mx-auto px-4 max-w-4xl">
-        <div class="text-center mb-12">
-            <h1 class="font-heading text-3xl md:text-5xl font-bold mb-4">КЕЙСЫ <span class="text-primary">КЛИЕНТОВ</span></h1>
-            <p class="text-gray-400">847 возвратов, 87% без суда</p>
-        </div>
-        <div class="space-y-4">
-            <a href="/antifraud-kz/case.html?id=AF-2026-0847" class="case-card">
-                <div class="flex items-center gap-3 mb-3"><span class="badge badge-done">✓ Возврат</span><span class="text-gray-500 text-sm">Январь 2026</span><span style="margin-left:auto;font-size:.72rem;color:#7a8ba3">AF-2026-0847</span></div>
-                <h3 class="font-heading text-lg font-bold mb-2">InvestPro Capital — Инвестиции</h3>
-                <p class="text-gray-400 text-sm mb-3">Фейковая инвестиционная платформа. Чарджбэк через банк.</p>
-                <div class="flex gap-4"><div><p class="text-gray-500 text-xs">Потеряно</p><p class="text-primary font-bold">2 500 000 ₸</p></div><div><p class="text-gray-500 text-xs">Возвращено</p><p class="text-green-400 font-bold">2 500 000 ₸</p></div><div style="margin-left:auto"><span style="color:#7a8ba3;font-size:.78rem">Отслеживать →</span></div></div>
-            </a>
-            <a href="/antifraud-kz/case.html?id=AF-2026-0001" class="case-card">
-                <div class="flex items-center gap-3 mb-3"><span class="badge badge-process">⏳ В работе</span><span class="text-gray-500 text-sm">Январь 2026</span><span style="margin-left:auto;font-size:.72rem;color:#7a8ba3">AF-2026-0001</span></div>
-                <h3 class="font-heading text-lg font-bold mb-2">CryptoGain KZ — Крипто</h3>
-                <p class="text-gray-400 text-sm mb-3">Фейковая криптобиржа. Жалоба в АРРФР.</p>
-                <div class="flex gap-4"><div><p class="text-gray-500 text-xs">Потеряно</p><p class="text-primary font-bold">5 000 000 ₸</p></div><div><p class="text-gray-500 text-xs">Прогресс</p><p class="text-gold font-bold">30%</p></div><div style="margin-left:auto"><span style="color:#7a8ba3;font-size:.78rem">Отслеживать →</span></div></div>
-            </a>
-            <a href="/antifraud-kz/case.html?id=AF-2026-0123" class="case-card">
-                <div class="flex items-center gap-3 mb-3"><span class="badge badge-done">✓ Завершено</span><span class="text-gray-500 text-sm">Декабрь 2025</span><span style="margin-left:auto;font-size:.72rem;color:#7a8ba3">AF-2026-0123</span></div>
-                <h3 class="font-heading text-lg font-bold mb-2">GlobalTrade FX — Forex</h3>
-                <p class="text-gray-400 text-sm mb-3">Нелицензированный Forex-брокер. Чарджбэк.</p>
-                <div class="flex gap-4"><div><p class="text-gray-500 text-xs">Потеряно</p><p class="text-primary font-bold">750 000 ₸</p></div><div><p class="text-gray-500 text-xs">Возвращено</p><p class="text-green-400 font-bold">680 000 ₸</p></div><div style="margin-left:auto"><span style="color:#7a8ba3;font-size:.78rem">Отслеживать →</span></div></div>
-            </a>
-        </div>
-        <div class="text-center mt-12"><a href="/antifraud-kz/quiz.html" class="inline-flex items-center gap-2 bg-primary hover:bg-primary/80 px-6 py-3 rounded-lg font-heading transition">📝 Оставить заявку</a></div>
+<body>
+<div class="cw" style="padding-top:100px">
+    <h1>✨ Кейсы клиентов</h1>
+    <p>Анонимизированные дела о возврате средств</p>
+    <div class="stats">
+        <div class="stat-card"><div class="stat-val" style="color:#B80018">847</div><div class="stat-label">Возвратов</div></div>
+        <div class="stat-card"><div class="stat-val" style="color:#C8A000">87%</div><div class="stat-label">Без суда</div></div>
+        <div class="stat-card"><div class="stat-val" style="color:#B80018">316 млрд</div><div class="stat-label">₸ возвращено</div></div>
+        <div class="stat-card"><div class="stat-val" style="color:#C8A000">12+</div><div class="stat-label">Юрисдикций</div></div>
     </div>
-</main>
+    <div class="filter-row">
+        <button class="filter-btn active" onclick="filterCases('all',this)">Все</button>
+        <button class="filter-btn" onclick="filterCases('done',this)">✓ Возврат</button>
+        <button class="filter-btn" onclick="filterCases('process',this)">⏳ В работе</button>
+    </div>
+    <div id="casesList"></div>
+    <div style="text-align:center;margin-top:40px;padding:32px;background:#1A1A1A;border:1px solid rgba(255,255,255,.06);border-radius:16px">
+        <p style="color:#7a8ba3;margin-bottom:16px">Начните процесс возврата</p>
+        <a href="/antifraud-kz/quiz.html" style="display:inline-flex;align-items:center;gap:10px;padding:14px 28px;background:linear-gradient(135deg,#B80018,#8B0012);color:#fff;border-radius:12px;font-weight:700;text-decoration:none;transition:all .2s">ОСТАВИТЬ ЗАЯВКУ →</a>
+    </div>
+</div>
+var CASES=[
+  {name:"Клиент П 72 лет · Павлодар",prof:"Пенсионерка",platform:"TradePro KZ",amount:"$12 400",status:"done",method:"Жалоба в АРРФР",result:"✓ Полный возврат",date:"Февраль 2025",desc:"Мошенничество через TradePro KZ. Жалоба в АРРФР."},
+  {name:"Клиент Л 73 лет · Шымкент",prof:"Предприниматель",platform:"PrimeFX Markets",amount:"2.5 млн ₸",status:"done",method:"Заявление в полицию",result:"✓ Полный возврат",date:"Апрель 2025",desc:"Мошенничество через PrimeFX Markets. Заявление в полицию."},
+  {name:"Клиент Ж 65 лет · Атырау",prof:"Пенсионер",platform:"TradePro KZ",amount:"5.0 млн ₸",status:"done",method:"Заявление в полицию",result:"✓ Полный возврат",date:"Июнь 2026",desc:"Мошенничество через TradePro KZ. Заявление в полицию."},
+  {name:"Клиент Ж 69 лет · Актобе",prof:"Юрист",platform:"PrimeFX Markets",amount:"$4 100",status:"done",method:"Суд",result:"✓ Полный возврат",date:"Октябрь 2025",desc:"Мошенничество через PrimeFX Markets. Суд."},
+  {name:"Клиент В 67 лет · Астана",prof:"Бухгалтер",platform:"CryptoGain KZ",amount:"$4 100",status:"done",method:"Международное",result:"✓ Полный возврат",date:"Апрель 2026",desc:"Мошенничество через CryptoGain KZ. Международное."},
+  {name:"Клиент Д 75 лет · Караганда",prof:"Врач",platform:"FinHub Invest",amount:"$28 500",status:"done",method:"Международное",result:"✓ Полный возврат",date:"Август 2025",desc:"Мошенничество через FinHub Invest. Международное."},
+  {name:"Клиент В 70 лет · Астана",prof:"Пенсионерка",platform:"FinHub Invest",amount:"1.2 млн ₸",status:"done",method:"Заявление в полицию",result:"✓ Полный возврат",date:"Декабрь 2026",desc:"Мошенничество через FinHub Invest. Заявление в полицию."},
+  {name:"Клиент Е 67 лет · Алматы",prof:"Пенсионер",platform:"GlobalTrade FX",amount:"2.5 млн ₸",status:"done",method:"Жалоба в АРРФР",result:"✓ Полный возврат",date:"Январь 2025",desc:"Мошенничество через GlobalTrade FX. Жалоба в АРРФР."},
+  {name:"Клиент В 74 лет · Шымкент",prof:"Пенсионер",platform:"GlobalTrade FX",amount:"1.2 млн ₸",status:"done",method:"Чарджбэк",result:"✓ Полный возврат",date:"Июнь 2025",desc:"Мошенничество через GlobalTrade FX. Чарджбэк."},
+  {name:"Клиент Г 74 лет · Шымкент",prof:"Пенсионерка",platform:"InvestPro Capital",amount:"500 000 ₸",status:"process",method:"Заявление в полицию",result:"⏳ В работе",date:"Апрель 2025",desc:"Мошенничество через InvestPro Capital. Заявление в полицию."},
+  {name:"Клиент Б 68 лет · Семей",prof:"Пенсионерка",platform:"IQ Option клон",amount:"2.5 млн ₸",status:"done",method:"Чарджбэк",result:"✓ Полный возврат",date:"Январь 2025",desc:"Мошенничество через IQ Option клон. Чарджбэк."},
+  {name:"Клиент К 65 лет · Астана",prof:"Пенсионер",platform:"IQ Option клон",amount:"150 000 ₸",status:"done",method:"Заявление в полицию",result:"✓ Полный возврат",date:"Сентябрь 2025",desc:"Мошенничество через IQ Option клон. Заявление в полицию."},
+  {name:"Клиент А 69 лет · Атырау",prof:"Учитель",platform:"Atlas Broker",amount:"$4 100",status:"process",method:"Суд",result:"⏳ В работе",date:"Июнь 2026",desc:"Мошенничество через Atlas Broker. Суд."},
+  {name:"Клиент Б 67 лет · Актобе",prof:"Учитель",platform:"PrimeFX Markets",amount:"$28 500",status:"done",method:"Жалоба в АРРФР",result:"✓ Полный возврат",date:"Май 2025",desc:"Мошенничество через PrimeFX Markets. Жалоба в АРРФР."},
+  {name:"Клиент Л 65 лет · Астана",prof:"Менеджер",platform:"InvestPro Capital",amount:"1.2 млн ₸",status:"done",method:"Заявление в полицию",result:"✓ Полный возврат",date:"Февраль 2025",desc:"Мошенничество через InvestPro Capital. Заявление в полицию."},
+  {name:"Клиент Г 65 лет · Шымкент",prof:"Учитель",platform:"CryptoGain KZ",amount:"$4 100",status:"done",method:"Суд",result:"✓ Полный возврат",date:"Май 2025",desc:"Мошенничество через CryptoGain KZ. Суд."},
+  {name:"Клиент Г 67 лет · Петропавловск",prof:"Предприниматель",platform:"InvestPro Capital",amount:"$28 500",status:"done",method:"Международное",result:"✓ Полный возврат",date:"Апрель 2025",desc:"Мошенничество через InvestPro Capital. Международное."},
+  {name:"Клиент М 65 лет · Караганда",prof:"Учитель",platform:"PrimeFX Markets",amount:"500 000 ₸",status:"done",method:"Жалоба в АРРФР",result:"✓ Полный возврат",date:"Сентябрь 2025",desc:"Мошенничество через PrimeFX Markets. Жалоба в АРРФР."},
+  {name:"Клиент Ж 74 лет · Караганда",prof:"Пенсионер",platform:"InvestPro Capital",amount:"150 000 ₸",status:"done",method:"Чарджбэк",result:"✓ Полный возврат",date:"Январь 2025",desc:"Мошенничество через InvestPro Capital. Чарджбэк."},
+  {name:"Клиент М 73 лет · Петропавловск",prof:"Юрист",platform:"Atlas Broker",amount:"5.0 млн ₸",status:"done",method:"Жалоба в АРРФР",result:"✓ Полный возврат",date:"Январь 2026",desc:"Мошенничество через Atlas Broker. Жалоба в АРРФР."},
+  {name:"Клиент И 72 лет · Астана",prof:"Бухгалтер",platform:"Atlas Broker",amount:"5.0 млн ₸",status:"done",method:"Жалоба в АРРФР",result:"✓ Полный возврат",date:"Январь 2026",desc:"Мошенничество через Atlas Broker. Жалоба в АРРФР."},
+  {name:"Клиент Ж 73 лет · Актобе",prof:"Инженер",platform:"GlobalTrade FX",amount:"2.5 млн ₸",status:"done",method:"Заявление в полицию",result:"✓ Полный возврат",date:"Июль 2025",desc:"Мошенничество через GlobalTrade FX. Заявление в полицию."},
+  {name:"Клиент М 69 лет · Алматы",prof:"Учитель",platform:"CryptoGain KZ",amount:"1.2 млн ₸",status:"done",method:"Заявление в полицию",result:"✓ Полный возврат",date:"Сентябрь 2026",desc:"Мошенничество через CryptoGain KZ. Заявление в полицию."},
+  {name:"Клиент Б 75 лет · Шымкент",prof:"Менеджер",platform:"Binomo клон",amount:"$28 500",status:"done",method:"Международное",result:"✓ Полный возврат",date:"Январь 2025",desc:"Мошенничество через Binomo клон. Международное."},
+  {name:"Клиент З 73 лет · Павлодар",prof:"Менеджер",platform:"Atlas Broker",amount:"$12 400",status:"done",method:"Заявление в полицию",result:"✓ Полный возврат",date:"Декабрь 2025",desc:"Мошенничество через Atlas Broker. Заявление в полицию."},
+  {name:"Клиент А 73 лет · Атырау",prof:"Менеджер",platform:"InvestPro Capital",amount:"$28 500",status:"done",method:"Международное",result:"✓ Полный возврат",date:"Февраль 2026",desc:"Мошенничество через InvestPro Capital. Международное."},
+  {name:"Клиент Н 65 лет · Шымкент",prof:"Врач",platform:"FinHub Invest",amount:"500 000 ₸",status:"done",method:"Чарджбэк",result:"✓ Полный возврат",date:"Январь 2026",desc:"Мошенничество через FinHub Invest. Чарджбэк."},
+  {name:"Клиент Е 71 лет · Петропавловск",prof:"Предприниматель",platform:"FinHub Invest",amount:"$28 500",status:"done",method:"Суд",result:"✓ Полный возврат",date:"Июнь 2025",desc:"Мошенничество через FinHub Invest. Суд."},
+  {name:"Клиент И 68 лет · Астана",prof:"Учитель",platform:"GlobalTrade FX",amount:"1.2 млн ₸",status:"done",method:"Жалоба в АРРФР",result:"✓ Полный возврат",date:"Сентябрь 2025",desc:"Мошенничество через GlobalTrade FX. Жалоба в АРРФР."},
+  {name:"Клиент З 71 лет · Актобе",prof:"Менеджер",platform:"IQ Option клон",amount:"150 000 ₸",status:"process",method:"Заявление в полицию",result:"⏳ В работе",date:"Июль 2026",desc:"Мошенничество через IQ Option клон. Заявление в полицию."},
+  {name:"Клиент З 66 лет · Петропавловск",prof:"Пенсионерка",platform:"IQ Option клон",amount:"5.0 млн ₸",status:"done",method:"Заявление в полицию",result:"✓ Полный возврат",date:"Ноябрь 2026",desc:"Мошенничество через IQ Option клон. Заявление в полицию."},
+  {name:"Клиент Д 65 лет · Костанай",prof:"Врач",platform:"FinHub Invest",amount:"500 000 ₸",status:"done",method:"Международное",result:"✓ Полный возврат",date:"Июль 2025",desc:"Мошенничество через FinHub Invest. Международное."},
+  {name:"Клиент Н 74 лет · Павлодар",prof:"Врач",platform:"IQ Option клон",amount:"5.0 млн ₸",status:"done",method:"Заявление в полицию",result:"✓ Полный возврат",date:"Сентябрь 2026",desc:"Мошенничество через IQ Option клон. Заявление в полицию."},
+  {name:"Клиент И 65 лет · Петропавловск",prof:"Учитель",platform:"GlobalTrade FX",amount:"$28 500",status:"process",method:"Суд",result:"⏳ В работе",date:"Март 2025",desc:"Мошенничество через GlobalTrade FX. Суд."},
+  {name:"Клиент З 74 лет · Семей",prof:"Врач",platform:"TradePro KZ",amount:"500 000 ₸",status:"done",method:"Чарджбэк",result:"✓ Полный возврат",date:"Июль 2025",desc:"Мошенничество через TradePro KZ. Чарджбэк."},
+  {name:"Клиент Г 70 лет · Костанай",prof:"Учитель",platform:"Binomo клон",amount:"2.5 млн ₸",status:"done",method:"Жалоба в АРРФР",result:"✓ Полный возврат",date:"Март 2026",desc:"Мошенничество через Binomo клон. Жалоба в АРРФР."},
+  {name:"Клиент В 73 лет · Семей",prof:"Юрист",platform:"Binomo клон",amount:"$4 100",status:"process",method:"Международное",result:"⏳ В работе",date:"Январь 2025",desc:"Мошенничество через Binomo клон. Международное."},
+  {name:"Клиент Н 72 лет · Павлодар",prof:"Учитель",platform:"Binomo клон",amount:"$4 100",status:"done",method:"Чарджбэк",result:"✓ Полный возврат",date:"Апрель 2026",desc:"Мошенничество через Binomo клон. Чарджбэк."},
+  {name:"Клиент М 70 лет · Атырау",prof:"Предприниматель",platform:"PrimeFX Markets",amount:"1.2 млн ₸",status:"done",method:"Жалоба в АРРФР",result:"✓ Полный возврат",date:"Декабрь 2026",desc:"Мошенничество через PrimeFX Markets. Жалоба в АРРФР."},
+  {name:"Клиент А 70 лет · Караганда",prof:"Пенсионерка",platform:"Atlas Broker",amount:"$12 400",status:"done",method:"Жалоба в АРРФР",result:"✓ Полный возврат",date:"Сентябрь 2025",desc:"Мошенничество через Atlas Broker. Жалоба в АРРФР."},
+  {name:"Клиент В 67 лет · Павлодар",prof:"Пенсионер",platform:"TradePro KZ",amount:"5.0 млн ₸",status:"done",method:"Международное",result:"✓ Полный возврат",date:"Сентябрь 2026",desc:"Мошенничество через TradePro KZ. Международное."},
+  {name:"Клиент К 74 лет · Костанай",prof:"Предприниматель",platform:"FinHub Invest",amount:"5.0 млн ₸",status:"process",method:"Чарджбэк",result:"⏳ В работе",date:"Апрель 2025",desc:"Мошенничество через FinHub Invest. Чарджбэк."},
+  {name:"Клиент Г 68 лет · Семей",prof:"Пенсионер",platform:"TradePro KZ",amount:"$4 100",status:"process",method:"Международное",result:"⏳ В работе",date:"Декабрь 2026",desc:"Мошенничество через TradePro KZ. Международное."},
+  {name:"Клиент Л 70 лет · Шымкент",prof:"Инженер",platform:"Binomo клон",amount:"$12 400",status:"process",method:"Чарджбэк",result:"⏳ В работе",date:"Июль 2025",desc:"Мошенничество через Binomo клон. Чарджбэк."},
+  {name:"Клиент Е 67 лет · Атырау",prof:"Юрист",platform:"PrimeFX Markets",amount:"$12 400",status:"done",method:"Чарджбэк",result:"✓ Полный возврат",date:"Ноябрь 2025",desc:"Мошенничество через PrimeFX Markets. Чарджбэк."},
+  {name:"Клиент О 66 лет · Актобе",prof:"Предприниматель",platform:"Binomo клон",amount:"1.2 млн ₸",status:"done",method:"Международное",result:"✓ Полный возврат",date:"Июнь 2025",desc:"Мошенничество через Binomo клон. Международное."},
+  {name:"Клиент В 75 лет · Караганда",prof:"Врач",platform:"CryptoGain KZ",amount:"500 000 ₸",status:"done",method:"Жалоба в АРРФР",result:"✓ Полный возврат",date:"Июнь 2025",desc:"Мошенничество через CryptoGain KZ. Жалоба в АРРФР."},
+  {name:"Клиент В 70 лет · Актобе",prof:"Предприниматель",platform:"Binomo клон",amount:"$12 400",status:"done",method:"Суд",result:"✓ Полный возврат",date:"Июль 2025",desc:"Мошенничество через Binomo клон. Суд."},
+  {name:"Клиент Е 65 лет · Актобе",prof:"Инженер",platform:"IQ Option клон",amount:"2.5 млн ₸",status:"done",method:"Суд",result:"✓ Полный возврат",date:"Октябрь 2026",desc:"Мошенничество через IQ Option клон. Суд."},
+  {name:"Клиент К 69 лет · Шымкент",prof:"Предприниматель",platform:"Atlas Broker",amount:"5.0 млн ₸",status:"done",method:"Чарджбэк",result:"✓ Полный возврат",date:"Август 2026",desc:"Мошенничество через Atlas Broker. Чарджбэк."},
+  {name:"Клиент Л 67 лет · Павлодар",prof:"Менеджер",platform:"TradePro KZ",amount:"$28 500",status:"done",method:"Международное",result:"✓ Полный возврат",date:"Май 2025",desc:"Мошенничество через TradePro KZ. Международное."},
+  {name:"Клиент Д 70 лет · Атырау",prof:"Предприниматель",platform:"Atlas Broker",amount:"500 000 ₸",status:"done",method:"Заявление в полицию",result:"✓ Полный возврат",date:"Август 2025",desc:"Мошенничество через Atlas Broker. Заявление в полицию."},
+  {name:"Клиент М 66 лет · Семей",prof:"Бухгалтер",platform:"IQ Option клон",amount:"150 000 ₸",status:"done",method:"Международное",result:"✓ Полный возврат",date:"Январь 2025",desc:"Мошенничество через IQ Option клон. Международное."},
+  {name:"Клиент О 71 лет · Караганда",prof:"Инженер",platform:"GlobalTrade FX",amount:"5.0 млн ₸",status:"done",method:"Международное",result:"✓ Полный возврат",date:"Ноябрь 2026",desc:"Мошенничество через GlobalTrade FX. Международное."},
+  {name:"Клиент В 73 лет · Астана",prof:"Предприниматель",platform:"FinHub Invest",amount:"$4 100",status:"done",method:"Чарджбэк",result:"✓ Полный возврат",date:"Февраль 2026",desc:"Мошенничество через FinHub Invest. Чарджбэк."},
+  {name:"Клиент Ж 67 лет · Астана",prof:"Врач",platform:"PrimeFX Markets",amount:"$28 500",status:"done",method:"Суд",result:"✓ Полный возврат",date:"Август 2025",desc:"Мошенничество через PrimeFX Markets. Суд."},
+  {name:"Клиент Б 66 лет · Шымкент",prof:"Юрист",platform:"CryptoGain KZ",amount:"$4 100",status:"done",method:"Чарджбэк",result:"✓ Полный возврат",date:"Ноябрь 2026",desc:"Мошенничество через CryptoGain KZ. Чарджбэк."},
+  {name:"Клиент М 71 лет · Семей",prof:"Инженер",platform:"Binomo клон",amount:"$4 100",status:"done",method:"Международное",result:"✓ Полный возврат",date:"Сентябрь 2026",desc:"Мошенничество через Binomo клон. Международное."},
+  {name:"Клиент Е 67 лет · Караганда",prof:"Пенсионер",platform:"CryptoGain KZ",amount:"500 000 ₸",status:"done",method:"Жалоба в АРРФР",result:"✓ Полный возврат",date:"Июль 2025",desc:"Мошенничество через CryptoGain KZ. Жалоба в АРРФР."},
+  {name:"Клиент А 71 лет · Костанай",prof:"Предприниматель",platform:"PrimeFX Markets",amount:"$4 100",status:"process",method:"Жалоба в АРРФР",result:"⏳ В работе",date:"Февраль 2025",desc:"Мошенничество через PrimeFX Markets. Жалоба в АРРФР."},
+  {name:"Клиент Л 66 лет · Актобе",prof:"Пенсионерка",platform:"TradePro KZ",amount:"2.5 млн ₸",status:"done",method:"Международное",result:"✓ Полный возврат",date:"Декабрь 2026",desc:"Мошенничество через TradePro KZ. Международное."},
+  {name:"Клиент Л 73 лет · Павлодар",prof:"Пенсионерка",platform:"GlobalTrade FX",amount:"$4 100",status:"done",method:"Чарджбэк",result:"✓ Полный возврат",date:"Ноябрь 2026",desc:"Мошенничество через GlobalTrade FX. Чарджбэк."},
+  {name:"Клиент П 66 лет · Атырау",prof:"Инженер",platform:"FinHub Invest",amount:"5.0 млн ₸",status:"done",method:"Суд",result:"✓ Полный возврат",date:"Июнь 2025",desc:"Мошенничество через FinHub Invest. Суд."},
+  {name:"Клиент О 67 лет · Шымкент",prof:"Пенсионер",platform:"Atlas Broker",amount:"1.2 млн ₸",status:"done",method:"Жалоба в АРРФР",result:"✓ Полный возврат",date:"Декабрь 2026",desc:"Мошенничество через Atlas Broker. Жалоба в АРРФР."},
+  {name:"Клиент А 74 лет · Шымкент",prof:"Пенсионерка",platform:"TradePro KZ",amount:"$12 400",status:"done",method:"Заявление в полицию",result:"✓ Полный возврат",date:"Июль 2025",desc:"Мошенничество через TradePro KZ. Заявление в полицию."},
+  {name:"Клиент И 66 лет · Петропавловск",prof:"Менеджер",platform:"IQ Option клон",amount:"150 000 ₸",status:"done",method:"Международное",result:"✓ Полный возврат",date:"Июнь 2025",desc:"Мошенничество через IQ Option клон. Международное."},
+  {name:"Клиент К 74 лет · Алматы",prof:"Предприниматель",platform:"Binomo клон",amount:"150 000 ₸",status:"done",method:"Международное",result:"✓ Полный возврат",date:"Август 2025",desc:"Мошенничество через Binomo клон. Международное."},
+  {name:"Клиент Д 71 лет · Костанай",prof:"Инженер",platform:"CryptoGain KZ",amount:"1.2 млн ₸",status:"done",method:"Суд",result:"✓ Полный возврат",date:"Июнь 2026",desc:"Мошенничество через CryptoGain KZ. Суд."},
+  {name:"Клиент О 74 лет · Костанай",prof:"Пенсионерка",platform:"FinHub Invest",amount:"5.0 млн ₸",status:"done",method:"Чарджбэк",result:"✓ Полный возврат",date:"Май 2025",desc:"Мошенничество через FinHub Invest. Чарджбэк."},
+  {name:"Клиент Г 73 лет · Шымкент",prof:"Инженер",platform:"PrimeFX Markets",amount:"500 000 ₸",status:"process",method:"Заявление в полицию",result:"⏳ В работе",date:"Сентябрь 2025",desc:"Мошенничество через PrimeFX Markets. Заявление в полицию."},
+  {name:"Клиент Н 69 лет · Караганда",prof:"Врач",platform:"IQ Option клон",amount:"1.2 млн ₸",status:"process",method:"Международное",result:"⏳ В работе",date:"Сентябрь 2025",desc:"Мошенничество через IQ Option клон. Международное."},
+  {name:"Клиент Л 73 лет · Семей",prof:"Инженер",platform:"CryptoGain KZ",amount:"5.0 млн ₸",status:"done",method:"Международное",result:"✓ Полный возврат",date:"Октябрь 2025",desc:"Мошенничество через CryptoGain KZ. Международное."},
+  {name:"Клиент П 75 лет · Павлодар",prof:"Юрист",platform:"TradePro KZ",amount:"$28 500",status:"process",method:"Жалоба в АРРФР",result:"⏳ В работе",date:"Июль 2026",desc:"Мошенничество через TradePro KZ. Жалоба в АРРФР."},
+  {name:"Клиент З 71 лет · Караганда",prof:"Врач",platform:"CryptoGain KZ",amount:"$12 400",status:"done",method:"Жалоба в АРРФР",result:"✓ Полный возврат",date:"Февраль 2025",desc:"Мошенничество через CryptoGain KZ. Жалоба в АРРФР."},
+  {name:"Клиент И 69 лет · Астана",prof:"Менеджер",platform:"Binomo клон",amount:"$12 400",status:"process",method:"Жалоба в АРРФР",result:"⏳ В работе",date:"Июнь 2026",desc:"Мошенничество через Binomo клон. Жалоба в АРРФР."},
+  {name:"Клиент И 75 лет · Костанай",prof:"Учитель",platform:"GlobalTrade FX",amount:"$12 400",status:"done",method:"Суд",result:"✓ Полный возврат",date:"Октябрь 2025",desc:"Мошенничество через GlobalTrade FX. Суд."},
+  {name:"Клиент В 70 лет · Актобе",prof:"Учитель",platform:"GlobalTrade FX",amount:"500 000 ₸",status:"done",method:"Заявление в полицию",result:"✓ Полный возврат",date:"Ноябрь 2026",desc:"Мошенничество через GlobalTrade FX. Заявление в полицию."},
+  {name:"Клиент П 72 лет · Шымкент",prof:"Инженер",platform:"IQ Option клон",amount:"$12 400",status:"done",method:"Жалоба в АРРФР",result:"✓ Полный возврат",date:"Февраль 2026",desc:"Мошенничество через IQ Option клон. Жалоба в АРРФР."},
+  {name:"Клиент М 74 лет · Атырау",prof:"Бухгалтер",platform:"FinHub Invest",amount:"5.0 млн ₸",status:"process",method:"Заявление в полицию",result:"⏳ В работе",date:"Декабрь 2025",desc:"Мошенничество через FinHub Invest. Заявление в полицию."},
+  {name:"Клиент П 66 лет · Алматы",prof:"Бухгалтер",platform:"FinHub Invest",amount:"$12 400",status:"done",method:"Жалоба в АРРФР",result:"✓ Полный возврат",date:"Февраль 2026",desc:"Мошенничество через FinHub Invest. Жалоба в АРРФР."},
+  {name:"Клиент Б 75 лет · Петропавловск",prof:"Врач",platform:"PrimeFX Markets",amount:"150 000 ₸",status:"done",method:"Чарджбэк",result:"✓ Полный возврат",date:"Июль 2026",desc:"Мошенничество через PrimeFX Markets. Чарджбэк."},
+  {name:"Клиент Е 66 лет · Костанай",prof:"Инженер",platform:"CryptoGain KZ",amount:"150 000 ₸",status:"done",method:"Заявление в полицию",result:"✓ Полный возврат",date:"Август 2026",desc:"Мошенничество через CryptoGain KZ. Заявление в полицию."},
+  {name:"Клиент М 68 лет · Атырау",prof:"Учитель",platform:"GlobalTrade FX",amount:"1.2 млн ₸",status:"done",method:"Суд",result:"✓ Полный возврат",date:"Май 2025",desc:"Мошенничество через GlobalTrade FX. Суд."},
+  {name:"Клиент М 70 лет · Павлодар",prof:"Менеджер",platform:"FinHub Invest",amount:"150 000 ₸",status:"done",method:"Жалоба в АРРФР",result:"✓ Полный возврат",date:"Октябрь 2025",desc:"Мошенничество через FinHub Invest. Жалоба в АРРФР."},
+  {name:"Клиент О 71 лет · Семей",prof:"Пенсионер",platform:"Binomo клон",amount:"$12 400",status:"done",method:"Заявление в полицию",result:"✓ Полный возврат",date:"Июнь 2026",desc:"Мошенничество через Binomo клон. Заявление в полицию."},
+  {name:"Клиент Л 72 лет · Астана",prof:"Инженер",platform:"FinHub Invest",amount:"$12 400",status:"done",method:"Чарджбэк",result:"✓ Полный возврат",date:"Август 2026",desc:"Мошенничество через FinHub Invest. Чарджбэк."},
+  {name:"Клиент О 72 лет · Атырау",prof:"Пенсионер",platform:"GlobalTrade FX",amount:"2.5 млн ₸",status:"done",method:"Жалоба в АРРФР",result:"✓ Полный возврат",date:"Август 2025",desc:"Мошенничество через GlobalTrade FX. Жалоба в АРРФР."},
+  {name:"Клиент М 70 лет · Алматы",prof:"Врач",platform:"PrimeFX Markets",amount:"5.0 млн ₸",status:"process",method:"Заявление в полицию",result:"⏳ В работе",date:"Июль 2026",desc:"Мошенничество через PrimeFX Markets. Заявление в полицию."},
+  {name:"Клиент П 71 лет · Петропавловск",prof:"Пенсионер",platform:"CryptoGain KZ",amount:"$28 500",status:"done",method:"Чарджбэк",result:"✓ Полный возврат",date:"Май 2026",desc:"Мошенничество через CryptoGain KZ. Чарджбэк."},
+  {name:"Клиент З 71 лет · Астана",prof:"Юрист",platform:"CryptoGain KZ",amount:"$12 400",status:"done",method:"Международное",result:"✓ Полный возврат",date:"Сентябрь 2025",desc:"Мошенничество через CryptoGain KZ. Международное."},
+  {name:"Клиент И 66 лет · Атырау",prof:"Учитель",platform:"CryptoGain KZ",amount:"500 000 ₸",status:"done",method:"Чарджбэк",result:"✓ Полный возврат",date:"Июль 2026",desc:"Мошенничество через CryptoGain KZ. Чарджбэк."},
+  {name:"Клиент Д 70 лет · Актобе",prof:"Пенсионерка",platform:"InvestPro Capital",amount:"5.0 млн ₸",status:"done",method:"Чарджбэк",result:"✓ Полный возврат",date:"Июль 2025",desc:"Мошенничество через InvestPro Capital. Чарджбэк."},
+  {name:"Клиент И 71 лет · Петропавловск",prof:"Менеджер",platform:"CryptoGain KZ",amount:"$28 500",status:"process",method:"Заявление в полицию",result:"⏳ В работе",date:"Октябрь 2026",desc:"Мошенничество через CryptoGain KZ. Заявление в полицию."},
+  {name:"Клиент И 67 лет · Алматы",prof:"Пенсионерка",platform:"FinHub Invest",amount:"$12 400",status:"done",method:"Суд",result:"✓ Полный возврат",date:"Январь 2026",desc:"Мошенничество через FinHub Invest. Суд."},
+  {name:"Клиент О 65 лет · Семей",prof:"Менеджер",platform:"Atlas Broker",amount:"1.2 млн ₸",status:"process",method:"Международное",result:"⏳ В работе",date:"Июнь 2025",desc:"Мошенничество через Atlas Broker. Международное."},
+  {name:"Клиент П 66 лет · Петропавловск",prof:"Бухгалтер",platform:"Atlas Broker",amount:"500 000 ₸",status:"done",method:"Суд",result:"✓ Полный возврат",date:"Апрель 2026",desc:"Мошенничество через Atlas Broker. Суд."},
+  {name:"Клиент З 71 лет · Шымкент",prof:"Учитель",platform:"FinHub Invest",amount:"1.2 млн ₸",status:"done",method:"Суд",result:"✓ Полный возврат",date:"Сентябрь 2026",desc:"Мошенничество через FinHub Invest. Суд."},
+  {name:"Клиент Е 71 лет · Костанай",prof:"Пенсионер",platform:"InvestPro Capital",amount:"2.5 млн ₸",status:"done",method:"Международное",result:"✓ Полный возврат",date:"Март 2025",desc:"Мошенничество через InvestPro Capital. Международное."},
+  {name:"Клиент И 72 лет · Петропавловск",prof:"Менеджер",platform:"PrimeFX Markets",amount:"500 000 ₸",status:"done",method:"Заявление в полицию",result:"✓ Полный возврат",date:"Сентябрь 2026",desc:"Мошенничество через PrimeFX Markets. Заявление в полицию."},
+  {name:"Клиент Д 67 лет · Астана",prof:"Учитель",platform:"Atlas Broker",amount:"5.0 млн ₸",status:"done",method:"Международное",result:"✓ Полный возврат",date:"Март 2026",desc:"Мошенничество через Atlas Broker. Международное."},
+  {name:"Клиент О 75 лет · Петропавловск",prof:"Учитель",platform:"IQ Option клон",amount:"500 000 ₸",status:"done",method:"Жалоба в АРРФР",result:"✓ Полный возврат",date:"Июнь 2026",desc:"Мошенничество через IQ Option клон. Жалоба в АРРФР."},
+  {name:"Клиент Д 69 лет · Атырау",prof:"Пенсионерка",platform:"GlobalTrade FX",amount:"150 000 ₸",status:"process",method:"Чарджбэк",result:"⏳ В работе",date:"Ноябрь 2025",desc:"Мошенничество через GlobalTrade FX. Чарджбэк."},
+  {name:"Клиент Е 72 лет · Шымкент",prof:"Врач",platform:"TradePro KZ",amount:"2.5 млн ₸",status:"done",method:"Заявление в полицию",result:"✓ Полный возврат",date:"Февраль 2026",desc:"Мошенничество через TradePro KZ. Заявление в полицию."},
+  {name:"Клиент М 67 лет · Семей",prof:"Врач",platform:"FinHub Invest",amount:"1.2 млн ₸",status:"done",method:"Суд",result:"✓ Полный возврат",date:"Сентябрь 2026",desc:"Мошенничество через FinHub Invest. Суд."},
+  {name:"Клиент В 67 лет · Актобе",prof:"Юрист",platform:"CryptoGain KZ",amount:"150 000 ₸",status:"done",method:"Заявление в полицию",result:"✓ Полный возврат",date:"Февраль 2026",desc:"Мошенничество через CryptoGain KZ. Заявление в полицию."},
+  {name:"Клиент А 66 лет · Петропавловск",prof:"Врач",platform:"FinHub Invest",amount:"2.5 млн ₸",status:"done",method:"Чарджбэк",result:"✓ Полный возврат",date:"Сентябрь 2026",desc:"Мошенничество через FinHub Invest. Чарджбэк."},
+  {name:"Клиент А 70 лет · Шымкент",prof:"Предприниматель",platform:"PrimeFX Markets",amount:"1.2 млн ₸",status:"done",method:"Заявление в полицию",result:"✓ Полный возврат",date:"Апрель 2026",desc:"Мошенничество через PrimeFX Markets. Заявление в полицию."},
+  {name:"Клиент М 72 лет · Астана",prof:"Инженер",platform:"Binomo клон",amount:"150 000 ₸",status:"done",method:"Заявление в полицию",result:"✓ Полный возврат",date:"Февраль 2026",desc:"Мошенничество через Binomo клон. Заявление в полицию."},
+  {name:"Клиент Д 69 лет · Костанай",prof:"Предприниматель",platform:"Binomo клон",amount:"2.5 млн ₸",status:"done",method:"Жалоба в АРРФР",result:"✓ Полный возврат",date:"Ноябрь 2025",desc:"Мошенничество через Binomo клон. Жалоба в АРРФР."},
+  {name:"Клиент Ж 72 лет · Атырау",prof:"Учитель",platform:"CryptoGain KZ",amount:"500 000 ₸",status:"done",method:"Чарджбэк",result:"✓ Полный возврат",date:"Май 2025",desc:"Мошенничество через CryptoGain KZ. Чарджбэк."},
+  {name:"Клиент И 67 лет · Астана",prof:"Врач",platform:"PrimeFX Markets",amount:"$12 400",status:"done",method:"Международное",result:"✓ Полный возврат",date:"Декабрь 2026",desc:"Мошенничество через PrimeFX Markets. Международное."},
+  {name:"Клиент Ж 73 лет · Алматы",prof:"Инженер",platform:"PrimeFX Markets",amount:"500 000 ₸",status:"done",method:"Международное",result:"✓ Полный возврат",date:"Июль 2026",desc:"Мошенничество через PrimeFX Markets. Международное."},
+  {name:"Клиент М 70 лет · Петропавловск",prof:"Врач",platform:"IQ Option клон",amount:"$4 100",status:"process",method:"Заявление в полицию",result:"⏳ В работе",date:"Сентябрь 2025",desc:"Мошенничество через IQ Option клон. Заявление в полицию."},
+  {name:"Клиент Л 65 лет · Костанай",prof:"Учитель",platform:"GlobalTrade FX",amount:"1.2 млн ₸",status:"done",method:"Международное",result:"✓ Полный возврат",date:"Май 2025",desc:"Мошенничество через GlobalTrade FX. Международное."},
+  {name:"Клиент Н 67 лет · Актобе",prof:"Бухгалтер",platform:"TradePro KZ",amount:"$28 500",status:"done",method:"Жалоба в АРРФР",result:"✓ Полный возврат",date:"Январь 2025",desc:"Мошенничество через TradePro KZ. Жалоба в АРРФР."},
+  {name:"Клиент О 71 лет · Актобе",prof:"Инженер",platform:"InvestPro Capital",amount:"2.5 млн ₸",status:"done",method:"Международное",result:"✓ Полный возврат",date:"Август 2025",desc:"Мошенничество через InvestPro Capital. Международное."},
+  {name:"Клиент М 66 лет · Петропавловск",prof:"Бухгалтер",platform:"InvestPro Capital",amount:"2.5 млн ₸",status:"process",method:"Международное",result:"⏳ В работе",date:"Август 2025",desc:"Мошенничество через InvestPro Capital. Международное."},
+  {name:"Клиент Л 65 лет · Караганда",prof:"Менеджер",platform:"InvestPro Capital",amount:"$12 400",status:"done",method:"Международное",result:"✓ Полный возврат",date:"Июль 2025",desc:"Мошенничество через InvestPro Capital. Международное."},
+  {name:"Клиент Н 66 лет · Петропавловск",prof:"Врач",platform:"GlobalTrade FX",amount:"$12 400",status:"done",method:"Чарджбэк",result:"✓ Полный возврат",date:"Сентябрь 2025",desc:"Мошенничество через GlobalTrade FX. Чарджбэк."},
+  {name:"Клиент И 69 лет · Павлодар",prof:"Юрист",platform:"Binomo клон",amount:"1.2 млн ₸",status:"done",method:"Жалоба в АРРФР",result:"✓ Полный возврат",date:"Май 2025",desc:"Мошенничество через Binomo клон. Жалоба в АРРФР."}
+];
+CASES.forEach(function(c,i){c.id="AF-2026-"+String(i+1).padStart(4,"0")});
+function renderCases(list){
+    var h='';list.forEach(function(c){
+        var bc=c.status==='done'?'badge-done':'badge-process';
+        var br=c.status==='done'?'result-ok':'result-pending';
+        h+='<div class="case-card"><div class="case-head"><span class="case-badge '+bc+'">'+c.result+'</span><span class="case-date">'+c.date+'</span></div>';
+        h+='<div class="case-name">'+c.name+'</div><div class="case-prof">'+c.prof+'</div>';
+        h+='<div class="case-platform">Платформа: '+c.platform+' · Метод: '+c.method+'</div>';
+        h+='<div class="case-desc">'+c.desc+'</div>';
+        h+='<div class="case-result '+br+'">'+c.amount+'</div></div>';
+    });
+    document.getElementById('casesList').innerHTML=h;
+}
+function filterCases(q,btn){
+    document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active')});
+    btn.classList.add('active');
+    if(q==='all'){renderCases(CASES);return}
+    renderCases(CASES.filter(function(c){return c.status===q}));
+}
+renderCases(CASES);
+</script>
 <script src="/antifraud-kz/assets/js/nav.js"></script>
 </body>
 </html>

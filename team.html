@@ -8,23 +8,209 @@
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <script>tailwind.config={theme:{extend:{colors:{primary:'#B80018',gold:'#C8A000',dark:'#1A1A1A',darker:'#000000'},fontFamily:{heading:['Oswald','sans-serif'],body:['PT Sans','sans-serif']}}}}</script>
-<link rel="stylesheet" href="/antifraud-kz/assets/css/styles.css">
+<style>
+body{background:#000;color:#fff;font-family:'PT Sans',sans-serif;padding-bottom:80px}
+.tw{max-width:1000px;margin:0 auto;padding:clamp(20px,5vw,40px) clamp(16px,4vw,16px)}
+.tw h1{font-size:clamp(1.6rem,4vw,2.2rem);font-weight:700;margin-bottom:6px;text-align:center}
+.tw>p{color:#7a8ba3;margin-bottom:24px;font-size:.92rem;text-align:center}
+.stats{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;margin-bottom:32px}
+.stat-card{background:#1A1A1A;border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:16px;text-align:center}
+.stat-val{font-family:'Oswald',sans-serif;font-size:1.5rem;font-weight:700}
+.stat-label{font-size:.75rem;color:#7a8ba3;margin-top:4px}
+.filters{display:flex;gap:8px;flex-wrap:wrap;margin-bottom:20px}
+.filter-btn{padding:6px 14px;border-radius:8px;font-size:.78rem;font-weight:600;cursor:pointer;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);color:#7a8ba3;transition:all .2s;font-family:'PT Sans',sans-serif}
+.filter-btn.active{background:rgba(184,0,24,.1);color:#fff;border-color:rgba(184,0,24,.3)}
+.team-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(200px,1fr));gap:10px}
+.team-card{background:#1A1A1A;border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:16px;text-align:center;transition:all .2s}
+.team-card:hover{border-color:rgba(184,0,24,.2);transform:translateY(-2px)}
+.team-avatar{width:56px;height:56px;border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 10px;font-size:1.3rem}
+.team-name{font-weight:700;font-size:.88rem;margin-bottom:2px}
+.team-role{font-size:.75rem;color:#B80018;margin-bottom:4px}
+.team-spec{font-size:.72rem;color:#7a8ba3;margin-bottom:6px}
+.team-stats{display:flex;justify-content:center;gap:12px;font-size:.72rem}
+.team-stat{color:#7a8ba3}
+.team-stat strong{color:#fff}
+</style>
 </head>
-<body class="bg-darker text-white font-body">
-<main class="pt-24 pb-16">
-    <div class="container mx-auto px-4">
-        <div class="text-center mb-12">
-            <h1 class="font-heading text-4xl md:text-5xl font-bold mb-4">НАША <span class="text-primary">КОМАНДА</span></h1>
-            <p class="text-xl text-gray-400">32 специалиста, 10+ лет опыта</p>
-        </div>
-        <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-            <div class="bg-dark p-6 rounded-xl border border-gray-800 text-center"><div class="w-20 h-20 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4"><span class="text-3xl">👨‍⚖️</span></div><h3 class="font-heading font-bold">Абает Ерболат</h3><p class="text-primary text-sm mb-2">Руководитель</p><p class="text-gray-400 text-xs">15+ лет, финансовое право</p></div>
-            <div class="bg-dark p-6 rounded-xl border border-gray-800 text-center"><div class="w-20 h-20 bg-gold/20 rounded-full flex items-center justify-center mx-auto mb-4"><span class="text-3xl">👩‍⚖️</span></div><h3 class="font-heading font-bold">Нурлан Кайрат</h3><p class="text-gold text-sm mb-2">Старший юрист</p><p class="text-gray-400 text-xs">Банковское право, 200+ дел</p></div>
-            <div class="bg-dark p-6 rounded-xl border border-gray-800 text-center"><div class="w-20 h-20 bg-primary/20 rounded-full flex items-center justify-center mx-auto mb-4"><span class="text-3xl">💻</span></div><h3 class="font-heading font-bold">Динара Асель</h3><p class="text-primary text-sm mb-2">Юрист</p><p class="text-gray-400 text-xs">МФО, кредитные мошенничества</p></div>
-            <div class="bg-dark p-6 rounded-xl border border-gray-800 text-center"><div class="w-20 h-20 bg-gold/20 rounded-full flex items-center justify-center mx-auto mb-4"><span class="text-3xl">📊</span></div><h3 class="font-heading font-bold">Сергей Волков</h3><p class="text-gold text-sm mb-2">Аналитик</p><p class="text-gray-400 text-xs">Выявление мошенничества</p></div>
-        </div>
+<body>
+<div class="tw" style="padding-top:100px">
+    <h1>👨‍⚖️ Наша команда</h1>
+    <p>120+ специалистов, 10+ лет опыта, 12+ юрисдикций</p>
+
+    <div class="stats">
+        <div class="stat-card"><div class="stat-val" style="color:#B80018">120+</div><div class="stat-label">Специалистов</div></div>
+        <div class="stat-card"><div class="stat-val" style="color:#C8A000">12+</div><div class="stat-label">Лет опыта</div></div>
+        <div class="stat-card"><div class="stat-val" style="color:#B80018">87%</div><div class="stat-label">Успех</div></div>
+        <div class="stat-card"><div class="stat-val" style="color:#C8A000">12+</div><div class="stat-label">Юрисдикций</div></div>
     </div>
-</main>
+
+    <div class="filters">
+        <button class="filter-btn active" onclick="filterTeam('all',this)">Все</button>
+        <button class="filter-btn" onclick="filterTeam('Адвокат',this)">Адвокаты</button>
+        <button class="filter-btn" onclick="filterTeam('Юрист',this)">Юристы</button>
+        <button class="filter-btn" onclick="filterTeam('Старший юрист',this)">Старшие</button>
+        <button class="filter-btn" onclick="filterTeam('Консультант',this)">Консультанты</button>
+        <button class="filter-btn" onclick="filterTeam('Аналитик',this)">Аналитики</button>
+        <button class="filter-btn" onclick="filterTeam('чарджбэк',this)">Чарджбэк</button>
+        <button class="filter-btn" onclick="filterTeam('крипте',this)">Крипто</button>
+        <button class="filter-btn" onclick="filterTeam('Руководитель',this)">Руководство</button>
+    </div>
+
+    <div class="team-grid" id="teamGrid"></div>
+</div>
+
+<script>
+TEAM=[
+{name:"Светлана Калиева",role:"Международный юрист",spec:"Инвестиционное мошенничество",exp:13,cases:30},
+{name:"Ербол Есентаев",role:"Юрист",spec:"Чарджбэк",exp:8,cases:120},
+{name:"Айгуль Абдрахманов",role:"Руководитель отдела",spec:"AML",exp:14,cases:48},
+{name:"Жанель Шарипов",role:"Адвокат",spec:"AML",exp:17,cases:30},
+{name:"Дмитрий Назарова",role:"Менеджер",spec:"Международное право",exp:6,cases:80},
+{name:"Светлана Бектуров",role:"Специалист по чарджбэку",spec:"Чарджбэк",exp:15,cases:150},
+{name:"Хамит Шарипов",role:"Старший юрист",spec:"Чарджбэк",exp:17,cases:100},
+{name:"Сергей Жаксылыкова",role:"Адвокат",spec:"Банковское право",exp:12,cases:85},
+{name:"Наталья Назарова",role:"Специалист по крипте",spec:"Крипто",exp:18,cases:15},
+{name:"Азамат Ахметов",role:"Адвокат",spec:"Банковское право",exp:11,cases:15},
+{name:"Олжас Алпысов",role:"Аналитик",spec:"АРРФР",exp:9,cases:92},
+{name:"Айгуль Есентаев",role:"Специалист по крипте",spec:"Чарджбэк",exp:18,cases:52},
+{name:"Лариса Турсунов",role:"Менеджер",spec:"Чарджбэк",exp:12,cases:100},
+{name:"Шерзод Бектуров",role:"Специалист по чарджбэку",spec:"Полиция",exp:16,cases:120},
+{name:"Светлана Маратова",role:"Менеджер",spec:"Банковское право",exp:19,cases:150},
+{name:"Фатима Байжанов",role:"Специалист по чарджбэку",spec:"Forex",exp:13,cases:67},
+{name:"Валерий Оразов",role:"Руководитель отдела",spec:"Банковское право",exp:14,cases:67},
+{name:"Роман Маратова",role:"Юрист",spec:"АРРФР",exp:16,cases:30},
+{name:"Андрей Иманова",role:"Специалист по крипте",spec:"Полиция",exp:14,cases:25},
+{name:"Борис Мамырова",role:"Аналитик",spec:"Полиция",exp:9,cases:65},
+{name:"Хамит Алибеков",role:"Международный юрист",spec:"Инвестиционное мошенничество",exp:7,cases:150},
+{name:"Юлия Есентаев",role:"Специалист по чарджбэку",spec:"Чарджбэк",exp:14,cases:180},
+{name:"Пётр Сулеев",role:"Менеджер",spec:"Банковское право",exp:18,cases:55},
+{name:"Пётр Курманова",role:"Менеджер",spec:"Банковское право",exp:7,cases:92},
+{name:"Улжан Алибеков",role:"Консультант",spec:"Полиция",exp:14,cases:92},
+{name:"Денис Садыкова",role:"Адвокат",spec:"Полиция",exp:4,cases:120},
+{name:"Лаура Сагинов",role:"Аналитик",spec:"Суд",exp:7,cases:180},
+{name:"Елена Калиева",role:"Международный юрист",spec:"Банковское право",exp:11,cases:74},
+{name:"Руслан Маратова",role:"Аналитик",spec:"Инвестиционное мошенничество",exp:19,cases:25},
+{name:"Виктория Ахметов",role:"Специалист по чарджбэку",spec:"Крипто",exp:19,cases:25},
+{name:"Николай Берденов",role:"Аналитик",spec:"Чарджбэк",exp:4,cases:65},
+{name:"Сергей Есентаев",role:"Юрист",spec:"Инвестиционное мошенничество",exp:12,cases:150},
+{name:"Виктория Абдрахманов",role:"Старший юрист",spec:"Инвестиционное мошенничество",exp:20,cases:74},
+{name:"Мадина Кажибаев",role:"Старший юрист",spec:"AML",exp:16,cases:150},
+{name:"Андрей Кенжебаев",role:"Специалист по крипте",spec:"Чарджбэк",exp:18,cases:52},
+{name:"Халида Касымова",role:"Специалист по чарджбэку",spec:"Банковское право",exp:4,cases:74},
+{name:"Даулет Жолдыбаев",role:"Международный юрист",spec:"АРРФР",exp:17,cases:85},
+{name:"Абай Турсунов",role:"Старший юрист",spec:"Суд",exp:14,cases:74},
+{name:"Полина Алпысов",role:"Юрист",spec:"Крипто",exp:11,cases:85},
+{name:"Евгений Калиева",role:"Международный юрист",spec:"Forex",exp:8,cases:55},
+{name:"Гаухар Байжанов",role:"Консультант",spec:"Инвестиционное мошенничество",exp:14,cases:52},
+{name:"Светлана Касымова",role:"Адвокат",spec:"Международное право",exp:9,cases:67},
+{name:"Евгений Байжанов",role:"Консультант",spec:"Международное право",exp:19,cases:180},
+{name:"Денис Мамырова",role:"Юрист",spec:"Полиция",exp:20,cases:150},
+{name:"Павел Иманова",role:"Юрист",spec:"Международное право",exp:6,cases:74},
+{name:"Борис Сулеев",role:"Адвокат",spec:"АРРФР",exp:14,cases:30},
+{name:"Жанна Берденов",role:"Специалист по чарджбэку",spec:"Международное право",exp:14,cases:30},
+{name:"Данияр Ахметов",role:"Адвокат",spec:"Банковское право",exp:15,cases:85},
+{name:"Ульяна Байжанов",role:"Юрист",spec:"Полиция",exp:11,cases:180},
+{name:"Мадина Жаксылыкова",role:"Руководитель отдела",spec:"AML",exp:19,cases:120},
+{name:"Гульмира Абдрахманов",role:"Международный юрист",spec:"Международное право",exp:16,cases:200},
+{name:"Элина Сулеев",role:"Руководитель отдела",spec:"Полиция",exp:8,cases:22},
+{name:"Юлия Бектуров",role:"Адвокат",spec:"Суд",exp:19,cases:180},
+{name:"Ботир Жумабаева",role:"Консультант",spec:"Крипто",exp:18,cases:40},
+{name:"Мадина Токтосунов",role:"Специалист по чарджбэку",spec:"Международное право",exp:20,cases:74},
+{name:"Азамат Берденов",role:"Международный юрист",spec:"AML",exp:9,cases:80},
+{name:"Анна Серикова",role:"Менеджер",spec:"AML",exp:14,cases:48},
+{name:"Елена Нурланов",role:"Менеджер",spec:"Крипто",exp:10,cases:22},
+{name:"Ербол Калиева",role:"Менеджер",spec:"Чарджбэк",exp:14,cases:80},
+{name:"Константин Оразов",role:"Старший юрист",spec:"Банковское право",exp:13,cases:150},
+{name:"Шынар Бектуров",role:"Аналитик",spec:"Суд",exp:8,cases:65},
+{name:"Фатима Ахметов",role:"Менеджер",spec:"Forex",exp:17,cases:74},
+{name:"Мадина Курманова",role:"Специалист по крипте",spec:"Чарджбэк",exp:4,cases:200},
+{name:"Иван Байжанов",role:"Международный юрист",spec:"Чарджбэк",exp:18,cases:22},
+{name:"Тимофей Мамырова",role:"Аналитик",spec:"Полиция",exp:19,cases:150},
+{name:"Серик Назарова",role:"Менеджер",spec:"Чарджбэк",exp:8,cases:67},
+{name:"Нуржан Маратова",role:"Аналитик",spec:"АРРФР",exp:3,cases:15},
+{name:"Эльмира Курманова",role:"Адвокат",spec:"АРРФР",exp:4,cases:35},
+{name:"Тимур Шарипов",role:"Консультант",spec:"AML",exp:4,cases:74},
+{name:"Ольга Оразов",role:"Юрист",spec:"Forex",exp:4,cases:74},
+{name:"Руслан Кенжебаев",role:"Руководитель отдела",spec:"Международное право",exp:14,cases:22},
+{name:"Канат Жолдыбаев",role:"Юрист",spec:"AML",exp:7,cases:200},
+{name:"Хамит Касымова",role:"Консультант",spec:"Forex",exp:19,cases:30},
+{name:"Юлия Алибеков",role:"Юрист",spec:"Банковское право",exp:19,cases:85},
+{name:"Константин Жолдыбаев",role:"Международный юрист",spec:"Инвестиционное мошенничество",exp:14,cases:52},
+{name:"Николай Касымова",role:"Руководитель отдела",spec:"AML",exp:9,cases:200},
+{name:"Нуржан Кажибаев",role:"Специалист по крипте",spec:"Инвестиционное мошенничество",exp:13,cases:67},
+{name:"Серик Нурланов",role:"Специалист по чарджбэку",spec:"Forex",exp:11,cases:200},
+{name:"Михаил Ахметов",role:"Старший юрист",spec:"Суд",exp:20,cases:40},
+{name:"Сергей Касымова",role:"Юрист",spec:"Чарджбэк",exp:3,cases:40},
+{name:"Денис Назарова",role:"Юрист",spec:"АРРФР",exp:7,cases:52},
+{name:"Данияр Касымова",role:"Менеджер",spec:"Чарджбэк",exp:7,cases:15},
+{name:"Дмитрий Есентаев",role:"Аналитик",spec:"Чарджбэк",exp:16,cases:25},
+{name:"Тамара Мамырова",role:"Юрист",spec:"Полиция",exp:9,cases:30},
+{name:"Улан Оразов",role:"Адвокат",spec:"Forex",exp:12,cases:74},
+{name:"Фёдор Турсунов",role:"Международный юрист",spec:"Forex",exp:20,cases:40},
+{name:"Гаухар Садыкова",role:"Старший юрист",spec:"Крипто",exp:6,cases:74},
+{name:"Денис Абдрахманов",role:"Специалист по чарджбэку",spec:"АРРФР",exp:4,cases:150},
+{name:"Ольга Алпысов",role:"Аналитик",spec:"Чарджбэк",exp:17,cases:100},
+{name:"Оксана Кенжебаев",role:"Международный юрист",spec:"Банковское право",exp:3,cases:55},
+{name:"Айгуль Турсунов",role:"Консультант",spec:"Forex",exp:12,cases:55},
+{name:"Камила Мамырова",role:"Специалист по чарджбэку",spec:"АРРФР",exp:10,cases:52},
+{name:"Филипп Жолдыбаев",role:"Юрист",spec:"Суд",exp:14,cases:200},
+{name:"Камила Бектуров",role:"Старший юрист",spec:"Крипто",exp:13,cases:85},
+{name:"Снежана Абдрахманов",role:"Адвокат",spec:"Суд",exp:14,cases:25},
+{name:"Иван Сулеев",role:"Юрист",spec:"Суд",exp:20,cases:25},
+{name:"Олег Жолдыбаев",role:"Адвокат",spec:"AML",exp:12,cases:30},
+{name:"Рустам Сулеев",role:"Аналитик",spec:"Forex",exp:6,cases:25},
+{name:"Денис Кенжебаев",role:"Менеджер",spec:"Банковское право",exp:7,cases:67},
+{name:"Даулет Байжанов",role:"Руководитель отдела",spec:"Полиция",exp:6,cases:100},
+{name:"Светлана Жаксылыкова",role:"Юрист",spec:"Чарджбэк",exp:9,cases:74},
+{name:"Фёдор Жаксылыкова",role:"Специалист по крипте",spec:"Банковское право",exp:7,cases:67},
+{name:"Ульяна Ахметов",role:"Руководитель отдела",spec:"Инвестиционное мошенничество",exp:4,cases:55},
+{name:"Ботир Токтосунов",role:"Юрист",spec:"AML",exp:16,cases:55},
+{name:"Андрей Назарова",role:"Старший юрист",spec:"Международное право",exp:3,cases:55},
+{name:"Николай Калиева",role:"Адвокат",spec:"Инвестиционное мошенничество",exp:6,cases:65},
+{name:"Кристина Алпысов",role:"Руководитель отдела",spec:"Суд",exp:14,cases:15},
+{name:"Фёдор Байжанов",role:"Юрист",spec:"Международное право",exp:8,cases:100},
+{name:"Тимур Сагинов",role:"Старший юрист",spec:"Чарджбэк",exp:10,cases:65},
+{name:"Улжан Турсунов",role:"Руководитель отдела",spec:"Банковское право",exp:20,cases:30},
+{name:"Екатерина Муканова",role:"Специалист по чарджбэку",spec:"AML",exp:13,cases:67},
+{name:"Улжан Бектуров",role:"Специалист по чарджбэку",spec:"Чарджбэк",exp:12,cases:80},
+{name:"Улан Мамырова",role:"Менеджер",spec:"АРРФР",exp:15,cases:22},
+{name:"Гулнара Назарова",role:"Специалист по крипте",spec:"Банковское право",exp:8,cases:120},
+{name:"Андрей Калиева",role:"Специалист по крипте",spec:"Полиция",exp:18,cases:150},
+{name:"Марат Кенжебаев",role:"Руководитель отдела",spec:"Суд",exp:20,cases:65},
+{name:"Геннадий Байжанов",role:"Международный юрист",spec:"Полиция",exp:5,cases:52},
+{name:"Николай Садыкова",role:"Международный юрист",spec:"Банковское право",exp:20,cases:25},
+{name:"Руслан Алибеков",role:"Специалист по чарджбэку",spec:"Forex",exp:11,cases:22},
+{name:"Гульмира Мамырова",role:"Менеджер",spec:"Чарджбэк",exp:3,cases:55}
+];
+
+var avatars=['👨‍⚖️','👩‍⚖️','👨‍💼','👩‍💼','👨‍💻','👩‍💻','👨‍🔬','👩‍🔬','👨‍🏫','👩‍🏫'];
+var avatarColors=['rgba(184,0,24,.2)','rgba(200,160,0,.2)','rgba(99,102,241,.2)','rgba(16,185,129,.2)'];
+
+function renderTeam(list){
+    var h='';list.forEach(function(t,i){
+        var av=avatars[i%avatars.length];
+        var ac=avatarColors[i%avatarColors.length];
+        h+='<div class="team-card"><div class="team-avatar" style="background:'+ac+'">'+av+'</div>';
+        h+='<div class="team-name">'+t.name+'</div>';
+        h+='<div class="team-role">'+t.role+'</div>';
+        h+='<div class="team-spec">'+t.spec+'</div>';
+        h+='<div class="team-stats"><div class="team-stat">'+t.exp+' лет</div><div class="team-stat">'+t.cases+' дел</div></div>';
+        h+='</div>';
+    });
+    document.getElementById('teamGrid').innerHTML=h;
+}
+
+function filterTeam(q,btn){
+    document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.remove('active')});
+    btn.classList.add('active');
+    if(q==='all'){renderTeam(TEAM);return}
+    renderTeam(TEAM.filter(function(t){
+        return t.role.indexOf(q)>=0||t.spec.toLowerCase().indexOf(q.toLowerCase())>=0;
+    }));
+}
+
+renderTeam(TEAM);
+</script>
 <script src="/antifraud-kz/assets/js/nav.js"></script>
 </body>
 </html>

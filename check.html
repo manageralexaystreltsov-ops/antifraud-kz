@@ -11,52 +11,59 @@
 <script>tailwind.config={theme:{extend:{colors:{primary:'#B80018',gold:'#C8A000',dark:'#1A1A1A',darker:'#000000'},fontFamily:{heading:['Oswald','sans-serif'],body:['PT Sans','sans-serif']}}}}</script>
 <style>
 body{background:#000;color:#fff;font-family:'PT Sans',sans-serif;padding-bottom:80px}
-.ck{max-width:640px;margin:0 auto;padding:clamp(30px,6vw,60px) clamp(16px,4vw,24px)}
-.ck h1{font-size:clamp(1.8rem,5vw,2.5rem);font-weight:700;margin-bottom:8px;text-align:center;line-height:1.2}
-.ck>p{color:#7a8ba3;text-align:center;margin-bottom:32px;font-size:1.05rem;line-height:1.6}
-.search-frame{background:#1A1A1A;border:1px solid rgba(255,255,255,.06);border-radius:20px;padding:24px;margin-bottom:24px}
+.ck{max-width:900px;margin:0 auto;padding:clamp(20px,5vw,40px) clamp(16px,4vw,16px)}
+.ck h1{font-size:clamp(1.6rem,4vw,2.2rem);font-weight:700;margin-bottom:8px;text-align:center}
+.ck>p{color:#7a8ba3;text-align:center;margin-bottom:24px;font-size:1rem;line-height:1.6}
+.search-frame{background:#1A1A1A;border:1px solid rgba(255,255,255,.06);border-radius:20px;padding:24px;margin-bottom:32px}
 .search-row{display:flex;gap:12px}
-.search-input{flex:1;padding:18px 20px;background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.08);border-radius:14px;font-size:1.1rem;font-family:'PT Sans',sans-serif;color:#fff;transition:all .3s}
+.search-input{flex:1;padding:16px 20px;background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.08);border-radius:14px;font-size:1.05rem;font-family:'PT Sans',sans-serif;color:#fff}
 .search-input::placeholder{color:#555}
-.search-input:focus{border-color:rgba(184,0,24,.4);outline:none;box-shadow:0 0 30px rgba(184,0,24,.08)}
-.search-btn{padding:18px 32px;background:linear-gradient(135deg,#B80018,#8B0012);color:#fff;border:none;border-radius:14px;font-family:'Oswald',sans-serif;font-weight:700;font-size:1rem;cursor:pointer;transition:all .3s;white-space:nowrap}
-.search-btn:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(184,0,24,.3)}
-.search-btn:disabled{opacity:.3;cursor:not-allowed}
-.search-hint{font-size:.78rem;color:#555;text-align:center;margin-top:12px}
-.loader{display:none;text-align:center;padding:48px 0}
+.search-input:focus{border-color:rgba(184,0,24,.4);outline:none}
+.search-btn{padding:16px 28px;background:linear-gradient(135deg,#B80018,#8B0012);color:#fff;border:none;border-radius:14px;font-family:'Oswald',sans-serif;font-weight:700;font-size:.95rem;cursor:pointer;transition:all .2s}
+.search-btn:hover{transform:translateY(-1px)}
+.loader{display:none;text-align:center;padding:40px 0}
 .loader.show{display:block}
-.spinner{width:48px;height:48px;border:3px solid rgba(255,255,255,.05);border-top-color:#B80018;border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 16px}
+.spinner{width:40px;height:40px;border:3px solid rgba(255,255,255,.05);border-top-color:#B80018;border-radius:50%;animation:spin .8s linear infinite;margin:0 auto 12px}
 @keyframes spin{to{transform:rotate(360deg)}}
 .result{display:none;margin-top:8px}
-.result.show{display:block;animation:fadeUp .5s ease}
-@keyframes fadeUp{from{opacity:0;transform:translateY(16px)}to{opacity:1;transform:translateY(0)}}
-.result-card{background:#1A1A1A;border:1px solid rgba(255,255,255,.06);border-radius:20px;padding:28px 24px}
+.result.show{display:block;animation:fadeUp .4s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.result-card{background:#1A1A1A;border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:24px}
 .result-card.danger{border-color:rgba(239,68,68,.3)}
 .result-card.safe{border-color:rgba(16,185,129,.3)}
 .result-card.warn{border-color:rgba(245,158,11,.3)}
-.result-header{display:flex;align-items:center;gap:16px;margin-bottom:20px}
-.result-icon{font-size:3rem;flex-shrink:0}
-.result-title{font-family:'Oswald',sans-serif;font-size:1.3rem;font-weight:700;color:#fff}
-.result-subtitle{font-size:.85rem;color:#7a8ba3;margin-top:2px}
-.result-badge{display:inline-block;padding:6px 16px;border-radius:100px;font-size:.82rem;font-weight:700;margin-top:6px}
+.result-header{display:flex;align-items:center;gap:14px;margin-bottom:16px}
+.result-icon{font-size:2.5rem}
+.result-title{font-family:'Oswald',sans-serif;font-size:1.2rem;font-weight:700}
+.result-subtitle{font-size:.82rem;color:#7a8ba3}
+.result-badge{display:inline-block;padding:5px 14px;border-radius:100px;font-size:.78rem;font-weight:700;margin-top:4px}
 .badge-danger{background:rgba(239,68,68,.1);color:#fca5a5;border:1px solid rgba(239,68,68,.2)}
 .badge-safe{background:rgba(16,185,129,.1);color:#6ee7b7;border:1px solid rgba(16,185,129,.2)}
 .badge-warn{background:rgba(245,158,11,.1);color:#fbbf24;border:1px solid rgba(245,158,11,.2)}
-.result-detail{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.04)}
+.result-detail{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:.88rem}
 .result-detail:last-child{border-bottom:none}
-.detail-label{font-size:.88rem;color:#7a8ba3}
-.detail-value{font-size:.92rem;color:#fff;font-weight:600}
-.detail-value.safe{color:#6ee7b7}
-.detail-value.danger{color:#fca5a5}
-.detail-value.warn{color:#fbbf24}
-.result-advice{padding:16px;background:rgba(255,255,255,.02);border-radius:12px;border-left:3px solid rgba(184,0,24,.3);font-size:.92rem;color:#e8ecf4;line-height:1.7;margin-top:16px}
-.result-actions{display:flex;gap:12px;margin-top:16px;flex-wrap:wrap}
-.action-btn{padding:12px 24px;border-radius:12px;font-size:.92rem;font-weight:700;text-decoration:none;transition:all .2s;display:inline-flex;align-items:center;gap:8px}
+.result-advice{padding:14px;background:rgba(255,255,255,.02);border-radius:10px;border-left:3px solid rgba(184,0,24,.3);font-size:.88rem;color:#e8ecf4;line-height:1.6;margin-top:14px}
+.result-actions{display:flex;gap:10px;margin-top:14px;flex-wrap:wrap}
+.action-btn{padding:10px 20px;border-radius:10px;font-size:.88rem;font-weight:700;text-decoration:none;transition:all .2s;display:inline-flex;align-items:center;gap:6px}
 .action-btn.primary{background:linear-gradient(135deg,#B80018,#8B0012);color:#fff}
 .action-btn.primary:hover{transform:translateY(-1px);color:#fff;text-decoration:none}
 .action-btn.secondary{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:#e8ecf4}
 .action-btn.secondary:hover{background:rgba(255,255,255,.08);color:#fff;text-decoration:none}
-@media(max-width:500px){.search-row{flex-direction:column}}
+/* Org list */
+.org-section{margin-top:40px}
+.org-section h2{font-family:'Oswald',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:8px}
+.org-section h2::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(255,255,255,.08),transparent)}
+.org-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:10px}
+.org-card{background:#1A1A1A;border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:14px;transition:all .2s}
+.org-card:hover{border-color:rgba(184,0,24,.2)}
+.org-card-name{font-weight:700;font-size:.88rem;margin-bottom:4px}
+.org-card-full{font-size:.78rem;color:#7a8ba3;line-height:1.4}
+.org-card-when{font-size:.72rem;color:#e8ecf4;line-height:1.4;padding:6px 8px;background:rgba(184,0,24,.04);border-radius:6px;border-left:2px solid rgba(184,0,24,.3);margin:8px 0}
+.org-card-btns{display:flex;gap:6px}
+.org-card-btn{padding:5px 12px;border-radius:6px;font-size:.72rem;font-weight:600;text-decoration:none;transition:all .2s;cursor:pointer;border:none;font-family:'PT Sans',sans-serif}
+.btn-sm-apply{background:linear-gradient(135deg,#B80018,#8B0012);color:#fff}
+.btn-sm-site{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:#e8ecf4}
+@media(max-width:500px){.search-row{flex-direction:column}.org-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
@@ -69,152 +76,59 @@ body{background:#000;color:#fff;font-family:'PT Sans',sans-serif;padding-bottom:
             <input type="text" class="search-input" id="q" placeholder="Название платформы..." onkeydown="if(event.key==='Enter')doCheck()">
             <button class="search-btn" id="btn" onclick="doCheck()">Проверить</button>
         </div>
-        <div class="search-hint">Пример: InvestPro, CryptoGain, АРРФР, Halyk Bank, SEC</div>
     </div>
 
     <div class="loader" id="loader"><div class="spinner"></div><p style="color:#7a8ba3">Проверяем по базам данных...</p></div>
     <div class="result" id="result"></div>
+
+    <!-- Organizations List -->
+    <div class="org-section" id="orgListSection"></div>
 </div>
 
 <script>
+// Blacklist
 var BL=[
     {n:'InvestPro Capital',r:'Финансовая пирамида',s:'investpro-capital.com',reg:'АРРФР'},
-    {n:'FinHub Invest',r:'Инвестиционное мошенничество',s:'finhubinvest.com',reg:'АРРФР'},
-    {n:'CapitalInvest Kazakhstan',r:'Без лицензии',s:'capitalinvest-kz.com',reg:'АРРФР'},
-    {n:'Invest Group KZ',r:'Финансовая пирамида',s:'investgroup.kz',reg:'АРРФР'},
-    {n:'Global Investment Partners',r:'Фейковые инвестиции',s:'globalinvestmentpartners.com',reg:'АРРФР'},
-    {n:'Asia Capital Group',r:'Инвестиционное мошенничество',s:'asiacapitalgroup.com',reg:'АРРФР'},
-    {n:'Prestige Invest',r:'Финансовая пирамида',s:'prestigeinvest.com',reg:'АРРФР'},
-    {n:'Royal Forex Trade',r:'Нелицензированный брокер',s:'royalforextrade.com',reg:'АРРФР'},
     {n:'CryptoGain KZ',r:'Фейковая криптобиржа',s:'cryptogain.kz',reg:'АРРФР'},
-    {n:'CryptoPro Trade',r:'Фейковая платформа',s:'cryptopro-trade.com',reg:'АРРФР'},
-    {n:'CryptoMax',r:'Фейковый майнинг',s:'cryptomax.kz',reg:'АРРФР'},
-    {n:'Bitcoin Profit Kazakhstan',r:'Фейковая платформа',s:'bitcoinprofit-kz.com',reg:'АРРФР'},
-    {n:'Ethereum Trade Pro',r:'Фейковая биржа',s:'ethereumtradepro.com',reg:'АРРФР'},
-    {n:'Crypto Futures Pro',r:'Нелицензированная платформа',s:'cryptofuturespro.com',reg:'АРРФР'},
-    {n:'DeFi Yield Kazakhstan',r:'Фейковый DeFi',s:'defiyield.kz',reg:'АРРФР'},
-    {n:'Bitcoin Code KZ',r:'Фейковая автоматизация',s:'bitcoincode-kz.com',reg:'АРРФР'},
-    {n:'Crypto Bank Pro',r:'Фейковый криптобанк',s:'cryptobankpro.com',reg:'АРРФР'},
-    {n:'Digital Assets Trade',r:'Нелицензированная платформа',s:'digitalassetstrade.com',reg:'АРРФР'},
     {n:'GlobalTrade FX',r:'Нелицензированный Forex',s:'globaltradefx.com',reg:'АРРФР'},
-    {n:'PrimeFX Markets',r:'Нелицензированный Forex',s:'primefxmarkets.com',reg:'АРРФР'},
+    {n:'FinHub Invest',r:'Инвестиционное мошенничество',s:'finhubinvest.com',reg:'АРРФР'},
     {n:'Atlas Broker',r:'Нелицензированный брокер',s:'atlasbroker.com',reg:'АРРФР'},
+    {n:'PrimeFX Markets',r:'Нелицензированный Forex',s:'primefxmarkets.com',reg:'АРРФР'},
     {n:'TradePro KZ',r:'Нелицензированный брокер',s:'tradepro-kz.com',reg:'АРРФР'},
-    {n:'RoboForex scam',r:'Нелицензированный брокер',s:'robforex-scam.com',reg:'АРРФР'},
-    {n:'AvaTrade scam',r:'Клон брокера',s:'avatrade-scam.com',reg:'АРРФР'},
-    {n:'IQcent scam',r:'Нелицензированная платформа',s:'iqcent-scam.com',reg:'АРРФР'},
-    {n:'GlobalMarkets',r:'Нелицензированный брокер',s:'globalmarkets-scam.com',reg:'АРРФР'},
-    {n:'FinTech Pro',r:'Нелицензированная платформа',s:'fintech-pro.com',reg:'АРРФР'},
-    {n:'Forex Time scam',r:'Клон брокера',s:'forextime-scam.com',reg:'АРРФР'},
-    {n:'Olymp Trade clone',r:'Клон платформы',s:'olymptrade-kz.com',reg:'АРРФР'},
-    {n:'FXPro clone',r:'Клон брокера',s:'fxpro-kz.com',reg:'АРРФР'},
     {n:'IQ Option клон',r:'Клон платформы',s:'iqoption-kz.com',reg:'АРРФР'},
     {n:'Binomo клон',r:'Клон бинарных опционов',s:'binomo-kz.com',reg:'АРРФР'},
     {n:'Bybit клон',r:'Клон биржи',s:'bybit-kz.com',reg:'АРРФР'},
-    {n:'eToro клон',r:'Клон соц. платформы',s:'etoro-kz.com',reg:'АРРФР'},
     {n:'Binance clone',r:'Клон биржи',s:'binance-kz.com',reg:'АРРФР'},
-    {n:'Coinbase clone',r:'Клон биржи',s:'coinbase-kz.com',reg:'АРРФР'},
-    {n:'Kraken clone',r:'Клон биржи',s:'kraken-kz.com',reg:'АРРФР'},
-    {n:'Huobi clone',r:'Клон биржи',s:'huobi-kz.com',reg:'АРРФР'},
-    {n:'ExpertOption clone',r:'Клон бинарных опционов',s:'expertoption-kz.com',reg:'АРРФР'},
-    {n:'Pocket Option clone',r:'Клон бинарных опционов',s:'pocketoption-kz.com',reg:'АРРФР'},
-    {n:'Deriv clone',r:'Клон платформы',s:'deriv-kz.com',reg:'АРРФР'},
-    {n:'Alpari clone',r:'Клон брокера',s:'alpari-kz.com',reg:'АРРФР'},
-    {n:'RoboMarkets clone',r:'Клон брокера',s:'robomarkets-kz.com',reg:'АРРФР'},
-    {n:'InstaForex clone',r:'Клон брокера',s:'instaforex-kz.com',reg:'АРРФР'},
-    {n:'Tickmill clone',r:'Клон брокера',s:'tickmill-kz.com',reg:'АРРФР'},
-    {n:'XM clone',r:'Клон брокера',s:'xm-kz.com',reg:'АРРФР'},
-    {n:'Exness clone',r:'Клон брокера',s:'exness-kz.com',reg:'АРРФР'},
     {n:'FCA Kazakhstan',r:'FCA работает только в UK',s:'fca-kz.com',reg:'FCA UK'},
     {n:'SEC Kazakhstan',r:'SEC работает только в США',s:'sec-kz.com',reg:'SEC USA'},
-    {n:'FINRA Kazakhstan',r:'FINRA работает только в США',s:'finra-kz.com',reg:'FINRA USA'},
     {n:'JCP Protocol',r:'Несуществующий протокол',s:'',reg:'—'},
     {n:'SWIFT Insurance Protocol',r:'Несуществующий протокол',s:'',reg:'—'},
-    {n:'Global AML Certification',r:'Несуществующий сертификат',s:'',reg:'—'},
     {n:'IIGF',r:'Несуществующий фонд',s:'',reg:'—'},
-    {n:'World Financial Safety Fund',r:'Несуществующий фонд',s:'',reg:'—'},
-    {n:'АРРФР Департамент по резервным счетам',r:'Такого отдела нет',s:'',reg:'—'},
-    {n:'Регулятор ЕАЭС',r:'Нет единого регулятора',s:'',reg:'—'},
-    {n:'International Financial Regulatory Commission',r:'Несуществующая организация',s:'',reg:'—'},
-    {n:'World Securities Commission',r:'Несуществующая организация',s:'',reg:'—'},
     {n:'UN Compensation Fund',r:'Несуществующий фонд',s:'',reg:'—'},
-    {n:'World Bank Victims Relief Fund',r:'Несуществующий фонд',s:'',reg:'—'},
-    {n:'IMF Emergency Relief Program',r:'Несуществующая программа',s:'',reg:'—'},
-    {n:'International Cybercrime Compensation Fund',r:'Несуществующий фонд',s:'',reg:'—'},
-    {n:'Interpol Financial Recovery Division',r:'Интерпол не возвращает деньги',s:'',reg:'—'},
-    {n:'KYC Release Certificate',r:'Несуществующий документ',s:'',reg:'—'},
-    {n:'Tax Clearance Certificate',r:'Фейковый документ',s:'',reg:'—'},
-    {n:'Correspondent Bank Activation Fee',r:'Несуществующая комиссия',s:'',reg:'—'},
-    {n:'International Wire Release Code',r:'Несуществующий код',s:'',reg:'—'}
+    {n:'Interpol Financial Recovery',r:'Интерпол не возвращает деньги',s:'',reg:'—'}
 ];
-
+// Whitelist
 var WL=[
-    // === ГОСУДАРСТВЕННЫЕ ОРГАНЫ КАЗАХСТАНА ===
-    {n:'АРРФР',s:'ardfm.gov.kz',reg:'Госорган РК · Тел: 1434'},
-    {n:'Агентство РК по регулированию и развитию финансового рынка',s:'ardfm.gov.kz',reg:'Госорган РК · Тел: 1434'},
-    {n:'НБ РК',s:'nationalbank.kz',reg:'Госорган РК · Тел: 8-800-080-45-36'},
-    {n:'Национальный банк Республики Казахстан',s:'nationalbank.kz',reg:'Госорган РК'},
-    {n:'КГД',s:'kgd.gov.kz',reg:'Госорган РК · Тел: 1414'},
-    {n:'Комитет государственных доходов',s:'kgd.gov.kz',reg:'Госорган РК · Тел: 1414'},
-    {n:'МФ РК',s:'minfin.gov.kz',reg:'Госорган РК'},
-    {n:'Министерство финансов РК',s:'minfin.gov.kz',reg:'Госорган РК'},
-    {n:'АФМ РК',s:'afm.gov.kz',reg:'Госорган РК'},
-    {n:'Агентство по финансовому мониторингу',s:'afm.gov.kz',reg:'Госорган РК'},
-    {n:'ДЭР',s:'mia.gov.kz',reg:'Госорган РК'},
-    {n:'Департамент экономических расследований',s:'mia.gov.kz',reg:'Госорган РК'},
-    {n:'КНБ РК',s:'knb.gov.kz',reg:'Госорган РК'},
-    {n:'Комитет национальной безопасности',s:'knb.gov.kz',reg:'Госорган РК'},
-    {n:'МВД РК',s:'mvd.gov.kz',reg:'Полиция · Тел: 102'},
-    {n:'Министерство внутренних дел',s:'mvd.gov.kz',reg:'Полиция · Тел: 102'},
-    {n:'Полиция',s:'mvd.gov.kz',reg:'Тел: 102'},
-    {n:'Генеральная прокуратура',s:'prosecutor.kz',reg:'Прокуратура РК'},
-    {n:'Антикоррупционная служба',s:'gov4.kz',reg:'Тел: 1424'},
-    {n:'Верховный суд РК',s:'supcourt.kz',reg:'Судебная система'},
-    {n:'Судебный кабинет',s:'sud.kz',reg:'Проверка дел онлайн'},
-    {n:'Судебные акты онлайн',s:'judicial.gov.kz',reg:'База судебных решений'},
-    {n:'Реестр адвокатов',s:'rka.kz',reg:'Проверка адвокатов'},
-    {n:'Реестр нотариусов',s:'notariat.kz',reg:'Проверка нотариусов'},
-    {n:'КДИФ',s:'kdif.kz',reg:'Гарантирование депозитов'},
-    {n:'Реестр ТОО/АО',s:'egov.kz',reg:'Юрлица РК'},
-    {n:'Egov',s:'egov.kz',reg:'Государственные услуги'},
-    // === БАНКИ КАЗАХСТАНА ===
-    {n:'Halyk Bank',s:'halykbank.kz',reg:'Банк РК · Тел: 595'},
-    {n:'Kaspi Bank',s:'kaspi.kz',reg:'Банк РК · Тел: 5050'},
-    {n:'ForteBank',s:'fortebank.kz',reg:'Банк РК · Тел: *6800'},
-    {n:'Банк ЦентрКредит',s:'ccbank.kz',reg:'Банк РК'},
-    {n:'Евразийский банк',s:'eubank.kz',reg:'Банк РК · Тел: 505'},
-    {n:'Сбербанк Казахстан',s:'sberbank.kz',reg:'Банк РК'},
-    {n:'Народный Банк',s:'nurbank.kz',reg:'Банк РК'},
-    {n:'Банк ВТБ',s:'vtb.kz',reg:'Банк РК'},
-    {n:'Jýsan Bank',s:'jysanbank.kz',reg:'Банк РК · Тел: 2233'},
-    {n:'Freedom Bank',s:'freedombank.kz',reg:'Банк РК · Тел: 5520'},
-    {n:'Банк Каспий',s:'bankkaspikz.kz',reg:'Банк РК'},
-    {n:'Банк Цеснабанк',s:'cesnabank.kz',reg:'Банк РК'},
-    // === МЕЖДУНАРОДНЫЕ РЕГУЛЯТОРЫ ===
-    {n:'SEC',s:'sec.gov',reg:'США · Комиссия по ценным бумагам'},
-    {n:'CFTC',s:'cftc.gov',reg:'США · Товарные фьючерсы'},
-    {n:'FINRA',s:'finra.org',reg:'США · Регулятор индустрии'},
-    {n:'FinCEN',s:'fincen.gov',reg:'США · Борьба с финансовыми преступлениями'},
-    {n:'FDIC',s:'fdic.gov',reg:'США · Страхование депозитов'},
-    {n:'ФРС',s:'federalreserve.gov',reg:'США · Центральный банк'},
-    {n:'FBI',s:'fbi.gov',reg:'США · Федеральное бюро расследований'},
-    {n:'FCA',s:'fca.org.uk',reg:'UK · Управление финансового поведения'},
-    {n:'PRA',s:'bankofengland.co.uk/pra',reg:'UK · Пруденциальное регулирование'},
-    {n:'Bank of England',s:'bankofengland.co.uk',reg:'UK · Центральный банк'},
-    {n:'BaFin',s:'bafin.de',reg:'Германия · Финансовый надзор'},
-    {n:'MAS',s:'mas.gov.sg',reg:'Сингапур · Денежный орган'},
-    {n:'ASIC',s:'asic.gov.au',reg:'Австралия · Комиссия по ценным бумагам'},
-    {n:'FINMA',s:'finma.ch',reg:'Швейцария · Финансовый надзор'},
-    {n:'CySEC',s:'cysec.gov.cy',reg:'Кипр · Комиссия по ценным бумагам'},
-    {n:'ESMA',s:'esma.europa.eu',reg:'ЕС · Агентство по ценным бумагам'},
-    {n:'EBA',s:'eba.europa.eu',reg:'ЕС · Банковский регулятор'},
-    // === МЕЖДУНАРОДНЫЕ ОРГАНИЗАЦИИ ===
-    {n:'МВФ',s:'imf.org',reg:'Международный валютный фонд'},
-    {n:'Всемирный банк',s:'worldbank.org',reg:'Международная финансовая организация'},
-    {n:'ЕБРР',s:'ebrd.com',reg:'Европейский банк реконструкции'},
-    {n:'Интерпол',s:'interpol.int',reg:'Международная полиция'},
-    {n:'Европол',s:'europol.europa.eu',reg:'Полиция ЕС'},
-    {n:'SWIFT',s:'swift.com',reg:'Межбанковские расчёты'},
+    {n:'Halyk Bank',s:'halykbank.kz',reg:'АРРФР · 595'},
+    {n:'Kaspi Bank',s:'kaspi.kz',reg:'АРРФР · 5050'},
+    {n:'ForteBank',s:'fortebank.kz',reg:'АРРФР · *6800'},
+    {n:'Банк ЦентрКредит',s:'ccbank.kz',reg:'АРРФР'},
+    {n:'Евразийский банк',s:'eubank.kz',reg:'АРРФР · 505'},
+    {n:'Сбербанк Казахстан',s:'sberbank.kz',reg:'АРРФР'},
+    {n:'Народный Банк',s:'nurbank.kz',reg:'АРРФР'},
+    {n:'Банк ВТБ',s:'vtb.kz',reg:'АРРФР'},
+    {n:'Jýsan Bank',s:'jysanbank.kz',reg:'АРРФР · 2233'},
+    {n:'Freedom Bank',s:'freedombank.kz',reg:'АРРФР · 5520'},
+    {n:'АРРФР',s:'ardfm.gov.kz',reg:'Госорган · 1434'},
+    {n:'НБ РК',s:'nationalbank.kz',reg:'Госорган'},
+    {n:'КГД',s:'kgd.gov.kz',reg:'Госорган · 1414'},
+    {n:'МВД РК',s:'mvd.gov.kz',reg:'Полиция · 102'},
+    {n:'Прокуратура',s:'prosecutor.kz',reg:'Госорган'},
+    {n:'SEC',s:'sec.gov',reg:'США'},
+    {n:'FCA',s:'fca.org.uk',reg:'UK'},
+    {n:'BaFin',s:'bafin.de',reg:'Германия'},
+    {n:'MAS',s:'mas.gov.sg',reg:'Сингапур'},
+    {n:'Интерпол',s:'interpol.int',reg:'Международная'},
     {n:'Visa',s:'visa.com',reg:'Платёжная система'},
     {n:'Mastercard',s:'mastercard.com',reg:'Платёжная система'}
 ];
@@ -234,29 +148,70 @@ function doCheck(){
         if(found)showR(found,'danger');
         else if(safe)showR(safe,'safe');
         else showR({n:document.getElementById('q').value.trim()},'warn');
-    },1500);
+    },1200);
 }
 
 function showR(org,type){
     var h='<div class="result-card '+type+'"><div class="result-header">';
     if(type==='danger')h+='<div class="result-icon">🚫</div><div><div class="result-title">'+org.n+'</div><div class="result-subtitle">'+org.reg+'</div><div class="result-badge badge-danger">В ЧЁРНОМ СПИСКЕ</div></div>';
     else if(type==='safe')h+='<div class="result-icon">✅</div><div><div class="result-title">'+org.n+'</div><div class="result-subtitle">'+org.reg+'</div><div class="result-badge badge-safe">РЕАЛЬНАЯ ОРГАНИЗАЦИЯ</div></div>';
-    else h+='<div class="result-icon">⚠️</div><div><div class="result-title">'+org.n+'</div><div class="result-subtitle">Не найдена в реестрах</div><div class="result-badge badge-warn">НЕ НАЙДЕНА</div></div>';
+    else h+='<div class="result-icon">⚠️</div><div><div class="result-title">'+org.n+'</div><div class="result-subtitle">Не найдена</div><div class="result-badge badge-warn">НЕ НАЙДЕНА</div></div>';
     h+='</div>';
-    h+='<div class="result-detail"><span class="detail-label">Статус</span><span class="detail-value '+(type==='safe'?'safe':type==='danger'?'danger':'warn')+'">'+(type==='safe'?'✓ Реально существует':type==='danger'?'✗ Мошенничество':'? Не найдено')+'</span></div>';
-    if(org.r)h+='<div class="result-detail"><span class="detail-label">Причина</span><span class="detail-value danger">'+org.r+'</span></div>';
-    if(type==='danger')h+='<div class="result-advice"><strong>⚠️ ВНИМАНИЕ:</strong> Это мошенничество. Не переводите деньги. Мы поможем обратиться в АРРФР (1434), полицию (102) и оформить все документы. Начните с заявки — мы всё сделаем за вас.</div>';
-    else if(type==='safe')h+='<div class="result-advice"><strong>✅ ЭТО РЕАЛЬНАЯ ОРГАНИЗАЦИЯ.</strong> Если вам нужна помощь с обращением, документами или консультацией — мы поможем. Оставьте заявку.</div>';
-    else h+='<div class="result-advice"><strong>⚠️ ОСТОРОЖНО:</strong> Организация не найдена. Рекомендуем проверить ещё раз или обратиться к нам — мы поможем разобраться и при необходимости подать жалобу.</div>';
-    h+='<div class="result-actions"><a href="/antifraud-kz/quiz.html" class="action-btn primary">📝 Оставить заявку — поможем</a>';
+    if(org.r)h+='<div class="result-detail"><span style="color:#7a8ba3">Причина</span><span style="color:#fca5a5;font-weight:600">'+org.r+'</span></div>';
+    if(type==='danger')h+='<div class="result-advice"><strong>⚠️ ВНИМАНИЕ:</strong> Это мошенничество. Мы поможем обратиться в АРРФР (1434), полицию (102) и оформить документы.</div>';
+    else if(type==='safe')h+='<div class="result-advice"><strong>✅ РЕАЛЬНАЯ ОРГАНИЗАЦИЯ.</strong> Если нужна помощь с обращением — мы поможем.</div>';
+    else h+='<div class="result-advice"><strong>⚠️ ОСТОРОЖНО:</strong> Не найдена в реестре. Рекомендуем проверить ещё раз или обратиться к нам.</div>';
+    h+='<div class="result-actions"><a href="/antifraud-kz/quiz.html" class="action-btn primary">📝 Оставить заявку</a>';
     if(org.s)h+='<a href="https://'+org.s+'" target="_blank" class="action-btn secondary">🌐 Сайт</a>';
     h+='</div></div>';
     document.getElementById('result').innerHTML=h;
     document.getElementById('result').classList.add('show');
     document.getElementById('result').scrollIntoView({behavior:'smooth',block:'start'});
 }
+
+// Organizations list
+var orgs=[
+    {n:'АРРФР',full:'Агентство РК по регулированию финансового рынка',cat:'gov',when:'Организация работает без лицензии',site:'ardfm.gov.kz'},
+    {n:'НБ РК',full:'Национальный банк РК',cat:'gov',when:'Банк отказывает в чарджбэке',site:'nationalbank.kz'},
+    {n:'КГД',full:'Комитет государственных доходов',cat:'gov',when:'Мошенники присылают «налоговые акты»',site:'kgd.gov.kz'},
+    {n:'МВД РК',full:'Министерство внутренних дел',cat:'gov',when:'При мошенничестве · Тел: 102',site:'mvd.gov.kz'},
+    {n:'Прокуратура',full:'Генеральная прокуратура РК',cat:'gov',when:'Полиция бездействует',site:'prosecutor.kz'},
+    {n:'Киберпреступность',full:'Центр противодействия киберпреступности',cat:'gov',when:'Интернет-мошенничество · Тел: 115',site:'cia.gov.kz'},
+    {n:'Halyk Bank',full:'Крупнейший банк РК · Тел: 595',cat:'bank',when:'Чарджбэк через Halyk',site:'halykbank.kz'},
+    {n:'Kaspi Bank',full:'Банк Kaspi · Тел: 5050',cat:'bank',when:'Чарджбэк через Kaspi',site:'kaspi.kz'},
+    {n:'ForteBank',full:'Банк Форте · Тел: *6800',cat:'bank',when:'Чарджбэк через Forte',site:'fortebank.kz'},
+    {n:'Банк ЦентрКредит',full:'Банк ЦентрКредит',cat:'bank',when:'Чарджбэк через BCC',site:'ccbank.kz'},
+    {n:'Евразийский банк',full:'Евразийский банк · Тел: 505',cat:'bank',when:'Чарджбэк через Евразийский',site:'eubank.kz'},
+    {n:'Сбербанк Казахстан',full:'Сбербанк · Тел: 8-800-100-0006',cat:'bank',when:'Чарджбэк через Сбербанк',site:'sberbank.kz'},
+    {n:'Народный Банк',full:'Народный Банк Казахстана',cat:'bank',when:'Чарджбэк через Народный',site:'nurbank.kz'},
+    {n:'Jýsan Bank',full:'Жусан Банк · Тел: 2233',cat:'bank',when:'Чарджбэк через Jýsan',site:'jysanbank.kz'},
+    {n:'Freedom Bank',full:'Фридом Банк · Тел: 5520',cat:'bank',when:'Чарджбэк через Freedom',site:'freedombank.kz'},
+    {n:'FCA',full:'Управление финансового поведения (UK)',cat:'intl',when:'Мошенники используют бренд FCA',site:'fca.org.uk'},
+    {n:'SEC',full:'Комиссия по ценным бумагам (USA)',cat:'intl',when:'Мошенники используют бренд SEC',site:'sec.gov'},
+    {n:'BaFin',full:'Финансовый надзор Германии',cat:'intl',when:'Мошенники из Германии',site:'bafin.de'},
+    {n:'MAS',full:'Денежный орган Сингапура',cat:'intl',when:'Мошенники из Сингапура',site:'mas.gov.sg'},
+    {n:'Интерпол',full:'Международная полиция',cat:'intl',when:'Крупные суммы, трансграничное',site:'interpol.int'}
+];
+var orgCats=[{id:'gov',name:'Государственные органы Казахстана',icon:'🏛️'},{id:'bank',name:'Банки Казахстана',icon:'🏦'},{id:'intl',name:'Международные регуляторы',icon:'🌍'}];
+
+function renderOrgs(){
+    var g={};orgs.forEach(function(o){if(!g[o.cat])g[o.cat]=[];g[o.cat].push(o)});
+    var h='';orgCats.forEach(function(c){
+        var items=g[c.id];if(!items||!items.length)return;
+        h+='<h2>'+c.icon+' '+c.name+'</h2><div class="org-grid">';
+        items.forEach(function(o){
+            h+='<div class="org-card"><div class="org-card-name">'+o.n+'</div><div class="org-card-full">'+o.full+'</div>';
+            if(o.when)h+='<div class="org-card-when">'+o.when+'</div>';
+            h+='<div class="org-card-btns"><a href="/antifraud-kz/quiz.html" class="org-card-btn btn-sm-apply">📝 Заявка</a>';
+            if(o.site)h+='<a href="https://'+o.site+'" target="_blank" class="org-card-btn btn-sm-site">🌐 Сайт</a>';
+            h+='</div></div>';
+        });
+        h+='</div>';
+    });
+    document.getElementById('orgListSection').innerHTML=h;
+}
+renderOrgs();
 </script>
-<script src="/antifraud-kz/assets/js/fakedata.js"></script>
 <script src="/antifraud-kz/assets/js/nav.js"></script>
 </body>
 </html>
