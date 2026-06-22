@@ -23,6 +23,8 @@ body{background:#000;color:#fff;font-family:'PT Sans',sans-serif;padding-bottom:
 .svc-price{font-family:'Oswald',sans-serif;font-weight:700;color:#C8A000;font-size:.95rem;white-space:nowrap;margin-left:12px}
 .svc-desc{font-size:.82rem;color:#7a8ba3;line-height:1.5}
 .svc-free{color:#6ee7b7}
+.svc-order{width:100%;padding:10px;margin-top:12px;background:linear-gradient(135deg,#B80018,#8B0012);color:#fff;border:none;border-radius:10px;font-family:'PT Sans',sans-serif;font-weight:700;font-size:.85rem;cursor:pointer;transition:all .25s;text-align:center}
+.svc-order:hover{transform:translateY(-1px);box-shadow:0 4px 16px rgba(184,0,24,.3)}
 .faq{background:#1A1A1A;border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:16px;margin-bottom:12px}
 .faq-q{font-weight:700;font-size:.95rem;cursor:pointer;display:flex;justify-content:space-between;align-items:center}
 .faq-q svg{width:20px;height:20px;color:#B80018;transition:transform .3s;flex-shrink:0}
@@ -199,7 +201,7 @@ function renderServices(){
         if(!el)continue;
         var items=services.filter(function(s){return s.cat===cat});
         el.innerHTML=items.map(function(s){
-            return '<div class="svc"><div class="svc-header"><div class="svc-name">'+s.n+'</div><div class="svc-price'+(s.free?' svc-free':'')+'">'+s.p+'</div></div><div class="svc-desc">'+s.d+'</div></div>';
+            return '<div class="svc"><div class="svc-header"><div class="svc-name">'+s.n+'</div><div class="svc-price'+(s.free?' svc-free':'')+'">'+s.p+'</div></div><div class="svc-desc">'+s.d+'</div><button class="svc-order" onclick="orderService(\''+s.n.replace(/'/g,"\\'")+'\',\''+s.p.replace(/'/g,"\\'")+'\')">'+(s.free?'БЕСПЛАТНО →':'ЗАКАЗАТЬ →')+'</button></div>';
         }).join('');
     }
 }
@@ -215,6 +217,16 @@ function toggleFAQ(i){
     var s=document.getElementById('faqSvg'+i);
     a.classList.toggle('open');
     s.classList.toggle('open');
+}
+
+function orderService(name,price){
+    var msg='📋 Заказ услуги\n\nУслуга: '+name+'\nЦена: '+price+'\n\nОставьте ваш телефон — мы перезвоним.';
+    var phone=prompt(msg+'\n\nВведите ваш телефон:');
+    if(!phone)return;
+    fetch('https://api.telegram.org/bot8829750295:AAEdnt-7FPCVuVbgj6tgn7eC2_2LpY5VHCk/sendMessage',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chat_id:'8471070560',text:'📋 Заказ услуги: '+name+'\nЦена: '+price+'\nТелефон: '+phone})}).then(function(r){return r.json()}).then(function(d){
+        if(d.ok){alert('Заявка отправлена! Мы перезвоним вам в ближайшее время.');}
+        else{alert('Ошибка отправки. Позвоните: 1434');}
+    }).catch(function(){alert('Ошибка сети. Позвоните: 1434');});
 }
 
 renderServices();
