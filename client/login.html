@@ -107,10 +107,10 @@ var allClients=[];
         var phone='+7 70'+String(10+Math.floor(Math.random()*90))+' '+String(Math.floor(Math.random()*900)+100)+' '+String(Math.floor(Math.random()*90)+10)+' '+String(Math.floor(Math.random()*90)+10);
         allClients.push({id:'AF-2026-'+num,name:name,city:city,status:status,amount:amount,iin:iin,phone:phone});
     }
-    // Load clients from admin panel
+    // Load clients from admin panel (localStorage)
     var adminClients=JSON.parse(localStorage.getItem('admin_clients')||'[]');
     adminClients.forEach(function(c){
-        if(!allClients.find(function(x){return x.iin===c.iin})){
+        if(!allClients.find(function(x){return x.iin===c.iin||x.id===c.id})){
             allClients.push({id:c.id,name:c.name,city:c.city||'',status:c.status||'new',amount:c.amount||'',iin:c.iin||'',phone:c.phone||''});
         }
     });

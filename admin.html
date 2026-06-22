@@ -156,6 +156,9 @@ function showSection(id,btn){
 function loadAll(){loadClients();loadApps();loadCases()}
 function loadClients(){
     var clients=JSON.parse(localStorage.getItem('admin_clients')||'[]');
+    renderClientsTable(clients);
+}
+function renderClientsTable(clients){
     document.getElementById('clientCount').textContent=clients.length;
     var h='';
     clients.forEach(function(c){
