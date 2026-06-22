@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>AI-советник — Антифрод Центр</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🧠</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=PT+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#B80018',gold:'#C8A000',dark:'#111111',darker:'#000000'},fontFamily:{heading:['Oswald','sans-serif'],body:['PT Sans','sans-serif']}}}}</script>
+<style>
+body{background:#000;color:#fff;font-family:'PT Sans',sans-serif;padding-bottom:80px}
+.adv{max-width:800px;margin:0 auto;padding:clamp(20px,5vw,40px) clamp(16px,4vw,16px)}
+.adv h1{font-size:clamp(1.6rem,4vw,2.2rem);font-weight:700;margin-bottom:8px;text-align:center}
+.adv>p{color:#7a8ba3;text-align:center;margin-bottom:24px;font-size:.92rem}
+/* Chat container */
+.chat-box{background:#1A1A1A;border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:20px;max-height:500px;overflow-y:auto;margin-bottom:16px}
+.chat-msg{margin-bottom:16px;display:flex;gap:10px}
+.chat-msg.user{flex-direction:row-reverse}
+.chat-avatar{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.9rem;flex-shrink:0}
+.chat-bubble{max-width:85%;padding:12px 16px;border-radius:12px;font-size:.88rem;line-height:1.6}
+.chat-bubble.ai{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.06)}
+.chat-bubble.user{background:rgba(184,0,24,.15);border:1px solid rgba(184,0,24,.2)}
+.chat-date{font-size:.7rem;color:#7a8ba3;margin-top:4px}
+/* Input */
+.chat-input-wrap{display:flex;gap:8px}
+.chat-input{flex:1;padding:14px 16px;background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.08);border-radius:12px;color:#fff;font-size:.9rem;font-family:'PT Sans',sans-serif}
+.chat-input:focus{outline:none;border-color:rgba(184,0,24,.3)}
+.chat-send{padding:14px 20px;background:linear-gradient(135deg,#B80018,#8B0012);color:#fff;border:none;border-radius:12px;font-weight:700;cursor:pointer;transition:all .2s}
+.chat-send:hover{transform:translateY(-1px)}
+/* Quick questions */
+.quick-qs{display:flex;flex-wrap:wrap;gap:8px;margin-bottom:16px}
+.quick-q{padding:8px 14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:20px;font-size:.82rem;color:#7a8ba3;cursor:pointer;transition:all .2s;font-family:'PT Sans',sans-serif}
+.quick-q:hover{border-color:rgba(184,0,24,.3);color:#fff}
+/* Recommendation box */
+.rec-box{background:rgba(184,0,24,.06);border:1px solid rgba(184,0,24,.2);border-radius:12px;padding:14px;margin-top:12px}
+.rec-title{font-weight:700;font-size:.88rem;color:#fff;margin-bottom:6px}
+.rec-text{font-size:.82rem;color:#e8ecf4;line-height:1.6}
+.rec-action{display:inline-block;margin-top:8px;padding:6px 14px;background:linear-gradient(135deg,#B80018,#8B0012);color:#fff;border-radius:8px;font-size:.78rem;font-weight:600;cursor:pointer;border:none;text-decoration:none;transition:all .2s}
+.rec-action:hover{transform:translateY(-1px);color:#fff;text-decoration:none}
+/* Situation panel */
+.sit-panel{background:#1A1A1A;border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:16px;margin-bottom:16px}
+.sit-row{display:flex;justify-content:space-between;padding:6px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:.85rem}
+.sit-row:last-child{border-bottom:none}
+.sit-label{color:#7a8ba3}
+.sit-value{color:#fff;font-weight:600}
+</style>
+</head>
+<body>
+<div class="adv" style="padding-top:100px">
+    <h1>🧠 AI-советник</h1>
+    <p>Персональный помощник по вашей ситуации. Ответит на вопросы и подскажет план действий.</p>
+
+    <!-- Quick Questions -->
+    <div class="quick-qs">
+        <button class="quick-q" onclick="askQ('Что делать если просят доплатить?')">💰 Просят доплатить</button>
+        <button class="quick-q" onclick="askQ('Как вернуть деньги через банк?')">🏦 Чарджбэк</button>
+        <button class="quick-q" onclick="askQ('Куда обращаться при мошенничестве?')">🏛️ Куда обращаться</button>
+        <button class="quick-q" onclick="askQ('Какие документы нужны?')">📄 Документы</button>
+        <button class="quick-q" onclick="askQ('Сколько времени на возврат?')">⏰ Сроки</button>
+        <button class="quick-q" onclick="askQ('Можно ли вернуть крипту?')">₿ Крипта</button>
+    </div>
+
+    <!-- Chat -->
+    <div class="chat-box" id="chatBox">
+        <div class="chat-msg ai">
+            <div class="chat-avatar" style="background:rgba(184,0,24,.2)">🧠</div>
+            <div class="chat-bubble ai">
+                Здравствуйте! Я AI-советник Антифрод Центра.<br><br>
+                Задайте вопрос или выберите тему выше — я помогу разобраться в ситуации и подскажу план действий.
+            </div>
+        </div>
+    </div>
+
+    <!-- Input -->
+    <div class="chat-input-wrap">
+        <input type="text" class="chat-input" id="chatInput" placeholder="Задайте вопрос..." onkeydown="if(event.key==='Enter')sendMsg()">
+        <button class="chat-send" onclick="sendMsg()">→</button>
+    </div>
+</div>
+
+<script>
+var knowledge = {
+    'доплатить': {
+        answer: 'ВАЖНО: Если вам просят доплатить «налог», «комиссию» или «страховку» чтобы вернуть деньги — это ПОВТОРНОЕ мошенничество.',
+        recommendation: 'НЕ ПЕРЕВОДИТЕ ДЕНЬГИ. Это классическая схема: сначала обещают доход, потом блокируют вывод и требуют доплату. Каждая «комиссия» — это новый шаг мошенничества.',
+        action: 'Немедленно подайте заявку через нашу форму. Мы поможем заблокировать операции и начать процесс возврата.',
+        link: '/antifraud-kz/quiz.html'
+    },
+    'чарджбэк': {
+        answer: 'Чарджбэк — это процесс оспаривания платёжной транзакции через банк. Если вы перевели деньги мошенникам, банк может вернуть их.',
+        recommendation: 'Срок подачи заявления — от 30 до 120 дней с момента транзакции. Чем быстрее обратитесь, тем выше шансы.',
+        action: 'Мы поможем подготовить документы и подать заявление в банк. Средний срок возврата — 30-90 дней.',
+        link: '/antifraud-kz/contacts.html'
+    },
+    'обращаться': {
+        answer: 'При мошенничестве нужно обращаться в несколько инстанций одновременно:',
+        recommendation: '1. Банк (для чарджбэка)\n2. АРРФР — тел. 1434\n3. Полиция — тел. 102\n4. Центр киберпреступности — тел. 115',
+        action: 'Мы поможем подготовить все заявления и подать их за вас.',
+        link: '/antifraud-kz/quiz.html'
+    },
+    'документы': {
+        answer: 'Для начала работы нам нужны: паспорт, договор с организацией (если есть), переписки, чеки об оплате, скриншоты сайтов.',
+        recommendation: 'Не удаляйте ничего! Даже переписка в WhatsApp может служить доказательством.',
+        action: 'Соберите все документы и оставьте заявку — мы поможем оформить жалобы.',
+        link: '/antifraud-kz/documents.html'
+    },
+    'сроки': {
+        answer: 'Сроки зависят от способа возврата:\n• Чарджбэк: 30-90 дней\n• АРРФР: от 30 дней\n• Суд: от 2 месяцев',
+        recommendation: 'Чем быстрее обратитесь, тем выше шансы. В первые 72 часа — максимальные шансы.',
+        action: 'Не теряйте время — оставьте заявку прямо сейчас.',
+        link: '/antifraud-kz/quiz.html'
+    },
+    'крипта': {
+        answer: 'Возврат криптовалюты возможен, но сложнее传统ных платежей. Нужно отследить транзакции и обратиться на биржу.',
+        recommendation: 'Сохраните адрес кошелька и все транзакции. Мы работаем с Etherscan, BSCScan и другими сервисами.',
+        action: 'Опишите ситуацию — мы оценим шансы на возврат.',
+        link: '/antifraud-kz/quiz.html'
+    }
+};
+
+function askQ(q) {
+    addMsg('user', q);
+    setTimeout(function() {
+        var key = Object.keys(knowledge).find(function(k) { return q.toLowerCase().indexOf(k) >= 0; });
+        if (key) {
+            var k = knowledge[key];
+            var response = k.answer + '\n\n📋 <strong>Рекомендация:</strong>\n' + k.recommendation;
+            addMsg('ai', response, k.action, k.link);
+        } else {
+            addMsg('ai', 'Задайте более конкретный вопрос или выберите тему выше. Я могу помочь с вопросами о чарджбэке, документах, сроках возврата и работе с госорганами.', 'Оставить заявку', '/antifraud-kz/quiz.html');
+        }
+    }, 800);
+}
+
+function sendMsg() {
+    var input = document.getElementById('chatInput');
+    var q = input.value.trim();
+    if (!q) return;
+    input.value = '';
+    askQ(q);
+}
+
+function addMsg(type, text, action, link) {
+    var chatBox = document.getElementById('chatBox');
+    var avatar = type === 'ai' ? '🧠' : '👤';
+    var bubbleClass = type === 'ai' ? 'ai' : 'user';
+    var html = '<div class="chat-msg ' + type + '">';
+    html += '<div class="chat-avatar" style="background:' + (type === 'ai' ? 'rgba(184,0,24,.2)' : 'rgba(200,160,0,.2)') + '">' + avatar + '</div>';
+    html += '<div><div class="chat-bubble ' + bubbleClass + '">' + text.replace(/\n/g, '<br>') + '</div>';
+    if (action && link) {
+        html += '<a href="' + link + '" class="rec-action" style="margin-top:8px;display:inline-block">' + action + ' →</a>';
+    }
+    html += '</div></div>';
+    chatBox.innerHTML += html;
+    chatBox.scrollTop = chatBox.scrollHeight;
+}
+</script>
+<script src="/antifraud-kz/assets/js/nav.js"></script>
+</body>
+</html>
