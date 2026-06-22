@@ -30,12 +30,11 @@
         <!-- Desktop nav row -->
         <nav class="hidden md:flex items-center gap-1 pb-2 -mt-1 overflow-x-auto">
             <a href="/antifraud-kz/" class="nav-link px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-white/5 transition" data-page="home">Главная</a>
-            <a href="/antifraud-kz/organizations.html" class="nav-link px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-white/5 transition" data-page="check">Проверка</a>
+            <a href="/antifraud-kz/organizations.html" class="nav-link px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-white/5 transition" data-page="organizations">Реестр</a>
             <a href="/antifraud-kz/quiz.html" class="nav-link px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-white/5 transition" data-page="quiz">Заявка</a>
             <a href="/antifraud-kz/services.html" class="nav-link px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-white/5 transition" data-page="services">Услуги</a>
             <a href="/antifraud-kz/team.html" class="nav-link px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-white/5 transition" data-page="team">Команда</a>
             <a href="/antifraud-kz/cases.html" class="nav-link px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-white/5 transition" data-page="cases">Кейсы</a>
-            <a href="/antifraud-kz/organizations.html" class="nav-link px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-white/5 transition" data-page="organizations">Реестр</a>
             <a href="/antifraud-kz/contacts.html" class="nav-link px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-white/5 transition" data-page="contacts">Контакты</a>
             <a href="/antifraud-kz/client/login.html" class="nav-link px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-white/5 transition" data-page="client">Кабинет</a>
             <a href="/antifraud-kz/admin.html" class="nav-link px-3 py-1.5 rounded-lg text-sm font-medium hover:bg-white/5 transition text-gray-500" data-page="admin">⚙</a>
@@ -45,12 +44,11 @@
     <div id="mobileMenu" class="hidden md:hidden bg-dark border-t border-gray-800">
         <nav class="container mx-auto px-4 py-3 flex flex-col">
             <a href="/antifraud-kz/" class="py-3 px-3 hover:bg-white/5 rounded-lg transition nav-link" data-page="home">🏠 Главная</a>
-            <a href="/antifraud-kz/organizations.html" class="py-3 px-3 hover:bg-white/5 rounded-lg transition nav-link" data-page="check">🏛️ Реестр организаций</a>
+            <a href="/antifraud-kz/organizations.html" class="py-3 px-3 hover:bg-white/5 rounded-lg transition nav-link" data-page="organizations">🏛️ Реестр организаций</a>
             <a href="/antifraud-kz/quiz.html" class="py-3 px-3 hover:bg-white/5 rounded-lg transition nav-link" data-page="quiz">📝 Оставить заявку</a>
             <a href="/antifraud-kz/services.html" class="py-3 px-3 hover:bg-white/5 rounded-lg transition nav-link" data-page="services">📋 Услуги и цены</a>
             <a href="/antifraud-kz/team.html" class="py-3 px-3 hover:bg-white/5 rounded-lg transition nav-link" data-page="team">👨‍⚖️ Команда</a>
             <a href="/antifraud-kz/cases.html" class="py-3 px-3 hover:bg-white/5 rounded-lg transition nav-link" data-page="cases">✨ Кейсы</a>
-            <a href="/antifraud-kz/organizations.html" class="py-3 px-3 hover:bg-white/5 rounded-lg transition nav-link" data-page="organizations">🏛️ Реестр организаций</a>
             <a href="/antifraud-kz/contacts.html" class="py-3 px-3 hover:bg-white/5 rounded-lg transition nav-link" data-page="contacts">✉️ Контакты</a>
             <a href="/antifraud-kz/client/login.html" class="py-3 px-3 hover:bg-white/5 rounded-lg transition nav-link" data-page="client">🔐 Личный кабинет</a>
             <a href="/antifraud-kz/admin.html" class="py-3 px-3 hover:bg-white/5 rounded-lg transition nav-link text-gray-500" data-page="admin">⚙ Админ</a>
