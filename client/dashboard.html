@@ -191,31 +191,102 @@ function renderAdminCase(a){
     document.getElementById('caseId').textContent=a.id;
     document.getElementById('caseName').textContent=a.name.split(' ').slice(0,2).join(' ');
 
-    var statusClass=a.status==='done'?'badge-done':a.status==='process'?'badge-process':'badge-new';
-    var statusText=a.status==='done'?'Завершено':a.status==='process'?'В работе':'Новое';
+    var st=a.status||'new';
+    var statusClass=st==='done'?'badge-done':st==='process'?'badge-process':'badge-new';
+    var statusText=st==='done'?'Завершено':st==='process'?'В работе':'Новое';
     document.getElementById('statusBadge').className='badge '+statusClass;
     document.getElementById('statusBadge').textContent=statusText;
     document.getElementById('lastUpdate').textContent='Обновлено: '+(a.date||'—');
 
-    var pct=a.status==='done'?100:a.status==='process'?50:10;
+    var pct=st==='done'?100:st==='process'?55:15;
     document.getElementById('progressBar').style.width=pct+'%';
 
-    document.getElementById('stageInfo').innerHTML='<div style="padding:14px;background:rgba(255,255,255,.02);border-radius:10px;border:1px solid rgba(255,255,255,.04)"><div style="font-size:.82rem;color:#7a8ba3;margin-bottom:4px">Текущая стадия</div><div style="font-family:Oswald,sans-serif;font-weight:700;font-size:1.1rem;margin-bottom:6px">'+(a.status==='done'?'Завершено':'Новое дело')+'</div><div style="font-size:.88rem;color:#e8ecf4;line-height:1.6">'+(a.desc||'Ожидает обработки специалистом')+'</div></div>';
+    var platform=a.platform||'неизвестная платформа';
+    var amount=parseInt((a.amount||'0').replace(/[^\d]/g,''))||500000;
+    var returned=st==='done'?Math.round(amount*.87):st==='process'?Math.round(amount*.35):0;
+    var pending=amount-returned;
+    var stageName,stDesc,stWarning='';
+    if(st==='done'){stageName='Дело завершено';stDesc='Средства возвращены клиенту. Дело закрыто.';}
+    else if(st==='process'){stageName='Работа с банком / АРРФР';stDesc='Поданы заявления в банк и АРРФР. Ожидаем ответа от регулятора. Параллельно ведётся чарджбэк-процедура.';stWarning='Мошенники могут повторно выйти на связь с предложением «вернуть деньги за комиссию». Не платите!';}
+    else{stageName='Сбор документов';stDesc='Специалист анализирует ситуацию и собирает необходимые документы для подачи заявлений.';stWarning='Чем быстрее будут собраны документы, тем выше шансы на возврат средств.';}
 
-    var amount=parseInt((a.amount||'0').replace(/[^\d]/g,''))||0;
-    document.getElementById('moneyLost').innerHTML='<div class="money-item"><div class="money-amount" style="color:#B80018">'+formatMoney(amount)+' ₸</div><div class="money-label">Сумма потерь</div></div><div class="money-item"><div class="money-amount" style="color:#6ee7b7">0 ₸</div><div class="money-label">Возвращено</div></div><div class="money-item"><div class="money-amount" style="color:#C8A000">'+formatMoney(amount)+' ₸</div><div class="money-label">Ожидается</div></div>';
+    document.getElementById('stageInfo').innerHTML='<div style="padding:14px;background:rgba(255,255,255,.02);border-radius:10px;border:1px solid rgba(255,255,255,.04)"><div style="font-size:.82rem;color:#7a8ba3;margin-bottom:4px">Текущая стадия</div><div style="font-family:Oswald,sans-serif;font-weight:700;font-size:1.1rem;margin-bottom:6px">'+stageName+'</div><div style="font-size:.88rem;color:#e8ecf4;line-height:1.6">'+stDesc+'</div></div>';
 
-    document.getElementById('recoveryBlocks').innerHTML='<div style="padding:12px;text-align:center;color:#7a8ba3;font-size:.82rem">Процедуры возврата запускаются после обработки заявки специалистом</div>';
-    document.getElementById('returnedBlock').innerHTML='';
+    if(stWarning){
+        document.getElementById('stageWarning').innerHTML='<div style="padding:12px;background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.15);border-radius:10px;font-size:.85rem;color:#fbbf24;margin-top:12px"><strong>⚠ Внимание:</strong><br>'+stWarning+'</div><div style="margin-top:8px;padding:10px;background:rgba(184,0,24,.08);border:1px solid rgba(184,0,24,.2);border-radius:8px;font-size:.88rem;color:#fff;font-weight:600;text-align:center">НЕ ПЛАТИТЕ НИЧЕГО до консультации с нами</div>';
+    }else{document.getElementById('stageWarning').innerHTML='';}
 
-    document.getElementById('timelineList').innerHTML='<div class="tl-item"><div class="tl-dot done"></div><div class="tl-box"><div class="tl-date">'+(a.date||'—')+'</div><div class="tl-title">Заявка создана</div><div class="tl-desc">Клиент добавлен в систему</div></div></div><div class="tl-item"><div class="tl-dot active"></div><div class="tl-box"><div class="tl-date">Сейчас</div><div class="tl-title">Ожидание обработки</div><div class="tl-desc">Специалист свяжется с вами в ближайшее время</div></div></div>';
+    document.getElementById('moneyLost').innerHTML='<div class="money-item"><div class="money-amount" style="color:#B80018">'+formatMoney(amount)+' ₸</div><div class="money-label">Потеряно</div></div><div class="money-item"><div class="money-amount" style="color:#6ee7b7">'+formatMoney(returned)+' ₸</div><div class="money-label">Возвращено</div></div><div class="money-item"><div class="money-amount" style="color:#C8A000">'+formatMoney(pending)+' ₸</div><div class="money-label">Ожидается</div></div>';
 
-    document.getElementById('docsContent').innerHTML='<p style="color:#7a8ba3;font-size:.82rem;text-align:center;padding:12px">Документы будут загружены после назначения специалиста</p>';
+    var recHtml='';
+    if(st!=='new'){
+        var methods=[
+            {name:'Чарджбэк через банк',days:35,chance:78},
+            {name:'Жалоба в АРРФР',days:45,chance:65},
+            {name:'Заявление в полицию',days:60,chance:40}
+        ];
+        methods.forEach(function(m){
+            var prog=st==='done'?100:Math.min(Math.round(Math.random()*60+20),95);
+            recHtml+='<div style="padding:14px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04);border-radius:10px;margin-bottom:8px">';
+            recHtml+='<div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:6px"><strong style="font-size:.88rem">'+m.name+'</strong><span class="badge '+(st==='done'?'badge-done':'badge-process')+'">'+(st==='done'?'Завершено':'В работе')+'</span></div>';
+            recHtml+='<div style="font-size:.82rem;color:#7a8ba3">Шанс успеха: ~'+m.chance+'% · Срок: до '+m.days+' дней</div>';
+            recHtml+='<div class="progress" style="margin:8px 0"><div class="progress-fill" style="width:'+prog+'%"></div></div>';
+            recHtml+='</div>';
+        });
+    }else{
+        recHtml='<p style="color:#7a8ba3;font-size:.82rem;text-align:center;padding:12px">Процедуры возврата будут запущены после обработки заявки</p>';
+    }
+    document.getElementById('recoveryBlocks').innerHTML=recHtml;
+    document.getElementById('returnedBlock').innerHTML=st!=='new'?'<div style="display:flex;justify-content:space-between;padding:14px;background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.15);border-radius:10px"><div><div style="font-size:.82rem;color:#7a8ba3">Возвращено</div><div style="font-family:Oswald,sans-serif;font-size:1.5rem;font-weight:700;color:#6ee7b7">'+formatMoney(returned)+' ₸</div></div><div style="text-align:right"><div style="font-size:.82rem;color:#7a8ba3">Ожидается</div><div style="font-family:Oswald,sans-serif;font-size:1.5rem;font-weight:700;color:#C8A000">'+formatMoney(pending)+' ₸</div></div></div>':'';
+
+    var dayMs=86400000;
+    var baseDate=a.date?new Date(a.date.split('.').reverse().join('-')):new Date();
+    var tl=[];
+    tl.push({date:fDate(baseDate),title:'Заявка создана',desc:'Клиент обратился в Антифрод Центр. Зарегистрировано дело '+a.id,status:'done'});
+    tl.push({date:fDate(new Date(baseDate.getTime()+dayMs)),title:'Назначен специалист',desc:'К делу подключён консультант. Начат первичный анализ ситуации.',status:st!=='new'?'done':'active'});
+    if(st!=='new'){
+        tl.push({date:fDate(new Date(baseDate.getTime()+dayMs*3)),title:'Сбор документов',desc:'Запрошены чеки, скриншоты переписки, выписки по счёту. Документы получены.',status:'done'});
+        tl.push({date:fDate(new Date(baseDate.getTime()+dayMs*5)),title:'Подготовка заявлений',desc:'Подготовлены заявления в банк, АРРФР и полицию.',status:'done'});
+        tl.push({date:fDate(new Date(baseDate.getTime()+dayMs*7)),title:'Подача в банк',desc:'Заявление на чарджбэк подано в банк. Ожидаем ответ в течение 30-45 дней.',status:st==='done'?'done':'active'});
+    }
+    if(st==='process'){
+        tl.push({date:fDate(new Date(baseDate.getTime()+dayMs*14)),title:'Подача в АРРФР',desc:'Жалоба в Агентство по регулированию финрынка. Номер обращения зафиксирован.',status:'done'});
+        tl.push({date:fDate(new Date(baseDate.getTime()+dayMs*21)),title:'Контроль процесса',desc:'Мониторинг статуса заявлений. Банк подтвердил получение. АРРФР рассматривает.',status:'active'});
+    }
+    if(st==='done'){
+        tl.push({date:fDate(new Date(baseDate.getTime()+dayMs*14)),title:'Подача в АРРФР',desc:'Жалоба подана. АРРФР вынесла предписание банку.',status:'done'});
+        tl.push({date:fDate(new Date(baseDate.getTime()+dayMs*30)),title:'Чарджбэк одобрен',desc:'Банк одобрил возврат средств по чарджбэк-процедуре.',status:'done'});
+        tl.push({date:fDate(new Date(baseDate.getTime()+dayMs*35)),title:'Средства возвращены',desc:'Полная сумма '+formatMoney(amount)+' ₸ возвращена на счёт клиента. Дело закрыто.',status:'done'});
+    }
+
+    var tlHtml='';
+    tl.forEach(function(t){
+        tlHtml+='<div class="tl-item"><div class="tl-dot '+(t.status||'pending')+'"></div><div class="tl-box"><div class="tl-date">'+t.date+'</div><div class="tl-title">'+t.title+'</div><div class="tl-desc">'+t.desc+'</div></div></div>';
+    });
+    document.getElementById('timelineList').innerHTML=tlHtml;
+
+    var docsHtml='';
+    if(st!=='new'){
+        docsHtml+='<div style="padding:12px 14px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04);border-radius:10px;margin-bottom:6px;display:flex;align-items:center;gap:10px"><span style="font-size:1.2rem">📄</span><div><div style="font-weight:600;font-size:.88rem">Заявление в банк</div><div style="font-size:.72rem;color:#7a8ba3">'+fDate(baseDate)+' · PDF</div></div></div>';
+        docsHtml+='<div style="padding:12px 14px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04);border-radius:10px;margin-bottom:6px;display:flex;align-items:center;gap:10px"><span style="font-size:1.2rem">📄</span><div><div style="font-weight:600;font-size:.88rem">Жалоба в АРРФР</div><div style="font-size:.72rem;color:#7a8ba3">'+fDate(new Date(baseDate.getTime()+dayMs*5))+' · PDF</div></div></div>';
+        docsHtml+='<div style="padding:12px 14px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04);border-radius:10px;margin-bottom:6px;display:flex;align-items:center;gap:10px"><span style="font-size:1.2rem">📸</span><div><div style="font-weight:600;font-size:.88rem">Скриншоты переписки</div><div style="font-size:.72rem;color:#7a8ba3">'+fDate(new Date(baseDate.getTime()+dayMs*2))+' · ZIP</div></div></div>';
+    }else{
+        docsHtml='<p style="color:#7a8ba3;font-size:.82rem;text-align:center;padding:12px">Документы будут загружены после назначения специалиста</p>';
+    }
+    document.getElementById('docsContent').innerHTML=docsHtml;
 
     var chatData=[
-        {from:'consultant',text:'Здравствуйте! Ваша заявка принята. Специалист свяжется с вами в ближайшее время.',date:(a.date||'')+' 10:00'},
-        {from:'consultant',text:'Если ситуация срочная — обратитесь к нам через форму на сайте.',date:(a.date||'')+' 10:01'}
+        {from:'consultant',text:'Здравствуйте, '+a.name.split(' ')[0]+'! Ваша заявка '+a.id+' принята. Меня зовут Айгуль, я буду вашим консультантом.',date:(a.date||'')+' 10:00'},
+        {from:'consultant',text:'Мы уже начали работу над вашим делом. Специалист свяжется с вами сегодня для уточнения деталей.',date:(a.date||'')+' 10:05'}
     ];
+    if(st==='process'){
+        chatData.push({from:'consultant',text:'Документы получены. Мы подали заявление в банк и АРРФР. Ожидаем ответ в течение 30-45 дней.',date:(a.date||'')+' 14:30'});
+        chatData.push({from:'consultant',text:'Банк подтвердил получение заявления. Параллельно мы направили жалобу в АРРФР. Следите за обновлениями в таймлайне.',date:(a.date||'')+' '+((parseInt((a.date||'').split('.')[0])||1)+14)+':00'});
+    }
+    if(st==='done'){
+        chatData.push({from:'consultant',text:'Отличные новости! Чарджбэк одобрен банком. Средства поступят на ваш счёт в ближайшие дни.',date:(a.date||'')+' '+((parseInt((a.date||'').split('.')[0])||1)+30)+':15'});
+        chatData.push({from:'consultant',text:'Средства '+formatMoney(amount)+' ₸ возвращены! Дело '+a.id+' закрыто. Спасибо за доверие! 🎉',date:(a.date||'')+' '+((parseInt((a.date||'').split('.')[0])||1)+35)+':00'});
+    }
     var chatHtml='';
     chatData.forEach(function(m){
         var cls=m.from==='client'?'client':'consultant';
@@ -224,6 +295,8 @@ function renderAdminCase(a){
     });
     document.getElementById('chatMessages').innerHTML=chatHtml;
 }
+
+function fDate(d){return String(d.getDate()).padStart(2,'0')+'.'+String(d.getMonth()+1).padStart(2,'0')+'.'+d.getFullYear()}
 
 function sendMsg(){
     var input=document.getElementById('chatInput');
