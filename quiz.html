@@ -157,6 +157,14 @@ body{background:#000;padding-bottom:70px}
         <button class="qz-back" onclick="go(7)">← Назад</button>
     </div>
 
+    <!-- STEP 9: Send -->
+    <div class="qz-step" id="s9">
+        <div class="qz-q">Всё готово! Отправьте заявку</div>
+        <p style="color:#7a8ba3;font-size:.88rem;margin-bottom:16px;line-height:1.6">Мы получим ваши данные и свяжемся с вами для бесплатной консультации</p>
+        <button class="qz-btn" onclick="send()">📨 ОТПРАВИТЬ ЗАЯВКУ</button>
+        <button class="qz-back" onclick="go(8)">← Назад</button>
+    </div>
+
     <!-- LOADER -->
     <div class="qz-loader" id="loader">
         <div class="spinner"></div>
@@ -191,9 +199,8 @@ function set(k,v,next){d[k]=v;go(next)}
 function go(n){
     document.querySelectorAll('.qz-step').forEach(function(s){s.classList.remove('active')});
     document.getElementById('s'+n).classList.add('active');
-    document.getElementById('bar').style.width=((n-1)/8*100)+'%';
+    document.getElementById('bar').style.width=((n)/9*100)+'%';
     window.scrollTo({top:0,behavior:'smooth'});
-    if(n===9)send();
 }
 function formatPhone(el){
     var v=el.value.replace(/[^0-9]/g,'');
