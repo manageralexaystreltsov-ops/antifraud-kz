@@ -110,9 +110,7 @@ var allClients=[];
     // Load clients from admin panel (localStorage)
     var adminClients=JSON.parse(localStorage.getItem('admin_clients')||'[]');
     adminClients.forEach(function(c){
-        if(!allClients.find(function(x){return x.iin===c.iin||x.id===c.id})){
-            allClients.push({id:c.id,name:c.name,city:c.city||'',status:c.status||'new',amount:c.amount||'',iin:c.iin||'',phone:c.phone||''});
-        }
+        allClients.push({id:c.id,name:c.name,city:c.city||'',status:c.status||'new',amount:c.amount||'',iin:c.iin||'',phone:c.phone||'',_admin:true});
     });
     renderClients(allClients);
 })();
@@ -120,14 +118,30 @@ var allClients=[];
 function renderClients(list){
     document.getElementById('clientCount').textContent='Показано '+list.length+' из '+allClients.length+' клиентов';
     var html='';
-    list.slice(0,50).forEach(function(c){
-        var sc=c.status==='done'?'s-done':'s-process';
-        var sl=c.status==='done'?'Завершено':'В работе';
-        html+='<div class="client-item" onclick="loginAs(\''+c.iin+'\')">';
-        html+='<div><div class="client-name">'+c.name+'</div><div class="client-meta">'+c.id+' · '+c.city+' · '+c.amount+'</div></div>';
-        html+='<span class="client-status '+sc+'">'+sl+'</span>';
-        html+='</div>';
-    });
+    var adminList=list.filter(function(c){return c._admin});
+    var fakeList=list.filter(function(c){return !c._admin});
+    if(adminList.length){
+        html+='<div style="padding:10px 16px;font-size:.78rem;color:#C8A000;font-weight:700;border-bottom:1px solid rgba(200,160,0,.2);background:rgba(200,160,0,.05)">ВАШИ РЕАЛЬНЫЕ КЛИЕНТЫ ('+adminList.length+')</div>';
+        adminList.forEach(function(c){
+            var sc=c.status==='done'?'s-done':'s-process';
+            var sl=c.status==='done'?'Завершено':'В работе';
+            html+='<div class="client-item" style="background:rgba(200,160,0,.04)" onclick="loginAs(\''+c.iin+'\')">';
+            html+='<div><div class="client-name">'+c.name+'</div><div class="client-meta">'+c.id+' · '+(c.city||'')+' · '+c.amount+'</div></div>';
+            html+='<span class="client-status '+sc+'">'+sl+'</span>';
+            html+='</div>';
+        });
+    }
+    if(fakeList.length){
+        if(adminList.length) html+='<div style="padding:10px 16px;font-size:.78rem;color:#7a8ba3;border-bottom:1px solid rgba(255,255,255,.04)">Демо-клиенты</div>';
+        fakeList.slice(0,50).forEach(function(c){
+            var sc=c.status==='done'?'s-done':'s-process';
+            var sl=c.status==='done'?'Завершено':'В работе';
+            html+='<div class="client-item" onclick="loginAs(\''+c.iin+'\')">';
+            html+='<div><div class="client-name">'+c.name+'</div><div class="client-meta">'+c.id+' · '+c.city+' · '+c.amount+'</div></div>';
+            html+='<span class="client-status '+sc+'">'+sl+'</span>';
+            html+='</div>';
+        });
+    }
     document.getElementById('clientItems').innerHTML=html;
 }
 
@@ -154,7 +168,7 @@ function switchTab(tab,btn){
 }
 
 function loginAs(iin){
-    var c=allClients.find(function(x){return x.iin===iin});
+    var c=allClients.find(function(x){return x.iin===iin&&(x._admin||true)});
     if(c){
         localStorage.setItem('currentCase',JSON.stringify({id:c.id,name:c.name,phone:c.phone}));
         window.location.href='/antifraud-kz/client/dashboard.html?id='+c.id;
@@ -167,12 +181,12 @@ function findCase(){
     else if(currentTab==='case')key=document.getElementById('caseInput').value.trim().toUpperCase();
     else key=document.getElementById('phoneInput').value.trim();
     if(!key){document.getElementById('loginError').textContent='Введите данные';document.getElementById('loginError').style.display='block';return}
-    var found=allClients.find(function(c){return c.iin===key||c.id===key||c.phone===key});
+    var found=allClients.find(function(c){return c._admin&&(c.iin===key||c.id===key||c.phone===key)});
+    if(!found) found=allClients.find(function(c){return c.iin===key||c.id===key||c.phone===key});
     if(!found){
-        var num=String(Math.floor(Math.random()*1000)+1).padStart(4,'0');
-        var fn=['Абай','Мария','Даулет','Асель','Серик'][Math.floor(Math.random()*5)];
-        var ln=['Кажибаев','Серикова','Нурланов','Маратова','Алибеков'][Math.floor(Math.random()*5)];
-        found={id:'AF-2026-'+num,name:fn+' '+ln,phone:'+7 701 234 56 78'};
+        document.getElementById('loginError').textContent='Дело не найдено. Проверьте данные или оставьте заявку.';
+        document.getElementById('loginError').style.display='block';
+        return;
     }
     localStorage.setItem('currentCase',JSON.stringify({id:found.id,name:found.name,phone:found.phone}));
     window.location.href='/antifraud-kz/client/dashboard.html?id='+found.id;
