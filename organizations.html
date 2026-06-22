@@ -4,165 +4,235 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
 <title>Реестр организаций — Антифрод Центр Казахстан</title>
-<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🏛️</text></svg>">
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+<meta name="description" content="Реестр проверенных и мошеннических организаций Казахстана. Поиск по названию, ИНН или сфере деятельности.">
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📋</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=PT+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <script>tailwind.config={theme:{extend:{colors:{primary:'#B80018',gold:'#C8A000',dark:'#1A1A1A',darker:'#000000'},fontFamily:{heading:['Oswald','sans-serif'],body:['PT Sans','sans-serif']}}}}</script>
 <link rel="stylesheet" href="/antifraud-kz/assets/css/styles.css">
 <style>
 body{background:#000;color:#fff;font-family:'PT Sans',sans-serif;padding-bottom:80px}
-.og{max-width:900px;margin:0 auto;padding:clamp(20px,5vw,40px) clamp(16px,4vw,16px)}
-.og h1{font-size:clamp(1.6rem,4vw,2.2rem);font-weight:700;margin-bottom:6px;text-align:center}
-.og>p{color:#7a8ba3;margin-bottom:24px;font-size:.92rem;text-align:center;line-height:1.6}
-.search-box{position:relative;margin-bottom:24px}
-.search-box input{width:100%;padding:16px 20px;background:#1A1A1A;border:1px solid rgba(255,255,255,.06);border-radius:14px;font-size:1rem;color:#fff;font-family:'PT Sans',sans-serif}
-.search-box input::placeholder{color:#555}
-.search-box input:focus{outline:none;border-color:rgba(184,0,24,.3)}
-.cat-section{margin-bottom:32px}
-.cat-title{font-size:1rem;font-weight:700;margin-bottom:14px;display:flex;align-items:center;gap:10px;color:#fff}
-.cat-title::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(255,255,255,.08),transparent)}
-.org-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:10px}
-.org-card{background:#1A1A1A;border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:16px;transition:all .2s;cursor:pointer}
-.org-card:hover{border-color:rgba(184,0,24,.2);transform:translateY(-2px)}
-.org-name{font-weight:700;font-size:.92rem;color:#fff;margin-bottom:4px}
-.org-full{font-size:.78rem;color:#7a8ba3;margin-bottom:8px}
-.org-when{font-size:.75rem;color:#e8ecf4;line-height:1.5;padding:8px 10px;background:rgba(184,0,24,.04);border-radius:8px;border-left:2px solid rgba(184,0,24,.3);margin-bottom:10px}
-.org-btns{display:flex;gap:6px;flex-wrap:wrap}
-.org-btn{padding:7px 14px;border-radius:8px;font-size:.75rem;font-weight:600;text-decoration:none;transition:all .2s;cursor:pointer;border:none;font-family:'PT Sans',sans-serif}
-.btn-apply{background:linear-gradient(135deg,#B80018,#8B0012);color:#fff}
-.btn-apply:hover{box-shadow:0 4px 16px rgba(184,0,24,.3)}
+.rg{max-width:960px;margin:0 auto;padding:clamp(20px,5vw,40px) clamp(16px,4vw,16px)}
+.rg h1{font-size:clamp(1.8rem,5vw,2.5rem);font-weight:700;margin-bottom:8px;text-align:center}
+.rg>.subtitle{color:#7a8ba3;text-align:center;margin-bottom:32px;font-size:1.05rem;line-height:1.6}
+.search-wrap{position:relative;margin-bottom:24px}
+.search-wrap input{width:100%;padding:18px 20px 18px 52px;background:rgba(26,26,26,0.6);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.06);border-radius:16px;font-size:1rem;font-family:'PT Sans',sans-serif;color:#fff;transition:all .3s}
+.search-wrap input::placeholder{color:#555}
+.search-wrap input:focus{outline:none;border-color:rgba(184,0,24,.3);box-shadow:0 0 40px rgba(184,0,24,.06)}
+.search-wrap .search-icon{position:absolute;left:18px;top:50%;transform:translateY(-50%);color:#555;font-size:1.2rem;pointer-events:none}
+.stats-row{display:flex;gap:10px;margin-bottom:28px;flex-wrap:wrap}
+.stat-card{flex:1;min-width:120px;padding:16px 18px;background:rgba(26,26,26,0.5);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.06);border-radius:14px;text-align:center;transition:all .3s}
+.stat-card:hover{transform:translateY(-2px);border-color:rgba(255,255,255,.12)}
+.stat-count{font-family:'Oswald',sans-serif;font-size:clamp(1.4rem,3vw,1.8rem);font-weight:700;line-height:1}
+.stat-label{font-size:.75rem;color:#7a8ba3;margin-top:4px;text-transform:uppercase;letter-spacing:.5px}
+.stat-total .stat-count{color:#fff}
+.stat-clean .stat-count{color:#10b981}
+.stat-suspicious .stat-count{color:#fbbf24}
+.stat-black .stat-count{color:#B80018}
+.filters{display:flex;gap:8px;margin-bottom:20px;flex-wrap:wrap}
+.filter-btn{padding:8px 18px;border-radius:100px;font-size:.8rem;font-weight:600;font-family:'PT Sans',sans-serif;cursor:pointer;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.04);color:#7a8ba3;transition:all .2s}
+.filter-btn:hover{background:rgba(255,255,255,.08);color:#fff}
+.filter-btn.active{background:rgba(184,0,24,.15);border-color:rgba(184,0,24,.3);color:#fff}
+.org-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(280px,1fr));gap:12px}
+.org-card{background:rgba(26,26,26,0.5);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:20px;transition:all .4s cubic-bezier(0.16,1,0.3,1);position:relative;overflow:hidden}
+.org-card:hover{background:rgba(26,26,26,0.7);border-color:rgba(184,0,24,.2);transform:translateY(-4px);box-shadow:0 12px 48px rgba(0,0,0,.4)}
+.org-card-top{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:10px;gap:10px}
+.org-name{font-weight:700;font-size:1rem;color:#fff;line-height:1.3}
+.org-badges{display:flex;gap:6px;flex-shrink:0;flex-wrap:wrap;justify-content:flex-end}
+.badge-type{display:inline-block;padding:3px 10px;border-radius:100px;font-size:.68rem;font-weight:600;text-transform:uppercase;letter-spacing:.3px;background:rgba(255,255,255,.06);color:#7a8ba3;border:1px solid rgba(255,255,255,.06)}
+.badge-status{display:inline-block;padding:3px 10px;border-radius:100px;font-size:.68rem;font-weight:700;text-transform:uppercase;letter-spacing:.3px}
+.badge-clean{background:rgba(16,185,129,.12);color:#10b981;border:1px solid rgba(16,185,129,.2)}
+.badge-suspicious{background:rgba(251,191,36,.12);color:#fbbf24;border:1px solid rgba(251,191,36,.2)}
+.badge-black{background:rgba(184,0,24,.15);color:#B80018;border:1px solid rgba(184,0,24,.25);animation:statusPulse 2s ease-in-out infinite}
+@keyframes statusPulse{0%,100%{box-shadow:0 0 0 0 rgba(184,0,24,.2)}50%{box-shadow:0 0 12px 0 rgba(184,0,24,.15)}}
+.org-desc{font-size:.85rem;color:#9ca3af;line-height:1.5;margin-bottom:14px}
+.org-meta{display:flex;flex-direction:column;gap:6px;margin-bottom:14px}
+.org-meta-item{display:flex;align-items:center;gap:8px;font-size:.8rem;color:#7a8ba3}
+.org-meta-item a{color:#C8A000;text-decoration:none;transition:all .2s;border-bottom:1px solid transparent}
+.org-meta-item a:hover{color:#e6b800;border-bottom-color:rgba(200,160,0,.3)}
+.org-meta-item .meta-icon{width:16px;text-align:center;font-size:.85rem;flex-shrink:0}
+.org-actions{display:flex;gap:8px;flex-wrap:wrap}
+.org-btn{padding:10px 18px;border-radius:10px;font-size:.8rem;font-weight:600;text-decoration:none;transition:all .2s;cursor:pointer;border:none;font-family:'PT Sans',sans-serif;display:inline-flex;align-items:center;gap:6px}
+.btn-report{background:linear-gradient(135deg,#B80018,#8B0012);color:#fff}
+.btn-report:hover{box-shadow:0 4px 16px rgba(184,0,24,.3);transform:translateY(-1px)}
 .btn-site{background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:#e8ecf4}
 .btn-site:hover{background:rgba(255,255,255,.08);color:#fff}
-.modal{display:none;position:fixed;inset:0;background:rgba(0,0,0,.88);z-index:2000;align-items:flex-end;justify-content:center}
-.modal.on{display:flex}
-.modal-inner{width:100%;max-width:520px;max-height:88vh;overflow-y:auto;background:#1A1A1A;border:1px solid rgba(255,255,255,.06);border-radius:20px 20px 0 0;padding:24px 20px 32px;animation:slideUp .3s ease}
-@keyframes slideUp{from{transform:translateY(100%);opacity:0}to{transform:translateY(0);opacity:1}}
-.modal-close{position:absolute;top:16px;right:16px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);color:#7a8ba3;font-size:.85rem;cursor:pointer;padding:8px 10px;border-radius:8px}
-.modal-close:hover{color:#fff;border-color:rgba(255,255,255,.15)}
-.modal h2{font-size:1.1rem;font-weight:700;color:#fff;margin-bottom:4px;padding-right:30px}
-.modal .om-full{font-size:.82rem;color:#7a8ba3;margin-bottom:16px}
-.modal-section{margin-bottom:14px}
-.modal-section-title{font-size:.72rem;font-weight:700;color:#7a8ba3;text-transform:uppercase;letter-spacing:.5px;margin-bottom:6px}
-.modal-when{font-size:.88rem;color:#e8ecf4;line-height:1.6;padding:12px;background:rgba(255,255,255,.02);border-radius:8px;border-left:3px solid rgba(184,0,24,.3)}
-.modal-say{font-size:.88rem;color:#e8ecf4;line-height:1.6;padding:12px;background:rgba(16,185,129,.04);border-radius:8px;border-left:3px solid rgba(16,185,129,.3);font-style:italic}
-.modal-docs{display:flex;flex-wrap:wrap;gap:4px;margin-top:6px}
-.modal-doc{padding:3px 8px;background:rgba(255,255,255,.04);border-radius:4px;font-size:.75rem;color:#7a8ba3}
-.modal-form .fg{margin-bottom:10px}
-.modal-form label{display:block;font-size:.72rem;font-weight:600;color:#7a8ba3;margin-bottom:4px;text-transform:uppercase;letter-spacing:.5px}
-.modal-form input,.modal-form textarea{width:100%;padding:12px 14px;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.08);border-radius:10px;font-size:.88rem;font-family:'PT Sans',sans-serif;color:#fff;transition:all .2s}
-.modal-form input:focus,.modal-form textarea:focus{outline:none;border-color:rgba(184,0,24,.3);background:rgba(255,255,255,.05)}
-.modal-form textarea{height:60px;resize:vertical}
-.modal-form .fb{width:100%;padding:14px;background:linear-gradient(135deg,#B80018,#8B0012);color:#fff;border:none;border-radius:10px;font-size:.92rem;font-weight:700;cursor:pointer;font-family:'PT Sans',sans-serif;margin-top:4px;transition:all .2s}
-.modal-form .fb:hover{box-shadow:0 4px 16px rgba(184,0,24,.3)}
-.modal-sent{text-align:center;padding:20px 0;display:none}
-.modal-sent h3{color:#fff;margin-bottom:4px;font-size:1rem}
-.modal-sent p{color:#7a8ba3;font-size:.88rem}
-@media(max-width:500px){.org-grid{grid-template-columns:1fr}}
+.empty-state{text-align:center;padding:60px 20px;color:#7a8ba3}
+.empty-state .empty-icon{font-size:3rem;margin-bottom:12px}
+.empty-state h3{font-size:1.1rem;color:#fff;margin-bottom:6px}
+.empty-state p{font-size:.9rem}
+.cta-section{margin-top:48px;padding:40px;background:rgba(26,26,26,0.5);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.06);border-radius:20px;text-align:center}
+.cta-section h2{font-size:clamp(1.2rem,3vw,1.5rem);font-weight:700;margin-bottom:8px}
+.cta-section p{color:#7a8ba3;margin-bottom:20px;font-size:.95rem}
+.cta-btn{display:inline-flex;align-items:center;gap:10px;padding:16px 32px;background:linear-gradient(135deg,#B80018,#8B0012);color:#fff;border:none;border-radius:14px;font-family:'Oswald',sans-serif;font-weight:700;font-size:1rem;text-decoration:none;transition:all .3s}
+.cta-btn:hover{transform:translateY(-2px);box-shadow:0 8px 24px rgba(184,0,24,.3);color:#fff}
+.result-count{font-size:.82rem;color:#7a8ba3;margin-bottom:16px;text-align:center}
+@media(max-width:500px){.org-grid{grid-template-columns:1fr}.stats-row{flex-direction:column}.stat-card{min-width:auto}.filters{overflow-x:auto;flex-wrap:nowrap;padding-bottom:4px}}
 </style>
 </head>
 <body>
-<div class="og" style="padding-top:100px">
-    <h1 data-reveal>🏛️ Реестр организаций</h1>
-    <p data-reveal>Куда обращаться при мошенничестве. Выберите организацию и оставьте заявку.</p>
-    <div class="search-box"><input type="text" id="orgSearch" placeholder="Поиск организации..." oninput="filterOrgs()"></div>
-    <div id="orgList" data-stagger data-stagger-delay="60"></div>
+<div class="rg" style="padding-top:100px">
+  <h1 data-reveal>📋 Реестр организаций</h1>
+  <p class="subtitle" data-reveal>Проверенные компании, лицензированные банки, подозрительные и мошеннические организации Казахстана.</p>
+
+  <div class="search-wrap" data-reveal>
+    <span class="search-icon">🔍</span>
+    <input type="text" id="orgSearch" placeholder="Поиск по названию организации, ИНН или сфере..." oninput="filterOrgs()" autocomplete="off">
+  </div>
+
+  <div class="stats-row" id="statsRow" data-reveal>
+    <div class="stat-card stat-total">
+      <div class="stat-count" id="totalCount">0</div>
+      <div class="stat-label">Всего</div>
+    </div>
+    <div class="stat-card stat-clean">
+      <div class="stat-count" id="cleanCount">0</div>
+      <div class="stat-label">Безопасные</div>
+    </div>
+    <div class="stat-card stat-suspicious">
+      <div class="stat-count" id="suspiciousCount">0</div>
+      <div class="stat-label">Подозрительные</div>
+    </div>
+    <div class="stat-card stat-black">
+      <div class="stat-count" id="blackCount">0</div>
+      <div class="stat-label">Чёрный список</div>
+    </div>
+  </div>
+
+  <div class="filters" data-reveal>
+    <button class="filter-btn active" data-filter="all" onclick="setFilter('all')">Все</button>
+    <button class="filter-btn" data-filter="clean" onclick="setFilter('clean')">✅ Безопасные</button>
+    <button class="filter-btn" data-filter="suspicious" onclick="setFilter('suspicious')">⚠️ Подозрительные</button>
+    <button class="filter-btn" data-filter="black" onclick="setFilter('black')">🚫 Чёрный список</button>
+  </div>
+
+  <div class="result-count" id="resultCount" data-reveal></div>
+
+  <div id="orgList" data-stagger data-stagger-delay="50"></div>
+
+  <div class="cta-section" data-reveal>
+    <h2>❓ Не нашли организацию?</h2>
+    <p>Если вы не нашли нужную организацию в реестре — сообщите нам, и мы проверим её и добавим в базу.</p>
+    <a href="/antifraud-kz/quiz.html" class="cta-btn btn-ripple">📝 Сообщить об организации</a>
+  </div>
 </div>
 
-<div class="modal" id="modal"><div class="modal-inner" style="position:relative">
-    <button class="modal-close" onclick="closeModal()">✕</button>
-    <div id="modalContent"></div>
-</div></div>
-
 <script>
-var orgs=[
-    // Госорганы Казахстана
-    {id:'arrfr',name:'АРРФР',full:'Агентство РК по регулированию и развитию финансового рынка',cat:'gov',when:'Если организация работает без лицензии или вымогает деньги',whatSay:'Укажите: название организации, сумму потерь, скриншоты переписки',docs:['Заявление','Паспорт','Скриншоты','Чеки об оплате'],site:'ardfm.gov.kz'},
-    {id:'nbrk',name:'НБ РК',full:'Национальный банк Республики Казахстан',cat:'gov',when:'Если банк отказывает в чарджбэке или нарушает ваши права',whatSay:'Укажите: номер счёта, даты транзакций, ответ банка',docs:['Заявление','Выписка по счёту','Копия заявления в банк'],site:'nationalbank.kz'},
-    {id:'kgd',name:'КГД',full:'Комитет государственных доходов',cat:'gov',when:'Если мошенники присылают «налоговые акты» или требуют оплату на счёт',whatSay:'Укажите: реквизиты счёта, сумму, скриншоты',docs:['Заявление','Скриншоты','Реквизиты счёта'],site:'kgd.gov.kz'},
-    {id:'mvd',name:'Полиция',full:'Министерство внутренних дел РК',cat:'gov',when:'При мошенничестве — подайте заявление. Тел: 102',whatSay:'Опишите: что произошло, когда, какая сумма, данные мошенников',docs:['Заявление','Паспорт','Все доказательства'],site:'mvd.gov.kz'},
-    {id:'prosecutor',name:'Прокуратура',full:'Генеральная прокуратура РК',cat:'gov',when:'Если полиция бездействует или отказывается возбуждать дело',whatSay:'Укажите: номер заявления в полиции, сроки, бездействие',docs:['Жалоба','Копия заявления в полицию','Ответ полиции'],site:'prosecutor.kz'},
-    // Банки
-    {id:'halyk',name:'Halyk Bank',full:'Крупнейший банк Казахстана',cat:'bank',when:'Если переводили через Halyk — подавайте чарджбэк',whatSay:'Укажите: номер счёта, дату и сумму перевода, данные получателя',docs:['Заявление на чарджбэк','Выписка','Договор'],site:'halykbank.kz'},
-    {id:'kaspi',name:'Kaspi Bank',full:'Один из крупнейших банков РК',cat:'bank',when:'Если переводили через Kaspi — подавайте чарджбэк',whatSay:'Укажите: номер транзакции, дату, сумму',docs:['Заявление','Выписка','Скриншот'],site:'kaspi.kz'},
-    {id:'forte',name:'ForteBank',full:'Банк Форте',cat:'bank',when:'Для чарджбэка транзакций через ForteBank',whatSay:'Номер операции, дата, сумма, реквизиты получателя',docs:['Заявление','Выписка'],site:'fortebank.kz'},
-    {id:'bcc',name:'Банк ЦентрКредит',full:'Банк ЦентрКредит',cat:'bank',when:'Чарджбэк транзакций через BCC',whatSay:'Данные операции, скриншоты переписки',docs:['Заявление','Выписка'],site:'ccbank.kz'},
-    // Международные регуляторы
-    {id:'fca',name:'FCA',full:'Управление финансового поведения (UK)',cat:'intl',when:'Если мошенники используют бренд FCA или зарегистрированы в UK',whatSay:'Укажите: название платформы, сайт, скриншоты',docs:['Жалоба','Доказательства'],site:'fca.org.uk'},
-    {id:'sec',name:'SEC',full:'Комиссия по ценным бумагам (USA)',cat:'intl',when:'Если мошенники используют бренд SEC или зарегистрированы в США',whatSay:'Название, сайт, сумма, данные для связи',docs:['Complaint form','Доказательства'],site:'sec.gov'},
-    {id:'interpol',name:'Интерпол',full:'Международная полиция',cat:'intl',when:'При крупных суммах и трансграничном мошенничестве',whatSay:'Всю информацию — через МВД РК',docs:['Заявление в МВД','Международные реквизиты'],site:'interpol.int'},
-    // Кибербезопасность
-    {id:'cyber',name:'Центр киберпреступности',full:'Центр противодействия киберпреступности',cat:'cyber',when:'При интернет-мошенничестве, фишинге, краже данных',whatSay:'URL сайта, скриншоты, данные мошенников',docs:['Заявление','Скриншоты','URL'],site:'cia.gov.kz'}
-];
+var allOrgs = [];
+var currentFilter = 'all';
+var searchQuery = '';
 
-var cats=[
-    {id:'gov',name:'Государственные органы Казахстана',icon:'🏛️'},
-    {id:'bank',name:'Банки',icon:'🏦'},
-    {id:'intl',name:'Международные регуляторы',icon:'🌍'},
-    {id:'cyber',name:'Кибербезопасность',icon:'🛡️'}
-];
+var typeLabels = {
+  bank: 'Банк',
+  gov: 'Госорган',
+  crypto: 'Крипта',
+  invest: 'Инвестиции',
+  fintech: 'Финтех',
+  shop: 'Магазин',
+  service: 'Услуги',
+  mfo: 'МФО',
+  insurance: 'Страхование',
+  transport: 'Транспорт',
+  company: 'Компания'
+};
 
-var currentOrg=null;
-
-function renderOrgs(list){
-    var g={};list.forEach(function(o){if(!g[o.cat])g[o.cat]=[];g[o.cat].push(o)});
-    var h='';cats.forEach(function(c){
-        var items=g[c.id];if(!items||!items.length)return;
-        h+='<div class="cat-section"><div class="cat-title">'+c.icon+' '+c.name+'</div><div class="org-grid">';
-        items.forEach(function(o){
-            h+='<div class="org-card" onclick="showModal(\''+o.id+'\')">';
-            h+='<div class="org-name">'+o.name+'</div>';
-            h+='<div class="org-full">'+o.full+'</div>';
-            if(o.when)h+='<div class="org-when">'+o.when+'</div>';
-            h+='<div class="org-btns">';
-            h+='<button class="org-btn btn-apply" onclick="event.stopPropagation();showModal(\''+o.id+'\')">📝 Заявка</button>';
-            if(o.site)h+='<a href="https://'+o.site+'" target="_blank" class="org-btn btn-site" onclick="event.stopPropagation()">🌐 Сайт</a>';
-            h+='</div></div>';
-        });
-        h+='</div></div>';
-    });
-    document.getElementById('orgList').innerHTML=h||'<p style="text-align:center;color:#7a8ba3;padding:40px">Не найдено</p>';
+function updateStats(list) {
+  var total = list.length;
+  var clean = list.filter(function(o){return o.status === 'clean'}).length;
+  var suspicious = list.filter(function(o){return o.status === 'suspicious'}).length;
+  var black = list.filter(function(o){return o.status === 'black'}).length;
+  document.getElementById('totalCount').textContent = total;
+  document.getElementById('cleanCount').textContent = clean;
+  document.getElementById('suspiciousCount').textContent = suspicious;
+  document.getElementById('blackCount').textContent = black;
+  return {total: total, clean: clean, suspicious: suspicious, black: black};
 }
 
-function filterOrgs(){
-    var q=document.getElementById('orgSearch').value.toLowerCase();
-    renderOrgs(orgs.filter(function(o){
-        return o.name.toLowerCase().indexOf(q)>=0||o.full.toLowerCase().indexOf(q)>=0||(o.site&&o.site.toLowerCase().indexOf(q)>=0);
-    }));
+function statusBadge(status) {
+  var cls = status === 'clean' ? 'badge-clean' : status === 'suspicious' ? 'badge-suspicious' : 'badge-black';
+  var label = status === 'clean' ? 'Безопасно' : status === 'suspicious' ? 'Подозрительно' : 'Чёрный список';
+  return '<span class="badge-status ' + cls + '">' + label + '</span>';
 }
 
-function showModal(id){
-    currentOrg=orgs.find(function(x){return x.id===id});if(!currentOrg)return;
-    var o=currentOrg;
-    var h='<h2>'+o.name+'</h2><div class="om-full">'+o.full+'</div>';
-    if(o.when)h+='<div class="modal-section"><div class="modal-section-title">Когда обращаться</div><div class="modal-when">'+o.when+'</div></div>';
-    if(o.whatSay)h+='<div class="modal-section"><div class="modal-section-title">Что указать в заявке</div><div class="modal-say">«'+o.whatSay+'»</div></div>';
-    if(o.docs)h+='<div class="modal-section"><div class="modal-section-title">Какие документы нужны</div><div class="modal-docs">'+o.docs.map(function(d){return'<span class="modal-doc">'+d+'</span>'}).join('')+'</div></div>';
-    h+='<div class="modal-form" id="modalForm">';
-    h+='<div class="fg"><label>Ваше имя *</label><input type="text" id="omName" placeholder="Иван Иванов"></div>';
-    h+='<div class="fg"><label>Телефон *</label><input type="tel" id="omPhone" placeholder="+7 7XX XXX XX XX"></div>';
-    h+='<div class="fg"><label>Опишите ситуацию</label><textarea id="omText" placeholder="Что произошло, какая сумма..."></textarea></div>';
-    h+='<button class="fb" onclick="sendForm()">Отправить заявку</button></div>';
-    h+='<div class="modal-sent" id="modalSent"><h3>✅ Заявка отправлена!</h3><p>Наш специалист свяжется с вами.</p></div>';
-    document.getElementById('modalContent').innerHTML=h;
-    document.getElementById('modal').classList.add('on');
+function typeBadge(type) {
+  var label = typeLabels[type] || type;
+  return '<span class="badge-type">' + label + '</span>';
 }
 
-function closeModal(){document.getElementById('modal').classList.remove('on');currentOrg=null}
-
-function sendForm(){
-    var name=document.getElementById('omName').value.trim();
-    var phone=document.getElementById('omPhone').value.trim();
-    var text=document.getElementById('omText').value.trim();
-    if(!name||!phone){alert('Заполните имя и телефон');return}
-    var btn=document.querySelector('#modalForm .fb');
-    btn.disabled=true;btn.textContent='Отправка...';
-    fetch('https://api.telegram.org/bot8829750295:AAEdnt-7FPCVuVbgj6tgn7eC2_2LpY5VHCk/sendMessage',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chat_id:'8471070560',text:'📋 Заявка через реестр\n\n🏢 '+currentOrg.name+'\n👤 '+name+'\n📱 '+phone+'\n💬 '+text})}).then(function(r){return r.json()}).then(function(d){
-        if(d.ok){document.getElementById('modalForm').style.display='none';document.getElementById('modalSent').style.display='block'}
-        else{alert('Ошибка');btn.disabled=false;btn.textContent='Отправить'}
-    }).catch(function(){alert('Ошибка сети');btn.disabled=false;btn.textContent='Отправить'});
+function renderOrgs(list) {
+  var container = document.getElementById('orgList');
+  if (!list.length) {
+    container.innerHTML = '<div class="empty-state"><div class="empty-icon">🔍</div><h3>Ничего не найдено</h3><p>Попробуйте изменить поисковый запрос или сбросить фильтр.</p></div>';
+    document.getElementById('resultCount').textContent = '0 результатов';
+    return;
+  }
+  var stats = updateStats(list);
+  document.getElementById('resultCount').textContent = 'Показано ' + list.length + ' из ' + allOrgs.length + ' организаций';
+  var h = '';
+  list.forEach(function(o) {
+    h += '<div class="org-card">';
+    h += '<div class="org-card-top">';
+    h += '<div class="org-name">' + escapeHtml(o.name) + '</div>';
+    h += '<div class="org-badges">' + typeBadge(o.type) + statusBadge(o.status) + '</div>';
+    h += '</div>';
+    h += '<div class="org-desc">' + escapeHtml(o.desc) + '</div>';
+    h += '<div class="org-meta">';
+    if (o.site) h += '<div class="org-meta-item"><span class="meta-icon">🌐</span><a href="https://' + o.site + '" target="_blank" rel="noopener">' + escapeHtml(o.site) + '</a></div>';
+    if (o.phone && o.phone !== '—') h += '<div class="org-meta-item"><span class="meta-icon">📞</span><span>' + escapeHtml(o.phone) + '</span></div>';
+    h += '</div>';
+    h += '<div class="org-actions">';
+    h += '<a href="/antifraud-kz/quiz.html" class="org-btn btn-report btn-ripple">📝 Сообщить</a>';
+    if (o.site) h += '<a href="https://' + o.site + '" target="_blank" rel="noopener" class="org-btn btn-site btn-ripple">🌐 Сайт</a>';
+    h += '</div>';
+    h += '</div>';
+  });
+  container.innerHTML = h;
 }
 
-renderOrgs(orgs);
+function escapeHtml(str) {
+  var div = document.createElement('div');
+  div.appendChild(document.createTextNode(str));
+  return div.innerHTML;
+}
+
+function filterOrgs() {
+  searchQuery = document.getElementById('orgSearch').value.toLowerCase().trim();
+  applyFilters();
+}
+
+function setFilter(filter) {
+  currentFilter = filter;
+  document.querySelectorAll('.filter-btn').forEach(function(b) {
+    b.classList.toggle('active', b.getAttribute('data-filter') === filter);
+  });
+  applyFilters();
+}
+
+function applyFilters() {
+  var list = allOrgs.filter(function(o) {
+    if (currentFilter !== 'all' && o.status !== currentFilter) return false;
+    if (searchQuery) {
+      var q = searchQuery;
+      return o.name.toLowerCase().indexOf(q) >= 0 ||
+             o.desc.toLowerCase().indexOf(q) >= 0 ||
+             (o.type && o.type.toLowerCase().indexOf(q) >= 0) ||
+             (o.site && o.site.toLowerCase().indexOf(q) >= 0) ||
+             (o.phone && o.phone.indexOf(q) >= 0);
+    }
+    return true;
+  });
+  renderOrgs(list);
+}
+
+fetch('/antifraud-kz/data/organizations.json')
+  .then(function(r) { return r.json(); })
+  .then(function(data) {
+    allOrgs = data;
+    renderOrgs(allOrgs);
+  })
+  .catch(function() {
+    document.getElementById('orgList').innerHTML = '<div class="empty-state"><div class="empty-icon">⚠️</div><h3>Ошибка загрузки</h3><p>Не удалось загрузить реестр. Попробуйте обновить страницу.</p></div>';
+  });
 </script>
 <script src="/antifraud-kz/assets/js/effects.js"></script>
 <script src="/antifraud-kz/assets/js/nav.js"></script>

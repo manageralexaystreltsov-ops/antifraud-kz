@@ -42,6 +42,7 @@ body{background:#0a0a0a;color:#fff;font-family:'PT Sans',sans-serif;padding-bott
 .money-row{display:flex;gap:12px;margin-bottom:16px}
 .money-item{flex:1;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:16px;text-align:center}
 .money-item .label{font-size:.78rem;color:#7a8ba3;margin-top:4px}
+.money-item .money-amount{display:flex;align-items:center;justify-content:center;gap:6px}
 .tl{position:relative;padding-left:28px}
 .tl::before{content:'';position:absolute;left:10px;top:0;bottom:0;width:2px;background:rgba(255,255,255,.06)}
 .tl-item{position:relative;margin-bottom:16px}
@@ -54,7 +55,8 @@ body{background:#0a0a0a;color:#fff;font-family:'PT Sans',sans-serif;padding-bott
 .tl-date{font-size:.72rem;color:#7a8ba3}
 .tl-title{font-weight:700;font-size:.88rem;margin:2px 0}
 .tl-desc{font-size:.82rem;color:#e8ecf4}
-.tl-note{font-size:.75rem;color:#C8A000;margin-top:4px;cursor:pointer}
+.tl-note{font-size:.75rem;color:#C8A000;margin-top:4px;cursor:pointer;display:inline-flex;align-items:center;gap:4px}
+.tl-note:hover{color:#e6b800}
 .doc-item{display:flex;align-items:center;gap:12px;padding:12px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04);border-radius:12px;margin-bottom:8px;transition:border-color .3s}
 .doc-item:hover{border-color:rgba(255,255,255,.1)}
 .doc-icon{font-size:1.5rem}
@@ -88,7 +90,6 @@ body{background:#0a0a0a;color:#fff;font-family:'PT Sans',sans-serif;padding-bott
 .section-btn.active{background:rgba(184,0,24,.1);color:#fff;border-color:rgba(184,0,24,.3)}
 .section{display:none}
 .section.active{display:block}
-/* News card */
 .news-item{display:flex;gap:16px;padding:16px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04);border-radius:14px;margin-bottom:10px;transition:all .3s}
 .news-item:hover{border-color:rgba(255,255,255,.1)}
 .news-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
@@ -101,6 +102,24 @@ body{background:#0a0a0a;color:#fff;font-family:'PT Sans',sans-serif;padding-bott
 .news-badge.info{background:rgba(99,102,241,.1);color:#818cf8}
 .news-badge.success{background:rgba(16,185,129,.1);color:#6ee7b7}
 .consultant-photo{width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,.08)}
+.edit-btn{background:none;border:none;cursor:pointer;font-size:.8rem;padding:2px 6px;border-radius:4px;transition:all .2s;opacity:.4;line-height:1;vertical-align:middle}
+.edit-btn:hover{opacity:1;background:rgba(255,255,255,.08)}
+.edited-badge{display:inline-block;padding:2px 8px;background:rgba(200,160,0,.12);color:#C8A000;border-radius:4px;font-size:.68rem;font-weight:600;margin-left:8px;white-space:nowrap}
+.edited-glow{box-shadow:0 0 12px rgba(200,160,0,.08)}
+.status-pill.clickable{cursor:pointer;transition:all .2s}
+.status-pill.clickable:hover{filter:brightness(1.2)}
+.status-dropdown{position:absolute;top:100%;right:0;margin-top:4px;background:#1A1A1A;border:1px solid rgba(255,255,255,.1);border-radius:10px;overflow:hidden;z-index:100;box-shadow:0 8px 32px rgba(0,0,0,.5);min-width:160px}
+.status-dropdown div{padding:10px 16px;font-size:.85rem;cursor:pointer;transition:background .2s;color:#e8ecf4}
+.status-dropdown div:hover{background:rgba(255,255,255,.06)}
+.status-dropdown div.selected{color:#C8A000;font-weight:700}
+#stageDescDisplay{cursor:pointer;transition:all .2s;padding:4px 8px;margin:-4px -8px;border-radius:6px}
+#stageDescDisplay:hover{background:rgba(255,255,255,.04)}
+.stage-edit-input{width:100%;padding:8px 10px;background:rgba(255,255,255,.04);border:1px solid rgba(184,0,24,.3);border-radius:8px;color:#fff;font-family:'PT Sans',sans-serif;font-size:.88rem;margin-top:4px}
+.stage-edit-input:focus{outline:none;border-color:rgba(184,0,24,.5)}
+.stage-edit-actions{display:flex;gap:6px;margin-top:6px}
+.stage-edit-actions button{padding:4px 12px;border-radius:6px;font-size:.78rem;cursor:pointer;border:none;font-weight:600}
+.stage-save-btn{background:rgba(184,0,24,.2);color:#B80018}
+.stage-cancel-btn{background:rgba(255,255,255,.05);color:#7a8ba3}
 @media(max-width:500px){.money-row{flex-direction:column}.news-item{flex-direction:column}}
 </style>
 </head>
@@ -117,7 +136,6 @@ body{background:#0a0a0a;color:#fff;font-family:'PT Sans',sans-serif;padding-bott
 </div>
 
 <div class="wrap">
-    <!-- Section Nav -->
     <div class="section-nav" data-reveal>
         <button class="section-btn active" onclick="showSection('status',this)">📊 Статус</button>
         <button class="section-btn" onclick="showSection('finance',this)">💰 Финансы</button>
@@ -127,13 +145,15 @@ body{background:#0a0a0a;color:#fff;font-family:'PT Sans',sans-serif;padding-bott
         <button class="section-btn" onclick="showSection('news',this)">📰 Новости</button>
     </div>
 
-    <!-- STATUS -->
     <div id="status" class="section active">
         <div class="card" data-reveal>
             <div class="card-header">
                 <div class="card-icon" style="background:rgba(245,158,11,.1)">📊</div>
                 <div><div class="card-title">СТАТУС ВАШЕГО ДЕЛА</div><div class="card-subtitle" id="lastUpdate"></div></div>
-                <span class="status-pill s-process" id="statusBadge" style="margin-left:auto"></span>
+                <div style="position:relative;margin-left:auto">
+                    <span class="status-pill s-process clickable" id="statusBadge" onclick="editStatus()"></span>
+                    <span id="statusEditedBadge" style="display:none" class="edited-badge">✏️ Изменён</span>
+                </div>
             </div>
             <div class="progress-bar"><div class="progress-fill" id="progressBar" style="width:0%"></div></div>
             <div id="stageInfo"></div>
@@ -145,12 +165,12 @@ body{background:#0a0a0a;color:#fff;font-family:'PT Sans',sans-serif;padding-bott
         </div>
     </div>
 
-    <!-- FINANCE -->
     <div id="finance" class="section">
         <div class="card" data-reveal>
             <div class="card-header">
                 <div class="card-icon" style="background:rgba(200,160,0,.1)">💰</div>
                 <div class="card-title">ФИНАНСЫ ВАШЕГО ДЕЛА</div>
+                <span id="financeEditedBadge" style="display:none" class="edited-badge">✏️ Изменено</span>
             </div>
             <div class="money-row" id="moneyLost"></div>
             <div id="recoveryBlocks"></div>
@@ -165,7 +185,6 @@ body{background:#0a0a0a;color:#fff;font-family:'PT Sans',sans-serif;padding-bott
         </div>
     </div>
 
-    <!-- TIMELINE -->
     <div id="timeline" class="section">
         <div class="card" data-reveal>
             <div class="card-header">
@@ -176,7 +195,6 @@ body{background:#0a0a0a;color:#fff;font-family:'PT Sans',sans-serif;padding-bott
         </div>
     </div>
 
-    <!-- DOCS -->
     <div id="docs" class="section">
         <div class="card" data-reveal>
             <div class="card-header">
@@ -195,7 +213,6 @@ body{background:#0a0a0a;color:#fff;font-family:'PT Sans',sans-serif;padding-bott
         </div>
     </div>
 
-    <!-- CHAT -->
     <div id="chat" class="section">
         <div class="card" data-reveal>
             <div class="card-header">
@@ -223,7 +240,6 @@ body{background:#0a0a0a;color:#fff;font-family:'PT Sans',sans-serif;padding-bott
         </div>
     </div>
 
-    <!-- NEWS -->
     <div id="news" class="section">
         <div class="card" data-reveal>
             <div class="card-header">
@@ -254,12 +270,153 @@ function showSection(id,btn){
 var params=new URLSearchParams(window.location.search);
 var caseId=params.get('id')||'AF-2026-0847';
 var CURRENT_DATA=null;
+var EDITS={};
+var EDITS_KEY='dashboard_edits_'+caseId;
 
 document.getElementById('mainSkeleton').style.display='block';
 document.querySelector('.wrap').style.display='none';
 
+/* ===== EDIT SYSTEM ===== */
+function loadEdits(){
+    try{
+        EDITS=JSON.parse(localStorage.getItem(EDITS_KEY)||'{}');
+    }catch(e){EDITS={};}
+}
+
+function saveEdits(){
+    localStorage.setItem(EDITS_KEY,JSON.stringify(EDITS));
+}
+
+function hasEdits(){
+    return Object.keys(EDITS).length>0;
+}
+
+function hasFinanceEdits(){
+    return EDITS.lost && (EDITS.lost.bank!=null||EDITS.lost.crypto!=null||EDITS.lost.total!=null);
+}
+
+function hasStatusEdit(){
+    return EDITS.status && EDITS.statusText;
+}
+
+function mergeEdits(base){
+    if(!base)return base;
+    var d=JSON.parse(JSON.stringify(base));
+    if(EDITS.lost){
+        d.lost=d.lost||{};
+        if(EDITS.lost.bank!=null)d.lost.bank=EDITS.lost.bank;
+        if(EDITS.lost.crypto!=null)d.lost.crypto=EDITS.lost.crypto;
+        if(EDITS.lost.total!=null)d.lost.total=EDITS.lost.total;
+    }
+    if(EDITS.status)d.status=EDITS.status;
+    if(EDITS.statusText)d.statusText=EDITS.statusText;
+    if(EDITS.stage!=null)d.stage=EDITS.stage;
+    if(EDITS.stageName!=null)d.stageName=EDITS.stageName;
+    if(EDITS.stageDesc!=null)d.stageDesc=EDITS.stageDesc;
+    if(EDITS.timelineNotes){
+        Object.keys(EDITS.timelineNotes).forEach(function(k){
+            if(d.timeline&&d.timeline[k])d.timeline[k].note=EDITS.timelineNotes[k];
+        });
+    }
+    return d;
+}
+
+function editMoneyField(field){
+    var currentVal=0;
+    if(EDITS.lost&&EDITS.lost[field]!=null){
+        currentVal=EDITS.lost[field];
+    }else if(CURRENT_DATA&&CURRENT_DATA.lost&&CURRENT_DATA.lost[field]!=null){
+        currentVal=CURRENT_DATA.lost[field];
+    }
+    var input=prompt('Введите сумму в тенге (₸):',currentVal.toString());
+    if(input===null)return;
+    var num=parseInt(input.replace(/[^\d]/g,''));
+    if(isNaN(num)){alert('Введите корректное число');return;}
+    if(!EDITS.lost)EDITS.lost={};
+    EDITS.lost[field]=num;
+    EDITS.lost.total=(EDITS.lost.bank!=null?EDITS.lost.bank:(CURRENT_DATA.lost?CURRENT_DATA.lost.bank:0))+(EDITS.lost.crypto!=null?EDITS.lost.crypto:(CURRENT_DATA.lost?CURRENT_DATA.lost.crypto:0));
+    saveEdits();
+    renderCase(mergeEdits(CURRENT_DATA));
+}
+
+function editStatus(){
+    var currentStatus=EDITS.status||(CURRENT_DATA?CURRENT_DATA.status:'process');
+    var dropdown=document.createElement('div');
+    dropdown.className='status-dropdown';
+    var options=[
+        {id:'process',label:'В работе',color:'#fbbf24'},
+        {id:'done',label:'Завершено',color:'#6ee7b7'},
+        {id:'new',label:'Новое',color:'#818cf8'}
+    ];
+    options.forEach(function(o){
+        var div=document.createElement('div');
+        div.textContent=o.label;
+        if(o.id===currentStatus)div.style.color=o.color;
+        div.onclick=function(){
+            EDITS.status=o.id;
+            EDITS.statusText=o.label;
+            saveEdits();
+            renderCase(mergeEdits(CURRENT_DATA));
+            dropdown.remove();
+        };
+        dropdown.appendChild(div);
+    });
+    var badge=document.getElementById('statusBadge');
+    var rect=badge.getBoundingClientRect();
+    dropdown.style.position='fixed';
+    dropdown.style.top=rect.bottom+4+'px';
+    dropdown.style.right=(window.innerWidth-rect.right)+'px';
+    document.body.appendChild(dropdown);
+    function closeDrop(e){
+        if(!dropdown.contains(e.target)&&e.target!==badge){
+            dropdown.remove();
+            document.removeEventListener('click',closeDrop);
+        }
+    }
+    setTimeout(function(){document.addEventListener('click',closeDrop);},10);
+}
+
+function editStageDesc(){
+    var container=document.getElementById('stageDescDisplay');
+    var currentText=EDITS.stageDesc!=null?EDITS.stageDesc:(CURRENT_DATA?CURRENT_DATA.stageDesc:'');
+    container.style.display='none';
+    var editArea=document.createElement('div');
+    editArea.innerHTML='<textarea class="stage-edit-input" id="stageDescInput" rows="3">'+currentText.replace(/</g,'&lt;')+'</textarea><div class="stage-edit-actions"><button class="stage-save-btn" onclick="saveStageDesc()">💾 Сохранить</button><button class="stage-cancel-btn" onclick="cancelStageEdit()">Отмена</button></div>';
+    container.parentNode.insertBefore(editArea,container.nextSibling);
+    editArea.id='stageEditContainer';
+    document.getElementById('stageDescInput').focus();
+}
+function saveStageDesc(){
+    var val=document.getElementById('stageDescInput').value.trim();
+    if(!val)return;
+    EDITS.stageDesc=val;
+    saveEdits();
+    renderCase(mergeEdits(CURRENT_DATA));
+}
+function cancelStageEdit(){
+    var el=document.getElementById('stageEditContainer');
+    if(el)el.remove();
+    document.getElementById('stageDescDisplay').style.display='';
+}
+
+function editTimelineNote(idx){
+    var currentNote='';
+    if(EDITS.timelineNotes&&EDITS.timelineNotes[idx]!=null){
+        currentNote=EDITS.timelineNotes[idx];
+    }else if(CURRENT_DATA&&CURRENT_DATA.timeline&&CURRENT_DATA.timeline[idx]&&CURRENT_DATA.timeline[idx].note){
+        currentNote=CURRENT_DATA.timeline[idx].note;
+    }
+    var input=prompt('Редактировать заметку консультанта для шага "'+(CURRENT_DATA.timeline[idx]?CURRENT_DATA.timeline[idx].title:'')+'":',currentNote);
+    if(input===null)return;
+    if(!EDITS.timelineNotes)EDITS.timelineNotes={};
+    EDITS.timelineNotes[idx]=input.trim()||'';
+    saveEdits();
+    renderCase(mergeEdits(CURRENT_DATA));
+}
+
+/* ===== LOAD CASE ===== */
 function loadCase(){
-    // First check admin_clients
+    loadEdits();
     try{
         var adminClients=JSON.parse(localStorage.getItem('admin_clients')||'[]');
         var adminCase=adminClients.find(function(c){return c.id===caseId});
@@ -268,11 +425,9 @@ function loadCase(){
             return;
         }
     }catch(e){}
-    // Load from JSON
     fetch('/antifraud-kz/data/cases.json').then(function(r){return r.json()}).then(function(data){
         var c=data.cases.find(function(x){return x.id===caseId});
-        if(c){renderFromJSON(c);return}
-        // Create fake case if not found
+        if(c){renderFromJSON(c);return;}
         renderFake(caseId);
     }).catch(function(e){
         renderFake(caseId);
@@ -283,14 +438,14 @@ function renderFromJSON(c){
     CURRENT_DATA=c;
     document.getElementById('mainSkeleton').style.display='none';
     document.querySelector('.wrap').style.display='block';
-    renderCase(c);
+    renderCase(mergeEdits(c));
 }
 
 function renderFromAdmin(a){
     CURRENT_DATA=a;
     document.getElementById('mainSkeleton').style.display='none';
     document.querySelector('.wrap').style.display='block';
-    renderCase({
+    renderCase(mergeEdits({
         id:a.id,
         client:{name:a.name,phone:a.phone,iin:a.iin||'',city:a.city||'',age:0},
         consultant:{name:a.consultant||'Ожидает назначения',role:'Консультант',phone:'',cases:0,photo:'https://i.pravatar.cc/100?img=1'},
@@ -306,14 +461,14 @@ function renderFromAdmin(a){
         timeline:[{date:a.date||'—',title:'Заявка создана',desc:'Клиент добавлен в систему',status:'done'}],
         documents:{ours:[],scammers:[]},
         chat:[{date:(a.date||'')+' 10:00',from:'consultant',text:'Заявка принята. Ожидайте звонка специалиста.'}]
-    });
+    }));
 }
 
 function renderFake(id){
     CURRENT_DATA={id:id};
     document.getElementById('mainSkeleton').style.display='none';
     document.querySelector('.wrap').style.display='block';
-    renderCase({
+    renderCase(mergeEdits({
         id:id,client:{name:'Новый клиент',phone:'+7 700 000 00 00',iin:'—',city:'—',age:0},
         consultant:{name:'Специалист',role:'Консультант',phone:'',cases:0,photo:'https://i.pravatar.cc/100?img=1'},
         status:'new',statusText:'Новое',
@@ -326,19 +481,23 @@ function renderFake(id){
         timeline:[{date:new Date().toISOString().slice(0,10),title:'Заявка создана',desc:'Ожидайте звонка',status:'active'}],
         documents:{ours:[],scammers:[]},
         chat:[{date:new Date().toISOString().slice(0,10)+' 00:00',from:'consultant',text:'Здравствуйте! Ваша заявка принята. Скоро свяжемся.'}]
-    });
+    }));
 }
 
 function renderCase(c){
     document.getElementById('caseId').textContent=c.id;
     document.getElementById('caseName').textContent=c.client.name.split(' ').slice(0,2).join(' ');
 
+    /* Status */
     var statusClass=c.status==='done'?'s-done':'s-process';
     if(c.status==='new')statusClass='s-process';
-    document.getElementById('statusBadge').className='status-pill '+statusClass;
-    document.getElementById('statusBadge').textContent=c.statusText;
+    document.getElementById('statusBadge').className='status-pill '+statusClass+' clickable';
+    document.getElementById('statusBadge').textContent=c.statusText+' ✏️';
     document.getElementById('lastUpdate').textContent='Обновлено: '+(c.lastUpdate||'—');
+    var sb=document.getElementById('statusEditedBadge');
+    if(hasStatusEdit()){sb.style.display='';}else{sb.style.display='none';}
 
+    /* Progress */
     var pct=c.status==='done'?100:c.status==='process'?60:10;
     if(c.timeline){
         var doneCount=c.timeline.filter(function(t){return t.status==='done'}).length;
@@ -347,16 +506,23 @@ function renderCase(c){
     }
     document.getElementById('progressBar').style.width=pct+'%';
 
-    document.getElementById('stageInfo').innerHTML='<div style="padding:14px;background:rgba(255,255,255,.03);border-radius:10px;border:1px solid rgba(255,255,255,.06)"><div style="font-size:.82rem;color:#7a8ba3;margin-bottom:4px">Стадия:</div><div style="font-family:Oswald,sans-serif;font-weight:700;font-size:1.1rem;margin-bottom:8px">'+(c.stage||'—')+' — '+(c.stageName||'—')+'</div><div style="font-size:.88rem;color:#e8ecf4;line-height:1.6">'+(c.stageDesc||'—')+'</div></div>';
+    /* Stage info */
+    var stageText=EDITS.stageDesc!=null?EDITS.stageDesc:(c.stageDesc||'');
+    document.getElementById('stageInfo').innerHTML='<div style="padding:14px;background:rgba(255,255,255,.03);border-radius:10px;border:1px solid rgba(255,255,255,.06)"><div style="font-size:.82rem;color:#7a8ba3;margin-bottom:4px;display:flex;align-items:center;gap:8px">Стадия: <span style="font-size:.7rem;color:#7a8ba3;font-weight:400">(нажмите на текст, чтобы изменить)</span></div><div style="font-family:Oswald,sans-serif;font-weight:700;font-size:1.1rem;margin-bottom:8px">'+(c.stage||'—')+' — '+(c.stageName||'—')+'</div><div id="stageDescDisplay" onclick="editStageDesc()" style="font-size:.88rem;color:#e8ecf4;line-height:1.6">'+stageText+' <span style="font-size:.7rem;color:#7a8ba3">✏️</span></div></div>';
 
     if(c.stageWarning){
         document.getElementById('stageWarning').innerHTML='<div style="padding:12px;background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.15);border-radius:10px;font-size:.85rem;color:#fbbf24"><strong>⚠ Следующий шаг мошенников:</strong><br>'+(c.stageWarning||'')+'</div><div style="margin-top:8px;padding:10px;background:rgba(184,0,24,.08);border:1px solid rgba(184,0,24,.2);border-radius:8px;font-size:.88rem;color:#fff;font-weight:600;text-align:center">НЕ ПЛАТИТЕ НИЧЕГО до консультации с нами</div>';
     }
 
-    // Finance
+    /* Finance */
     if(c.lost){
-        document.getElementById('moneyLost').innerHTML='<div class="money-item"><div class="money-amount" style="color:#B80018">'+formatMoney(c.lost.bank)+'</div><div class="label">Банковские переводы</div></div><div class="money-item"><div class="money-amount" style="color:#C8A000">'+formatMoney(c.lost.crypto)+'</div><div class="label">Криптовалюта</div></div><div class="money-item"><div class="money-amount" style="color:#fff">'+formatMoney(c.lost.total)+'</div><div class="label">Итого потеряно</div></div>';
+        var bankVal=EDITS.lost&&EDITS.lost.bank!=null?EDITS.lost.bank:c.lost.bank;
+        var cryptoVal=EDITS.lost&&EDITS.lost.crypto!=null?EDITS.lost.crypto:c.lost.crypto;
+        var totalVal=EDITS.lost&&EDITS.lost.total!=null?EDITS.lost.total:c.lost.total;
+        document.getElementById('moneyLost').innerHTML='<div class="money-item'+((EDITS.lost&&EDITS.lost.bank!=null)?' edited-glow':'')+'"><div class="money-amount" style="color:#B80018"><span>'+formatMoney(bankVal)+'</span><button class="edit-btn" onclick="editMoneyField(\'bank\')" title="Редактировать">✏️</button></div><div class="label">Банковские переводы</div></div><div class="money-item'+((EDITS.lost&&EDITS.lost.crypto!=null)?' edited-glow':'')+'"><div class="money-amount" style="color:#C8A000"><span>'+formatMoney(cryptoVal)+'</span><button class="edit-btn" onclick="editMoneyField(\'crypto\')" title="Редактировать">✏️</button></div><div class="label">Криптовалюта</div></div><div class="money-item'+((EDITS.lost&&EDITS.lost.total!=null)?' edited-glow':'')+'"><div class="money-amount" style="color:#fff"><span>'+formatMoney(totalVal)+'</span><button class="edit-btn" onclick="editMoneyField(\'total\')" title="Редактировать">✏️</button></div><div class="label">Итого потеряно</div></div>';
     }
+    var fb=document.getElementById('financeEditedBadge');
+    if(hasFinanceEdits()){fb.style.display='';}else{fb.style.display='none';}
 
     var recoveryHtml='';
     if(c.recovery&&c.recovery.length){
@@ -387,18 +553,30 @@ function renderCase(c){
     }
     document.getElementById('servicesList').innerHTML=servicesHtml;
 
-    // Timeline
+    /* Timeline with editable notes */
     var tlHtml='';
     if(c.timeline&&c.timeline.length){
-        c.timeline.forEach(function(t){
-            tlHtml+='<div class="tl-item"><div class="tl-dot '+(t.status||'pending')+'"></div><div class="tl-content"><div class="tl-date">'+t.date+'</div><div class="tl-title">'+t.title+'</div><div class="tl-desc">'+t.desc+'</div>'+((t.note)?'<div class="tl-note" onclick="alert(\''+t.note.replace(/'/g,"\\'")+'\')">📝 Заметка консультанта</div>':'')+'</div></div>';
+        c.timeline.forEach(function(t,i){
+            var noteText='';
+            if(EDITS.timelineNotes&&EDITS.timelineNotes[i]!=null&&EDITS.timelineNotes[i]){
+                noteText=EDITS.timelineNotes[i];
+            }else if(t.note){
+                noteText=t.note;
+            }
+            var noteHtml='';
+            if(noteText){
+                noteHtml='<div class="tl-note" onclick="editTimelineNote('+i+')">📝 '+noteText+' <span style="font-size:.65rem;color:#7a8ba3;margin-left:4px">✏️</span></div>';
+            }else{
+                noteHtml='<div class="tl-note" onclick="editTimelineNote('+i+')" style="opacity:.5">➕ Добавить заметку</div>';
+            }
+            tlHtml+='<div class="tl-item"><div class="tl-dot '+(t.status||'pending')+'"></div><div class="tl-content"><div class="tl-date">'+t.date+'</div><div class="tl-title">'+t.title+'</div><div class="tl-desc">'+t.desc+'</div>'+noteHtml+'</div></div>';
         });
     }else{
         tlHtml='<p style="color:#7a8ba3;font-size:.82rem;text-align:center;padding:20px">Таймлайн пока пуст</p>';
     }
     document.getElementById('timelineList').innerHTML=tlHtml;
 
-    // Documents
+    /* Documents */
     var docsHtml='';
     if(c.documents&&c.documents.ours&&c.documents.ours.length){
         c.documents.ours.forEach(function(d){
@@ -415,9 +593,8 @@ function renderCase(c){
     }else{scamHtml='<p style="color:#7a8ba3;font-size:.82rem;text-align:center;padding:20px">Документы мошенников не загружены</p>';}
     document.getElementById('docsScammers').innerHTML=scamHtml;
 
-    // Chat
+    /* Chat */
     var consultant=c.consultant||{name:'Специалист',role:'Консультант',cases:0,photo:''};
-    var photoHtml=consultant.photo?'<img src="'+consultant.photo+'" alt="">':'⚖️';
     document.getElementById('consultantInfo').innerHTML='<span style="display:flex;align-items:center;gap:8px">'+(consultant.photo?'<img src="'+consultant.photo+'" style="width:24px;height:24px;border-radius:50%;object-fit:cover">':'⚖️')+' '+consultant.name+' · '+consultant.role+' · '+consultant.cases+' дел · <span style="color:#10b981">🟢 Онлайн</span></span>';
 
     var chatHtml='';
@@ -432,7 +609,7 @@ function renderCase(c){
     }
     document.getElementById('chatMessages').innerHTML=chatHtml;
 
-    // News
+    /* News */
     renderNews(c);
 }
 
@@ -469,11 +646,9 @@ function sendMsg(){
     if(!input.value.trim())return;
     var chatBox=document.getElementById('chatMessages');
     var consultant=CURRENT_DATA&&CURRENT_DATA.consultant?CURRENT_DATA.consultant:{name:'',role:'',cases:0,photo:''};
-    var photoHtml=consultant.photo?'<img src="'+consultant.photo+'" alt="">':'⚖️';
     chatBox.innerHTML+='<div class="chat-msg client"><div class="chat-avatar" style="background:rgba(184,0,24,.2)">👤</div><div><div class="chat-bubble client">'+input.value.replace(/</g,'&lt;')+'</div><div class="chat-date">Сейчас</div></div></div>';
     input.value='';
     chatBox.scrollTop=chatBox.scrollHeight;
-    // Auto-reply
     setTimeout(function(){
         chatBox.innerHTML+='<div class="chat-msg consultant"><div class="chat-avatar" style="background:rgba(16,185,129,.2);overflow:hidden">'+(consultant.photo?'<img src="'+consultant.photo+'" alt="">':'⚖️')+'</div><div><div class="chat-bubble consultant">Спасибо за сообщение! Мы ответим вам в ближайшее время. Если ситуация срочная — звоните <strong>1434</strong>.</div><div class="chat-date">Только что</div></div></div>';
         chatBox.scrollTop=chatBox.scrollHeight;

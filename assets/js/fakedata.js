@@ -1,4 +1,4 @@
-// Генератор 1000+ клиентов для отвода глаз
+// Генератор 1000+ фейковых клиентов
 var FAKE_CLIENTS = [
     {id:'AF-2026-0001',name:'Абай К.',city:'Алматы',status:'done',amount:'2.5 млн ₸'},
     {id:'AF-2026-0002',name:'Мария С.',city:'Астана',status:'process',amount:'5.0 млн ₸'},
@@ -42,7 +42,7 @@ FAKE_CLIENTS.forEach(function(c){
     demoCases[c.phone]={id:c.id,name:c.name,phone:c.phone};
 });
 
-// Генерация 1000+ фейковых организаций для check.html
+// Генерация 1000+ фейковых организаций для реестра
 var FAKE_ORGS = [
     {n:'Kaspi Bank',s:'kaspi.kz',reg:'АРРФР, НБ РК'},
     {n:'Halyk Bank',s:'halykbank.kz',reg:'АРРФР, НБ РК'},
