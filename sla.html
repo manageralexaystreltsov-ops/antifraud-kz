@@ -1,0 +1,167 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>SLA и Контроль качества — Антифрод Центр</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>⏱️</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=PT+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#B80018',gold:'#C8A000',dark:'#111111',darker:'#000000'},fontFamily:{heading:['Oswald','sans-serif'],body:['PT Sans','sans-serif']}}}}</script>
+<style>
+body{background:#000;color:#fff;font-family:'PT Sans',sans-serif;padding-bottom:80px}
+.sl{max-width:900px;margin:0 auto;padding:clamp(20px,5vw,40px) clamp(16px,4vw,16px)}
+.sl h1{font-size:clamp(1.6rem,4vw,2.2rem);font-weight:700;margin-bottom:8px;text-align:center}
+.sl>p{color:#7a8ba3;text-align:center;margin-bottom:32px;font-size:.92rem}
+/* Stats */
+.stats-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(180px,1fr));gap:12px;margin-bottom:32px}
+.stat-card{background:#1A1A1A;border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:20px;text-align:center}
+.stat-icon{font-size:2rem;margin-bottom:8px}
+.stat-val{font-family:'Oswald',sans-serif;font-size:2rem;font-weight:700}
+.stat-label{font-size:.82rem;color:#7a8ba3;margin-top:4px}
+.stat-val.green{color:#6ee7b7}
+.stat-val.yellow{color:#fbbf24}
+.stat-val.red{color:#fca5a5}
+/* SLA Timer */
+.sla-list{margin-bottom:32px}
+.sla-item{display:flex;align-items:center;gap:16px;padding:16px;background:#1A1A1A;border:1px solid rgba(255,255,255,.06);border-radius:12px;margin-bottom:10px}
+.sla-timer{font-family:'Oswald',sans-serif;font-size:1.5rem;font-weight:700;min-width:80px;text-align:center}
+.sla-timer.ok{color:#6ee7b7}
+.sla-timer.warn{color:#fbbf24}
+.sla-timer.danger{color:#fca5a5}
+.sla-info{flex:1}
+.sla-name{font-weight:700;font-size:.92rem;margin-bottom:2px}
+.sla-desc{font-size:.82rem;color:#7a8ba3}
+.sla-badge{padding:4px 10px;border-radius:100px;font-size:.72rem;font-weight:700}
+.badge-ok{background:rgba(16,185,129,.1);color:#6ee7b7;border:1px solid rgba(16,185,129,.2)}
+.badge-warn{background:rgba(245,158,11,.1);color:#fbbf24;border:1px solid rgba(245,158,11,.2)}
+.badge-danger{background:rgba(239,68,68,.1);color:#fca5a5;border:1px solid rgba(239,68,68,.2)}
+/* QA Score */
+.qa-score{text-align:center;padding:32px;background:#1A1A1A;border:1px solid rgba(255,255,255,.06);border-radius:16px;margin-bottom:32px}
+.qa-number{font-family:'Oswald',sans-serif;font-size:5rem;font-weight:700;line-height:1}
+.qa-label{font-size:1rem;color:#7a8ba3;margin-top:8px}
+.qa-breakdown{display:grid;grid-template-columns:repeat(auto-fit,minmax(200px,1fr));gap:12px;margin-top:24px}
+.qa-item{padding:12px;background:rgba(255,255,255,.02);border-radius:10px;text-align:center}
+.qa-item-val{font-family:'Oswald',sans-serif;font-size:1.2rem;font-weight:700}
+.qa-item-label{font-size:.78rem;color:#7a8ba3;margin-top:2px}
+.qa-item-bar{height:4px;background:rgba(255,255,255,.06);border-radius:4px;overflow:hidden;margin-top:6px}
+.qa-item-fill{height:100%;border-radius:4px}
+/* Issues */
+.issue{padding:14px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04);border-radius:10px;margin-bottom:10px}
+.issue-header{display:flex;align-items:center;gap:8px;margin-bottom:6px}
+.issue-icon{font-size:1rem}
+.issue-title{font-weight:700;font-size:.9rem}
+.issue-text{font-size:.82rem;color:#7a8ba3;line-height:1.5}
+.issue-fix{margin-top:8px;font-size:.78rem;color:#B80018;font-weight:600}
+</style>
+</head>
+<body>
+<div class="sl" style="padding-top:100px">
+    <h1>⏱️ SLA и Контроль качества</h1>
+    <p>Мониторинг скорости работы и качества выполнения задач</p>
+
+    <!-- Stats Overview -->
+    <div class="stats-grid">
+        <div class="stat-card">
+            <div class="stat-icon">⏱️</div>
+            <div class="stat-val green">2.4ч</div>
+            <div class="stat-label">Среднее время реакции</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">📋</div>
+            <div class="stat-val green">87%</div>
+            <div class="stat-label">Выполнено вовремя</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">🧠</div>
+            <div class="stat-val" style="color:#818cf8">78/100</div>
+            <div class="stat-label">QA-оценка</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-icon">⚠️</div>
+            <div class="stat-val yellow">3</div>
+            <div class="stat-label">Нарушения SLA</div>
+        </div>
+    </div>
+
+    <!-- SLA Timers -->
+    <h2 style="font-family:'Oswald',sans-serif;font-size:1.2rem;font-weight:700;margin-bottom:16px">⏱️ Активные таймеры</h2>
+    <div class="sla-list" id="slaList"></div>
+
+    <!-- QA Score -->
+    <h2 style="font-family:'Oswald',sans-serif;font-size:1.2rem;font-weight:700;margin-bottom:16px">🧠 QA-оценка менеджера</h2>
+    <div class="qa-score">
+        <div class="qa-number" id="qaScore">78</div>
+        <div class="qa-label">из 100 баллов</div>
+        <div class="qa-breakdown" id="qaBreakdown"></div>
+    </div>
+
+    <!-- Issues -->
+    <h2 style="font-family:'Oswald',sans-serif;font-size:1.2rem;font-weight:700;margin-bottom:16px">⚠️ Замечания</h2>
+    <div id="issuesList"></div>
+</div>
+
+<script>
+var slaData=[
+    {name:'Нурланова А. — InvestPro',desc:'Ожидаем ответ АРРФР',time:'18:42',status:'ok',remaining:'Осталось 12 дней'},
+    {name:'Мария С. — CryptoGain',desc:'Чарджбэк в Kaspi Bank',time:'23:15',status:'warn',remaining:'Осталось 3 дня'},
+    {name:'Даулет Н. — GlobalTrade',desc:'Заявление в полицию',time:'48:30',status:'danger',remaining:'Превышен SLA на 18ч'}
+];
+
+var qaData=[
+    {label:'Методичка',val:30,max:35,color:'#6ee7b7'},
+    {label:'Скорость (SLA)',val:18,max:20,color:'#6ee7b7'},
+    {label:'Логика этапов',val:15,max:15,color:'#6ee7b7'},
+    {label:'Комментарии',val:10,max:15,color:'#fbbf24'},
+    {label:'Работа с рисками',val:3,max:10,color:'#fca5a5'},
+    {label:'AI-рекомендации',val:2,max:5,color:'#fca5a5'}
+];
+
+var issues=[
+    {icon:'⚠️',title:'Пропущен обязательный шаг',text:'На этапе AML не было объяснения сути процедуры клиенту. По методичке это обязательный шаг.',fix:'Добавить объяснение в следующем комментарии'},
+    {icon:'⚠️',title:'Формальный комментарий',text:'«Созвонились, думает» — нет фиксации реакции клиента и следующего шага.',fix:'Описать что именно сказал клиент и какой план'},
+    {icon:'💡',title:'Не использована рекомендация AI',text:'AI рекомендовал отправить объяснение AML, но менеджер этого не сделал.',fix:'Используйте кнопку «Отправить объяснение» в карточке клиента'}
+];
+
+function renderSLA(){
+    var h='';
+    slaData.forEach(function(s){
+        h+='<div class="sla-item">';
+        h+='<div class="sla-timer '+s.status+'">'+s.time+'</div>';
+        h+='<div class="sla-info"><div class="sla-name">'+s.name+'</div><div class="sla-desc">'+s.desc+'</div></div>';
+        h+='<span class="sla-badge badge-'+s.status+'">'+s.remaining+'</span></div>';
+    });
+    document.getElementById('slaList').innerHTML=h;
+}
+
+function renderQA(){
+    var total=qaData.reduce(function(a,b){return a+b.max},0);
+    var current=qaData.reduce(function(a,b){return a+b.val},0);
+    document.getElementById('qaScore').textContent=current;
+    var h='';
+    qaData.forEach(function(q){
+        var pct=Math.round(q.val/q.max*100);
+        h+='<div class="qa-item"><div class="qa-item-val" style="color:'+q.color+'">'+q.val+'/'+q.max+'</div>';
+        h+='<div class="qa-item-label">'+q.label+'</div>';
+        h+='<div class="qa-item-bar"><div class="qa-item-fill" style="width:'+pct+'%;background:'+q.color+'"></div></div></div>';
+    });
+    document.getElementById('qaBreakdown').innerHTML=h;
+}
+
+function renderIssues(){
+    var h='';
+    issues.forEach(function(i){
+        h+='<div class="issue"><div class="issue-header"><span class="issue-icon">'+i.icon+'</span><span class="issue-title">'+i.title+'</span></div>';
+        h+='<div class="issue-text">'+i.text+'</div>';
+        h+='<div class="issue-fix">→ '+i.fix+'</div></div>';
+    });
+    document.getElementById('issuesList').innerHTML=h;
+}
+
+renderSLA();
+renderQA();
+renderIssues();
+</script>
+<script src="/antifraud-kz/assets/js/nav.js"></script>
+</body>
+</html>
