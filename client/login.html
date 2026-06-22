@@ -60,7 +60,7 @@ body{background:#0a0a0a;color:#fff;font-family:'PT Sans',sans-serif;padding-bott
     <div class="client-list" id="clientList"></div>
 
     <div class="footer-link">
-        Нет номера дела? <a href="/antifraud-kz/quiz.html">Оставьте заявку</a> или позвоните: <strong style="color:#C8A000">1434</strong>
+        Нет номера дела? <a href="/antifraud-kz/quiz.html">Оставьте заявку</a>
     </div>
 </div>
 
@@ -107,7 +107,8 @@ function renderClients(list){
     var total=allClients.length;
     var shown=list.length;
     var q=document.getElementById('searchInput').value.trim();
-    document.getElementById('searchCount').textContent=q?'Найдено: '+shown+' из '+total:'Всего клиентов: '+total;
+    document.getElementById('searchCount').textContent=q?'Найдено: '+shown:'';
+    document.getElementById('searchCount').style.display=q?'block':'none';
     var h='';
     if(!list.length){
         h='<div class="empty-state"><div class="icon">📭</div><div>Клиенты не найдены</div></div>';

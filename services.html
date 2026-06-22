@@ -225,8 +225,8 @@ function orderService(name,price){
     if(!phone)return;
     fetch('https://api.telegram.org/bot8829750295:AAEdnt-7FPCVuVbgj6tgn7eC2_2LpY5VHCk/sendMessage',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chat_id:'8471070560',text:'📋 Заказ услуги: '+name+'\nЦена: '+price+'\nТелефон: '+phone})}).then(function(r){return r.json()}).then(function(d){
         if(d.ok){alert('Заявка отправлена! Мы перезвоним вам в ближайшее время.');}
-        else{alert('Ошибка отправки. Позвоните: 1434');}
-    }).catch(function(){alert('Ошибка сети. Позвоните: 1434');});
+        else{alert('Ошибка отправки. Попробуйте ещё раз.');}
+    }).catch(function(){alert('Ошибка сети. Попробуйте ещё раз.');});
 }
 
 renderServices();

@@ -253,7 +253,7 @@ function esc(s){var d=document.createElement('div');d.appendChild(document.creat
 function renderOrgs(list){
   var c=document.getElementById('orgList');
   if(!list.length){c.innerHTML='<div class="empty-state"><div class="empty-icon">🔍</div><h3>Ничего не найдено</h3><p>Попробуйте изменить запрос.</p></div>';document.getElementById('resultCount').textContent='0 результатов';return}
-  updateStats(list);document.getElementById('resultCount').textContent='Показано '+list.length+' из '+allOrgs.length;
+  updateStats(list);
   var h='';list.forEach(function(o){
     h+='<div class="org-card"><div class="org-card-top"><div class="org-name">'+esc(o.name)+'</div><div class="org-badges">'+typeBadge(o.type)+statusBadge(o.status)+'</div></div>';
     h+='<div class="org-desc">'+esc(o.desc)+'</div><div class="org-meta">';

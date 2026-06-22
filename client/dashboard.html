@@ -69,7 +69,7 @@ body{background:#0a0a0a;color:#fff;font-family:'PT Sans',sans-serif;padding:0;ma
         <div style="font-size:.85rem;color:#7a8ba3">Дело <strong style="color:#fff" id="caseId"></strong> · <span id="caseName"></span></div>
     </div>
     <div style="display:flex;gap:8px;align-items:center">
-        <a href="tel:1434" style="padding:8px 16px;border-radius:8px;font-size:.82rem;font-weight:600;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);color:#C8A000;text-decoration:none;display:flex;align-items:center;gap:6px">📞 1434</a>
+        <a href="/antifraud-kz/quiz.html" style="padding:8px 16px;border-radius:8px;font-size:.82rem;font-weight:600;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);color:#C8A000;text-decoration:none;display:flex;align-items:center;gap:6px">💬 Написать нам</a>
         <button onclick="localStorage.removeItem('currentCase');window.location.href='/antifraud-kz/client/login.html'" style="padding:8px 16px;border-radius:8px;font-size:.82rem;font-weight:600;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);color:#7a8ba3;cursor:pointer;font-family:'PT Sans',sans-serif">Выйти</button>
     </div>
 </div>
@@ -183,7 +183,7 @@ function loadCase(){
 function renderNotFound(){
     document.getElementById('caseId').textContent=caseId||'—';
     document.getElementById('caseName').textContent='Дело не найдено';
-    document.getElementById('mainContent').innerHTML='<div style="text-align:center;padding:60px 20px"><div style="font-size:3rem;margin-bottom:12px">🔍</div><h2 style="font-family:Oswald,sans-serif;margin-bottom:8px">Дело не найдено</h2><p style="color:#7a8ba3">Проверьте номер дела или обратитесь по телефону <strong style="color:#C8A000">1434</strong></p><a href="/antifraud-kz/client/login.html" style="display:inline-block;margin-top:16px;color:#B80018;text-decoration:none;font-weight:700">← Вернуться</a></div>';
+    document.getElementById('mainContent').innerHTML='<div style="text-align:center;padding:60px 20px"><div style="font-size:3rem;margin-bottom:12px">🔍</div><h2 style="font-family:Oswald,sans-serif;margin-bottom:8px">Дело не найдено</h2><p style="color:#7a8ba3">Проверьте номер дела или <a href="/antifraud-kz/quiz.html" style="color:#C8A000;text-decoration:none;font-weight:700">обратитесь к нам</a></p><a href="/antifraud-kz/client/login.html" style="display:inline-block;margin-top:16px;color:#B80018;text-decoration:none;font-weight:700">← Вернуться</a></div>';
 }
 
 function renderAdminCase(a){
@@ -214,7 +214,7 @@ function renderAdminCase(a){
 
     var chatData=[
         {from:'consultant',text:'Здравствуйте! Ваша заявка принята. Специалист свяжется с вами в ближайшее время.',date:(a.date||'')+' 10:00'},
-        {from:'consultant',text:'Если ситуация срочная — звоните на горячую линию 1434',date:(a.date||'')+' 10:01'}
+        {from:'consultant',text:'Если ситуация срочная — обратитесь к нам через форму на сайте.',date:(a.date||'')+' 10:01'}
     ];
     var chatHtml='';
     chatData.forEach(function(m){
@@ -233,7 +233,7 @@ function sendMsg(){
     input.value='';
     chatBox.scrollTop=chatBox.scrollHeight;
     setTimeout(function(){
-        chatBox.innerHTML+='<div class="chat-msg consultant"><div class="chat-avatar" style="background:rgba(16,185,129,.2)">⚖️</div><div><div class="chat-bubble consultant">Спасибо за сообщение! Мы ответим вам в ближайшее время. Если ситуация срочная — звоните <strong>1434</strong>.</div><div class="chat-date">Только что</div></div></div>';
+        chatBox.innerHTML+='<div class="chat-msg consultant"><div class="chat-avatar" style="background:rgba(16,185,129,.2)">⚖️</div><div><div class="chat-bubble consultant">Спасибо за сообщение! Мы ответим вам в ближайшее время. Если ситуация срочная — <a href="/antifraud-kz/quiz.html" style="color:#C8A000">обратитесь к нам</a>.</div><div class="chat-date">Только что</div></div></div>';
         chatBox.scrollTop=chatBox.scrollHeight;
     },1000);
 }
