@@ -14,26 +14,17 @@ body{background:#000;color:#fff;font-family:'PT Sans',sans-serif;padding-bottom:
 .cw h1{font-size:clamp(1.6rem,4vw,2.2rem);font-weight:700;margin-bottom:6px;text-align:center}
 .cw>p{color:#7a8ba3;margin-bottom:24px;font-size:.92rem;text-align:center}
 .form-box{background:#1A1A1A;border:1px solid rgba(255,255,255,.06);border-radius:20px;padding:24px}
-.type-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:20px}
-.type-btn{padding:12px 8px;background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.06);border-radius:12px;cursor:pointer;text-align:center;transition:all .2s;font-family:'PT Sans',sans-serif}
-.type-btn:hover{border-color:rgba(184,0,24,.3)}
-.type-btn.active{border-color:#B80018;background:rgba(184,0,24,.08)}
-.type-icon{font-size:1.5rem;margin-bottom:4px}
-.type-label{font-size:.75rem;color:#7a8ba3}
-.type-btn.active .type-label{color:#fff}
 .fg{margin-bottom:14px}
 .fg label{display:block;font-size:.82rem;color:#7a8ba3;margin-bottom:6px}
 .fg input,.fg select,.fg textarea{width:100%;padding:13px 16px;background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.08);border-radius:12px;font-size:.95rem;color:#fff;font-family:'PT Sans',sans-serif;transition:all .2s}
 .fg input:focus,.fg select:focus,.fg textarea:focus{outline:none;border-color:rgba(184,0,24,.4)}
 .fg textarea{min-height:80px;resize:vertical}
+.fg select option{background:#1A1A1A;color:#fff}
 .submit-btn{width:100%;padding:16px;background:linear-gradient(135deg,#B80018,#8B0012);color:#fff;border:none;border-radius:12px;font-family:'Oswald',sans-serif;font-weight:700;font-size:1rem;cursor:pointer;transition:all .2s}
 .submit-btn:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(184,0,24,.3)}
 .trust-badges{display:flex;justify-content:center;gap:20px;margin-top:20px;flex-wrap:wrap}
 .trust-badge{font-size:.78rem;color:#7a8ba3;display:flex;align-items:center;gap:6px}
-.trust-badge span{color:#10b981}
 .sent-msg{text-align:center;padding:32px 0;display:none}
-.sent-msg h3{font-size:1.2rem;font-weight:700;margin-bottom:8px}
-.sent-msg p{color:#7a8ba3;font-size:.92rem}
 </style>
 </head>
 <body>
@@ -49,14 +40,24 @@ body{background:#000;color:#fff;font-family:'PT Sans',sans-serif;padding-bottom:
             </div>
         </div>
 
-        <p style="font-size:.85rem;color:#7a8ba3;text-align:center;margin-bottom:16px">Что вам нужно?</p>
-        <div class="type-grid">
-            <div class="type-btn active" onclick="selectType('callback',this)"><div class="type-icon">📞</div><div class="type-label">Обратный звонок</div></div>
-            <div class="type-btn" onclick="selectType('consult',this)"><div class="type-icon">💬</div><div class="type-label">Консультация</div></div>
-            <div class="type-btn" onclick="selectType('docs',this)"><div class="type-icon">📄</div><div class="type-label">Получить документ</div></div>
-            <div class="type-btn" onclick="selectType('return',this)"><div class="type-icon">💰</div><div class="type-label">Возврат средств</div></div>
-            <div class="type-btn" onclick="selectType('check',this)"><div class="type-icon">🔍</div><div class="type-label">Проверка организации</div></div>
-            <div class="type-btn" onclick="selectType('other',this)"><div class="type-icon">📝</div><div class="type-label">Другое</div></div>
+        <div class="fg">
+            <label>Что вам нужно? *</label>
+            <select id="cType">
+                <option value="">— Выберите —</option>
+                <option value="callback">📞 Обратный звонок</option>
+                <option value="consult">💬 Консультация юриста</option>
+                <option value="docs">📄 Получить документ / справку</option>
+                <option value="return">💰 Возврат средств</option>
+                <option value="check">🔍 Проверка организации</option>
+                <option value="chargeback">🏦 Чарджбэк (оспаривание платежа)</option>
+                <option value="complaint">🏛️ Жалоба в АРРФР / НБ РК</option>
+                <option value="court">⚖️ Подготовка иска в суд</option>
+                <option value="police">👮 Обращение в полицию</option>
+                <option value="crypto">₿ Проблема с криптой</option>
+                <option value="credit">💳 Проблемы с кредитом</option>
+                <option value="insurance">🛡️ Страховой случай</option>
+                <option value="other">📝 Другое</option>
+            </select>
         </div>
 
         <div class="fg"><label>Ваше имя *</label><input type="text" id="cName" placeholder="Иван Иванов"></div>
@@ -67,36 +68,32 @@ body{background:#000;color:#fff;font-family:'PT Sans',sans-serif;padding-bottom:
         <div class="fg"><label>Опишите ситуацию</label><textarea id="cText" placeholder="Что произошло, какая сумма, название платформы..."></textarea></div>
         <button class="submit-btn" onclick="submitForm()">ОТПРАВИТЬ ЗАЯВКУ →</button>
         <div class="trust-badges">
-            <div class="trust-badge"><span>🔒</span> Конфиденциально</div>
-            <div class="trust-badge"><span>⚡</span> Ответ за 24ч</div>
-            <div class="trust-badge"><span>💳</span> Без предоплаты</div>
+            <div class="trust-badge">🔒 Конфиденциально</div>
+            <div class="trust-badge">⚡ Ответ за 24ч</div>
+            <div class="trust-badge">💳 Без предоплаты</div>
         </div>
     </div>
 
     <div class="sent-msg" id="sentMsg">
         <div style="font-size:3rem;margin-bottom:12px">✅</div>
-        <h3>Заявка отправлена!</h3>
-        <p>Наш специалист свяжется с вами в ближайшее время</p>
-        <a href="/" style="display:inline-block;margin-top:16px;color:#B80018;text-decoration:none;font-weight:700">← Вернуться на главную</a>
+        <h3 style="font-size:1.2rem;font-weight:700;margin-bottom:8px">Заявка отправлена!</h3>
+        <p style="color:#7a8ba3">Наш специалист свяжется с вами в ближайшее время</p>
+        <a href="/antifraud-kz/" style="display:inline-block;margin-top:16px;color:#B80018;text-decoration:none;font-weight:700">← Вернуться на главную</a>
     </div>
 </div>
 
 <script>
-var selectedType='callback';
-function selectType(type,el){
-    selectedType=type;
-    document.querySelectorAll('.type-btn').forEach(function(b){b.classList.remove('active')});
-    el.classList.add('active');
-}
 function submitForm(){
     var name=document.getElementById('cName').value.trim();
     var phone=document.getElementById('cPhone').value.trim();
+    var type=document.getElementById('cType').value;
     var time=document.getElementById('cTime').value;
     var text=document.getElementById('cText').value.trim();
     if(!name||!phone){alert('Заполните имя и телефон');return}
-    var types={callback:'Обратный звонок',consult:'Консультация',docs:'Получить документ',return:'Возврат средств',check:'Проверка организации',other:'Другое'};
+    if(!type){alert('Выберите причину обращения');return}
+    var types={callback:'Обратный звонок',consult:'Консультация юриста',docs:'Получить документ',return:'Возврат средств',check:'Проверка организации',chargeback:'Чарджбэк',complaint:'Жалоба в АРРФР',court:'Подготовка иска',police:'Обращение в полицию',crypto:'Проблема с криптой',credit:'Проблемы с кредитом',insurance:'Страховой случай',other:'Другое'};
     var times={any:'В любое время',morning:'Утром (9-12)',afternoon:'Днём (12-17)',evening:'Вечером (17-20)'};
-    var msg='📋 Заявка с сайта\n\n📞 Тип: '+(types[selectedType]||selectedType)+'\n👤 Имя: '+name+'\n📱 Телефон: '+phone+'\n⏰ Удобное время: '+(times[time]||time)+'\n💬 '+text;
+    var msg='📋 Заявка с сайта\n\n📞 Тип: '+(types[type]||type)+'\n👤 Имя: '+name+'\n📱 Телефон: '+phone+'\n⏰ Удобное время: '+(times[time]||time)+'\n💬 '+text;
     fetch('https://api.telegram.org/bot8829750295:AAEdnt-7FPCVuVbgj6tgn7eC2_2LpY5VHCk/sendMessage',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chat_id:'8471070560',text:msg})}).then(function(r){return r.json()}).then(function(d){
         if(d.ok){
             document.getElementById('formBox').style.display='none';
