@@ -8,6 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <script>tailwind.config={theme:{extend:{colors:{primary:'#B80018',gold:'#C8A000',dark:'#1A1A1A',darker:'#000000'},fontFamily:{heading:['Oswald','sans-serif'],body:['PT Sans','sans-serif']}}}}</script>
+<link rel="stylesheet" href="/antifraud-kz/assets/css/styles.css">
 <style>
 body{background:#000;color:#fff;font-family:'PT Sans',sans-serif;padding-bottom:80px}
 .wrap{max-width:900px;margin:0 auto;padding:clamp(20px,5vw,40px) clamp(16px,4vw,20px)}
@@ -15,8 +16,8 @@ body{background:#000;color:#fff;font-family:'PT Sans',sans-serif;padding-bottom:
 .wrap>p{color:#7a8ba3;text-align:center;margin-bottom:32px;font-size:1.05rem;line-height:1.6}
 .cat-title{font-family:'Oswald',sans-serif;font-weight:700;font-size:1.1rem;margin:32px 0 16px;padding-bottom:8px;border-bottom:1px solid rgba(255,255,255,.06);display:flex;align-items:center;gap:10px}
 .svc-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(260px,1fr));gap:12px}
-.svc{background:#1A1A1A;border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:16px;transition:all .2s}
-.svc:hover{border-color:rgba(184,0,24,.2)}
+.svc{background:rgba(26,26,26,0.5);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:16px;transition:all .4s cubic-bezier(0.16,1,0.3,1)}
+.svc:hover{border-color:rgba(184,0,24,.2);transform:translateY(-3px);box-shadow:0 8px 32px rgba(0,0,0,0.3)}
 .svc-header{display:flex;justify-content:space-between;align-items:flex-start;margin-bottom:6px}
 .svc-name{font-weight:700;font-size:.92rem;flex:1}
 .svc-price{font-family:'Oswald',sans-serif;font-weight:700;color:#C8A000;font-size:.95rem;white-space:nowrap;margin-left:12px}
@@ -34,12 +35,12 @@ body{background:#000;color:#fff;font-family:'PT Sans',sans-serif;padding-bottom:
 </head>
 <body>
 <div class="wrap" style="padding-top:100px">
-    <h1>Услуги и <span style="color:#B80018">цены</span></h1>
-    <p>Прозрачные цены. Без скрытых платежей. Первая консультация — бесплатно.</p>
+    <h1 data-reveal>Услуги и <span style="color:#B80018" class="glow-text">цены</span></h1>
+    <p data-reveal>Прозрачные цены. Без скрытых платежей. Первая консультация — бесплатно.</p>
 
     <!-- КОНСУЛЬТАЦИИ -->
-    <div class="cat-title">💬 Консультации</div>
-    <div class="svc-grid" id="cat1"></div>
+    <div class="cat-title" data-reveal>💬 Консультации</div>
+    <div class="svc-grid" id="cat1" data-stagger data-stagger-delay="50"></div>
 
     <!-- ПРОВЕРКА -->
     <div class="cat-title">🔍 Проверка и анализ</div>
@@ -80,9 +81,9 @@ body{background:#000;color:#fff;font-family:'PT Sans',sans-serif;padding-bottom:
     </div>
 
     <!-- CTA -->
-    <div style="text-align:center;margin-top:40px;padding:32px;background:#1A1A1A;border:1px solid rgba(255,255,255,.06);border-radius:16px">
+    <div style="text-align:center;margin-top:40px;padding:32px;background:#1A1A1A;border:1px solid rgba(255,255,255,.06);border-radius:16px" data-reveal>
         <p style="color:#7a8ba3;margin-bottom:16px;font-size:1rem">Начните с бесплатной консультации — мы оценим ситуацию</p>
-        <a href="/antifraud-kz/quiz.html" style="display:inline-flex;align-items:center;gap:10px;padding:16px 32px;background:linear-gradient(135deg,#B80018,#8B0012);color:#fff;border-radius:12px;font-family:Oswald,sans-serif;font-weight:700;font-size:1rem;text-decoration:none;transition:all .2s">ОСТАВИТЬ ЗАЯВКУ</a>
+        <a href="/antifraud-kz/quiz.html" class="btn-ripple" style="display:inline-flex;align-items:center;gap:10px;padding:16px 32px;background:linear-gradient(135deg,#B80018,#8B0012);color:#fff;border-radius:12px;font-family:Oswald,sans-serif;font-weight:700;font-size:1rem;text-decoration:none;transition:all .2s glow-box">ОСТАВИТЬ ЗАЯВКУ</a>
     </div>
 </div>
 
@@ -219,6 +220,7 @@ function toggleFAQ(i){
 renderServices();
 renderFAQ();
 </script>
+<script src="/antifraud-kz/assets/js/effects.js"></script>
 <script src="/antifraud-kz/assets/js/nav.js"></script>
 </body>
 </html>

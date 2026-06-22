@@ -8,14 +8,15 @@
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=PT+Sans:wght@400;600;700&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <script>tailwind.config={theme:{extend:{colors:{primary:'#B80018',gold:'#C8A000',dark:'#111111',darker:'#000000'},fontFamily:{heading:['Oswald','sans-serif'],body:['PT Sans','sans-serif']}}}}</script>
+<link rel="stylesheet" href="/antifraud-kz/assets/css/styles.css">
 <style>
 body{background:#000;color:#fff;font-family:'PT Sans',sans-serif;padding-bottom:80px}
 .dg{max-width:900px;margin:0 auto;padding:clamp(20px,5vw,40px) clamp(16px,4vw,16px)}
 .dg h1{font-size:clamp(1.6rem,4vw,2.2rem);font-weight:700;margin-bottom:8px;text-align:center}
 .dg>p{color:#7a8ba3;text-align:center;margin-bottom:32px;font-size:.92rem}
 .tmpl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;margin-bottom:32px}
-.tmpl-card{background:#1A1A1A;border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:20px;cursor:pointer;transition:all .2s}
-.tmpl-card:hover{border-color:rgba(184,0,24,.3);transform:translateY(-2px)}
+.tmpl-card{background:rgba(26,26,26,0.5);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:20px;cursor:pointer;transition:all .4s cubic-bezier(0.16,1,0.3,1)}
+.tmpl-card:hover{border-color:rgba(184,0,24,.3);transform:translateY(-4px);box-shadow:0 12px 48px rgba(0,0,0,0.4)}
 .tmpl-card.selected{border-color:#B80018;background:rgba(184,0,24,.05)}
 .tmpl-icon{font-size:2rem;margin-bottom:8px}
 .tmpl-name{font-weight:700;font-size:.95rem;margin-bottom:4px}
@@ -54,12 +55,12 @@ body{background:#000;color:#fff;font-family:'PT Sans',sans-serif;padding-bottom:
 </head>
 <body>
 <div class="dg" style="padding-top:100px">
-    <h1>📄 Генерация документов</h1>
-    <p>Юридический конструктор: выберите шаблон, оформите, скачайте PDF</p>
+    <h1 data-reveal>📄 Генерация документов</h1>
+    <p data-reveal>Юридический конструктор: выберите шаблон, оформите, скачайте PDF</p>
 
     <!-- Step 1: Template Selection -->
     <h2 style="font-family:'Oswald',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:12px">Выберите тип документа</h2>
-    <div class="tmpl-grid" id="tmplGrid">
+    <div class="tmpl-grid" id="tmplGrid" data-stagger data-stagger-delay="50">
         <div class="tmpl-card" onclick="selectTemplate('aml')">
             <div class="tmpl-icon">🏛️</div>
             <div class="tmpl-name">Уведомление AML</div>
@@ -226,6 +227,7 @@ function generatePDF(){
     btn.innerHTML='📥 Скачать PDF';
 }
 </script>
+<script src="/antifraud-kz/assets/js/effects.js"></script>
 <script src="/antifraud-kz/assets/js/nav.js"></script>
 </body>
 </html>

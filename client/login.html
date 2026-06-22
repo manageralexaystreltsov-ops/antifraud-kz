@@ -3,165 +3,182 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Вход — Личный кабинет — Антифрод Центр</title>
+<title>Личный кабинет — Антифрод Центр Казахстан</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
-<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=PT+Sans:wght@400;700&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <script>tailwind.config={theme:{extend:{colors:{primary:'#B80018',gold:'#C8A000',dark:'#1A1A1A',darker:'#000000'},fontFamily:{heading:['Oswald','sans-serif'],body:['PT Sans','sans-serif']}}}}</script>
+<link rel="stylesheet" href="/antifraud-kz/assets/css/styles.css">
 <style>
-body{background:#000;color:#fff;font-family:'PT Sans',sans-serif;padding-bottom:40px}
-.wrap{max-width:600px;margin:0 auto;padding:20px 16px}
-.login-box{background:#1A1A1A;border:1px solid rgba(255,255,255,.06);border-radius:20px;padding:32px;margin-bottom:20px}
-.logo{text-align:center;margin-bottom:24px}
-.logo-icon{width:56px;height:56px;background:linear-gradient(135deg,#B80018,#8B0012);border-radius:50%;display:flex;align-items:center;justify-content:center;margin:0 auto 12px}
-.logo h1{font-family:'Oswald',sans-serif;font-size:1.2rem;font-weight:700}
-.logo p{color:#7a8ba3;font-size:.82rem}
-.tabs{display:flex;gap:4px;margin-bottom:20px;background:rgba(255,255,255,.03);border-radius:10px;padding:4px}
-.tab{flex:1;padding:10px;text-align:center;border-radius:8px;cursor:pointer;font-size:.82rem;font-weight:600;color:#7a8ba3;border:none;background:transparent;font-family:'PT Sans',sans-serif;transition:all .2s}
-.tab.active{color:#fff;background:rgba(184,0,24,.15);border:1px solid rgba(184,0,24,.3)}
-.form-input{width:100%;padding:14px 16px;background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.08);border-radius:12px;font-size:1rem;color:#fff;font-family:'PT Sans',sans-serif;margin-bottom:12px}
-.form-input::placeholder{color:#555}
-.form-input:focus{border-color:rgba(184,0,24,.4);outline:none}
-.form-label{display:block;font-size:.82rem;color:#7a8ba3;margin-bottom:6px}
-.submit-btn{width:100%;padding:14px;background:linear-gradient(135deg,#B80018,#8B0012);color:#fff;border:none;border-radius:12px;font-family:'Oswald',sans-serif;font-weight:700;font-size:.95rem;cursor:pointer;transition:all .2s}
-.submit-btn:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(184,0,24,.3)}
-.error{color:#fca5a5;font-size:.82rem;margin-top:8px;display:none}
-.hint{font-size:.72rem;color:#555;text-align:center;margin:8px 0}
-.footer-link{text-align:center;margin-top:12px;font-size:.82rem;color:#7a8ba3}
-.footer-link a{color:#B80018;text-decoration:none}
-.client-list{max-height:400px;overflow-y:auto;border:1px solid rgba(255,255,255,.06);border-radius:12px;margin-top:16px}
-.client-list::-webkit-scrollbar{width:6px}
-.client-list::-webkit-scrollbar-track{background:rgba(255,255,255,.02)}
-.client-list::-webkit-scrollbar-thumb{background:rgba(255,255,255,.1);border-radius:3px}
-.client-item{display:flex;justify-content:space-between;align-items:center;padding:12px 16px;border-bottom:1px solid rgba(255,255,255,.04);cursor:pointer;transition:background .2s;font-size:.88rem}
-.client-item:hover{background:rgba(255,255,255,.03)}
-.client-item:last-child{border-bottom:none}
-.client-name{font-weight:600;color:#fff}
+*{box-sizing:border-box}
+body{background:#0a0a0a;color:#fff;font-family:'PT Sans',sans-serif;padding-bottom:80px;min-height:100vh}
+.bg-pattern{position:fixed;top:0;left:0;width:100%;height:100%;background-image:radial-gradient(rgba(184,0,24,.08) 1px,transparent 1px);background-size:40px 40px;pointer-events:none;z-index:0}
+.wrap{max-width:680px;margin:0 auto;padding:clamp(24px,5vw,48px) clamp(16px,4vw,24px);position:relative;z-index:1}
+.hero-section{text-align:center;margin-bottom:32px}
+.hero-icon{width:72px;height:72px;background:linear-gradient(135deg,#B80018,#8B0012);border-radius:20px;display:flex;align-items:center;justify-content:center;margin:0 auto 16px;box-shadow:0 8px 32px rgba(184,0,24,.25)}
+.hero-section h1{font-family:'Oswald',sans-serif;font-size:clamp(1.6rem,4vw,2rem);font-weight:700;margin-bottom:6px}
+.hero-section p{color:#7a8ba3;font-size:.92rem;max-width:420px;margin:0 auto;line-height:1.6}
+.search-frame{background:rgba(26,26,26,0.6);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border:1px solid rgba(255,255,255,.06);border-radius:20px;padding:24px;margin-bottom:24px;box-shadow:0 8px 48px rgba(0,0,0,0.3)}
+.search-row{display:flex;gap:10px}
+.search-input{flex:1;padding:16px 20px;background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.08);border-radius:14px;font-size:1rem;color:#fff;font-family:'PT Sans',sans-serif;transition:border-color .3s}
+.search-input::placeholder{color:#555;font-size:.92rem}
+.search-input:focus{border-color:rgba(184,0,24,.4);outline:none}
+.search-btn{padding:16px 28px;background:linear-gradient(135deg,#B80018,#8B0012);color:#fff;border:none;border-radius:14px;font-family:'Oswald',sans-serif;font-weight:700;font-size:.92rem;cursor:pointer;white-space:nowrap;transition:all .3s}
+.search-btn:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(184,0,24,.25)}
+.search-stats{display:flex;justify-content:space-between;align-items:center;margin-top:14px;padding-top:14px;border-top:1px solid rgba(255,255,255,.04)}
+.search-stats span{font-size:.78rem;color:#7a8ba3}
+.search-stats strong{color:#fff}
+.results-info{display:flex;align-items:center;gap:8px;padding:10px 16px;background:rgba(184,0,24,.06);border:1px solid rgba(184,0,24,.12);border-radius:10px;margin-top:12px;font-size:.82rem;color:#e8ecf4;display:none}
+.client-list{display:grid;gap:10px}
+.client-item{display:flex;align-items:center;gap:16px;padding:16px 20px;background:rgba(26,26,26,0.5);backdrop-filter:blur(8px);-webkit-backdrop-filter:blur(8px);border:1px solid rgba(255,255,255,.06);border-radius:16px;cursor:pointer;transition:all .4s cubic-bezier(0.16,1,0.3,1)}
+.client-item:hover{border-color:rgba(184,0,24,.25);transform:translateY(-2px);box-shadow:0 8px 32px rgba(0,0,0,0.3)}
+.client-avatar{width:52px;height:52px;border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;font-weight:700;flex-shrink:0;font-family:'Oswald',sans-serif}
+.client-info{flex:1;min-width:0}
+.client-name{font-weight:700;font-size:.92rem;margin-bottom:2px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
 .client-meta{font-size:.78rem;color:#7a8ba3}
-.client-status{font-size:.72rem;padding:3px 8px;border-radius:100px;font-weight:600}
-.s-done{background:rgba(16,185,129,.1);color:#6ee7b7}
-.s-process{background:rgba(245,158,11,.1);color:#fbbf24}
-.client-count{font-size:.78rem;color:#7a8ba3;text-align:center;padding:8px;border-bottom:1px solid rgba(255,255,255,.04)}
+.client-right{text-align:right;flex-shrink:0}
+.client-amount{font-family:'Oswald',sans-serif;font-weight:700;font-size:1rem;white-space:nowrap}
+.client-id{font-size:.7rem;color:#7a8ba3;margin-top:2px}
+.status-dot{display:inline-block;width:8px;height:8px;border-radius:50%;margin-right:6px}
+.status-dot.process{background:#fbbf24;box-shadow:0 0 8px rgba(251,191,36,.4)}
+.status-dot.done{background:#10b981;box-shadow:0 0 8px rgba(16,185,129,.4)}
+.status-dot.new{background:#818cf8;box-shadow:0 0 8px rgba(129,140,248,.4)}
+.empty-state{text-align:center;padding:40px 20px}
+.empty-state-icon{font-size:3rem;margin-bottom:12px}
+.empty-state h3{font-family:'Oswald',sans-serif;font-weight:700;font-size:1.1rem;margin-bottom:6px}
+.empty-state p{color:#7a8ba3;font-size:.85rem}
+.quick-actions{display:flex;gap:10px;justify-content:center;margin-top:20px;flex-wrap:wrap}
+.quick-btn{padding:10px 20px;border-radius:12px;font-size:.82rem;font-weight:600;cursor:pointer;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);color:#e8ecf4;text-decoration:none;transition:all .3s;display:flex;align-items:center;gap:8px}
+.quick-btn:hover{background:rgba(184,0,24,.1);border-color:rgba(184,0,24,.2);color:#fff;text-decoration:none}
+@media(max-width:500px){.search-row{flex-direction:column}.search-btn{width:100%}.client-item{padding:14px 16px}.client-amount{font-size:.88rem}}
+.section-title{font-family:'Oswald',sans-serif;font-size:.85rem;font-weight:700;color:#7a8ba3;text-transform:uppercase;letter-spacing:1px;margin-bottom:14px;display:flex;align-items:center;gap:10px}
+.section-title::after{content:'';flex:1;height:1px;background:rgba(255,255,255,.06)}
 </style>
 </head>
 <body>
-<div class="wrap" style="padding-top:40px">
-    <div class="login-box">
-        <div class="logo">
-            <div class="logo-icon">
-                <svg style="width:28px;height:28px;color:#fff" fill="currentColor" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
-            </div>
-            <h1>АНТИФРОД ЦЕНТР</h1>
-            <p>Личный кабинет клиента</p>
+<div class="bg-pattern"></div>
+<div class="wrap">
+    <div class="hero-section" data-reveal>
+        <div class="hero-icon">
+            <svg style="width:32px;height:32px;color:#fff" fill="currentColor" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg>
         </div>
-
-        <div class="tabs">
-            <button class="tab active" onclick="switchTab('iin',this)">По ИИН</button>
-            <button class="tab" onclick="switchTab('case',this)">По номеру дела</button>
-            <button class="tab" onclick="switchTab('phone',this)">По телефону</button>
-        </div>
-
-        <div id="tab-iin">
-            <label class="form-label">ИИН (12 цифр)</label>
-            <input type="text" class="form-input" id="iinInput" placeholder="920515301456" maxlength="12" oninput="this.value=this.value.replace(/[^0-9]/g,'');filterClients()">
-        </div>
-        <div id="tab-case" style="display:none">
-            <label class="form-label">Номер дела</label>
-            <input type="text" class="form-input" id="caseInput" placeholder="AF-2026-0847" oninput="filterClients()">
-        </div>
-        <div id="tab-phone" style="display:none">
-            <label class="form-label">Телефон</label>
-            <input type="text" class="form-input" id="phoneInput" placeholder="+7 701 234 56 78" oninput="filterClients()">
-        </div>
-
-        <div id="loginError" class="error"></div>
-        <button class="submit-btn" onclick="findCase()">НАЙТИ МОЁ ДЕЛО →</button>
-        <div class="footer-link">Нет номера дела? <a href="/antifraud-kz/quiz.html">Оставьте заявку</a> или позвоните: <strong style="color:#C8A000">1434</strong></div>
+        <h1>ЛИЧНЫЙ КАБИНЕТ КЛИЕНТА</h1>
+        <p>Введите номер дела, ИИН или телефон — мы покажем статус и все документы по вашему обращению</p>
     </div>
 
-    <!-- Список клиентов -->
-    <div class="client-list" id="clientList">
-        <div id="clientItems"></div>
+    <div class="search-frame glass-card" data-reveal>
+        <div class="search-row">
+            <input type="text" class="search-input" id="searchInput" placeholder="Поиск по номеру дела, ИИН или телефону..." autocomplete="off" oninput="filterCases()" onkeydown="if(event.key==='Enter')filterCases()">
+            <button class="search-btn btn-ripple" onclick="filterCases()">НАЙТИ</button>
+        </div>
+        <div class="results-info" id="resultsInfo"></div>
+        <div class="search-stats">
+            <span>Всего дел: <strong id="totalCases">0</strong></span>
+            <span>В работе: <strong id="processCount" style="color:#fbbf24">0</strong> · Завершено: <strong id="doneCount" style="color:#10b981">0</strong></span>
+        </div>
+    </div>
+
+    <div class="section-title">ДЕЛА КЛИЕНТОВ</div>
+    <div class="client-list" id="clientList" data-stagger data-stagger-delay="50">
+        <div class="empty-state">
+            <div class="empty-state-icon">⏳</div>
+            <h3>Загрузка данных...</h3>
+            <p>Пожалуйста, подождите</p>
+        </div>
+    </div>
+
+    <div class="quick-actions">
+        <a href="/antifraud-kz/quiz.html" class="quick-btn">📝 Оставить заявку</a>
+        <a href="/antifraud-kz/case.html" class="quick-btn">🔍 Отследить дело</a>
+        <a href="tel:1434" class="quick-btn" style="color:#C8A000">📞 1434</a>
     </div>
 </div>
 
 <script>
-var currentTab='iin';
-var allClients=[];
+var ALL_CASES=[];
+var FILTERED=[];
 
-(function(){
-    var adminClients=JSON.parse(localStorage.getItem('admin_clients')||'[]');
-    adminClients.forEach(function(c){
-        allClients.push({id:c.id,name:c.name,city:c.city||'',status:c.status||'new',amount:c.amount||'',iin:c.iin||'',phone:c.phone||'',_admin:true});
+function init(){
+    // Load cases from JSON
+    fetch('/antifraud-kz/data/cases.json').then(function(r){return r.json()}).then(function(data){
+        ALL_CASES=data.cases.map(function(c,i){return {source:'json',id:c.id,name:c.client.name,iin:c.client.iin||'',phone:c.client.phone||'',city:c.client.city||'',status:c.status,statusText:c.statusText,amount:c.lost.total,platform:c.stageName,consultant:c.consultant.name,color:getColor(i)}});
+        // Load admin clients from localStorage
+        try{
+            var admin=JSON.parse(localStorage.getItem('admin_clients')||'[]');
+            admin.forEach(function(c,i){
+                ALL_CASES.push({source:'admin',id:c.id,name:c.name,iin:c.iin||'',phone:c.phone||'',city:c.city||'',status:c.status||'new',statusText:c.status==='done'?'Завершено':'В работе',amount:c.amount||'—',platform:c.desc||'—',consultant:c.consultant||'—',color:getColor(ALL_CASES.length+i+10)});
+            });
+        }catch(e){}
+        renderAll();
+    }).catch(function(e){
+        document.getElementById('clientList').innerHTML='<div class="empty-state"><div class="empty-state-icon">⚠️</div><h3>Ошибка загрузки</h3><p>Попробуйте позже</p></div>';
     });
-    renderClients(allClients);
-})();
-
-function renderClients(list){
-    var html='';
-    var adminList=list.filter(function(c){return c._admin});
-    var fakeList=list.filter(function(c){return !c._admin});
-    if(adminList.length){
-        html+='<div style="padding:10px 16px;font-size:.78rem;color:#C8A000;font-weight:700;border-bottom:1px solid rgba(200,160,0,.2);background:rgba(200,160,0,.05)">ВАШИ РЕАЛЬНЫЕ КЛИЕНТЫ ('+adminList.length+')</div>';
-        adminList.forEach(function(c){
-            var sc=c.status==='done'?'s-done':'s-process';
-            var sl=c.status==='done'?'Завершено':'В работе';
-            html+='<div class="client-item" style="background:rgba(200,160,0,.04)" onclick="loginAs(\''+c.id+'\')">';
-            html+='<div><div class="client-name">'+c.name+'</div><div class="client-meta">'+c.id+' · '+(c.city||'')+' · '+c.amount+'</div></div>';
-            html+='<span class="client-status '+sc+'">'+sl+'</span>';
-            html+='</div>';
-        });
-    }
-    document.getElementById('clientItems').innerHTML=html;
 }
 
-function filterClients(){
-    var q='';
-    if(currentTab==='iin')q=document.getElementById('iinInput').value.trim().toLowerCase();
-    else if(currentTab==='case')q=document.getElementById('caseInput').value.trim().toLowerCase();
-    else q=document.getElementById('phoneInput').value.trim().toLowerCase();
-    if(!q){renderClients(allClients);return}
-    var filtered=allClients.filter(function(c){
-        return c.iin.indexOf(q)>=0||c.id.toLowerCase().indexOf(q)>=0||c.phone.indexOf(q)>=0||c.name.toLowerCase().indexOf(q)>=0;
-    });
-    renderClients(filtered);
+var COLORS=['#B80018','#C8A000','#059669','#2563eb','#7c3aed','#db2777','#dc2626','#0891b2','#ca8a04','#4f46e5'];
+function getColor(i){return COLORS[i%COLORS.length]}
+
+function renderAll(){
+    document.getElementById('totalCases').textContent=ALL_CASES.length;
+    var p=ALL_CASES.filter(function(c){return c.status==='process'}).length;
+    var d=ALL_CASES.filter(function(c){return c.status==='done'}).length;
+    document.getElementById('processCount').textContent=p;
+    document.getElementById('doneCount').textContent=d;
+    FILTERED=ALL_CASES;
+    renderList(ALL_CASES);
 }
 
-function switchTab(tab,btn){
-    currentTab=tab;
-    document.querySelectorAll('.tab').forEach(function(t){t.classList.remove('active')});
-    btn.classList.add('active');
-    document.getElementById('tab-iin').style.display=tab==='iin'?'block':'none';
-    document.getElementById('tab-case').style.display=tab==='case'?'block':'none';
-    document.getElementById('tab-phone').style.display=tab==='phone'?'block':'none';
-    filterClients();
-}
-
-function loginAs(id){
-    var c=allClients.find(function(x){return x.id===id});
-    if(c){
-        localStorage.setItem('currentCase',JSON.stringify({id:c.id,name:c.name,phone:c.phone}));
-        window.location.href='/antifraud-kz/client/dashboard.html?id='+c.id;
-    }
-}
-
-function findCase(){
-    var key='';
-    if(currentTab==='iin')key=document.getElementById('iinInput').value.trim();
-    else if(currentTab==='case')key=document.getElementById('caseInput').value.trim().toUpperCase();
-    else key=document.getElementById('phoneInput').value.trim();
-    if(!key){document.getElementById('loginError').textContent='Введите данные';document.getElementById('loginError').style.display='block';return}
-    var found=allClients.find(function(c){return c._admin&&(c.iin===key||c.id===key||c.phone===key)});
-    if(!found) found=allClients.find(function(c){return c.iin===key||c.id===key||c.phone===key});
-    if(!found){
-        document.getElementById('loginError').textContent='Дело не найдено. Проверьте данные или оставьте заявку.';
-        document.getElementById('loginError').style.display='block';
+function filterCases(){
+    var q=document.getElementById('searchInput').value.trim().toLowerCase();
+    var info=document.getElementById('resultsInfo');
+    if(!q){
+        info.style.display='none';
+        FILTERED=ALL_CASES;
+        renderList(ALL_CASES);
         return;
     }
-    localStorage.setItem('currentCase',JSON.stringify({id:found.id,name:found.name,phone:found.phone}));
-    window.location.href='/antifraud-kz/client/dashboard.html?id='+found.id;
+    FILTERED=ALL_CASES.filter(function(c){
+        return c.id.toLowerCase().indexOf(q)>=0||c.name.toLowerCase().indexOf(q)>=0||c.iin.toLowerCase().indexOf(q)>=0||c.phone.replace(/[^0-9]/g,'').indexOf(q)>=0;
+    });
+    info.style.display='flex';
+    info.innerHTML='🔍 Найдено <strong>'+FILTERED.length+'</strong> '+(FILTERED.length===1?'дело':'дел')+' по запросу «'+document.getElementById('searchInput').value.trim()+'»';
+    renderList(FILTERED);
 }
+
+function renderList(list){
+    var el=document.getElementById('clientList');
+    if(!list.length){
+        el.innerHTML='<div class="empty-state"><div class="empty-state-icon">🔍</div><h3>Ничего не найдено</h3><p>Проверьте номер дела, ИИН или телефон</p></div>';
+        return;
+    }
+    var h='';
+    list.forEach(function(c,i){
+        var sc=c.status==='process'?'process':c.status==='done'?'done':'new';
+        var avatarColor=c.color||'#B80018';
+        var initial=c.name.charAt(0);
+        h+='<div class="client-item" data-reveal onclick="openCase(\''+c.id+'\')" style="'+(i>0?'':'')+'">';
+        h+='<div class="client-avatar" style="background:'+avatarColor+';">'+initial+'</div>';
+        h+='<div class="client-info"><div class="client-name">'+c.name+'</div>';
+        h+='<div class="client-meta">'+c.id+' · '+c.city+'</div></div>';
+        h+='<div class="client-right">';
+        h+='<div class="client-amount" style="color:'+(c.status==='done'?'#10b981':'#fff')+'">'+(typeof c.amount==='number'?c.amount.toString().replace(/\B(?=(\d{3})+(?!\d))/g,' ')+' ₸':c.amount)+'</div>';
+        h+='<div class="client-id"><span class="status-dot '+sc+'"></span>'+c.statusText+'</div>';
+        h+='</div></div>';
+    });
+    el.innerHTML=h;
+}
+
+function openCase(id){
+    var c=ALL_CASES.find(function(x){return x.id===id});
+    if(c){
+        localStorage.setItem('currentCase',JSON.stringify({id:c.id,name:c.name,phone:c.phone}));
+    }
+    window.location.href='/antifraud-kz/client/dashboard.html?id='+id;
+}
+
+init();
 </script>
+<script src="/antifraud-kz/assets/js/effects.js"></script>
 <script src="/antifraud-kz/assets/js/nav.js"></script>
 </body>
 </html>

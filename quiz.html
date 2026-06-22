@@ -8,30 +8,34 @@
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <script>tailwind.config={theme:{extend:{colors:{primary:'#B80018',gold:'#C8A000',dark:'#1A1A1A',darker:'#000000'},fontFamily:{heading:['Oswald','sans-serif'],body:['PT Sans','sans-serif']}}}}</script>
+<link rel="stylesheet" href="/antifraud-kz/assets/css/styles.css">
 <style>
 body{background:#000;padding-bottom:70px}
 .qz{max-width:500px;margin:0 auto;padding:clamp(20px,5vw,40px) clamp(16px,4vw,20px)}
 .qz h1{font-size:clamp(1.4rem,4vw,1.8rem);font-weight:900;margin-bottom:6px;text-align:center}
 .qz>p{color:#7a8ba3;text-align:center;margin-bottom:24px;font-size:.88rem}
 .qz-progress{margin-bottom:24px}
-.qz-bar{height:3px;background:rgba(255,255,255,.06);border-radius:4px;overflow:hidden}
-.qz-bar-fill{height:100%;background:linear-gradient(90deg,#B80018,#C8A000);border-radius:4px;transition:width .5s}
-.qz-step{display:none;animation:fadeIn .4s ease}
-.qz-step.active{display:block}
-@keyframes fadeIn{from{opacity:0;transform:translateY(10px)}to{opacity:1;transform:translateY(0)}}
+.qz-bar{height:4px;background:rgba(255,255,255,.06);border-radius:4px;overflow:hidden;position:relative}
+.qz-bar-fill{height:100%;background:linear-gradient(90deg,#B80018,#C8A000);border-radius:4px;transition:width .6s cubic-bezier(0.16,1,0.3,1);position:relative}
+.qz-bar-fill::after{content:'';position:absolute;top:0;left:0;right:0;bottom:0;background:linear-gradient(90deg,transparent,rgba(255,255,255,0.15),transparent);animation:shimmer 2s infinite}
+.qz-step{display:none}
+.qz-step.active{display:block;animation:slideIn .45s cubic-bezier(0.16,1,0.3,1) forwards}
+.qz-step.slide-out{animation:slideOut .3s cubic-bezier(0.16,1,0.3,1) forwards}
+@keyframes slideIn{from{opacity:0;transform:translateX(40px)}to{opacity:1;transform:translateX(0)}}
+@keyframes slideOut{from{opacity:1;transform:translateX(0)}to{opacity:0;transform:translateX(-40px)}}
 .qz-q{font-size:1rem;font-weight:800;color:#fff;margin-bottom:16px;line-height:1.4}
 .qz-opts{display:grid;gap:8px}
-.qz-opt{padding:14px 16px;background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.08);border-radius:12px;cursor:pointer;transition:all .2s;font-size:.88rem;color:#e8ecf4;text-align:center;font-family:'PT Sans',sans-serif;width:100%}
-.qz-opt:hover{border-color:rgba(184,0,24,.3);background:rgba(184,0,24,.05);color:#fff}
-.qz-opt:active{transform:scale(.98)}
-.qz-input{width:100%;padding:14px 16px;background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.08);border-radius:12px;font-size:.95rem;color:#fff;font-family:'PT Sans',sans-serif;margin-bottom:12px}
+.qz-opt{padding:14px 16px;background:rgba(255,255,255,.03);border:1.5px solid rgba(255,255,255,.08);border-radius:12px;cursor:pointer;transition:all .25s cubic-bezier(0.16,1,0.3,1);font-size:.88rem;color:#e8ecf4;text-align:center;font-family:'PT Sans',sans-serif;width:100%;position:relative;overflow:hidden}
+.qz-opt:hover{border-color:rgba(184,0,24,.3);background:rgba(184,0,24,.05);color:#fff;transform:translateY(-1px)}
+.qz-opt:active{transform:scale(.97)}
+.qz-input{width:100%;padding:14px 16px;background:rgba(255,255,255,.04);border:1.5px solid rgba(255,255,255,.08);border-radius:12px;font-size:.95rem;color:#fff;font-family:'PT Sans',sans-serif;margin-bottom:12px;transition:all .3s}
 .qz-input::placeholder{color:#555}
-.qz-input:focus{border-color:rgba(184,0,24,.4);outline:none}
+.qz-input:focus{border-color:rgba(184,0,24,.4);outline:none;box-shadow:0 0 0 3px rgba(184,0,24,.1)}
 .qz-label{font-size:.82rem;color:#7a8ba3;margin-bottom:6px;display:block}
-.qz-btn{padding:14px;background:linear-gradient(135deg,#B80018,#8B0012);color:#fff;border:none;border-radius:12px;font-family:'Oswald',sans-serif;font-weight:700;font-size:.95rem;cursor:pointer;width:100%;transition:all .2s}
+.qz-btn{padding:14px;background:linear-gradient(135deg,#B80018,#8B0012);color:#fff;border:none;border-radius:12px;font-family:'Oswald',sans-serif;font-weight:700;font-size:.95rem;cursor:pointer;width:100%;transition:all .2s;position:relative;overflow:hidden}
 .qz-btn:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(184,0,24,.3)}
-.qz-back{background:transparent;border:1px solid rgba(255,255,255,.1);color:#7a8ba3;padding:10px;border-radius:10px;cursor:pointer;font-size:.82rem;font-family:'PT Sans',sans-serif;margin-top:8px}
-.qz-back:hover{color:#fff}
+.qz-back{background:transparent;border:1px solid rgba(255,255,255,.1);color:#7a8ba3;padding:10px;border-radius:10px;cursor:pointer;font-size:.82rem;font-family:'PT Sans',sans-serif;margin-top:8px;transition:all .2s}
+.qz-back:hover{color:#fff;border-color:rgba(255,255,255,.2)}
 /* Loader */
 .qz-loader{display:none;text-align:center;padding:40px 0;animation:fadeIn .4s ease}
 .qz-loader.active{display:block}
@@ -46,7 +50,7 @@ body{background:#000;padding-bottom:70px}
 /* Done */
 .qz-done{display:none;text-align:center;animation:fadeIn .5s ease}
 .qz-done.active{display:block}
-.done-icon{font-size:4rem;margin-bottom:12px;animation:popIn .5s cubic-bezier(.68,-.55,.27,1.55) both}
+.done-icon{font-size:4rem;margin-bottom:12px;animation:popIn .6s cubic-bezier(.68,-.55,.27,1.55) both}
 @keyframes popIn{from{transform:scale(0)}to{transform:scale(1)}}
 .done-title{font-size:1.2rem;font-weight:800;color:#fff;margin-bottom:8px}
 .done-desc{color:#7a8ba3;font-size:.88rem;line-height:1.6;margin-bottom:16px}
@@ -54,9 +58,9 @@ body{background:#000;padding-bottom:70px}
 .done-badge.hope{background:rgba(16,185,129,.1);color:#6ee7b7;border:1px solid rgba(16,185,129,.2)}
 .done-badge.info{background:rgba(99,102,241,.1);color:#818cf8;border:1px solid rgba(99,102,241,.2)}
 .done-contact{display:flex;gap:10px;justify-content:center;margin-top:16px}
-.done-wa{background:#25D366;color:#fff;padding:12px 24px;border-radius:10px;font-weight:700;text-decoration:none;display:flex;align-items:center;gap:8px;transition:all .2s}
+.done-wa{background:#25D366;color:#fff;padding:12px 24px;border-radius:10px;font-weight:700;text-decoration:none;display:flex;align-items:center;gap:8px;transition:all .2s;position:relative;overflow:hidden}
 .done-wa:hover{background:#128C7E;transform:translateY(-1px);color:#fff;text-decoration:none}
-.done-tg{background:#0088cc;color:#fff;padding:12px 24px;border-radius:10px;font-weight:700;text-decoration:none;display:flex;align-items:center;gap:8px;transition:all .2s}
+.done-tg{background:#0088cc;color:#fff;padding:12px 24px;border-radius:10px;font-weight:700;text-decoration:none;display:flex;align-items:center;gap:8px;transition:all .2s;position:relative;overflow:hidden}
 .done-tg:hover{background:#006daa;transform:translateY(-1px);color:#fff;text-decoration:none}
 </style>
 </head>
@@ -161,7 +165,7 @@ body{background:#000;padding-bottom:70px}
     <div class="qz-step" id="s9">
         <div class="qz-q">Всё готово! Отправьте заявку</div>
         <p style="color:#7a8ba3;font-size:.88rem;margin-bottom:16px;line-height:1.6">Мы получим ваши данные и свяжемся с вами для бесплатной консультации</p>
-        <button class="qz-btn" onclick="send()">📨 ОТПРАВИТЬ ЗАЯВКУ</button>
+            <button class="qz-btn btn-ripple" onclick="send()">📨 ОТПРАВИТЬ ЗАЯВКУ</button>
         <button class="qz-back" onclick="go(8)">← Назад</button>
     </div>
 
@@ -196,9 +200,15 @@ body{background:#000;padding-bottom:70px}
 <script>
 var d={type:'',amount:'',fio:'',phone:'',time:'',blocked:'',reported:'',evidence:''};
 function set(k,v,next){d[k]=v;go(next)}
+var currentStep=1;
 function go(n){
-    document.querySelectorAll('.qz-step').forEach(function(s){s.classList.remove('active')});
-    document.getElementById('s'+n).classList.add('active');
+    var current=document.getElementById('s'+currentStep);
+    if(current){current.classList.remove('active');current.classList.add('slide-out');}
+    setTimeout(function(){
+        document.querySelectorAll('.qz-step').forEach(function(s){s.classList.remove('slide-out')});
+        document.getElementById('s'+n).classList.add('active');
+    },200);
+    currentStep=n;
     document.getElementById('bar').style.width=((n)/9*100)+'%';
     window.scrollTo({top:0,behavior:'smooth'});
 }
@@ -250,6 +260,7 @@ function send(){
     });
 }
 </script>
+<script src="/antifraud-kz/assets/js/effects.js"></script>
 <script src="/antifraud-kz/assets/js/nav.js"></script>
 </body>
 </html>

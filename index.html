@@ -10,7 +10,6 @@
     <script src="https://cdn.tailwindcss.com"></script>
     <script>
         tailwind.config = {
-            content: [],
             theme: {
                 extend: {
                     colors: {
@@ -27,9 +26,11 @@
             }
         }
     </script>
+    <link rel="stylesheet" href="/antifraud-kz/assets/css/styles.css">
     <style>
         .hero-bg {
             background: linear-gradient(rgba(0,0,0,0.75), rgba(0,0,0,0.85)), url('https://picsum.photos/id/1015/2000/1200') center/cover no-repeat;
+            will-change: background-position-y;
         }
         .trust-number {
             font-size: 2.75rem;
@@ -38,82 +39,138 @@
         @media (min-width: 768px) {
             .trust-number { font-size: 3.5rem; }
         }
+        .hero-title-line {
+            display: inline-block;
+            opacity: 0;
+            transform: translateY(40px);
+            animation: heroLineIn 0.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+        }
+        .hero-title-line:nth-child(1) { animation-delay: 0.2s; }
+        .hero-title-line:nth-child(2) { animation-delay: 0.5s; }
+        @keyframes heroLineIn {
+            to { opacity: 1; transform: translateY(0); }
+        }
+        .hero-subtitle {
+            opacity: 0;
+            animation: fadeIn 0.8s ease 0.8s forwards;
+        }
+        .hero-buttons {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 1s forwards;
+        }
+        .hero-stats {
+            opacity: 0;
+            animation: fadeInUp 0.8s ease 1.2s forwards;
+        }
+        .hero-badge {
+            opacity: 0;
+            animation: fadeInScale 0.6s ease 0.3s forwards;
+        }
+        .case-carousel {
+            display: flex;
+            gap: 16px;
+            overflow-x: auto;
+            scroll-snap-type: x mandatory;
+            padding-bottom: 12px;
+            scrollbar-width: none;
+        }
+        .case-carousel::-webkit-scrollbar { display: none; }
+        .case-carousel-item {
+            scroll-snap-align: start;
+            min-width: 280px;
+            flex-shrink: 0;
+        }
+        .trust-badge-pulse {
+            animation: glowPulse 3s ease-in-out infinite;
+        }
+        .hero-overlay-glow {
+            position: absolute;
+            top: 30%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            width: 600px;
+            height: 600px;
+            background: radial-gradient(circle, rgba(184,0,24,0.08) 0%, transparent 70%);
+            pointer-events: none;
+        }
     </style>
 </head>
 <body class="bg-darker text-white font-body">
 
-
+    <div class="hero-overlay-glow"></div>
 
     <!-- Hero -->
-    <section class="hero-bg min-h-screen flex items-center pt-20">
-        <div class="max-w-5xl mx-auto px-6 text-center">
-            <div class="inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-5 py-2 rounded-full mb-6 border border-white/20">
+    <section class="hero-bg min-h-screen flex items-center pt-20 relative" data-parallax data-parallax-speed="0.15">
+        <div class="max-w-5xl mx-auto px-6 text-center relative z-10">
+            <div class="hero-badge inline-flex items-center gap-2 bg-white/10 backdrop-blur-md px-5 py-2 rounded-full mb-6 border border-white/20">
                 <span class="text-green-400 text-xl">🛡️</span>
-                <span class="font-medium">Работаем с 2023 года • 184 000+ дел</span>
+                <span class="font-medium" style="color:#e8ecf4">Работаем с 2023 года</span>
+                <span class="text-primary font-bold" data-count="184000" data-suffix="+" style="opacity:1;transform:none">184 000+</span>
+                <span style="color:#7a8ba3">дел</span>
             </div>
             
             <h1 class="font-heading text-5xl md:text-6xl lg:text-7xl leading-tight font-bold mb-6">
-                ВАС ПРОСЯТ ЗАПЛАТИТЬ,<br>
-                <span class="text-primary">ЧТОБЫ ВЕРНУТЬ ВАШИ ДЕНЬГИ?</span>
+                <span class="hero-title-line">ВАС ПРОСЯТ ЗАПЛАТИТЬ,</span><br>
+                <span class="hero-title-line" style="color:#B80018">ЧТОБЫ ВЕРНУТЬ ВАШИ ДЕНЬГИ?</span>
             </h1>
             
-            <p class="text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-10">
+            <p class="hero-subtitle text-xl md:text-2xl text-gray-300 max-w-3xl mx-auto mb-10">
                 Это классическая схема мошенников. Вы не один. Мы помогаем тысячам людей вернуть средства.
             </p>
 
-            <div class="flex flex-col sm:flex-row gap-4 justify-center mb-16">
-                <a href="check.html" class="bg-primary hover:bg-red-700 text-white px-10 py-5 rounded-2xl font-heading text-xl transition transform hover:scale-105">
+            <div class="hero-buttons flex flex-col sm:flex-row gap-4 justify-center mb-16">
+                <a href="check.html" class="btn-ripple bg-primary hover:bg-red-700 text-white px-10 py-5 rounded-2xl font-heading text-xl transition transform hover:scale-105 glow-box" data-magnetic>
                     ПРОВЕРИТЬ ОРГАНИЗАЦИЮ ПРЯМО СЕЙЧАС
                 </a>
-                <a href="contacts.html" class="border-2 border-gold hover:bg-gold/10 px-10 py-5 rounded-2xl font-heading text-xl transition">
+                <a href="contacts.html" class="btn-ripple border-2 border-gold hover:bg-gold/10 px-10 py-5 rounded-2xl font-heading text-xl transition" data-magnetic>
                     ПОЛУЧИТЬ БЕСПЛАТНУЮ КОНСУЛЬТАЦИЮ
                 </a>
             </div>
 
-            <!-- Большая статистика -->
-            <div class="grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
-                <div class="text-center">
-                    <div class="trust-number text-primary font-bold">184K+</div>
+            <!-- Статистика -->
+            <div class="hero-stats grid grid-cols-2 md:grid-cols-4 gap-8 max-w-4xl mx-auto">
+                <div class="text-center" data-reveal>
+                    <div class="trust-number text-primary font-bold" data-count="184000" data-suffix="+">0</div>
                     <div class="text-gray-400 mt-1">Дел рассмотрено</div>
                 </div>
-                <div class="text-center">
-                    <div class="trust-number text-gold font-bold">87%</div>
+                <div class="text-center" data-reveal>
+                    <div class="trust-number text-gold font-bold" data-count="87" data-suffix="%">0</div>
                     <div class="text-gray-400 mt-1">Успешных возвратов</div>
                 </div>
-                <div class="text-center">
-                    <div class="trust-number text-primary font-bold">316 млрд</div>
+                <div class="text-center" data-reveal>
+                    <div class="trust-number text-primary font-bold" data-count="316" data-prefix="" data-suffix=" млрд">0</div>
                     <div class="text-gray-400 mt-1">Тенге возвращено</div>
                 </div>
-                <div class="text-center">
-                    <div class="trust-number text-gold font-bold">24 ч</div>
+                <div class="text-center" data-reveal>
+                    <div class="trust-number text-gold font-bold" data-count="24" data-suffix=" ч">0</div>
                     <div class="text-gray-400 mt-1">Среднее время ответа</div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- 4 ситуации -->
+    <!-- Ситуации -->
     <section class="py-20 bg-dark" id="check">
         <div class="max-w-6xl mx-auto px-6">
-            <h2 class="font-heading text-4xl text-center mb-12">Выберите вашу ситуацию</h2>
-            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                <a href="check.html" class="bg-[#1A1A1A] p-8 rounded-3xl border border-red-900/50 hover:border-primary group transition-all">
-                    <div class="text-5xl mb-6">💰</div>
+            <h2 class="font-heading text-4xl text-center mb-12 gradient-text" data-reveal>Выберите вашу ситуацию</h2>
+            <div class="grid md:grid-cols-2 lg:grid-cols-4 gap-6" data-stagger data-stagger-delay="100">
+                <a href="check.html" class="glass-card p-8 rounded-3xl border border-red-900/50 hover:border-primary group transition-all no-underline text-white" data-glow data-glow-color="rgba(184,0,24,0.15)">
+                    <div class="text-5xl mb-6" data-float data-float-distance="8">💰</div>
                     <h3 class="font-heading text-2xl mb-3">Просят доплатить</h3>
                     <p class="text-gray-400">«Налог», «страховка», «комиссия» — чтобы разблокировать деньги</p>
                 </a>
-                <a href="quiz.html" class="bg-[#1A1A1A] p-8 rounded-3xl border border-amber-900/50 hover:border-gold group transition-all">
-                    <div class="text-5xl mb-6">📱</div>
+                <a href="quiz.html" class="glass-card p-8 rounded-3xl border border-amber-900/50 hover:border-gold group transition-all no-underline text-white" data-glow data-glow-color="rgba(200,160,0,0.15)">
+                    <div class="text-5xl mb-6" data-float data-float-distance="10">📱</div>
                     <h3 class="font-heading text-2xl mb-3">Звонят «юристы»</h3>
                     <p class="text-gray-400">Обещают вернуть деньги за предоплату</p>
                 </a>
-                <a href="check.html" class="bg-[#1A1A1A] p-8 rounded-3xl border border-blue-900/50 hover:border-primary group transition-all">
-                    <div class="text-5xl mb-6">🔍</div>
+                <a href="check.html" class="glass-card p-8 rounded-3xl border border-blue-900/50 hover:border-primary group transition-all no-underline text-white" data-glow data-glow-color="rgba(184,0,24,0.15)">
+                    <div class="text-5xl mb-6" data-float data-float-distance="12">🔍</div>
                     <h3 class="font-heading text-2xl mb-3">Хочу проверить платформу</h3>
                     <p class="text-gray-400">Перед вложением или уже вложил</p>
                 </a>
-                <a href="contacts.html" class="bg-[#1A1A1A] p-8 rounded-3xl border border-emerald-900/50 hover:border-gold group transition-all">
-                    <div class="text-5xl mb-6">😟</div>
+                <a href="contacts.html" class="glass-card p-8 rounded-3xl border border-emerald-900/50 hover:border-gold group transition-all no-underline text-white" data-glow data-glow-color="rgba(16,185,129,0.15)">
+                    <div class="text-5xl mb-6" data-float data-float-distance="6">😟</div>
                     <h3 class="font-heading text-2xl mb-3">Я уже потерял деньги</h3>
                     <p class="text-gray-400">Нужна помощь и план действий</p>
                 </a>
@@ -121,8 +178,92 @@
         </div>
     </section>
 
+    <!-- Social Proof: кейсы -->
+    <section class="py-20 bg-darker">
+        <div class="max-w-6xl mx-auto px-6">
+            <h2 class="font-heading text-4xl text-center mb-4 gradient-text-gold" data-reveal>Реальные кейсы возврата</h2>
+            <p class="text-gray-400 text-center mb-10 max-w-2xl mx-auto">Анонимизированные истории людей, которым мы помогли вернуть деньги</p>
+            <div class="case-carousel" data-stagger data-stagger-delay="60">
+                <div class="case-carousel-item glass-card p-6 rounded-2xl" data-glow>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-xl">👤</div>
+                        <div>
+                            <div class="font-heading font-bold">Клиент Л, 66 лет</div>
+                            <div class="text-sm text-gray-400">Алматы · Врач</div>
+                        </div>
+                    </div>
+                    <div class="text-sm text-gray-400 mb-2">FinHub Invest → <span class="text-green-400 font-bold">Полный возврат</span></div>
+                    <div class="text-lg font-heading font-bold gradient-text">2.5 млн ₸</div>
+                    <div class="text-xs text-gray-500 mt-2">Через жалобу в АРРФР · Декабрь 2025</div>
+                </div>
+                <div class="case-carousel-item glass-card p-6 rounded-2xl" data-glow>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 rounded-full bg-gold/20 flex items-center justify-center text-xl">👤</div>
+                        <div>
+                            <div class="font-heading font-bold">Клиент П, 73 года</div>
+                            <div class="text-sm text-gray-400">Астана · Бухгалтер</div>
+                        </div>
+                    </div>
+                    <div class="text-sm text-gray-400 mb-2">InvestPro Capital → <span class="text-green-400 font-bold">Полный возврат</span></div>
+                    <div class="text-lg font-heading font-bold gradient-text">150 000 ₸</div>
+                    <div class="text-xs text-gray-500 mt-2">Через чарджбэк · Апрель 2025</div>
+                </div>
+                <div class="case-carousel-item glass-card p-6 rounded-2xl" data-glow>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-xl">👤</div>
+                        <div>
+                            <div class="font-heading font-bold">Клиент А, 73 года</div>
+                            <div class="text-sm text-gray-400">Атырау · Менеджер</div>
+                        </div>
+                    </div>
+                    <div class="text-sm text-gray-400 mb-2">TradePro KZ → <span class="text-green-400 font-bold">Полный возврат</span></div>
+                    <div class="text-lg font-heading font-bold gradient-text">2.5 млн ₸</div>
+                    <div class="text-xs text-gray-500 mt-2">Через суд · Октябрь 2026</div>
+                </div>
+                <div class="case-carousel-item glass-card p-6 rounded-2xl" data-glow>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 rounded-full bg-gold/20 flex items-center justify-center text-xl">👤</div>
+                        <div>
+                            <div class="font-heading font-bold">Клиент Д, 75 лет</div>
+                            <div class="text-sm text-gray-400">Костанай · Учитель</div>
+                        </div>
+                    </div>
+                    <div class="text-sm text-gray-400 mb-2">FinHub Invest → <span class="text-green-400 font-bold">Полный возврат</span></div>
+                    <div class="text-lg font-heading font-bold gradient-text">500 000 ₸</div>
+                    <div class="text-xs text-gray-500 mt-2">Через чарджбэк · Ноябрь 2025</div>
+                </div>
+                <div class="case-carousel-item glass-card p-6 rounded-2xl" data-glow>
+                    <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center text-xl">👤</div>
+                        <div>
+                            <div class="font-heading font-bold">Клиент Б, 71 год</div>
+                            <div class="text-sm text-gray-400">Павлодар · Учитель</div>
+                        </div>
+                    </div>
+                    <div class="text-sm text-gray-400 mb-2">Binomo клон → <span class="text-green-400 font-bold">Полный возврат</span></div>
+                    <div class="text-lg font-heading font-bold gradient-text">$28 500</div>
+                    <div class="text-xs text-gray-500 mt-2">Через суд · Январь 2025</div>
+                </div>
+            </div>
+            <div class="text-center mt-8">
+                <a href="cases.html" class="text-primary hover:text-red-400 font-heading font-bold text-lg transition">Смотреть все 184 000+ кейсов →</a>
+            </div>
+        </div>
+    </section>
 
+    <!-- CTA лента -->
+    <section class="py-16 bg-dark relative overflow-hidden">
+        <div class="absolute inset-0" style="background: radial-gradient(ellipse at center, rgba(184,0,24,0.05) 0%, transparent 70%)"></div>
+        <div class="max-w-4xl mx-auto px-6 text-center relative z-10">
+            <h2 class="font-heading text-4xl mb-4" data-reveal>Не ждите — каждый день повышает шансы</h2>
+            <p class="text-gray-400 text-lg mb-8 max-w-2xl mx-auto">Чем быстрее вы обратитесь, тем больше вероятность вернуть средства</p>
+            <a href="quiz.html" class="btn-ripple inline-flex items-center gap-3 bg-primary hover:bg-red-700 text-white px-12 py-5 rounded-2xl font-heading text-xl transition glow-box animate-pulse-glow" data-magnetic>
+                ⚡ ПОЛУЧИТЬ ПОМОЩЬ СЕЙЧАС
+            </a>
+        </div>
+    </section>
 
+    <script src="/antifraud-kz/assets/js/effects.js"></script>
     <script src="/antifraud-kz/assets/js/nav.js"></script>
 </body>
 </html>

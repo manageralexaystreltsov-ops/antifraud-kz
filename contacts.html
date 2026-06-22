@@ -8,6 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <script>tailwind.config={theme:{extend:{colors:{primary:'#B80018',gold:'#C8A000',dark:'#1A1A1A',darker:'#000000'},fontFamily:{heading:['Oswald','sans-serif'],body:['PT Sans','sans-serif']}}}}</script>
+<link rel="stylesheet" href="/antifraud-kz/assets/css/styles.css">
 <style>
 body{background:#000;color:#fff;font-family:'PT Sans',sans-serif;padding-bottom:80px}
 .cw{max-width:640px;margin:0 auto;padding:clamp(20px,5vw,40px) clamp(16px,4vw,16px)}
@@ -29,10 +30,10 @@ body{background:#000;color:#fff;font-family:'PT Sans',sans-serif;padding-bottom:
 </head>
 <body>
 <div class="cw" style="padding-top:100px">
-    <h1>✉️ Оставьте заявку</h1>
-    <p>Выберите причину обращения и заполните форму</p>
+    <h1 data-reveal>✉️ Оставьте заявку</h1>
+    <p data-reveal>Выберите причину обращения и заполните форму</p>
 
-    <div class="form-box" id="formBox">
+    <div class="form-box glass-card" id="formBox" data-reveal>
         <div style="text-align:center;margin-bottom:16px">
             <div style="display:inline-flex;align-items:center;gap:8px;background:rgba(16,185,129,.1);border:1px solid rgba(16,185,129,.2);border-radius:100px;padding:6px 16px">
                 <div style="width:6px;height:6px;background:#10b981;border-radius:50%;animation:pulse 2s infinite"></div>
@@ -66,7 +67,7 @@ body{background:#000;color:#fff;font-family:'PT Sans',sans-serif;padding-bottom:
             <select id="cTime"><option value="any">В любое время</option><option value="morning">Утром (9-12)</option><option value="afternoon">Днём (12-17)</option><option value="evening">Вечером (17-20)</option></select>
         </div>
         <div class="fg"><label>Опишите ситуацию</label><textarea id="cText" placeholder="Что произошло, какая сумма, название платформы..."></textarea></div>
-        <button class="submit-btn" onclick="submitForm()">ОТПРАВИТЬ ЗАЯВКУ →</button>
+        <button class="submit-btn btn-ripple" onclick="submitForm()">ОТПРАВИТЬ ЗАЯВКУ →</button>
         <div class="trust-badges">
             <div class="trust-badge">🔒 Конфиденциально</div>
             <div class="trust-badge">⚡ Ответ за 24ч</div>
@@ -102,6 +103,7 @@ function submitForm(){
     }).catch(function(){alert('Ошибка сети')});
 }
 </script>
+<script src="/antifraud-kz/assets/js/effects.js"></script>
 <script src="/antifraud-kz/assets/js/nav.js"></script>
 </body>
 </html>

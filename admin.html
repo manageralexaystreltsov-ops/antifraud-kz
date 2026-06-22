@@ -8,6 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <script>tailwind.config={theme:{extend:{colors:{primary:'#B80018',gold:'#C8A000',dark:'#1A1A1A',darker:'#000000'},fontFamily:{heading:['Oswald','sans-serif'],body:['PT Sans','sans-serif']}}}}</script>
+<link rel="stylesheet" href="/antifraud-kz/assets/css/styles.css">
 <style>
 body{background:#000;color:#fff;font-family:'PT Sans',sans-serif;margin:0}
 .login-box{max-width:400px;margin:100px auto;padding:32px;background:#1A1A1A;border:1px solid rgba(255,255,255,.08);border-radius:16px}
@@ -53,7 +54,7 @@ body{background:#000;color:#fff;font-family:'PT Sans',sans-serif;margin:0}
     </div>
     <input type="password" class="login-input" id="loginPass" placeholder="Пароль" onkeydown="if(event.key==='Enter')login()">
     <p id="loginError" style="color:#fca5a5;font-size:.82rem;display:none;margin-bottom:12px">Неверный пароль</p>
-    <button class="login-btn" onclick="login()">Войти</button>
+    <button class="login-btn btn-ripple" onclick="login()">Войти</button>
     <p style="text-align:center;color:#7a8ba3;font-size:.72rem;margin-top:12px">Демо: admin123</p>
 </div>
 
@@ -249,5 +250,6 @@ function deleteClient(id){
     loadClients();
 }
 </script>
+<script src="/antifraud-kz/assets/js/effects.js"></script>
 </body>
 </html>

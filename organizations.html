@@ -8,6 +8,7 @@
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <script>tailwind.config={theme:{extend:{colors:{primary:'#B80018',gold:'#C8A000',dark:'#1A1A1A',darker:'#000000'},fontFamily:{heading:['Oswald','sans-serif'],body:['PT Sans','sans-serif']}}}}</script>
+<link rel="stylesheet" href="/antifraud-kz/assets/css/styles.css">
 <style>
 body{background:#000;color:#fff;font-family:'PT Sans',sans-serif;padding-bottom:80px}
 .og{max-width:900px;margin:0 auto;padding:clamp(20px,5vw,40px) clamp(16px,4vw,16px)}
@@ -61,10 +62,10 @@ body{background:#000;color:#fff;font-family:'PT Sans',sans-serif;padding-bottom:
 </head>
 <body>
 <div class="og" style="padding-top:100px">
-    <h1>🏛️ Реестр организаций</h1>
-    <p>Куда обращаться при мошенничестве. Выберите организацию и оставьте заявку.</p>
+    <h1 data-reveal>🏛️ Реестр организаций</h1>
+    <p data-reveal>Куда обращаться при мошенничестве. Выберите организацию и оставьте заявку.</p>
     <div class="search-box"><input type="text" id="orgSearch" placeholder="Поиск организации..." oninput="filterOrgs()"></div>
-    <div id="orgList"></div>
+    <div id="orgList" data-stagger data-stagger-delay="60"></div>
 </div>
 
 <div class="modal" id="modal"><div class="modal-inner" style="position:relative">
@@ -163,6 +164,7 @@ function sendForm(){
 
 renderOrgs(orgs);
 </script>
+<script src="/antifraud-kz/assets/js/effects.js"></script>
 <script src="/antifraud-kz/assets/js/nav.js"></script>
 </body>
 </html>

@@ -3,14 +3,15 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Личный кабинет — Антифрод Центр</title>
+<title>Личный кабинет — Антифрод Центр Казахстан</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <script>tailwind.config={theme:{extend:{colors:{primary:'#B80018',gold:'#C8A000',dark:'#1A1A1A',darker:'#000000'},fontFamily:{heading:['Oswald','sans-serif'],body:['PT Sans','sans-serif']}}}}</script>
+<link rel="stylesheet" href="/antifraud-kz/assets/css/styles.css">
 <style>
 body{background:#0a0a0a;color:#fff;font-family:'PT Sans',sans-serif;padding-bottom:80px}
-.topbar{background:#1A1A1A;border-bottom:1px solid rgba(255,255,255,.06);padding:12px 20px;position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center}
+.topbar{background:rgba(26,26,26,0.8);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.06);padding:12px 20px;position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center}
 .topbar-left{display:flex;align-items:center;gap:12px}
 .topbar-logo{width:36px;height:36px;background:linear-gradient(135deg,#B80018,#8B0012);border-radius:10px;display:flex;align-items:center;justify-content:center}
 .topbar-case{font-family:'Oswald',sans-serif;font-size:.85rem;color:#7a8ba3}
@@ -20,12 +21,13 @@ body{background:#0a0a0a;color:#fff;font-family:'PT Sans',sans-serif;padding-bott
 .btn-logout{background:rgba(255,255,255,.05);color:#7a8ba3;border:1px solid rgba(255,255,255,.08)}
 .btn-logout:hover{color:#fff;border-color:rgba(255,255,255,.15)}
 .wrap{max-width:800px;margin:0 auto;padding:20px 16px}
-.card{background:#1A1A1A;border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:20px;margin-bottom:16px}
+.card{background:rgba(26,26,26,0.5);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:20px;margin-bottom:16px;transition:border-color .3s}
+.card:hover{border-color:rgba(255,255,255,.1)}
 .card-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}
 .card-icon{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
 .card-title{font-family:'Oswald',sans-serif;font-weight:700;font-size:1.1rem}
 .card-subtitle{font-size:.82rem;color:#7a8ba3}
-.status-pill{display:inline-block;padding:4px 12px;border-radius:100px;font-size:.75rem;font-weight:700}
+.status-pill{display:inline-block;padding:4px 14px;border-radius:100px;font-size:.75rem;font-weight:700}
 .s-process{background:rgba(245,158,11,.1);color:#fbbf24;border:1px solid rgba(245,158,11,.2)}
 .s-done{background:rgba(16,185,129,.1);color:#6ee7b7;border:1px solid rgba(16,185,129,.2)}
 .s-danger{background:rgba(239,68,68,.1);color:#fca5a5;border:1px solid rgba(239,68,68,.2)}
@@ -37,9 +39,9 @@ body{background:#0a0a0a;color:#fff;font-family:'PT Sans',sans-serif;padding-bott
 .detail-value{color:#fff;font-weight:600}
 .money-block{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:12px;padding:16px;margin-bottom:12px}
 .money-amount{font-family:'Oswald',sans-serif;font-size:1.8rem;font-weight:700}
-.money-label{font-size:.78rem;color:#7a8ba3}
 .money-row{display:flex;gap:12px;margin-bottom:16px}
 .money-item{flex:1;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:16px;text-align:center}
+.money-item .label{font-size:.78rem;color:#7a8ba3;margin-top:4px}
 .tl{position:relative;padding-left:28px}
 .tl::before{content:'';position:absolute;left:10px;top:0;bottom:0;width:2px;background:rgba(255,255,255,.06)}
 .tl-item{position:relative;margin-bottom:16px}
@@ -47,28 +49,32 @@ body{background:#0a0a0a;color:#fff;font-family:'PT Sans',sans-serif;padding-bott
 .tl-dot.done{background:#10b981;border-color:#10b981}
 .tl-dot.active{background:#B80018;border-color:#B80018;box-shadow:0 0 12px rgba(184,0,24,.4)}
 .tl-dot.pending{background:rgba(255,255,255,.06)}
-.tl-content{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04);border-radius:10px;padding:12px 14px}
+.tl-content{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04);border-radius:12px;padding:12px 14px;transition:border-color .3s}
+.tl-content:hover{border-color:rgba(255,255,255,.1)}
 .tl-date{font-size:.72rem;color:#7a8ba3}
 .tl-title{font-weight:700;font-size:.88rem;margin:2px 0}
 .tl-desc{font-size:.82rem;color:#e8ecf4}
 .tl-note{font-size:.75rem;color:#C8A000;margin-top:4px;cursor:pointer}
-.doc-item{display:flex;align-items:center;gap:12px;padding:12px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04);border-radius:10px;margin-bottom:8px}
+.doc-item{display:flex;align-items:center;gap:12px;padding:12px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04);border-radius:12px;margin-bottom:8px;transition:border-color .3s}
+.doc-item:hover{border-color:rgba(255,255,255,.1)}
 .doc-icon{font-size:1.5rem}
 .doc-name{font-size:.88rem;font-weight:600}
 .doc-meta{font-size:.75rem;color:#7a8ba3}
-.doc-download{margin-left:auto;padding:6px 12px;background:rgba(184,0,24,.1);color:#B80018;border-radius:6px;font-size:.75rem;font-weight:600;cursor:pointer;border:none;text-decoration:none}
+.doc-download{margin-left:auto;padding:6px 14px;background:rgba(184,0,24,.1);color:#B80018;border-radius:8px;font-size:.75rem;font-weight:600;cursor:pointer;border:none;text-decoration:none;transition:all .2s}
+.doc-download:hover{background:rgba(184,0,24,.2)}
 .doc-fake{background:rgba(239,68,68,.1);color:#fca5a5;border:1px solid rgba(239,68,68,.2);font-size:.72rem;padding:2px 8px;border-radius:4px;margin-left:8px}
 .chat-msg{margin-bottom:12px;display:flex;gap:10px}
 .chat-msg.client{flex-direction:row-reverse}
-.chat-avatar{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0}
-.chat-bubble{max-width:80%;padding:10px 14px;border-radius:12px;font-size:.88rem;line-height:1.5}
+.chat-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0;overflow:hidden}
+.chat-avatar img{width:100%;height:100%;object-fit:cover}
+.chat-bubble{max-width:80%;padding:10px 14px;border-radius:14px;font-size:.88rem;line-height:1.5}
 .chat-bubble.consultant{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.06)}
 .chat-bubble.client{background:rgba(184,0,24,.15);border:1px solid rgba(184,0,24,.2)}
 .chat-date{font-size:.7rem;color:#7a8ba3;margin-top:4px}
 .chat-input-wrap{display:flex;gap:8px;margin-top:12px}
-.chat-input{flex:1;padding:12px 14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;color:#fff;font-size:.88rem;font-family:'PT Sans',sans-serif}
+.chat-input{flex:1;padding:12px 14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;color:#fff;font-family:'PT Sans',sans-serif}
 .chat-input:focus{outline:none;border-color:rgba(184,0,24,.3)}
-.chat-send{padding:12px 16px;background:linear-gradient(135deg,#B80018,#8B0012);color:#fff;border:none;border-radius:10px;cursor:pointer;font-weight:700}
+.chat-send{padding:12px 16px;background:linear-gradient(135deg,#B80018,#8B0012);color:#fff;border:none;border-radius:12px;cursor:pointer;font-weight:700}
 .emergency-box{background:linear-gradient(135deg,rgba(239,68,68,.1),rgba(239,68,68,.05));border:1px solid rgba(239,68,68,.2);border-radius:16px;padding:20px;text-align:center}
 .emergency-btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:linear-gradient(135deg,#dc2626,#991b1b);color:#fff;border-radius:12px;font-family:'Oswald',sans-serif;font-weight:700;font-size:1rem;cursor:pointer;border:none;transition:all .2s;text-decoration:none;margin:12px 0}
 .emergency-btn:hover{transform:translateY(-1px);color:#fff;text-decoration:none}
@@ -82,12 +88,23 @@ body{background:#0a0a0a;color:#fff;font-family:'PT Sans',sans-serif;padding-bott
 .section-btn.active{background:rgba(184,0,24,.1);color:#fff;border-color:rgba(184,0,24,.3)}
 .section{display:none}
 .section.active{display:block}
-@media(max-width:500px){.money-row{flex-direction:column}}
+/* News card */
+.news-item{display:flex;gap:16px;padding:16px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04);border-radius:14px;margin-bottom:10px;transition:all .3s}
+.news-item:hover{border-color:rgba(255,255,255,.1)}
+.news-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
+.news-content{flex:1}
+.news-title{font-weight:700;font-size:.88rem;margin-bottom:2px}
+.news-desc{font-size:.82rem;color:#7a8ba3;line-height:1.5}
+.news-date{font-size:.7rem;color:#555;margin-top:4px}
+.news-badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:.68rem;font-weight:700;margin-bottom:6px}
+.news-badge.alert{background:rgba(239,68,68,.1);color:#fca5a5}
+.news-badge.info{background:rgba(99,102,241,.1);color:#818cf8}
+.news-badge.success{background:rgba(16,185,129,.1);color:#6ee7b7}
+.consultant-photo{width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,.08)}
+@media(max-width:500px){.money-row{flex-direction:column}.news-item{flex-direction:column}}
 </style>
 </head>
 <body>
-
-<!-- Top Bar -->
 <div class="topbar">
     <div class="topbar-left">
         <div class="topbar-logo"><svg style="width:20px;height:20px;color:#fff" fill="currentColor" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg></div>
@@ -101,17 +118,18 @@ body{background:#0a0a0a;color:#fff;font-family:'PT Sans',sans-serif;padding-bott
 
 <div class="wrap">
     <!-- Section Nav -->
-    <div class="section-nav">
+    <div class="section-nav" data-reveal>
         <button class="section-btn active" onclick="showSection('status',this)">📊 Статус</button>
         <button class="section-btn" onclick="showSection('finance',this)">💰 Финансы</button>
         <button class="section-btn" onclick="showSection('timeline',this)">📋 Таймлайн</button>
         <button class="section-btn" onclick="showSection('docs',this)">📁 Документы</button>
         <button class="section-btn" onclick="showSection('chat',this)">💬 Чат</button>
+        <button class="section-btn" onclick="showSection('news',this)">📰 Новости</button>
     </div>
 
     <!-- STATUS -->
     <div id="status" class="section active">
-        <div class="card">
+        <div class="card" data-reveal>
             <div class="card-header">
                 <div class="card-icon" style="background:rgba(245,158,11,.1)">📊</div>
                 <div><div class="card-title">СТАТУС ВАШЕГО ДЕЛА</div><div class="card-subtitle" id="lastUpdate"></div></div>
@@ -120,12 +138,16 @@ body{background:#0a0a0a;color:#fff;font-family:'PT Sans',sans-serif;padding-bott
             <div class="progress-bar"><div class="progress-fill" id="progressBar" style="width:0%"></div></div>
             <div id="stageInfo"></div>
             <div id="stageWarning" style="margin-top:12px"></div>
+            <div id="progressSkeleton" style="display:none">
+                <div class="af-skeleton" style="height:60px;border-radius:10px;margin-bottom:8px"></div>
+                <div class="af-skeleton" style="height:40px;border-radius:10px;width:70%"></div>
+            </div>
         </div>
     </div>
 
     <!-- FINANCE -->
     <div id="finance" class="section">
-        <div class="card">
+        <div class="card" data-reveal>
             <div class="card-header">
                 <div class="card-icon" style="background:rgba(200,160,0,.1)">💰</div>
                 <div class="card-title">ФИНАНСЫ ВАШЕГО ДЕЛА</div>
@@ -134,7 +156,7 @@ body{background:#0a0a0a;color:#fff;font-family:'PT Sans',sans-serif;padding-bott
             <div id="recoveryBlocks"></div>
             <div id="returnedBlock"></div>
         </div>
-        <div class="card">
+        <div class="card" data-reveal>
             <div class="card-header">
                 <div class="card-icon" style="background:rgba(16,185,129,.1)">💳</div>
                 <div class="card-title">ОПЛАЧЕННЫЕ УСЛУГИ</div>
@@ -145,29 +167,29 @@ body{background:#0a0a0a;color:#fff;font-family:'PT Sans',sans-serif;padding-bott
 
     <!-- TIMELINE -->
     <div id="timeline" class="section">
-        <div class="card">
+        <div class="card" data-reveal>
             <div class="card-header">
                 <div class="card-icon" style="background:rgba(99,102,241,.1)">📋</div>
                 <div class="card-title">ЧТО МЫ ДЕЛАЕМ — ШАГ ЗА ШАГОМ</div>
             </div>
-            <div class="tl" id="timelineList"></div>
+            <div class="tl" id="timelineList" data-stagger data-stagger-delay="80"></div>
         </div>
     </div>
 
     <!-- DOCS -->
     <div id="docs" class="section">
-        <div class="card">
+        <div class="card" data-reveal>
             <div class="card-header">
                 <div class="card-icon" style="background:rgba(184,0,24,.1)">📁</div>
-                <div class="card-title">ВАШИ ДОКУМЕНТЫ</div>
+                <div class="card-title">НАШИ ДОКУМЕНТЫ</div>
             </div>
             <div id="docsOurs"></div>
         </div>
-        <div class="card">
+        <div class="card" data-reveal>
             <div class="card-header">
                 <div class="card-icon" style="background:rgba(239,68,68,.1)">📄</div>
                 <div class="card-title">ДОКУМЕНТЫ МОШЕННИКОВ</div>
-                <span style="font-size:.75rem;color:#fca5a5">Для дела</span>
+                <span style="font-size:.75rem;color:#fca5a5">Приобщены к делу</span>
             </div>
             <div id="docsScammers"></div>
         </div>
@@ -175,22 +197,22 @@ body{background:#0a0a0a;color:#fff;font-family:'PT Sans',sans-serif;padding-bott
 
     <!-- CHAT -->
     <div id="chat" class="section">
-        <div class="card">
+        <div class="card" data-reveal>
             <div class="card-header">
                 <div class="card-icon" style="background:rgba(16,185,129,.1)">💬</div>
-                <div><div class="card-title">ВАШ КОНСУЛЬТАНТ</div><div class="card-subtitle" id="consultantInfo"></div></div>
+                <div><div class="card-title">КОНСУЛЬТАНТ</div><div class="card-subtitle" id="consultantInfo"></div></div>
             </div>
             <div id="chatMessages"></div>
             <div class="chat-input-wrap">
                 <input type="text" class="chat-input" id="chatInput" placeholder="Написать сообщение..." onkeydown="if(event.key==='Enter')sendMsg()">
-                <button class="chat-send" onclick="sendMsg()">→</button>
+                <button class="chat-send btn-ripple" onclick="sendMsg()">→</button>
             </div>
         </div>
-        <div class="emergency-box">
+        <div class="emergency-box" data-reveal>
             <div style="font-size:2rem;margin-bottom:8px">🚨</div>
             <h3 style="font-family:'Oswald',sans-serif;font-weight:700;margin-bottom:4px">ЭКСТРЕННАЯ СВЯЗЬ</h3>
             <p style="color:#7a8ba3;font-size:.85rem;margin-bottom:8px">Мошенники снова вышли на связь?</p>
-            <a href="tel:1434" class="emergency-btn">🚨 ТРЕВОГА — ЗВОНИТЕ ПРЯМО СЕЙЧАС</a>
+            <a href="tel:1434" class="emergency-btn btn-ripple">🚨 ТРЕВОГА — ЗВОНИТЕ 1434</a>
             <div class="rules">
                 <div class="rule no">❌ Не платите ни при каких условиях</div>
                 <div class="rule no">❌ Не отправляйте документы мошенникам</div>
@@ -200,6 +222,24 @@ body{background:#0a0a0a;color:#fff;font-family:'PT Sans',sans-serif;padding-bott
             </div>
         </div>
     </div>
+
+    <!-- NEWS -->
+    <div id="news" class="section">
+        <div class="card" data-reveal>
+            <div class="card-header">
+                <div class="card-icon" style="background:rgba(99,102,241,.1)">📰</div>
+                <div class="card-title">НОВОСТИ И ОБНОВЛЕНИЯ</div>
+            </div>
+            <div id="newsList"></div>
+        </div>
+    </div>
+</div>
+
+<div id="mainSkeleton" style="padding:20px">
+    <div class="af-skeleton" style="height:40px;border-radius:8px;margin-bottom:16px;width:200px"></div>
+    <div class="af-skeleton" style="height:200px;border-radius:14px;margin-bottom:12px"></div>
+    <div class="af-skeleton" style="height:120px;border-radius:14px;margin-bottom:12px"></div>
+    <div class="af-skeleton" style="height:80px;border-radius:14px;width:70%"></div>
 </div>
 
 <script>
@@ -207,135 +247,242 @@ function showSection(id,btn){
     document.querySelectorAll('.section').forEach(function(s){s.classList.remove('active')});
     document.querySelectorAll('.section-btn').forEach(function(b){b.classList.remove('active')});
     document.getElementById(id).classList.add('active');
-    btn.classList.add('active');
+    if(btn)btn.classList.add('active');
     window.scrollTo({top:0,behavior:'smooth'});
 }
 
 var params=new URLSearchParams(window.location.search);
 var caseId=params.get('id')||'AF-2026-0847';
+var CURRENT_DATA=null;
 
-// Also check admin_clients
-    var adminClients=JSON.parse(localStorage.getItem('admin_clients')||'[]');
-    var adminCase=adminClients.find(function(c){return c.id===caseId});
-    if(adminCase){
-        renderCase({
-            id:adminCase.id,
-            client:{name:adminCase.name,phone:adminCase.phone},
-            consultant:{name:adminCase.consultant||'Ожидает назначения',role:'Консультант',phone:'',cases:0},
-            status:adminCase.status==='done'?'done':'process',
-            statusText:adminCase.status==='done'?'Завершено':'В работе',
-            stage:'—',stageName:adminCase.status==='done'?'Завершено':'Новое дело',
-            stageDesc:adminCase.desc||'Ожидает обработки',
-            opened:adminCase.date,lastUpdate:adminCase.date,
-            lost:{bank:0,crypto:0,total:0},
-            recovery:[],returned:0,potentialReturn:0,
-            services:[{name:'Консультация',amount:0,status:'paid',note:'Ожидает'}],
-            nextPayment:null,
-            timeline:[{date:adminCase.date,title:'Заявка создана',desc:'Клиент добавлен в систему',status:'done'}],
-            documents:{ours:[],scammers:[]},
-            chat:[{date:adminCase.date+' 10:00',from:'consultant',text:'Заявка принята. Ожидайте звонка специалиста.'}]
-        });
-        return;
-    }
+document.getElementById('mainSkeleton').style.display='block';
+document.querySelector('.wrap').style.display='none';
+
+function loadCase(){
+    // First check admin_clients
+    try{
+        var adminClients=JSON.parse(localStorage.getItem('admin_clients')||'[]');
+        var adminCase=adminClients.find(function(c){return c.id===caseId});
+        if(adminCase){
+            renderFromAdmin(adminCase);
+            return;
+        }
+    }catch(e){}
+    // Load from JSON
     fetch('/antifraud-kz/data/cases.json').then(function(r){return r.json()}).then(function(data){
-    var c=data.cases.find(function(x){return x.id===caseId});
-    if(!c){document.querySelector('.wrap').innerHTML='<div style="text-align:center;padding:60px"><h2>Дело не найдено</h2></div>';return}
+        var c=data.cases.find(function(x){return x.id===caseId});
+        if(c){renderFromJSON(c);return}
+        // Create fake case if not found
+        renderFake(caseId);
+    }).catch(function(e){
+        renderFake(caseId);
+    });
+}
+
+function renderFromJSON(c){
+    CURRENT_DATA=c;
+    document.getElementById('mainSkeleton').style.display='none';
+    document.querySelector('.wrap').style.display='block';
     renderCase(c);
-}).catch(function(e){
-    console.log('Error:',e);
-    document.querySelector('.wrap').innerHTML='<div style="text-align:center;padding:60px"><h2>Ошибка загрузки данных</h2></div>';
-});
+}
+
+function renderFromAdmin(a){
+    CURRENT_DATA=a;
+    document.getElementById('mainSkeleton').style.display='none';
+    document.querySelector('.wrap').style.display='block';
+    renderCase({
+        id:a.id,
+        client:{name:a.name,phone:a.phone,iin:a.iin||'',city:a.city||'',age:0},
+        consultant:{name:a.consultant||'Ожидает назначения',role:'Консультант',phone:'',cases:0,photo:'https://i.pravatar.cc/100?img=1'},
+        status:a.status==='done'?'done':'process',
+        statusText:a.status==='done'?'Завершено':'В работе',
+        stage:'—',stageName:a.status==='done'?'Завершено':'Новое дело',
+        stageDesc:a.desc||'Ожидает обработки',
+        opened:a.date||'—',lastUpdate:a.date||'—',
+        lost:{bank:0,crypto:0,total:0},
+        recovery:[],returned:0,potentialReturn:0,
+        services:[{name:'Консультация',amount:0,status:'paid',note:'Ожидает'}],
+        nextPayment:null,
+        timeline:[{date:a.date||'—',title:'Заявка создана',desc:'Клиент добавлен в систему',status:'done'}],
+        documents:{ours:[],scammers:[]},
+        chat:[{date:(a.date||'')+' 10:00',from:'consultant',text:'Заявка принята. Ожидайте звонка специалиста.'}]
+    });
+}
+
+function renderFake(id){
+    CURRENT_DATA={id:id};
+    document.getElementById('mainSkeleton').style.display='none';
+    document.querySelector('.wrap').style.display='block';
+    renderCase({
+        id:id,client:{name:'Новый клиент',phone:'+7 700 000 00 00',iin:'—',city:'—',age:0},
+        consultant:{name:'Специалист',role:'Консультант',phone:'',cases:0,photo:'https://i.pravatar.cc/100?img=1'},
+        status:'new',statusText:'Новое',
+        stage:'А',stageName:'Ожидание обработки',
+        stageDesc:'Ваша заявка принята. В ближайшее время с вами свяжется специалист.',
+        opened:new Date().toISOString().slice(0,10),lastUpdate:new Date().toISOString().slice(0,10),
+        lost:{bank:0,crypto:0,total:0},
+        recovery:[],returned:0,potentialReturn:0,
+        services:[],nextPayment:null,
+        timeline:[{date:new Date().toISOString().slice(0,10),title:'Заявка создана',desc:'Ожидайте звонка',status:'active'}],
+        documents:{ours:[],scammers:[]},
+        chat:[{date:new Date().toISOString().slice(0,10)+' 00:00',from:'consultant',text:'Здравствуйте! Ваша заявка принята. Скоро свяжемся.'}]
+    });
+}
 
 function renderCase(c){
     document.getElementById('caseId').textContent=c.id;
     document.getElementById('caseName').textContent=c.client.name.split(' ').slice(0,2).join(' ');
-    
-    // Status
+
     var statusClass=c.status==='done'?'s-done':'s-process';
+    if(c.status==='new')statusClass='s-process';
     document.getElementById('statusBadge').className='status-pill '+statusClass;
     document.getElementById('statusBadge').textContent=c.statusText;
-    document.getElementById('lastUpdate').textContent='Обновлено: '+c.lastUpdate;
-    document.getElementById('progressBar').style.width=(c.status==='done'?100:50)+'%';
-    
-    document.getElementById('stageInfo').innerHTML='<div style="padding:14px;background:rgba(255,255,255,.03);border-radius:10px;border:1px solid rgba(255,255,255,.06)"><div style="font-size:.82rem;color:#7a8ba3;margin-bottom:4px">Вы находитесь на стадии:</div><div style="font-family:Oswald,sans-serif;font-weight:700;font-size:1.1rem;margin-bottom:8px">'+c.stage+' — '+c.stageName+'</div><div style="font-size:.88rem;color:#e8ecf4;line-height:1.6">'+c.stageDesc+'</div></div>';
-    
-    if(c.stageWarning){
-        document.getElementById('stageWarning').innerHTML='<div style="padding:12px;background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.15);border-radius:10px;font-size:.85rem;color:#fbbf24"><strong>⚠ Следующий шаг мошенников:</strong><br>'+c.stageWarning+'</div><div style="margin-top:8px;padding:10px;background:rgba(184,0,24,.08);border:1px solid rgba(184,0,24,.2);border-radius:8px;font-size:.88rem;color:#fff;font-weight:600;text-align:center">НЕ ПЛАТИТЕ НИЧЕГО до консультации с нами</div>';
+    document.getElementById('lastUpdate').textContent='Обновлено: '+(c.lastUpdate||'—');
+
+    var pct=c.status==='done'?100:c.status==='process'?60:10;
+    if(c.timeline){
+        var doneCount=c.timeline.filter(function(t){return t.status==='done'}).length;
+        var totalCount=c.timeline.length;
+        pct=totalCount?Math.round(doneCount/totalCount*100):pct;
     }
-    
+    document.getElementById('progressBar').style.width=pct+'%';
+
+    document.getElementById('stageInfo').innerHTML='<div style="padding:14px;background:rgba(255,255,255,.03);border-radius:10px;border:1px solid rgba(255,255,255,.06)"><div style="font-size:.82rem;color:#7a8ba3;margin-bottom:4px">Стадия:</div><div style="font-family:Oswald,sans-serif;font-weight:700;font-size:1.1rem;margin-bottom:8px">'+(c.stage||'—')+' — '+(c.stageName||'—')+'</div><div style="font-size:.88rem;color:#e8ecf4;line-height:1.6">'+(c.stageDesc||'—')+'</div></div>';
+
+    if(c.stageWarning){
+        document.getElementById('stageWarning').innerHTML='<div style="padding:12px;background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.15);border-radius:10px;font-size:.85rem;color:#fbbf24"><strong>⚠ Следующий шаг мошенников:</strong><br>'+(c.stageWarning||'')+'</div><div style="margin-top:8px;padding:10px;background:rgba(184,0,24,.08);border:1px solid rgba(184,0,24,.2);border-radius:8px;font-size:.88rem;color:#fff;font-weight:600;text-align:center">НЕ ПЛАТИТЕ НИЧЕГО до консультации с нами</div>';
+    }
+
     // Finance
-    document.getElementById('moneyLost').innerHTML='<div class="money-item"><div class="money-amount" style="color:#B80018">'+formatMoney(c.lost.bank)+'</div><div class="money-label">Банк. переводы</div></div><div class="money-item"><div class="money-amount" style="color:#C8A000">'+formatMoney(c.lost.crypto)+'</div><div class="money-label">Крипта</div></div><div class="money-item"><div class="money-amount" style="color:#fff">'+formatMoney(c.lost.total)+'</div><div class="money-label">Итого потеряно</div></div>';
-    
+    if(c.lost){
+        document.getElementById('moneyLost').innerHTML='<div class="money-item"><div class="money-amount" style="color:#B80018">'+formatMoney(c.lost.bank)+'</div><div class="label">Банковские переводы</div></div><div class="money-item"><div class="money-amount" style="color:#C8A000">'+formatMoney(c.lost.crypto)+'</div><div class="label">Криптовалюта</div></div><div class="money-item"><div class="money-amount" style="color:#fff">'+formatMoney(c.lost.total)+'</div><div class="label">Итого потеряно</div></div>';
+    }
+
     var recoveryHtml='';
-    c.recovery.forEach(function(r){
-        var progress=r.maxDays?Math.round(r.day/r.maxDays*100):0;
-        recoveryHtml+='<div class="money-block"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><strong style="font-size:.92rem">'+(r.type==='chargeback'?'Чарджбэк — '+r.bank:r.type==='police'?r.department:'Заявление')+'</strong><span class="status-pill s-process">'+r.statusText+'</span></div><div style="font-size:.88rem;color:#7a8ba3">Сумма: <strong style="color:#fff">'+formatMoney(r.amount)+' ₸</strong></div>';
-        if(r.maxDays){recoveryHtml+='<div class="progress-bar" style="margin:8px 0"><div class="progress-fill" style="width:'+progress+'%"></div></div><div style="font-size:.78rem;color:#7a8ba3">Прошло '+r.day+' из '+r.maxDays+' дней</div>';}
-        if(r.chance){recoveryHtml+='<div style="font-size:.78rem;color:#C8A000;margin-top:4px">Шанс успеха: ~'+r.chance+'%</div>';}
-        recoveryHtml+='</div>';
-    });
+    if(c.recovery&&c.recovery.length){
+        c.recovery.forEach(function(r){
+            var progress=r.maxDays?Math.min(Math.round(r.day/r.maxDays*100),100):0;
+            recoveryHtml+='<div class="money-block"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><strong style="font-size:.92rem">'+(r.type==='chargeback'?'Чарджбэк — '+r.bank:r.type==='police'?r.department:'Заявление')+'</strong><span class="status-pill '+(r.status==='completed'?'s-done':'s-process')+'">'+r.statusText+'</span></div><div style="font-size:.88rem;color:#7a8ba3">Сумма: <strong style="color:#fff">'+formatMoney(r.amount)+' ₸</strong></div>';
+            if(r.maxDays){recoveryHtml+='<div class="progress-bar" style="margin:8px 0"><div class="progress-fill" style="width:'+progress+'%"></div></div><div style="font-size:.78rem;color:#7a8ba3">Прошло '+r.day+' из '+r.maxDays+' дней</div>';}
+            if(r.chance){recoveryHtml+='<div style="font-size:.78rem;color:#C8A000;margin-top:4px">Шанс успеха: ~'+r.chance+'%</div>';}
+            recoveryHtml+='</div>';
+        });
+    }else{
+        recoveryHtml='<p style="color:#7a8ba3;font-size:.82rem;text-align:center;padding:12px">Процедуры возврата запускаются после сбора документов</p>';
+    }
     document.getElementById('recoveryBlocks').innerHTML=recoveryHtml;
-    
-    document.getElementById('returnedBlock').innerHTML='<div style="display:flex;justify-content:space-between;padding:14px;background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.15);border-radius:10px"><div><div style="font-size:.82rem;color:#7a8ba3">Возвращено</div><div style="font-family:Oswald,sans-serif;font-size:1.5rem;font-weight:700;color:#6ee7b7">'+formatMoney(c.returned)+' ₸</div></div><div style="text-align:right"><div style="font-size:.82rem;color:#7a8ba3">Ожидается</div><div style="font-family:Oswald,sans-serif;font-size:1.5rem;font-weight:700;color:#C8A000">'+formatMoney(c.potentialReturn)+' ₸</div></div></div>';
-    
+
+    document.getElementById('returnedBlock').innerHTML='<div style="display:flex;justify-content:space-between;padding:14px;background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.15);border-radius:10px"><div><div style="font-size:.82rem;color:#7a8ba3">Возвращено</div><div style="font-family:Oswald,sans-serif;font-size:1.5rem;font-weight:700;color:#6ee7b7">'+formatMoney(c.returned||0)+' ₸</div></div><div style="text-align:right"><div style="font-size:.82rem;color:#7a8ba3">Ожидается возврат</div><div style="font-family:Oswald,sans-serif;font-size:1.5rem;font-weight:700;color:#C8A000">'+formatMoney(c.potentialReturn||0)+' ₸</div></div></div>';
+
     var servicesHtml='';
-    c.services.forEach(function(s){
-        servicesHtml+='<div class="detail-row"><span class="detail-label">'+s.name+(s.note?' ('+s.note+')':'')+'</span><span class="detail-value">'+formatMoney(s.amount)+' ₸ ✅</span></div>';
-    });
-    if(c.nextPayment){
-        servicesHtml+='<div class="detail-row" style="border-top:2px solid rgba(255,255,255,.08);margin-top:8px;padding-top:12px"><span class="detail-label" style="color:#C8A000"><strong>'+c.nextPayment.name+'</strong></span><span class="detail-value" style="color:#C8A000">'+formatMoney(c.nextPayment.amount)+' ₸</span></div>';
+    if(c.services&&c.services.length){
+        c.services.forEach(function(s){
+            servicesHtml+='<div class="detail-row"><span class="detail-label">'+s.name+(s.note?' <span style="color:#7a8ba3">('+s.note+')</span>':'')+'</span><span class="detail-value">'+formatMoney(s.amount)+' ₸</span></div>';
+        });
+        if(c.nextPayment){
+            servicesHtml+='<div class="detail-row" style="border-top:2px solid rgba(255,255,255,.08);margin-top:8px;padding-top:12px"><span class="detail-label" style="color:#C8A000"><strong>'+c.nextPayment.name+'</strong></span><span class="detail-value" style="color:#C8A000">'+formatMoney(c.nextPayment.amount)+' ₸</span></div>';
+        }
+    }else{
+        servicesHtml='<p style="color:#7a8ba3;font-size:.82rem;text-align:center;padding:12px">Услуги ещё не назначены</p>';
     }
     document.getElementById('servicesList').innerHTML=servicesHtml;
-    
+
     // Timeline
     var tlHtml='';
-    c.timeline.forEach(function(t){
-        tlHtml+='<div class="tl-item"><div class="tl-dot '+(t.status||'pending')+'"></div><div class="tl-content"><div class="tl-date">'+t.date+'</div><div class="tl-title">'+t.title+'</div><div class="tl-desc">'+t.desc+'</div>'+((t.note)?'<div class="tl-note" onclick="alert(this.textContent)">📝 Посмотреть заметки</div>':'')+'</div></div>';
-    });
+    if(c.timeline&&c.timeline.length){
+        c.timeline.forEach(function(t){
+            tlHtml+='<div class="tl-item"><div class="tl-dot '+(t.status||'pending')+'"></div><div class="tl-content"><div class="tl-date">'+t.date+'</div><div class="tl-title">'+t.title+'</div><div class="tl-desc">'+t.desc+'</div>'+((t.note)?'<div class="tl-note" onclick="alert(\''+t.note.replace(/'/g,"\\'")+'\')">📝 Заметка консультанта</div>':'')+'</div></div>';
+        });
+    }else{
+        tlHtml='<p style="color:#7a8ba3;font-size:.82rem;text-align:center;padding:20px">Таймлайн пока пуст</p>';
+    }
     document.getElementById('timelineList').innerHTML=tlHtml;
-    
+
     // Documents
     var docsHtml='';
-    if(c.documents.ours.length){
+    if(c.documents&&c.documents.ours&&c.documents.ours.length){
         c.documents.ours.forEach(function(d){
-            docsHtml+='<div class="doc-item"><div class="doc-icon">📄</div><div><div class="doc-name">'+d.name+'</div><div class="doc-meta">'+d.date+' · '+d.size+'</div></div><button class="doc-download" onclick="alert(\'Скачивание в демо-режиме\')">СКАЧАТЬ</button></div>';
+            docsHtml+='<div class="doc-item"><div class="doc-icon">📄</div><div><div class="doc-name">'+d.name+'</div><div class="doc-meta">'+d.date+' · '+(d.size||'—')+'</div></div><button class="doc-download" onclick="alert(\'Скачивание в демо-режиме\')">СКАЧАТЬ</button></div>';
         });
-    }else{docsHtml='<p style="color:#7a8ba3;font-size:.88rem;text-align:center;padding:20px">Документы пока не загружены</p>';}
+    }else{docsHtml='<p style="color:#7a8ba3;font-size:.82rem;text-align:center;padding:20px">Документы пока не загружены</p>';}
     document.getElementById('docsOurs').innerHTML=docsHtml;
-    
+
     var scamHtml='';
-    if(c.documents.scammers.length){
+    if(c.documents&&c.documents.scammers&&c.documents.scammers.length){
         c.documents.scammers.forEach(function(d){
-            scamHtml+='<div class="doc-item"><div class="doc-icon">📄</div><div><div class="doc-name">'+d.name+'<span class="doc-fake">ПОДДЕЛКА</span></div><div class="doc-meta">'+d.note+'</div></div><button class="doc-download" onclick="alert(\'Анализ в демо-режиме\')">Посмотреть анализ</button></div>';
+            scamHtml+='<div class="doc-item"><div class="doc-icon">📄</div><div><div class="doc-name">'+d.name+'<span class="doc-fake">ПОДДЕЛКА</span></div><div class="doc-meta">'+(d.note||'')+'</div></div><button class="doc-download" onclick="alert(\'Экспертиза в демо-режиме\')">Анализ</button></div>';
         });
-    }else{scamHtml='<p style="color:#7a8ba3;font-size:.88rem;text-align:center;padding:20px">Документы мошенников не загружены</p>';}
+    }else{scamHtml='<p style="color:#7a8ba3;font-size:.82rem;text-align:center;padding:20px">Документы мошенников не загружены</p>';}
     document.getElementById('docsScammers').innerHTML=scamHtml;
-    
+
     // Chat
-    document.getElementById('consultantInfo').innerHTML=c.consultant.name+' · '+c.consultant.role+' · '+c.consultant.cases+' дела · <span style="color:#10b981">🟢 Онлайн</span>';
-    
+    var consultant=c.consultant||{name:'Специалист',role:'Консультант',cases:0,photo:''};
+    var photoHtml=consultant.photo?'<img src="'+consultant.photo+'" alt="">':'⚖️';
+    document.getElementById('consultantInfo').innerHTML='<span style="display:flex;align-items:center;gap:8px">'+(consultant.photo?'<img src="'+consultant.photo+'" style="width:24px;height:24px;border-radius:50%;object-fit:cover">':'⚖️')+' '+consultant.name+' · '+consultant.role+' · '+consultant.cases+' дел · <span style="color:#10b981">🟢 Онлайн</span></span>';
+
     var chatHtml='';
-    c.chat.forEach(function(m){
-        var cls=m.from==='client'?'client':'consultant';
-        var avatar=m.from==='client'?'👤':'⚖️';
-        chatHtml+='<div class="chat-msg '+cls+'"><div class="chat-avatar" style="background:'+(m.from==='client'?'rgba(184,0,24,.2)':'rgba(16,185,129,.2)')+'">'+avatar+'</div><div><div class="chat-bubble '+cls+'">'+m.text+'</div><div class="chat-date">'+m.date+'</div></div></div>';
-    });
+    if(c.chat&&c.chat.length){
+        c.chat.forEach(function(m){
+            var cls=m.from==='client'?'client':'consultant';
+            var avatar=m.from==='client'?'👤':(consultant.photo?'<img src="'+consultant.photo+'" alt="">':'⚖️');
+            chatHtml+='<div class="chat-msg '+cls+'"><div class="chat-avatar" style="background:'+(m.from==='client'?'rgba(184,0,24,.2)':'rgba(16,185,129,.2)')+'">'+avatar+'</div><div><div class="chat-bubble '+cls+'">'+m.text+'</div><div class="chat-date">'+m.date+'</div></div></div>';
+        });
+    }else{
+        chatHtml='<p style="color:#7a8ba3;font-size:.82rem;text-align:center;padding:20px">Нет сообщений</p>';
+    }
     document.getElementById('chatMessages').innerHTML=chatHtml;
-    var chatBox=document.getElementById('chatMessages');
-    if(chatBox)chatBox.scrollTop=chatBox.scrollHeight;
+
+    // News
+    renderNews(c);
 }
 
-function formatMoney(n){return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,' ')}
+function renderNews(c){
+    var allNews=[
+        {icon:'🔴',badge:'alert',badgeText:'СРОЧНО',title:'Новая схема мошенничества: фейковые «сотрудники АРРФР»',desc:'Мошенники звонят, представляются сотрудниками АРРФР и требуют оплатить «страховой депозит» для разблокировки средств. АРРФР НЕ взимает такие платежи.',date:'22 июня 2026'},
+        {icon:'🛡️',badge:'success',badgeText:'ЗАЩИТА',title:'Как распознать поддельный документ госоргана',desc:'Герб должен быть чётким, адрес — только .gov.kz, подпись — с ЭЦП. Любой документ с реквизитами на карту физлица — 100% фейк.',date:'21 июня 2026'},
+        {icon:'📊',badge:'info',badgeText:'СТАТИСТИКА',title:'За май 2026 возвращено 18,7 млн ₸ по 43 делам',desc:'Средний чек возврата — 435 000 ₸. 76% дел завершаются полным или частичным возвратом.',date:'20 июня 2026'},
+        {icon:'⚖️',badge:'info',badgeText:'ЗАКОН',title:'Верховный суд РК: новая практика по чарджбэкам',desc:'Суды всё чаще встают на сторону потерпевших. Прецедент: решение по делу AF-2026-0234 — полный возврат 880 000 ₸ через суд.',date:'18 июня 2026'},
+        {icon:'🔍',badge:'alert',badgeText:'ВНИМАНИЕ',title:'Мошенники используют AI-голосовые звонки',desc:'Зафиксированы случаи, когда мошенники клонируют голос «руководителя» через AI. Не доверяйте голосовым звонкам с требованиями оплаты.',date:'15 июня 2026'},
+        {icon:'☎️',badge:'success',badgeText:'ГОРЯЧАЯ ЛИНИЯ',title:'1434 — круглосуточная поддержка',desc:'Если мошенники вышли на связь в выходной или ночью — звоните 1434. Оператор проконсультирует.',date:'14 июня 2026'},
+        {icon:'👨‍⚖️',badge:'info',badgeText:'КЕЙС',title:'Дело AF-2026-0890: полный возврат 1 200 000 ₸ через Kaspi',desc:'Клиентка перевела деньги за товар, поставщик исчез. Чарджбэк одобрен за 28 дней. Все средства возвращены.',date:'12 июня 2026'},
+        {icon:'🤖',badge:'info',badgeText:'ТЕХНОЛОГИИ',title:'AI-советник теперь помогает 24/7',desc:'Наш AI-советник обработал 1 247 запросов за неделю. Среднее время ответа — 12 секунд.',date:'10 июня 2026'}
+    ];
+    var h='';
+    allNews.forEach(function(n,i){
+        h+='<div class="news-item" data-reveal>';
+        h+='<div class="news-icon" style="background:'+(n.badge==='alert'?'rgba(239,68,68,.1)':n.badge==='success'?'rgba(16,185,129,.1)':'rgba(99,102,241,.1)')+'">'+n.icon+'</div>';
+        h+='<div class="news-content"><span class="news-badge '+n.badge+'">'+n.badgeText+'</span>';
+        h+='<div class="news-title">'+n.title+'</div>';
+        h+='<div class="news-desc">'+n.desc+'</div>';
+        h+='<div class="news-date">'+n.date+'</div></div></div>';
+    });
+    document.getElementById('newsList').innerHTML=h;
+}
+
+function formatMoney(n){
+    if(typeof n!=='number')return n;
+    return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,' ');
+}
 
 function sendMsg(){
     var input=document.getElementById('chatInput');
     if(!input.value.trim())return;
     var chatBox=document.getElementById('chatMessages');
-    chatBox.innerHTML+='<div class="chat-msg client"><div class="chat-avatar" style="background:rgba(184,0,24,.2)">👤</div><div><div class="chat-bubble client">'+input.value+'</div><div class="chat-date">Сейчас</div></div></div>';
+    var consultant=CURRENT_DATA&&CURRENT_DATA.consultant?CURRENT_DATA.consultant:{name:'',role:'',cases:0,photo:''};
+    var photoHtml=consultant.photo?'<img src="'+consultant.photo+'" alt="">':'⚖️';
+    chatBox.innerHTML+='<div class="chat-msg client"><div class="chat-avatar" style="background:rgba(184,0,24,.2)">👤</div><div><div class="chat-bubble client">'+input.value.replace(/</g,'&lt;')+'</div><div class="chat-date">Сейчас</div></div></div>';
     input.value='';
     chatBox.scrollTop=chatBox.scrollHeight;
+    // Auto-reply
+    setTimeout(function(){
+        chatBox.innerHTML+='<div class="chat-msg consultant"><div class="chat-avatar" style="background:rgba(16,185,129,.2);overflow:hidden">'+(consultant.photo?'<img src="'+consultant.photo+'" alt="">':'⚖️')+'</div><div><div class="chat-bubble consultant">Спасибо за сообщение! Мы ответим вам в ближайшее время. Если ситуация срочная — звоните <strong>1434</strong>.</div><div class="chat-date">Только что</div></div></div>';
+        chatBox.scrollTop=chatBox.scrollHeight;
+    },1000);
 }
+
+loadCase();
 </script>
+<script src="/antifraud-kz/assets/js/effects.js"></script>
 <script src="/antifraud-kz/assets/js/nav.js"></script>
 </body>
 </html>

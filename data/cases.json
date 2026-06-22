@@ -1,248 +1,325 @@
 {
-    "cases": [
-        {
-            "id": "AF-2026-0847",
-            "client": {
-                "name": "Нурланова Асель Маратовна",
-                "iin": "920515301456",
-                "phone": "+7 701 234 56 78",
-                "age": 38,
-                "city": "Алматы"
-            },
-            "consultant": {
-                "name": "Серик Алибеков",
-                "role": "Адвокат",
-                "phone": "+7 777 111 22 33",
-                "cases": 74
-            },
-            "status": "process",
-            "statusText": "В работе",
-            "stage": "Г",
-            "stageName": "Налоговый отдел",
-            "stageDesc": "Мошенники прислали «налоговый акт». Просят 13% как «налог на прибыль». Это фейк. Не платите.",
-            "stageWarning": "Следующий шаг: Страховой фонд (~278 000 ₸) → Банк-корреспондент → Суд ($1 000–10 000)",
-            "opened": "2026-05-14",
-            "lastUpdate": "2026-06-21",
-            "lost": {
-                "bank": 1840000,
-                "crypto": 840000,
-                "total": 2680000
-            },
-            "recovery": [
-                {
-                    "type": "chargeback",
-                    "bank": "Halyk Bank",
-                    "amount": 480000,
-                    "status": "pending",
-                    "statusText": "На рассмотрении",
-                    "day": 12,
-                    "maxDays": 30,
-                    "chance": 40
-                },
-                {
-                    "type": "chargeback",
-                    "bank": "Kaspi Bank",
-                    "amount": 360000,
-                    "status": "pending",
-                    "statusText": "На рассмотрении",
-                    "day": 8,
-                    "maxDays": 30,
-                    "chance": 35
-                },
-                {
-                    "type": "police",
-                    "department": "УП Алмалинского района",
-                    "number": "УП-2026-1847",
-                    "status": "pending",
-                    "statusText": "Принято, проверка 30 дней"
-                }
-            ],
-            "returned": 0,
-            "potentialReturn": 840000,
-            "services": [
-                {"name": "Консультация", "amount": 0, "status": "paid", "note": "Бесплатно"},
-                {"name": "Анализ документов", "amount": 10000, "status": "paid"},
-                {"name": "Заявления", "amount": 15000, "status": "paid"},
-                {"name": "Чарджбэк (2 банка)", "amount": 40000, "status": "paid"}
-            ],
-            "nextPayment": {"name": "Сопровождение в полиции", "amount": 25000},
-            "timeline": [
-                {
-                    "date": "2026-05-14",
-                    "title": "Консультация",
-                    "desc": "Определили стадию Г. Объяснили схему. Консультант: Серик Алибеков",
-                    "status": "done",
-                    "note": "Клиент описал ситуацию: инвестировал через InvestPro Capital, мошенники требуют «налог»"
-                },
-                {
-                    "date": "2026-05-15",
-                    "title": "Анализ документов",
-                    "desc": "Проверено 4 PDF. Все — поддельные. Герб КГД искажён. Email не .gov.kz. Реквизиты на карту физлица.",
-                    "status": "done",
-                    "note": "Заключение готово. Все документы от мошенников — фейк."
-                },
-                {
-                    "date": "2026-05-16",
-                    "title": "Заявление в полицию",
-                    "desc": "Подано в УП Алмалинского района. Талон: УП-2026-1847",
-                    "status": "done",
-                    "note": "Заявление принято. Следователь уточняется."
-                },
-                {
-                    "date": "2026-05-17",
-                    "title": "Жалоба в АРРФР",
-                    "desc": "Номер обращения: АРРФР-2026-5521. Ответ ожидается до: 06.06.2026",
-                    "status": "done",
-                    "note": "Жалоба отправлена."
-                },
-                {
-                    "date": "2026-05-18",
-                    "title": "Чарджбэк — Halyk Bank",
-                    "desc": "Заявление принято. Рассматривается до 30 дней. Прошло: 12 дней.",
-                    "status": "done",
-                    "note": "Заявление на чарджбэк подано."
-                },
-                {
-                    "date": "2026-05-19",
-                    "title": "Чарджбэк — Kaspi Bank",
-                    "desc": "Заявление принято. Рассматривается до 30 дней.",
-                    "status": "done",
-                    "note": "Заявление на чарджбэк подано."
-                },
-                {
-                    "date": "now",
-                    "title": "Ожидаем ответов",
-                    "desc": "Halyk: до 17.06 | Kaspi: до 19.06 | АРРФР: до 06.06 | Полиция: 30 дней",
-                    "status": "active"
-                },
-                {
-                    "date": "future",
-                    "title": "Возврат средств",
-                    "desc": "При положительном чарджбэке — оформление возврата. При отказе — обжалование через суд.",
-                    "status": "pending"
-                }
-            ],
-            "documents": {
-                "ours": [
-                    {"name": "Заключение по фейковым документам.pdf", "date": "2026-05-15", "size": "2.1 МБ", "type": "analysis"},
-                    {"name": "Заявление в полицию.pdf", "date": "2026-05-16", "size": "340 КБ", "type": "police"},
-                    {"name": "Жалоба в АРРФР.pdf", "date": "2026-05-17", "size": "280 КБ", "type": "arrfr"},
-                    {"name": "Чарджбэк-заявление Halyk.pdf", "date": "2026-05-18", "size": "310 КБ", "type": "chargeback"},
-                    {"name": "Чарджбэк-заявление Kaspi.pdf", "date": "2026-05-19", "size": "295 КБ", "type": "chargeback"}
-                ],
-                "scammers": [
-                    {"name": "Налоговый_акт_фейк.pdf", "type": "fake", "note": "Подделка"},
-                    {"name": "Уведомление_регулятора.pdf", "type": "fake", "note": "Подделка"},
-                    {"name": "AML_сертификат.pdf", "type": "fake", "note": "Подделка"}
-                ]
-            },
-            "chat": [
-                {"date": "2026-05-14 10:23", "from": "consultant", "text": "Асель, получил ваши документы. Все четыре PDF — подделки. Начинаем работу."},
-                {"date": "2026-05-14 10:45", "from": "client", "text": "Мошенники снова написали, просят срочно оплатить налог сегодня"},
-                {"date": "2026-05-14 10:47", "from": "consultant", "text": "Не отвечайте им. Не платите. Я только что подал заявление в полицию. Талон пришлю через час."},
-                {"date": "2026-06-21 09:41", "from": "consultant", "text": "Halyk Bank принял чарджбэк. Ожидаем ответа до 17 июня. Если откажут — есть план Б."}
-            ]
-        },
-        {
-            "id": "AF-2026-0001",
-            "client": {
-                "name": "Мария Сергеевна",
-                "iin": "850315402567",
-                "phone": "+7 705 345 67 89",
-                "age": 41,
-                "city": "Алматы"
-            },
-            "consultant": {
-                "name": "Нурлан Кайрат",
-                "role": "Старший юрист",
-                "phone": "+7 777 222 33 44",
-                "cases": 200
-            },
-            "status": "process",
-            "statusText": "В работе",
-            "stage": "Б",
-            "stageName": "Активная фаза",
-            "stageDesc": "Сбор доказательств и подача заявлений.",
-            "opened": "2026-06-01",
-            "lastUpdate": "2026-06-20",
-            "lost": {"bank": 3200000, "crypto": 1800000, "total": 5000000},
-            "recovery": [],
-            "returned": 0,
-            "potentialReturn": 2000000,
-            "services": [
-                {"name": "Консультация", "amount": 0, "status": "paid", "note": "Бесплатно"},
-                {"name": "Анализ", "amount": 15000, "status": "paid"}
-            ],
-            "nextPayment": {"name": "Подготовка заявлений", "amount": 30000},
-            "timeline": [
-                {"date": "2026-06-01", "title": "Заявка получена", "desc": "Клиент потерял средства на CryptoGain KZ", "status": "done"},
-                {"date": "2026-06-02", "title": "Сбор доказательств", "desc": "Собраны переписки, чеки, выписки", "status": "done"},
-                {"date": "now", "title": "Подготовка заявлений", "desc": "Готовим документы для АРРФР и полиции", "status": "active"},
-                {"date": "future", "title": "Подача заявлений", "desc": "Подаём в АРРФР, полицию, банк", "status": "pending"}
-            ],
-            "documents": {
-                "ours": [],
-                "scammers": []
-            },
-            "chat": [
-                {"date": "2026-06-01 14:00", "from": "consultant", "text": "Мария, получила вашу заявку. Начинаем работу. Соберите все скриншоты переписки."}
-            ]
-        },
-        {
-            "id": "AF-2026-0123",
-            "client": {
-                "name": "Даулет Нурланович",
-                "iin": "900720503678",
-                "phone": "+7 707 456 78 90",
-                "age": 36,
-                "city": "Алматы"
-            },
-            "consultant": {
-                "name": "Динара Асель",
-                "role": "Юрист",
-                "phone": "+7 777 333 44 55",
-                "cases": 85
-            },
-            "status": "done",
-            "statusText": "Завершено",
-            "stage": "Z",
-            "stageName": "Возврат средств",
-            "stageDesc": "Чарджбэк одобрен. Средства возвращены.",
-            "opened": "2025-12-10",
-            "lastUpdate": "2026-01-05",
-            "lost": {"bank": 750000, "crypto": 0, "total": 750000},
-            "recovery": [
-                {
-                    "type": "chargeback",
-                    "bank": "Halyk Bank",
-                    "amount": 680000,
-                    "status": "completed",
-                    "statusText": "Возвращено"
-                }
-            ],
-            "returned": 680000,
-            "potentialReturn": 0,
-            "services": [
-                {"name": "Консультация", "amount": 0, "status": "paid"},
-                {"name": "Чарджбэк", "amount": 35000, "status": "paid"}
-            ],
-            "nextPayment": null,
-            "timeline": [
-                {"date": "2025-12-10", "title": "Заявка", "desc": "Жалоба на Forex-брокер GlobalTrade FX", "status": "done"},
-                {"date": "2025-12-12", "title": "Чарджбэк", "desc": "Заявление в Halyk Bank", "status": "done"},
-                {"date": "2025-12-20", "title": "Одобрен", "desc": "Транзакция оспорена банком", "status": "done"},
-                {"date": "2026-01-05", "title": "Возврат", "desc": "680 000 ₸ возвращено на счёт клиента", "status": "done"}
-            ],
-            "documents": {
-                "ours": [
-                    {"name": "Заявление на чарджбэк.pdf", "date": "2025-12-12", "size": "290 КБ"}
-                ],
-                "scammers": []
-            },
-            "chat": [
-                {"date": "2025-12-10 11:00", "from": "consultant", "text": "Даулет, начал работу. Подаю заявление на чарджбэк."},
-                {"date": "2026-01-05 10:00", "from": "consultant", "text": "Отличные новости! 680 000 ₸ возвращено на ваш счёт. Проверьте баланс."}
-            ]
-        }
-    ]
+  "cases": [
+    {
+      "id": "AF-2026-0847",
+      "client": { "name": "Нурланова Асель Маратовна", "iin": "920515301456", "phone": "+7 701 234 56 78", "age": 38, "city": "Алматы" },
+      "consultant": { "name": "Серик Алибеков", "role": "Адвокат", "phone": "+7 777 111 22 33", "cases": 74, "photo": "https://i.pravatar.cc/100?img=11" },
+      "status": "process", "statusText": "В работе",
+      "stage": "Г", "stageName": "Налоговый отдел",
+      "stageDesc": "Мошенники прислали «налоговый акт». Просят 13% как «налог на прибыль». Это фейк. Не платите.",
+      "stageWarning": "Следующий шаг: Страховой фонд (~278 000 ₸) → Банк-корреспондент → Суд ($1 000–10 000)",
+      "opened": "2026-05-14", "lastUpdate": "2026-06-21",
+      "lost": { "bank": 1840000, "crypto": 840000, "total": 2680000 },
+      "recovery": [
+        { "type": "chargeback", "bank": "Halyk Bank", "amount": 480000, "status": "pending", "statusText": "На рассмотрении", "day": 12, "maxDays": 30, "chance": 40 },
+        { "type": "chargeback", "bank": "Kaspi Bank", "amount": 360000, "status": "pending", "statusText": "На рассмотрении", "day": 8, "maxDays": 30, "chance": 35 },
+        { "type": "police", "department": "УП Алмалинского района", "number": "УП-2026-1847", "status": "pending", "statusText": "Принято, проверка 30 дней" }
+      ],
+      "returned": 0, "potentialReturn": 840000,
+      "services": [
+        { "name": "Консультация", "amount": 0, "status": "paid", "note": "Бесплатно" },
+        { "name": "Анализ документов", "amount": 10000, "status": "paid" },
+        { "name": "Заявления", "amount": 15000, "status": "paid" },
+        { "name": "Чарджбэк (2 банка)", "amount": 40000, "status": "paid" }
+      ],
+      "nextPayment": { "name": "Сопровождение в полиции", "amount": 25000 },
+      "timeline": [
+        { "date": "2026-05-14", "title": "Консультация", "desc": "Определили стадию Г. Объяснили схему.", "status": "done", "note": "Клиент описал ситуацию: инвестировал через InvestPro Capital" },
+        { "date": "2026-05-15", "title": "Анализ документов", "desc": "Проверено 4 PDF. Все — поддельные. Герб КГД искажён.", "status": "done", "note": "Заключение готово. Все документы — фейк." },
+        { "date": "2026-05-16", "title": "Заявление в полицию", "desc": "Подано в УП Алмалинского района. Талон: УП-2026-1847", "status": "done" },
+        { "date": "2026-05-17", "title": "Жалоба в АРРФР", "desc": "Номер обращения: АРРФР-2026-5521", "status": "done" },
+        { "date": "2026-05-18", "title": "Чарджбэк — Halyk Bank", "desc": "Заявление принято. Рассматривается до 30 дней.", "status": "done" },
+        { "date": "2026-05-19", "title": "Чарджбэк — Kaspi Bank", "desc": "Заявление принято на Kaspi.", "status": "done" },
+        { "date": "now", "title": "Ожидаем ответов", "desc": "Halyk: до 17.06 | Kaspi: до 19.06 | АРРФР: до 06.06", "status": "active" },
+        { "date": "future", "title": "Возврат средств", "desc": "При положительном чарджбэке — возврат.", "status": "pending" }
+      ],
+      "documents": {
+        "ours": [
+          { "name": "Заключение по фейковым документам.pdf", "date": "2026-05-15", "size": "2.1 МБ" },
+          { "name": "Заявление в полицию.pdf", "date": "2026-05-16", "size": "340 КБ" },
+          { "name": "Жалоба в АРРФР.pdf", "date": "2026-05-17", "size": "280 КБ" },
+          { "name": "Чарджбэк-заявление Halyk.pdf", "date": "2026-05-18", "size": "310 КБ" },
+          { "name": "Чарджбэк-заявление Kaspi.pdf", "date": "2026-05-19", "size": "295 КБ" }
+        ],
+        "scammers": [
+          { "name": "Налоговый_акт_фейк.pdf", "note": "Подделка: герб искажён, email не .gov.kz" },
+          { "name": "Уведомление_регулятора.pdf", "note": "Подделка: шрифты не совпадают" },
+          { "name": "AML_сертификат.pdf", "note": "Подделка: несуществующий регулятор" }
+        ]
+      },
+      "chat": [
+        { "date": "2026-05-14 10:23", "from": "consultant", "text": "Асель, получил ваши документы. Все четыре PDF — подделки. Начинаем работу." },
+        { "date": "2026-05-14 10:45", "from": "client", "text": "Мошенники снова написали, просят срочно оплатить налог сегодня" },
+        { "date": "2026-05-14 10:47", "from": "consultant", "text": "Не отвечайте им. Не платите. Я подал заявление в полицию." },
+        { "date": "2026-06-21 09:41", "from": "consultant", "text": "Halyk Bank принял чарджбэк. Ожидаем до 17 июня." }
+      ]
+    },
+    {
+      "id": "AF-2026-0001",
+      "client": { "name": "Мария Сергеевна Каримова", "iin": "850315402567", "phone": "+7 705 345 67 89", "age": 41, "city": "Алматы" },
+      "consultant": { "name": "Нурлан Кайратов", "role": "Старший юрист", "phone": "+7 777 222 33 44", "cases": 200, "photo": "https://i.pravatar.cc/100?img=53" },
+      "status": "process", "statusText": "В работе",
+      "stage": "Б", "stageName": "Активная фаза",
+      "stageDesc": "Сбор доказательств и подача заявлений.",
+      "opened": "2026-06-01", "lastUpdate": "2026-06-20",
+      "lost": { "bank": 3200000, "crypto": 1800000, "total": 5000000 },
+      "recovery": [],
+      "returned": 0, "potentialReturn": 2000000,
+      "services": [
+        { "name": "Консультация", "amount": 0, "status": "paid", "note": "Бесплатно" },
+        { "name": "Анализ", "amount": 15000, "status": "paid" }
+      ],
+      "nextPayment": { "name": "Подготовка заявлений", "amount": 30000 },
+      "timeline": [
+        { "date": "2026-06-01", "title": "Заявка получена", "desc": "Клиент потерял средства на CryptoGain KZ", "status": "done" },
+        { "date": "2026-06-02", "title": "Сбор доказательств", "desc": "Собраны переписки, чеки, выписки", "status": "done" },
+        { "date": "now", "title": "Подготовка заявлений", "desc": "Готовим документы для АРРФР и полиции", "status": "active" },
+        { "date": "future", "title": "Подача заявлений", "desc": "Подаём в АРРФР, полицию, банк", "status": "pending" }
+      ],
+      "documents": { "ours": [], "scammers": [] },
+      "chat": [
+        { "date": "2026-06-01 14:00", "from": "consultant", "text": "Мария, получила вашу заявку. Соберите все скриншоты переписки." }
+      ]
+    },
+    {
+      "id": "AF-2026-0123",
+      "client": { "name": "Даулет Нурланович Темиров", "iin": "900720503678", "phone": "+7 707 456 78 90", "age": 36, "city": "Алматы" },
+      "consultant": { "name": "Динара Асель", "role": "Юрист", "phone": "+7 777 333 44 55", "cases": 85, "photo": "https://i.pravatar.cc/100?img=45" },
+      "status": "done", "statusText": "Завершено",
+      "stage": "Z", "stageName": "Возврат средств",
+      "stageDesc": "Чарджбэк одобрен. Средства возвращены.",
+      "opened": "2025-12-10", "lastUpdate": "2026-01-05",
+      "lost": { "bank": 750000, "crypto": 0, "total": 750000 },
+      "recovery": [{ "type": "chargeback", "bank": "Halyk Bank", "amount": 680000, "status": "completed", "statusText": "Возвращено" }],
+      "returned": 680000, "potentialReturn": 0,
+      "services": [
+        { "name": "Консультация", "amount": 0, "status": "paid" },
+        { "name": "Чарджбэк", "amount": 35000, "status": "paid" }
+      ],
+      "nextPayment": null,
+      "timeline": [
+        { "date": "2025-12-10", "title": "Заявка", "desc": "Жалоба на Forex-брокер GlobalTrade FX", "status": "done" },
+        { "date": "2025-12-12", "title": "Чарджбэк", "desc": "Заявление в Halyk Bank", "status": "done" },
+        { "date": "2025-12-20", "title": "Одобрен", "desc": "Транзакция оспорена банком", "status": "done" },
+        { "date": "2026-01-05", "title": "Возврат", "desc": "680 000 ₸ возвращено на счёт клиента", "status": "done" }
+      ],
+      "documents": {
+        "ours": [{ "name": "Заявление на чарджбэк.pdf", "date": "2025-12-12", "size": "290 КБ" }],
+        "scammers": []
+      },
+      "chat": [
+        { "date": "2025-12-10 11:00", "from": "consultant", "text": "Даулет, начал работу. Подаю заявление на чарджбэк." },
+        { "date": "2026-01-05 10:00", "from": "consultant", "text": "Отличные новости! 680 000 ₸ возвращено на ваш счёт!" }
+      ]
+    },
+    {
+      "id": "AF-2026-0310",
+      "client": { "name": "Ермекова Гульмира Бахытовна", "iin": "880112401234", "phone": "+7 702 111 22 33", "age": 45, "city": "Астана" },
+      "consultant": { "name": "Арман Сериков", "role": "Адвокат", "phone": "+7 778 444 55 66", "cases": 112, "photo": "https://i.pravatar.cc/100?img=12" },
+      "status": "process", "statusText": "В работе",
+      "stage": "А", "stageName": "Начальная стадия",
+      "stageDesc": "Проверка платформы. Сбор первичных доказательств.",
+      "stageWarning": "Мошенники используют схему «Крипто-майнинг». Обещают 200% за месяц.",
+      "opened": "2026-06-10", "lastUpdate": "2026-06-22",
+      "lost": { "bank": 500000, "crypto": 1500000, "total": 2000000 },
+      "recovery": [],
+      "returned": 0, "potentialReturn": 800000,
+      "services": [
+        { "name": "Срочная консультация", "amount": 0, "status": "paid", "note": "VIP" },
+        { "name": "Анализ рисков", "amount": 20000, "status": "paid" }
+      ],
+      "nextPayment": { "name": "Блокировка счетов (судебный приказ)", "amount": 45000 },
+      "timeline": [
+        { "date": "2026-06-10", "title": "Первичная консультация", "desc": "Женщина перевела деньги на «майнинг-пул»", "status": "done" },
+        { "date": "2026-06-11", "title": "Проверка платформы", "desc": "MinePro KZ — в чёрном списке", "status": "done" },
+        { "date": "now", "title": "Сбор доказательств", "desc": "Запрашиваем выписки из Kaspi и Halyk", "status": "active" },
+        { "date": "future", "title": "Подача заявления в АРРФР", "desc": "Готовим документы", "status": "pending" }
+      ],
+      "documents": { "ours": [], "scammers": [] },
+      "chat": [
+        { "date": "2026-06-10 18:30", "from": "consultant", "text": "Гульмира, не переживайте. Мы уже проверили — MinePro KZ в чёрном списке АРРФР. Начинаем сбор." }
+      ]
+    },
+    {
+      "id": "AF-2026-0456",
+      "client": { "name": "Сагындыков Руслан Аскарович", "iin": "830621304567", "phone": "+7 775 555 66 77", "age": 43, "city": "Караганда" },
+      "consultant": { "name": "Алия Толеубаева", "role": "Старший юрист", "phone": "+7 771 666 77 88", "cases": 156, "photo": "https://i.pravatar.cc/100?img=23" },
+      "status": "process", "statusText": "В работе",
+      "stage": "В", "stageName": "Разбирательство",
+      "stageDesc": "Активная переписка с банками и госорганами.",
+      "opened": "2026-05-28", "lastUpdate": "2026-06-21",
+      "lost": { "bank": 4200000, "crypto": 0, "total": 4200000 },
+      "recovery": [
+        { "type": "chargeback", "bank": "Halyk Bank", "amount": 1200000, "status": "pending", "statusText": "На рассмотрении", "day": 18, "maxDays": 30, "chance": 55 },
+        { "type": "chargeback", "bank": "Kaspi Bank", "amount": 800000, "status": "pending", "statusText": "На рассмотрении", "day": 14, "maxDays": 30, "chance": 45 }
+      ],
+      "returned": 0, "potentialReturn": 2000000,
+      "services": [
+        { "name": "Консультация", "amount": 0, "status": "paid", "note": "Бесплатно" },
+        { "name": "Анализ сделок", "amount": 15000, "status": "paid" },
+        { "name": "Чарджбэк комплекс", "amount": 60000, "status": "paid" }
+      ],
+      "nextPayment": { "name": "Судебное сопровождение", "amount": 85000 },
+      "timeline": [
+        { "date": "2026-05-28", "title": "Обращение", "desc": "Перевёл деньги под видом инвестиций в недвижимость", "status": "done" },
+        { "date": "2026-05-29", "title": "Экспертиза", "desc": "Документы — поддельные. Схема — «Двойной выкуп»", "status": "done" },
+        { "date": "2026-06-01", "title": "Чарджбэк Halyk", "desc": "Заявление на 1 200 000 ₸", "status": "done" },
+        { "date": "2026-06-05", "title": "Чарджбэк Kaspi", "desc": "Заявление на 800 000 ₸", "status": "done" },
+        { "date": "now", "title": "Ожидание ответов", "desc": "Банки рассматривают", "status": "active" },
+        { "date": "future", "title": "Суд", "desc": "Если чарджбэк откажут — подаём иск", "status": "pending" }
+      ],
+      "documents": {
+        "ours": [
+          { "name": "Заключение эксперта.pdf", "date": "2026-05-30", "size": "1.8 МБ" },
+          { "name": "Заявление Halyk.pdf", "date": "2026-06-01", "size": "310 КБ" }
+        ],
+        "scammers": [
+          { "name": "Договор_инвестиций_фейк.pdf", "note": "Подделка: реквизиты недействительны" }
+        ]
+      },
+      "chat": [
+        { "date": "2026-05-29 09:00", "from": "consultant", "text": "Руслан, ваши документы проверили — договор купли-продажи фейковый. Реальные собственники недвижимости не имеют отношения к этой сделке." },
+        { "date": "2026-06-05 11:20", "from": "client", "text": "Мошенник снова звонил, говорит что нужно ещё заплатить страховку 500 000 ₸" },
+        { "date": "2026-06-05 11:22", "from": "consultant", "text": "Блокируйте номер. Не отвечайте. Это стандартная схема дожатия." }
+      ]
+    },
+    {
+      "id": "AF-2026-0234",
+      "client": { "name": "Ахметова Зарина Рустемовна", "iin": "950101501234", "phone": "+7 708 777 88 99", "age": 31, "city": "Шымкент" },
+      "consultant": { "name": "Бекжан Турлыбек", "role": "Юрист", "phone": "+7 777 888 99 00", "cases": 43, "photo": "https://i.pravatar.cc/100?img=33" },
+      "status": "done", "statusText": "Завершено",
+      "stage": "Z", "stageName": "Возврат",
+      "stageDesc": "Деньги возвращены через суд.",
+      "opened": "2026-03-15", "lastUpdate": "2026-05-20",
+      "lost": { "bank": 950000, "crypto": 0, "total": 950000 },
+      "recovery": [{ "type": "police", "department": "УП г.Шымкент", "number": "УП-2026-0891", "status": "completed", "statusText": "Возбуждено дело" }],
+      "returned": 880000, "potentialReturn": 0,
+      "services": [
+        { "name": "Консультация", "amount": 0, "status": "paid", "note": "Акция" },
+        { "name": "Судебное представительство", "amount": 50000, "status": "paid" },
+        { "name": "Исполнительное производство", "amount": 20000, "status": "paid" }
+      ],
+      "nextPayment": null,
+      "timeline": [
+        { "date": "2026-03-15", "title": "Заявка", "desc": "Купила товар в Instagram-магазине, товар не пришёл", "status": "done" },
+        { "date": "2026-03-18", "title": "Претензия", "desc": "Направили досудебную претензию", "status": "done" },
+        { "date": "2026-04-01", "title": "Иск в суд", "desc": "Подан иск о защите прав потребителей", "status": "done" },
+        { "date": "2026-04-28", "title": "Решение суда", "desc": "Суд удовлетворил иск. Взыскано 880 000 ₸", "status": "done" },
+        { "date": "2026-05-20", "title": "Исполнение", "desc": "Деньги поступили на счёт", "status": "done" }
+      ],
+      "documents": {
+        "ours": [
+          { "name": "Исковое заявление.pdf", "date": "2026-04-01", "size": "420 КБ" },
+          { "name": "Решение суда.pdf", "date": "2026-04-28", "size": "1.1 МБ" },
+          { "name": "Исполнительный лист.pdf", "date": "2026-05-05", "size": "340 КБ" }
+        ],
+        "scammers": []
+      },
+      "chat": [
+        { "date": "2026-05-20 14:00", "from": "consultant", "text": "Зарина, поздравляю! 880 000 ₸ поступили на ваш счёт. Дело закрыто. Спасибо за доверие! 🎉" }
+      ]
+    },
+    {
+      "id": "AF-2026-0678",
+      "client": { "name": "Кусаинов Марат Ерболатович", "iin": "780911209876", "phone": "+7 701 999 88 77", "age": 48, "city": "Астана" },
+      "consultant": { "name": "Серик Алибеков", "role": "Адвокат", "phone": "+7 777 111 22 33", "cases": 74, "photo": "https://i.pravatar.cc/100?img=11" },
+      "status": "process", "statusText": "В работе",
+      "stage": "Б", "stageName": "Сбор доказательств",
+      "stageDesc": "Собираем данные. Платформа уже заблокирована.",
+      "opened": "2026-06-15", "lastUpdate": "2026-06-22",
+      "lost": { "bank": 1800000, "crypto": 2700000, "total": 4500000 },
+      "recovery": [],
+      "returned": 0, "potentialReturn": 1800000,
+      "services": [{ "name": "Срочная консультация", "amount": 0, "status": "paid", "note": "VIP" }],
+      "nextPayment": { "name": "Чарджбэк (3 банка)", "amount": 65000 },
+      "timeline": [
+        { "date": "2026-06-15", "title": "Консультация", "desc": "Схема: фейковая криптобиржа CoinsMarket", "status": "done" },
+        { "date": "2026-06-16", "title": "Проверка", "desc": "Платформа зарегистрирована на подставное лицо", "status": "done" },
+        { "date": "now", "title": "Сбор выписок", "desc": "Запрашиваем выписки из 3 банков", "status": "active" }
+      ],
+      "documents": { "ours": [], "scammers": [ { "name": "CoinsMarket_сертификат.pdf", "note": "Подделка: лицензия недействительна" } ] },
+      "chat": [
+        { "date": "2026-06-15 20:00", "from": "consultant", "text": "Марат, криптобиржа CoinsMarket — мошенническая. Не вносите больше средств." }
+      ]
+    },
+    {
+      "id": "AF-2026-0890",
+      "client": { "name": "Оспанова Айгуль Кайратовна", "iin": "911220405678", "phone": "+7 776 123 45 67", "age": 35, "city": "Атырау" },
+      "consultant": { "name": "Нурлан Кайратов", "role": "Старший юрист", "phone": "+7 777 222 33 44", "cases": 200, "photo": "https://i.pravatar.cc/100?img=53" },
+      "status": "done", "statusText": "Завершено",
+      "stage": "Z", "stageName": "Возврат",
+      "stageDesc": "Полный возврат через чарджбэк.",
+      "opened": "2026-02-01", "lastUpdate": "2026-03-15",
+      "lost": { "bank": 1200000, "crypto": 0, "total": 1200000 },
+      "recovery": [{ "type": "chargeback", "bank": "Kaspi Bank", "amount": 1200000, "status": "completed", "statusText": "Возвращено" }],
+      "returned": 1200000, "potentialReturn": 0,
+      "services": [
+        { "name": "Консультация", "amount": 0, "status": "paid" },
+        { "name": "Чарджбэк", "amount": 25000, "status": "paid" }
+      ],
+      "nextPayment": null,
+      "timeline": [
+        { "date": "2026-02-01", "title": "Заявка", "desc": "Перевела деньги за товар, поставщик исчез", "status": "done" },
+        { "date": "2026-02-03", "title": "Чарджбэк", "desc": "Заявление на Kaspi", "status": "done" },
+        { "date": "2026-03-01", "title": "Удовлетворён", "desc": "Kaspi вернул средства", "status": "done" },
+        { "date": "2026-03-15", "title": "Средства получены", "desc": "1 200 000 ₸ на счёте", "status": "done" }
+      ],
+      "documents": {
+        "ours": [{ "name": "Заявление чарджбэк Kaspi.pdf", "date": "2026-02-03", "size": "280 КБ" }],
+        "scammers": []
+      },
+      "chat": [
+        { "date": "2026-03-15 11:00", "from": "consultant", "text": "Айгуль, деньги на вашем счету! Дело закрыто. Будьте внимательны в интернете." }
+      ]
+    },
+    {
+      "id": "AF-2026-0543",
+      "client": { "name": "Искаков Тимур Бауржанович", "iin": "890505309876", "phone": "+7 774 567 89 01", "age": 37, "city": "Алматы" },
+      "consultant": { "name": "Алия Толеубаева", "role": "Старший юрист", "phone": "+7 771 666 77 88", "cases": 156, "photo": "https://i.pravatar.cc/100?img=23" },
+      "status": "process", "statusText": "В работе",
+      "stage": "Г", "stageName": "Мошенники вышли на связь",
+      "stageDesc": "Мошенники звонят, представляются «финансовым контролёром». Просят оплатить «страховой депозит».",
+      "stageWarning": "Типичная схема дожатия: налог → страховка → корреспондент → суд",
+      "opened": "2026-06-18", "lastUpdate": "2026-06-22",
+      "lost": { "bank": 0, "crypto": 3200000, "total": 3200000 },
+      "recovery": [],
+      "returned": 0, "potentialReturn": 1200000,
+      "services": [
+        { "name": "Консультация экспресс", "amount": 0, "status": "paid", "note": "Бесплатно" },
+        { "name": "Мониторинг угроз", "amount": 35000, "status": "paid" }
+      ],
+      "nextPayment": { "name": "Юридическая блокировка", "amount": 55000 },
+      "timeline": [
+        { "date": "2026-06-18", "title": "Срочный звонок", "desc": "Клиент перевёл USDT на фейковую биржу", "status": "done" },
+        { "date": "2026-06-19", "title": "Идентификация", "desc": "Установлены кошельки мошенников в Binance", "status": "done" },
+        { "date": "now", "title": "Подготовка заявления", "desc": "Готовим блокировку кошельков", "status": "active" }
+      ],
+      "documents": { "ours": [], "scammers": [ { "name": "FinControl_удостоверение.pdf", "note": "Подделка: фото из стока" } ] },
+      "chat": [
+        { "date": "2026-06-18 22:00", "from": "consultant", "text": "Тимур, мошенники уже вышли на связь? Не платите ничего. Записывайте разговоры." }
+      ]
+    },
+    {
+      "id": "AF-2026-0999",
+      "client": { "name": "Калиева Ляззат Сериковна", "iin": "920112208765", "phone": "+7 705 998 87 76", "age": 34, "city": "Кокшетау" },
+      "consultant": { "name": "Бекжан Турлыбек", "role": "Юрист", "phone": "+7 777 888 99 00", "cases": 43, "photo": "https://i.pravatar.cc/100?img=33" },
+      "status": "process", "statusText": "В работе",
+      "stage": "А", "stageName": "Первичный анализ",
+      "stageDesc": "Проверяем платформу. Схема: фейковый брокер.",
+      "opened": "2026-06-20", "lastUpdate": "2026-06-22",
+      "lost": { "bank": 350000, "crypto": 650000, "total": 1000000 },
+      "recovery": [],
+      "returned": 0, "potentialReturn": 400000,
+      "services": [{ "name": "Консультация", "amount": 0, "status": "paid", "note": "Бесплатно" }],
+      "nextPayment": { "name": "Полный аудит", "amount": 25000 },
+      "timeline": [
+        { "date": "2026-06-20", "title": "Заявка через сайт", "desc": "Ляззат заполнила квиз на сайте", "status": "done" },
+        { "date": "now", "title": "Первичная проверка", "desc": "Анализируем платформу InvestTrade", "status": "active" }
+      ],
+      "documents": { "ours": [], "scammers": [] },
+      "chat": [
+        { "date": "2026-06-20 16:00", "from": "consultant", "text": "Ляззат, спасибо за обращение. Мы проверим платформу и свяжемся с вами." }
+      ]
+    }
+  ]
 }
