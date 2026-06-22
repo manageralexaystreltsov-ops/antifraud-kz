@@ -3,661 +3,242 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width,initial-scale=1.0">
-<title>Личный кабинет — Антифрод Центр Казахстан</title>
+<title>Дело — Антифрод Центр</title>
 <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🛡️</text></svg>">
 <link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=PT+Sans:wght@400;700&display=swap" rel="stylesheet">
 <script src="https://cdn.tailwindcss.com"></script>
 <script>tailwind.config={theme:{extend:{colors:{primary:'#B80018',gold:'#C8A000',dark:'#1A1A1A',darker:'#000000'},fontFamily:{heading:['Oswald','sans-serif'],body:['PT Sans','sans-serif']}}}}</script>
-<link rel="stylesheet" href="/antifraud-kz/assets/css/styles.css">
 <style>
-body{background:#0a0a0a;color:#fff;font-family:'PT Sans',sans-serif;padding-bottom:80px}
-.topbar{background:rgba(26,26,26,0.8);backdrop-filter:blur(16px);-webkit-backdrop-filter:blur(16px);border-bottom:1px solid rgba(255,255,255,.06);padding:12px 20px;position:sticky;top:0;z-index:50;display:flex;justify-content:space-between;align-items:center}
-.topbar-left{display:flex;align-items:center;gap:12px}
-.topbar-logo{width:36px;height:36px;background:linear-gradient(135deg,#B80018,#8B0012);border-radius:10px;display:flex;align-items:center;justify-content:center}
-.topbar-case{font-family:'Oswald',sans-serif;font-size:.85rem;color:#7a8ba3}
-.topbar-case strong{color:#fff}
-.topbar-right{display:flex;gap:8px;align-items:center}
-.topbar-btn{padding:8px 16px;border-radius:8px;font-size:.82rem;font-weight:600;cursor:pointer;border:none;transition:all .2s;font-family:'PT Sans',sans-serif}
-.btn-logout{background:rgba(255,255,255,.05);color:#7a8ba3;border:1px solid rgba(255,255,255,.08)}
-.btn-logout:hover{color:#fff;border-color:rgba(255,255,255,.15)}
-.wrap{max-width:800px;margin:0 auto;padding:20px 16px}
-.card{background:rgba(26,26,26,0.5);backdrop-filter:blur(12px);-webkit-backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:20px;margin-bottom:16px;transition:border-color .3s}
+*{box-sizing:border-box}
+body{background:#0a0a0a;color:#fff;font-family:'PT Sans',sans-serif;padding:0;margin:0;padding-top:70px;padding-bottom:40px}
+.dash{max-width:760px;margin:0 auto;padding:24px 16px}
+.card{background:rgba(26,26,26,.7);backdrop-filter:blur(12px);border:1px solid rgba(255,255,255,.06);border-radius:18px;padding:24px;margin-bottom:16px;transition:all .3s}
 .card:hover{border-color:rgba(255,255,255,.1)}
-.card-header{display:flex;align-items:center;gap:12px;margin-bottom:16px}
-.card-icon{width:40px;height:40px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;flex-shrink:0}
-.card-title{font-family:'Oswald',sans-serif;font-weight:700;font-size:1.1rem}
-.card-subtitle{font-size:.82rem;color:#7a8ba3}
-.status-pill{display:inline-block;padding:4px 14px;border-radius:100px;font-size:.75rem;font-weight:700}
-.s-process{background:rgba(245,158,11,.1);color:#fbbf24;border:1px solid rgba(245,158,11,.2)}
-.s-done{background:rgba(16,185,129,.1);color:#6ee7b7;border:1px solid rgba(16,185,129,.2)}
-.s-danger{background:rgba(239,68,68,.1);color:#fca5a5;border:1px solid rgba(239,68,68,.2)}
-.progress-bar{height:6px;background:rgba(255,255,255,.06);border-radius:4px;overflow:hidden;margin:12px 0}
-.progress-fill{height:100%;background:linear-gradient(90deg,#B80018,#C8A000);border-radius:4px;transition:width 1s ease}
-.detail-row{display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:.88rem}
-.detail-row:last-child{border-bottom:none}
-.detail-label{color:#7a8ba3}
-.detail-value{color:#fff;font-weight:600}
-.money-block{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:12px;padding:16px;margin-bottom:12px}
-.money-amount{font-family:'Oswald',sans-serif;font-size:1.8rem;font-weight:700}
-.money-row{display:flex;gap:12px;margin-bottom:16px}
-.money-item{flex:1;background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:16px;text-align:center}
-.money-item .label{font-size:.78rem;color:#7a8ba3;margin-top:4px}
-.money-item .money-amount{display:flex;align-items:center;justify-content:center;gap:6px}
-.tl{position:relative;padding-left:28px}
-.tl::before{content:'';position:absolute;left:10px;top:0;bottom:0;width:2px;background:rgba(255,255,255,.06)}
+.card-title{font-family:'Oswald',sans-serif;font-weight:700;font-size:1.1rem;margin-bottom:16px;display:flex;align-items:center;gap:10px}
+.card-title .icon{width:36px;height:36px;border-radius:10px;display:flex;align-items:center;justify-content:center;font-size:1.1rem;flex-shrink:0}
+.badge{display:inline-block;padding:4px 14px;border-radius:100px;font-size:.75rem;font-weight:700}
+.badge-new{background:rgba(99,102,241,.12);color:#818cf8;border:1px solid rgba(99,102,241,.2)}
+.badge-process{background:rgba(245,158,11,.1);color:#fbbf24;border:1px solid rgba(245,158,11,.2)}
+.badge-done{background:rgba(16,185,129,.1);color:#6ee7b7;border:1px solid rgba(16,185,129,.2)}
+.progress{height:6px;background:rgba(255,255,255,.06);border-radius:4px;overflow:hidden;margin:12px 0}
+.progress-fill{height:100%;background:linear-gradient(90deg,#B80018,#C8A000);border-radius:4px;transition:width .8s ease}
+.row{display:flex;justify-content:space-between;align-items:center;padding:12px 0;border-bottom:1px solid rgba(255,255,255,.04);font-size:.9rem}
+.row:last-child{border-bottom:none}
+.row-label{color:#7a8ba3}
+.row-value{font-weight:600}
+.money-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:10px;margin-bottom:12px}
+.money-item{text-align:center;padding:16px 8px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.05);border-radius:14px}
+.money-amount{font-family:'Oswald',sans-serif;font-size:1.3rem;font-weight:700}
+.money-label{font-size:.72rem;color:#7a8ba3;margin-top:4px}
+.tl{position:relative;padding-left:24px}
+.tl::before{content:'';position:absolute;left:8px;top:0;bottom:0;width:2px;background:rgba(255,255,255,.06)}
 .tl-item{position:relative;margin-bottom:16px}
-.tl-dot{position:absolute;left:-22px;top:12px;width:12px;height:12px;border-radius:50%;border:2px solid rgba(255,255,255,.08)}
+.tl-dot{position:absolute;left:-20px;top:10px;width:12px;height:12px;border-radius:50%;border:2px solid rgba(255,255,255,.08)}
 .tl-dot.done{background:#10b981;border-color:#10b981}
-.tl-dot.active{background:#B80018;border-color:#B80018;box-shadow:0 0 12px rgba(184,0,24,.4)}
+.tl-dot.active{background:#B80018;border-color:#B80018;box-shadow:0 0 8px rgba(184,0,24,.4)}
 .tl-dot.pending{background:rgba(255,255,255,.06)}
-.tl-content{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04);border-radius:12px;padding:12px 14px;transition:border-color .3s}
-.tl-content:hover{border-color:rgba(255,255,255,.1)}
+.tl-box{background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04);border-radius:10px;padding:12px 14px}
 .tl-date{font-size:.72rem;color:#7a8ba3}
 .tl-title{font-weight:700;font-size:.88rem;margin:2px 0}
 .tl-desc{font-size:.82rem;color:#e8ecf4}
-.tl-note{font-size:.75rem;color:#C8A000;margin-top:4px;cursor:pointer;display:inline-flex;align-items:center;gap:4px}
-.tl-note:hover{color:#e6b800}
-.doc-item{display:flex;align-items:center;gap:12px;padding:12px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04);border-radius:12px;margin-bottom:8px;transition:border-color .3s}
-.doc-item:hover{border-color:rgba(255,255,255,.1)}
-.doc-icon{font-size:1.5rem}
-.doc-name{font-size:.88rem;font-weight:600}
-.doc-meta{font-size:.75rem;color:#7a8ba3}
-.doc-download{margin-left:auto;padding:6px 14px;background:rgba(184,0,24,.1);color:#B80018;border-radius:8px;font-size:.75rem;font-weight:600;cursor:pointer;border:none;text-decoration:none;transition:all .2s}
-.doc-download:hover{background:rgba(184,0,24,.2)}
-.doc-fake{background:rgba(239,68,68,.1);color:#fca5a5;border:1px solid rgba(239,68,68,.2);font-size:.72rem;padding:2px 8px;border-radius:4px;margin-left:8px}
+.tl-note{font-size:.75rem;color:#C8A000;margin-top:6px;padding:8px;background:rgba(200,160,0,.06);border:1px solid rgba(200,160,0,.1);border-radius:8px}
 .chat-msg{margin-bottom:12px;display:flex;gap:10px}
 .chat-msg.client{flex-direction:row-reverse}
-.chat-avatar{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0;overflow:hidden}
-.chat-avatar img{width:100%;height:100%;object-fit:cover}
-.chat-bubble{max-width:80%;padding:10px 14px;border-radius:14px;font-size:.88rem;line-height:1.5}
+.chat-avatar{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:.8rem;flex-shrink:0}
+.chat-bubble{max-width:80%;padding:10px 14px;border-radius:12px;font-size:.88rem;line-height:1.5}
 .chat-bubble.consultant{background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.06)}
 .chat-bubble.client{background:rgba(184,0,24,.15);border:1px solid rgba(184,0,24,.2)}
 .chat-date{font-size:.7rem;color:#7a8ba3;margin-top:4px}
-.chat-input-wrap{display:flex;gap:8px;margin-top:12px}
-.chat-input{flex:1;padding:12px 14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:12px;color:#fff;font-family:'PT Sans',sans-serif}
-.chat-input:focus{outline:none;border-color:rgba(184,0,24,.3)}
-.chat-send{padding:12px 16px;background:linear-gradient(135deg,#B80018,#8B0012);color:#fff;border:none;border-radius:12px;cursor:pointer;font-weight:700}
-.emergency-box{background:linear-gradient(135deg,rgba(239,68,68,.1),rgba(239,68,68,.05));border:1px solid rgba(239,68,68,.2);border-radius:16px;padding:20px;text-align:center}
-.emergency-btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:linear-gradient(135deg,#dc2626,#991b1b);color:#fff;border-radius:12px;font-family:'Oswald',sans-serif;font-weight:700;font-size:1rem;cursor:pointer;border:none;transition:all .2s;text-decoration:none;margin:12px 0}
+.emergency{background:linear-gradient(135deg,rgba(239,68,68,.08),rgba(239,68,68,.03));border:1px solid rgba(239,68,68,.2);border-radius:18px;padding:24px;text-align:center;margin-top:16px}
+.emergency h3{font-family:'Oswald',sans-serif;font-weight:700;margin-bottom:8px}
+.emergency-btn{display:inline-flex;align-items:center;gap:8px;padding:14px 28px;background:linear-gradient(135deg,#dc2626,#991b1b);color:#fff;border-radius:12px;font-family:'Oswald',sans-serif;font-weight:700;font-size:1rem;text-decoration:none;transition:all .2s;margin:12px 0}
 .emergency-btn:hover{transform:translateY(-1px);color:#fff;text-decoration:none}
 .rules{display:grid;gap:6px;margin-top:12px;text-align:left}
 .rule{display:flex;align-items:center;gap:8px;font-size:.85rem;padding:8px 12px;background:rgba(255,255,255,.02);border-radius:8px}
 .rule.no{color:#fca5a5}
 .rule.yes{color:#6ee7b7}
-.section-nav{display:flex;gap:8px;overflow-x:auto;padding-bottom:8px;margin-bottom:16px;scrollbar-width:none}
-.section-nav::-webkit-scrollbar{display:none}
-.section-btn{padding:8px 16px;border-radius:8px;font-size:.82rem;font-weight:600;white-space:nowrap;cursor:pointer;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);color:#7a8ba3;transition:all .2s;font-family:'PT Sans',sans-serif}
-.section-btn.active{background:rgba(184,0,24,.1);color:#fff;border-color:rgba(184,0,24,.3)}
-.section{display:none}
-.section.active{display:block}
-.news-item{display:flex;gap:16px;padding:16px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04);border-radius:14px;margin-bottom:10px;transition:all .3s}
-.news-item:hover{border-color:rgba(255,255,255,.1)}
-.news-icon{width:48px;height:48px;border-radius:12px;display:flex;align-items:center;justify-content:center;font-size:1.3rem;flex-shrink:0}
-.news-content{flex:1}
-.news-title{font-weight:700;font-size:.88rem;margin-bottom:2px}
-.news-desc{font-size:.82rem;color:#7a8ba3;line-height:1.5}
-.news-date{font-size:.7rem;color:#555;margin-top:4px}
-.news-badge{display:inline-block;padding:2px 8px;border-radius:4px;font-size:.68rem;font-weight:700;margin-bottom:6px}
-.news-badge.alert{background:rgba(239,68,68,.1);color:#fca5a5}
-.news-badge.info{background:rgba(99,102,241,.1);color:#818cf8}
-.news-badge.success{background:rgba(16,185,129,.1);color:#6ee7b7}
-.consultant-photo{width:48px;height:48px;border-radius:50%;object-fit:cover;border:2px solid rgba(255,255,255,.08)}
-.edit-btn{background:none;border:none;cursor:pointer;font-size:.8rem;padding:2px 6px;border-radius:4px;transition:all .2s;opacity:.4;line-height:1;vertical-align:middle}
-.edit-btn:hover{opacity:1;background:rgba(255,255,255,.08)}
-.edited-badge{display:inline-block;padding:2px 8px;background:rgba(200,160,0,.12);color:#C8A000;border-radius:4px;font-size:.68rem;font-weight:600;margin-left:8px;white-space:nowrap}
-.edited-glow{box-shadow:0 0 12px rgba(200,160,0,.08)}
-.status-pill.clickable{cursor:pointer;transition:all .2s}
-.status-pill.clickable:hover{filter:brightness(1.2)}
-.status-dropdown{position:absolute;top:100%;right:0;margin-top:4px;background:#1A1A1A;border:1px solid rgba(255,255,255,.1);border-radius:10px;overflow:hidden;z-index:100;box-shadow:0 8px 32px rgba(0,0,0,.5);min-width:160px}
-.status-dropdown div{padding:10px 16px;font-size:.85rem;cursor:pointer;transition:background .2s;color:#e8ecf4}
-.status-dropdown div:hover{background:rgba(255,255,255,.06)}
-.status-dropdown div.selected{color:#C8A000;font-weight:700}
-#stageDescDisplay{cursor:pointer;transition:all .2s;padding:4px 8px;margin:-4px -8px;border-radius:6px}
-#stageDescDisplay:hover{background:rgba(255,255,255,.04)}
-.stage-edit-input{width:100%;padding:8px 10px;background:rgba(255,255,255,.04);border:1px solid rgba(184,0,24,.3);border-radius:8px;color:#fff;font-family:'PT Sans',sans-serif;font-size:.88rem;margin-top:4px}
-.stage-edit-input:focus{outline:none;border-color:rgba(184,0,24,.5)}
-.stage-edit-actions{display:flex;gap:6px;margin-top:6px}
-.stage-edit-actions button{padding:4px 12px;border-radius:6px;font-size:.78rem;cursor:pointer;border:none;font-weight:600}
-.stage-save-btn{background:rgba(184,0,24,.2);color:#B80018}
-.stage-cancel-btn{background:rgba(255,255,255,.05);color:#7a8ba3}
-@media(max-width:500px){.money-row{flex-direction:column}.news-item{flex-direction:column}}
+@media(max-width:500px){.money-grid{grid-template-columns:1fr}}
 </style>
 </head>
 <body>
-<div class="topbar">
-    <div class="topbar-left">
-        <div class="topbar-logo"><svg style="width:20px;height:20px;color:#fff" fill="currentColor" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg></div>
-        <div class="topbar-case">Дело <strong id="caseId"></strong> · <span id="caseName"></span></div>
+
+<!-- Top Bar -->
+<div style="position:fixed;top:0;left:0;right:0;z-index:50;background:rgba(17,17,17,.95);backdrop-filter:blur(12px);border-bottom:1px solid rgba(255,255,255,.06);padding:12px 20px;display:flex;justify-content:space-between;align-items:center">
+    <div style="display:flex;align-items:center;gap:10px">
+        <div style="width:32px;height:32px;background:linear-gradient(135deg,#B80018,#8B0012);border-radius:8px;display:flex;align-items:center;justify-content:center"><svg style="width:18px;height:18px;color:#fff" fill="currentColor" viewBox="0 0 24 24"><path d="M12 1L3 5v6c0 5.55 3.84 10.74 9 12 5.16-1.26 9-6.45 9-12V5l-9-4z"/></svg></div>
+        <div style="font-size:.85rem;color:#7a8ba3">Дело <strong style="color:#fff" id="caseId"></strong> · <span id="caseName"></span></div>
     </div>
-    <div class="topbar-right">
-        <a href="tel:1434" class="topbar-btn btn-logout" style="text-decoration:none;color:#C8A000">📞 1434</a>
-        <button class="topbar-btn btn-logout" onclick="localStorage.removeItem('currentCase');window.location.href='/antifraud-kz/client/login.html'">Выйти</button>
+    <div style="display:flex;gap:8px;align-items:center">
+        <a href="tel:1434" style="padding:8px 16px;border-radius:8px;font-size:.82rem;font-weight:600;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);color:#C8A000;text-decoration:none;display:flex;align-items:center;gap:6px">📞 1434</a>
+        <button onclick="localStorage.removeItem('currentCase');window.location.href='/antifraud-kz/client/login.html'" style="padding:8px 16px;border-radius:8px;font-size:.82rem;font-weight:600;border:1px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);color:#7a8ba3;cursor:pointer;font-family:'PT Sans',sans-serif">Выйти</button>
     </div>
 </div>
 
-<div class="wrap">
-    <div class="section-nav" data-reveal>
-        <button class="section-btn active" onclick="showSection('status',this)">📊 Статус</button>
-        <button class="section-btn" onclick="showSection('finance',this)">💰 Финансы</button>
-        <button class="section-btn" onclick="showSection('timeline',this)">📋 Таймлайн</button>
-        <button class="section-btn" onclick="showSection('docs',this)">📁 Документы</button>
-        <button class="section-btn" onclick="showSection('chat',this)">💬 Чат</button>
-        <button class="section-btn" onclick="showSection('news',this)">📰 Новости</button>
+<div class="dash" id="mainContent" style="display:none">
+
+    <!-- СТАТУС -->
+    <div class="card">
+        <div class="card-title">
+            <div class="icon" style="background:rgba(245,158,11,.1)">📊</div>
+            СТАТУС ДЕЛА
+            <span class="badge" id="statusBadge" style="margin-left:auto"></span>
+        </div>
+        <div style="font-size:.82rem;color:#7a8ba3;margin-bottom:4px" id="lastUpdate"></div>
+        <div class="progress"><div class="progress-fill" id="progressBar" style="width:0%"></div></div>
+        <div id="stageInfo"></div>
+        <div id="stageWarning"></div>
     </div>
 
-    <div id="status" class="section active">
-        <div class="card" data-reveal>
-            <div class="card-header">
-                <div class="card-icon" style="background:rgba(245,158,11,.1)">📊</div>
-                <div><div class="card-title">СТАТУС ВАШЕГО ДЕЛА</div><div class="card-subtitle" id="lastUpdate"></div></div>
-                <div style="position:relative;margin-left:auto">
-                    <span class="status-pill s-process clickable" id="statusBadge" onclick="editStatus()"></span>
-                    <span id="statusEditedBadge" style="display:none" class="edited-badge">✏️ Изменён</span>
-                </div>
-            </div>
-            <div class="progress-bar"><div class="progress-fill" id="progressBar" style="width:0%"></div></div>
-            <div id="stageInfo"></div>
-            <div id="stageWarning" style="margin-top:12px"></div>
-            <div id="progressSkeleton" style="display:none">
-                <div class="af-skeleton" style="height:60px;border-radius:10px;margin-bottom:8px"></div>
-                <div class="af-skeleton" style="height:40px;border-radius:10px;width:70%"></div>
-            </div>
+    <!-- ФИНАНСЫ -->
+    <div class="card">
+        <div class="card-title">
+            <div class="icon" style="background:rgba(200,160,0,.1)">💰</div>
+            ФИНАНСЫ
         </div>
+        <div class="money-grid" id="moneyLost"></div>
+        <div id="recoveryBlocks"></div>
+        <div id="returnedBlock"></div>
     </div>
 
-    <div id="finance" class="section">
-        <div class="card" data-reveal>
-            <div class="card-header">
-                <div class="card-icon" style="background:rgba(200,160,0,.1)">💰</div>
-                <div class="card-title">ФИНАНСЫ ВАШЕГО ДЕЛА</div>
-                <span id="financeEditedBadge" style="display:none" class="edited-badge">✏️ Изменено</span>
-            </div>
-            <div class="money-row" id="moneyLost"></div>
-            <div id="recoveryBlocks"></div>
-            <div id="returnedBlock"></div>
+    <!-- ТАЙМЛАЙН -->
+    <div class="card">
+        <div class="card-title">
+            <div class="icon" style="background:rgba(99,102,241,.1)">📋</div>
+            ХРОНОЛОГИЯ
         </div>
-        <div class="card" data-reveal>
-            <div class="card-header">
-                <div class="card-icon" style="background:rgba(16,185,129,.1)">💳</div>
-                <div class="card-title">ОПЛАЧЕННЫЕ УСЛУГИ</div>
-            </div>
-            <div id="servicesList"></div>
-        </div>
+        <div class="tl" id="timelineList"></div>
     </div>
 
-    <div id="timeline" class="section">
-        <div class="card" data-reveal>
-            <div class="card-header">
-                <div class="card-icon" style="background:rgba(99,102,241,.1)">📋</div>
-                <div class="card-title">ЧТО МЫ ДЕЛАЕМ — ШАГ ЗА ШАГОМ</div>
-            </div>
-            <div class="tl" id="timelineList" data-stagger data-stagger-delay="80"></div>
+    <!-- ДОКУМЕНТЫ -->
+    <div class="card">
+        <div class="card-title">
+            <div class="icon" style="background:rgba(184,0,24,.1)">📁</div>
+            ДОКУМЕНТЫ
+        </div>
+        <div id="docsContent"></div>
+    </div>
+
+    <!-- ЧАТ -->
+    <div class="card">
+        <div class="card-title">
+            <div class="icon" style="background:rgba(16,185,129,.1)">💬</div>
+            КОНСУЛЬТАНТ
+            <span style="font-size:.72rem;color:#10b981;margin-left:auto">🟢 Онлайн</span>
+        </div>
+        <div id="chatMessages"></div>
+        <div style="margin-top:12px;display:flex;gap:8px">
+            <input type="text" id="chatInput" placeholder="Написать сообщение..." style="flex:1;padding:12px 14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:10px;color:#fff;font-size:.88rem;font-family:'PT Sans',sans-serif" onkeydown="if(event.key==='Enter')sendMsg()">
+            <button onclick="sendMsg()" style="padding:12px 16px;background:linear-gradient(135deg,#B80018,#8B0012);color:#fff;border:none;border-radius:10px;cursor:pointer;font-weight:700">→</button>
         </div>
     </div>
 
-    <div id="docs" class="section">
-        <div class="card" data-reveal>
-            <div class="card-header">
-                <div class="card-icon" style="background:rgba(184,0,24,.1)">📁</div>
-                <div class="card-title">НАШИ ДОКУМЕНТЫ</div>
-            </div>
-            <div id="docsOurs"></div>
-        </div>
-        <div class="card" data-reveal>
-            <div class="card-header">
-                <div class="card-icon" style="background:rgba(239,68,68,.1)">📄</div>
-                <div class="card-title">ДОКУМЕНТЫ МОШЕННИКОВ</div>
-                <span style="font-size:.75rem;color:#fca5a5">Приобщены к делу</span>
-            </div>
-            <div id="docsScammers"></div>
+    <!-- ЭКСТРЕННАЯ СВЯЗЬ -->
+    <div class="emergency">
+        <div style="font-size:2rem;margin-bottom:8px">🚨</div>
+        <h3>ЭКСТРЕННАЯ СВЯЗЬ</h3>
+        <p style="color:#7a8ba3;font-size:.85rem;margin-bottom:8px">Мошенники снова вышли на связь?</p>
+        <a href="tel:1434" class="emergency-btn">🚨 ТРЕВОГА — ЗВОНИТЕ 1434</a>
+        <div class="rules">
+            <div class="rule no">❌ Не платите ни при каких условиях</div>
+            <div class="rule no">❌ Не отправляйте документы мошенникам</div>
+            <div class="rule no">❌ Не сообщайте данные других карт</div>
+            <div class="rule yes">✅ Делайте скриншоты всего</div>
+            <div class="rule yes">✅ Присылайте нам новые требования</div>
         </div>
     </div>
 
-    <div id="chat" class="section">
-        <div class="card" data-reveal>
-            <div class="card-header">
-                <div class="card-icon" style="background:rgba(16,185,129,.1)">💬</div>
-                <div><div class="card-title">КОНСУЛЬТАНТ</div><div class="card-subtitle" id="consultantInfo"></div></div>
-            </div>
-            <div id="chatMessages"></div>
-            <div class="chat-input-wrap">
-                <input type="text" class="chat-input" id="chatInput" placeholder="Написать сообщение..." onkeydown="if(event.key==='Enter')sendMsg()">
-                <button class="chat-send btn-ripple" onclick="sendMsg()">→</button>
-            </div>
-        </div>
-        <div class="emergency-box" data-reveal>
-            <div style="font-size:2rem;margin-bottom:8px">🚨</div>
-            <h3 style="font-family:'Oswald',sans-serif;font-weight:700;margin-bottom:4px">ЭКСТРЕННАЯ СВЯЗЬ</h3>
-            <p style="color:#7a8ba3;font-size:.85rem;margin-bottom:8px">Мошенники снова вышли на связь?</p>
-            <a href="tel:1434" class="emergency-btn btn-ripple">🚨 ТРЕВОГА — ЗВОНИТЕ 1434</a>
-            <div class="rules">
-                <div class="rule no">❌ Не платите ни при каких условиях</div>
-                <div class="rule no">❌ Не отправляйте документы мошенникам</div>
-                <div class="rule no">❌ Не сообщайте данные других карт</div>
-                <div class="rule yes">✅ Делайте скриншоты всего</div>
-                <div class="rule yes">✅ Присылайте нам новые требования</div>
-            </div>
-        </div>
-    </div>
-
-    <div id="news" class="section">
-        <div class="card" data-reveal>
-            <div class="card-header">
-                <div class="card-icon" style="background:rgba(99,102,241,.1)">📰</div>
-                <div class="card-title">НОВОСТИ И ОБНОВЛЕНИЯ</div>
-            </div>
-            <div id="newsList"></div>
-        </div>
-    </div>
 </div>
 
-<div id="mainSkeleton" style="padding:20px">
-    <div class="af-skeleton" style="height:40px;border-radius:8px;margin-bottom:16px;width:200px"></div>
-    <div class="af-skeleton" style="height:200px;border-radius:14px;margin-bottom:12px"></div>
-    <div class="af-skeleton" style="height:120px;border-radius:14px;margin-bottom:12px"></div>
-    <div class="af-skeleton" style="height:80px;border-radius:14px;width:70%"></div>
+<!-- Skeleton -->
+<div id="skeleton" style="max-width:760px;margin:0 auto;padding:96px 16px 24px">
+    <div style="height:40px;border-radius:8px;margin-bottom:16px;width:200px;background:rgba(255,255,255,.04)"></div>
+    <div style="height:160px;border-radius:18px;margin-bottom:16px;background:rgba(255,255,255,.04)"></div>
+    <div style="height:120px;border-radius:18px;margin-bottom:16px;background:rgba(255,255,255,.04)"></div>
+    <div style="height:80px;border-radius:18px;width:70%;background:rgba(255,255,255,.04)"></div>
 </div>
 
 <script>
-function showSection(id,btn){
-    document.querySelectorAll('.section').forEach(function(s){s.classList.remove('active')});
-    document.querySelectorAll('.section-btn').forEach(function(b){b.classList.remove('active')});
-    document.getElementById(id).classList.add('active');
-    if(btn)btn.classList.add('active');
-    window.scrollTo({top:0,behavior:'smooth'});
-}
-
 var params=new URLSearchParams(window.location.search);
-var caseId=params.get('id')||'AF-2026-0847';
+var caseId=params.get('id')||'';
 var CURRENT_DATA=null;
-var EDITS={};
-var EDITS_KEY='dashboard_edits_'+caseId;
 
-document.getElementById('mainSkeleton').style.display='block';
-document.querySelector('.wrap').style.display='none';
+function formatMoney(n){if(typeof n!=='number')return n;return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,' ')}
 
-/* ===== EDIT SYSTEM ===== */
-function loadEdits(){
-    try{
-        EDITS=JSON.parse(localStorage.getItem(EDITS_KEY)||'{}');
-    }catch(e){EDITS={};}
-}
-
-function saveEdits(){
-    localStorage.setItem(EDITS_KEY,JSON.stringify(EDITS));
-}
-
-function hasEdits(){
-    return Object.keys(EDITS).length>0;
-}
-
-function hasFinanceEdits(){
-    return EDITS.lost && (EDITS.lost.bank!=null||EDITS.lost.crypto!=null||EDITS.lost.total!=null);
-}
-
-function hasStatusEdit(){
-    return EDITS.status && EDITS.statusText;
-}
-
-function mergeEdits(base){
-    if(!base)return base;
-    var d=JSON.parse(JSON.stringify(base));
-    if(EDITS.lost){
-        d.lost=d.lost||{};
-        if(EDITS.lost.bank!=null)d.lost.bank=EDITS.lost.bank;
-        if(EDITS.lost.crypto!=null)d.lost.crypto=EDITS.lost.crypto;
-        if(EDITS.lost.total!=null)d.lost.total=EDITS.lost.total;
-    }
-    if(EDITS.status)d.status=EDITS.status;
-    if(EDITS.statusText)d.statusText=EDITS.statusText;
-    if(EDITS.stage!=null)d.stage=EDITS.stage;
-    if(EDITS.stageName!=null)d.stageName=EDITS.stageName;
-    if(EDITS.stageDesc!=null)d.stageDesc=EDITS.stageDesc;
-    if(EDITS.timelineNotes){
-        Object.keys(EDITS.timelineNotes).forEach(function(k){
-            if(d.timeline&&d.timeline[k])d.timeline[k].note=EDITS.timelineNotes[k];
-        });
-    }
-    return d;
-}
-
-function editMoneyField(field){
-    var currentVal=0;
-    if(EDITS.lost&&EDITS.lost[field]!=null){
-        currentVal=EDITS.lost[field];
-    }else if(CURRENT_DATA&&CURRENT_DATA.lost&&CURRENT_DATA.lost[field]!=null){
-        currentVal=CURRENT_DATA.lost[field];
-    }
-    var input=prompt('Введите сумму в тенге (₸):',currentVal.toString());
-    if(input===null)return;
-    var num=parseInt(input.replace(/[^\d]/g,''));
-    if(isNaN(num)){alert('Введите корректное число');return;}
-    if(!EDITS.lost)EDITS.lost={};
-    EDITS.lost[field]=num;
-    EDITS.lost.total=(EDITS.lost.bank!=null?EDITS.lost.bank:(CURRENT_DATA.lost?CURRENT_DATA.lost.bank:0))+(EDITS.lost.crypto!=null?EDITS.lost.crypto:(CURRENT_DATA.lost?CURRENT_DATA.lost.crypto:0));
-    saveEdits();
-    renderCase(mergeEdits(CURRENT_DATA));
-}
-
-function editStatus(){
-    var currentStatus=EDITS.status||(CURRENT_DATA?CURRENT_DATA.status:'process');
-    var dropdown=document.createElement('div');
-    dropdown.className='status-dropdown';
-    var options=[
-        {id:'process',label:'В работе',color:'#fbbf24'},
-        {id:'done',label:'Завершено',color:'#6ee7b7'},
-        {id:'new',label:'Новое',color:'#818cf8'}
-    ];
-    options.forEach(function(o){
-        var div=document.createElement('div');
-        div.textContent=o.label;
-        if(o.id===currentStatus)div.style.color=o.color;
-        div.onclick=function(){
-            EDITS.status=o.id;
-            EDITS.statusText=o.label;
-            saveEdits();
-            renderCase(mergeEdits(CURRENT_DATA));
-            dropdown.remove();
-        };
-        dropdown.appendChild(div);
-    });
-    var badge=document.getElementById('statusBadge');
-    var rect=badge.getBoundingClientRect();
-    dropdown.style.position='fixed';
-    dropdown.style.top=rect.bottom+4+'px';
-    dropdown.style.right=(window.innerWidth-rect.right)+'px';
-    document.body.appendChild(dropdown);
-    function closeDrop(e){
-        if(!dropdown.contains(e.target)&&e.target!==badge){
-            dropdown.remove();
-            document.removeEventListener('click',closeDrop);
-        }
-    }
-    setTimeout(function(){document.addEventListener('click',closeDrop);},10);
-}
-
-function editStageDesc(){
-    var container=document.getElementById('stageDescDisplay');
-    var currentText=EDITS.stageDesc!=null?EDITS.stageDesc:(CURRENT_DATA?CURRENT_DATA.stageDesc:'');
-    container.style.display='none';
-    var editArea=document.createElement('div');
-    editArea.innerHTML='<textarea class="stage-edit-input" id="stageDescInput" rows="3">'+currentText.replace(/</g,'&lt;')+'</textarea><div class="stage-edit-actions"><button class="stage-save-btn" onclick="saveStageDesc()">💾 Сохранить</button><button class="stage-cancel-btn" onclick="cancelStageEdit()">Отмена</button></div>';
-    container.parentNode.insertBefore(editArea,container.nextSibling);
-    editArea.id='stageEditContainer';
-    document.getElementById('stageDescInput').focus();
-}
-function saveStageDesc(){
-    var val=document.getElementById('stageDescInput').value.trim();
-    if(!val)return;
-    EDITS.stageDesc=val;
-    saveEdits();
-    renderCase(mergeEdits(CURRENT_DATA));
-}
-function cancelStageEdit(){
-    var el=document.getElementById('stageEditContainer');
-    if(el)el.remove();
-    document.getElementById('stageDescDisplay').style.display='';
-}
-
-function editTimelineNote(idx){
-    var currentNote='';
-    if(EDITS.timelineNotes&&EDITS.timelineNotes[idx]!=null){
-        currentNote=EDITS.timelineNotes[idx];
-    }else if(CURRENT_DATA&&CURRENT_DATA.timeline&&CURRENT_DATA.timeline[idx]&&CURRENT_DATA.timeline[idx].note){
-        currentNote=CURRENT_DATA.timeline[idx].note;
-    }
-    var input=prompt('Редактировать заметку консультанта для шага "'+(CURRENT_DATA.timeline[idx]?CURRENT_DATA.timeline[idx].title:'')+'":',currentNote);
-    if(input===null)return;
-    if(!EDITS.timelineNotes)EDITS.timelineNotes={};
-    EDITS.timelineNotes[idx]=input.trim()||'';
-    saveEdits();
-    renderCase(mergeEdits(CURRENT_DATA));
-}
-
-/* ===== LOAD CASE ===== */
 function loadCase(){
-    loadEdits();
     try{
         var adminClients=JSON.parse(localStorage.getItem('admin_clients')||'[]');
         var adminCase=adminClients.find(function(c){return c.id===caseId});
         if(adminCase){
-            renderFromAdmin(adminCase);
+            document.getElementById('skeleton').style.display='none';
+            document.getElementById('mainContent').style.display='block';
+            renderAdminCase(adminCase);
             return;
         }
     }catch(e){}
-    fetch('/antifraud-kz/data/cases.json').then(function(r){return r.json()}).then(function(data){
-        var c=data.cases.find(function(x){return x.id===caseId});
-        if(c){renderFromJSON(c);return;}
-        renderFake(caseId);
-    }).catch(function(e){
-        renderFake(caseId);
-    });
+    document.getElementById('skeleton').style.display='none';
+    document.getElementById('mainContent').style.display='block';
+    renderNotFound();
 }
 
-function renderFromJSON(c){
-    CURRENT_DATA=c;
-    document.getElementById('mainSkeleton').style.display='none';
-    document.querySelector('.wrap').style.display='block';
-    renderCase(mergeEdits(c));
+function renderNotFound(){
+    document.getElementById('caseId').textContent=caseId||'—';
+    document.getElementById('caseName').textContent='Дело не найдено';
+    document.getElementById('mainContent').innerHTML='<div style="text-align:center;padding:60px 20px"><div style="font-size:3rem;margin-bottom:12px">🔍</div><h2 style="font-family:Oswald,sans-serif;margin-bottom:8px">Дело не найдено</h2><p style="color:#7a8ba3">Проверьте номер дела или обратитесь по телефону <strong style="color:#C8A000">1434</strong></p><a href="/antifraud-kz/client/login.html" style="display:inline-block;margin-top:16px;color:#B80018;text-decoration:none;font-weight:700">← Вернуться</a></div>';
 }
 
-function renderFromAdmin(a){
+function renderAdminCase(a){
     CURRENT_DATA=a;
-    document.getElementById('mainSkeleton').style.display='none';
-    document.querySelector('.wrap').style.display='block';
-    renderCase(mergeEdits({
-        id:a.id,
-        client:{name:a.name,phone:a.phone,iin:a.iin||'',city:a.city||'',age:0},
-        consultant:{name:a.consultant||'Ожидает назначения',role:'Консультант',phone:'',cases:0,photo:'https://i.pravatar.cc/100?img=1'},
-        status:a.status==='done'?'done':'process',
-        statusText:a.status==='done'?'Завершено':'В работе',
-        stage:'—',stageName:a.status==='done'?'Завершено':'Новое дело',
-        stageDesc:a.desc||'Ожидает обработки',
-        opened:a.date||'—',lastUpdate:a.date||'—',
-        lost:{bank:0,crypto:0,total:0},
-        recovery:[],returned:0,potentialReturn:0,
-        services:[{name:'Консультация',amount:0,status:'paid',note:'Ожидает'}],
-        nextPayment:null,
-        timeline:[{date:a.date||'—',title:'Заявка создана',desc:'Клиент добавлен в систему',status:'done'}],
-        documents:{ours:[],scammers:[]},
-        chat:[{date:(a.date||'')+' 10:00',from:'consultant',text:'Заявка принята. Ожидайте звонка специалиста.'}]
-    }));
-}
+    document.getElementById('caseId').textContent=a.id;
+    document.getElementById('caseName').textContent=a.name.split(' ').slice(0,2).join(' ');
 
-function renderFake(id){
-    CURRENT_DATA={id:id};
-    document.getElementById('mainSkeleton').style.display='none';
-    document.querySelector('.wrap').style.display='block';
-    renderCase(mergeEdits({
-        id:id,client:{name:'Новый клиент',phone:'+7 700 000 00 00',iin:'—',city:'—',age:0},
-        consultant:{name:'Специалист',role:'Консультант',phone:'',cases:0,photo:'https://i.pravatar.cc/100?img=1'},
-        status:'new',statusText:'Новое',
-        stage:'А',stageName:'Ожидание обработки',
-        stageDesc:'Ваша заявка принята. В ближайшее время с вами свяжется специалист.',
-        opened:new Date().toISOString().slice(0,10),lastUpdate:new Date().toISOString().slice(0,10),
-        lost:{bank:0,crypto:0,total:0},
-        recovery:[],returned:0,potentialReturn:0,
-        services:[],nextPayment:null,
-        timeline:[{date:new Date().toISOString().slice(0,10),title:'Заявка создана',desc:'Ожидайте звонка',status:'active'}],
-        documents:{ours:[],scammers:[]},
-        chat:[{date:new Date().toISOString().slice(0,10)+' 00:00',from:'consultant',text:'Здравствуйте! Ваша заявка принята. Скоро свяжемся.'}]
-    }));
-}
+    var statusClass=a.status==='done'?'badge-done':a.status==='process'?'badge-process':'badge-new';
+    var statusText=a.status==='done'?'Завершено':a.status==='process'?'В работе':'Новое';
+    document.getElementById('statusBadge').className='badge '+statusClass;
+    document.getElementById('statusBadge').textContent=statusText;
+    document.getElementById('lastUpdate').textContent='Обновлено: '+(a.date||'—');
 
-function renderCase(c){
-    document.getElementById('caseId').textContent=c.id;
-    document.getElementById('caseName').textContent=c.client.name.split(' ').slice(0,2).join(' ');
-
-    /* Status */
-    var statusClass=c.status==='done'?'s-done':'s-process';
-    if(c.status==='new')statusClass='s-process';
-    document.getElementById('statusBadge').className='status-pill '+statusClass+' clickable';
-    document.getElementById('statusBadge').textContent=c.statusText+' ✏️';
-    document.getElementById('lastUpdate').textContent='Обновлено: '+(c.lastUpdate||'—');
-    var sb=document.getElementById('statusEditedBadge');
-    if(hasStatusEdit()){sb.style.display='';}else{sb.style.display='none';}
-
-    /* Progress */
-    var pct=c.status==='done'?100:c.status==='process'?60:10;
-    if(c.timeline){
-        var doneCount=c.timeline.filter(function(t){return t.status==='done'}).length;
-        var totalCount=c.timeline.length;
-        pct=totalCount?Math.round(doneCount/totalCount*100):pct;
-    }
+    var pct=a.status==='done'?100:a.status==='process'?50:10;
     document.getElementById('progressBar').style.width=pct+'%';
 
-    /* Stage info */
-    var stageText=EDITS.stageDesc!=null?EDITS.stageDesc:(c.stageDesc||'');
-    document.getElementById('stageInfo').innerHTML='<div style="padding:14px;background:rgba(255,255,255,.03);border-radius:10px;border:1px solid rgba(255,255,255,.06)"><div style="font-size:.82rem;color:#7a8ba3;margin-bottom:4px;display:flex;align-items:center;gap:8px">Стадия: <span style="font-size:.7rem;color:#7a8ba3;font-weight:400">(нажмите на текст, чтобы изменить)</span></div><div style="font-family:Oswald,sans-serif;font-weight:700;font-size:1.1rem;margin-bottom:8px">'+(c.stage||'—')+' — '+(c.stageName||'—')+'</div><div id="stageDescDisplay" onclick="editStageDesc()" style="font-size:.88rem;color:#e8ecf4;line-height:1.6">'+stageText+' <span style="font-size:.7rem;color:#7a8ba3">✏️</span></div></div>';
+    document.getElementById('stageInfo').innerHTML='<div style="padding:14px;background:rgba(255,255,255,.02);border-radius:10px;border:1px solid rgba(255,255,255,.04)"><div style="font-size:.82rem;color:#7a8ba3;margin-bottom:4px">Текущая стадия</div><div style="font-family:Oswald,sans-serif;font-weight:700;font-size:1.1rem;margin-bottom:6px">'+(a.status==='done'?'Завершено':'Новое дело')+'</div><div style="font-size:.88rem;color:#e8ecf4;line-height:1.6">'+(a.desc||'Ожидает обработки специалистом')+'</div></div>';
 
-    if(c.stageWarning){
-        document.getElementById('stageWarning').innerHTML='<div style="padding:12px;background:rgba(245,158,11,.06);border:1px solid rgba(245,158,11,.15);border-radius:10px;font-size:.85rem;color:#fbbf24"><strong>⚠ Следующий шаг мошенников:</strong><br>'+(c.stageWarning||'')+'</div><div style="margin-top:8px;padding:10px;background:rgba(184,0,24,.08);border:1px solid rgba(184,0,24,.2);border-radius:8px;font-size:.88rem;color:#fff;font-weight:600;text-align:center">НЕ ПЛАТИТЕ НИЧЕГО до консультации с нами</div>';
-    }
+    var amount=parseInt((a.amount||'0').replace(/[^\d]/g,''))||0;
+    document.getElementById('moneyLost').innerHTML='<div class="money-item"><div class="money-amount" style="color:#B80018">'+formatMoney(amount)+' ₸</div><div class="money-label">Сумма потерь</div></div><div class="money-item"><div class="money-amount" style="color:#6ee7b7">0 ₸</div><div class="money-label">Возвращено</div></div><div class="money-item"><div class="money-amount" style="color:#C8A000">'+formatMoney(amount)+' ₸</div><div class="money-label">Ожидается</div></div>';
 
-    /* Finance */
-    if(c.lost){
-        var bankVal=EDITS.lost&&EDITS.lost.bank!=null?EDITS.lost.bank:c.lost.bank;
-        var cryptoVal=EDITS.lost&&EDITS.lost.crypto!=null?EDITS.lost.crypto:c.lost.crypto;
-        var totalVal=EDITS.lost&&EDITS.lost.total!=null?EDITS.lost.total:c.lost.total;
-        document.getElementById('moneyLost').innerHTML='<div class="money-item'+((EDITS.lost&&EDITS.lost.bank!=null)?' edited-glow':'')+'"><div class="money-amount" style="color:#B80018"><span>'+formatMoney(bankVal)+'</span><button class="edit-btn" onclick="editMoneyField(\'bank\')" title="Редактировать">✏️</button></div><div class="label">Банковские переводы</div></div><div class="money-item'+((EDITS.lost&&EDITS.lost.crypto!=null)?' edited-glow':'')+'"><div class="money-amount" style="color:#C8A000"><span>'+formatMoney(cryptoVal)+'</span><button class="edit-btn" onclick="editMoneyField(\'crypto\')" title="Редактировать">✏️</button></div><div class="label">Криптовалюта</div></div><div class="money-item'+((EDITS.lost&&EDITS.lost.total!=null)?' edited-glow':'')+'"><div class="money-amount" style="color:#fff"><span>'+formatMoney(totalVal)+'</span><button class="edit-btn" onclick="editMoneyField(\'total\')" title="Редактировать">✏️</button></div><div class="label">Итого потеряно</div></div>';
-    }
-    var fb=document.getElementById('financeEditedBadge');
-    if(hasFinanceEdits()){fb.style.display='';}else{fb.style.display='none';}
+    document.getElementById('recoveryBlocks').innerHTML='<div style="padding:12px;text-align:center;color:#7a8ba3;font-size:.82rem">Процедуры возврата запускаются после обработки заявки специалистом</div>';
+    document.getElementById('returnedBlock').innerHTML='';
 
-    var recoveryHtml='';
-    if(c.recovery&&c.recovery.length){
-        c.recovery.forEach(function(r){
-            var progress=r.maxDays?Math.min(Math.round(r.day/r.maxDays*100),100):0;
-            recoveryHtml+='<div class="money-block"><div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:8px"><strong style="font-size:.92rem">'+(r.type==='chargeback'?'Чарджбэк — '+r.bank:r.type==='police'?r.department:'Заявление')+'</strong><span class="status-pill '+(r.status==='completed'?'s-done':'s-process')+'">'+r.statusText+'</span></div><div style="font-size:.88rem;color:#7a8ba3">Сумма: <strong style="color:#fff">'+formatMoney(r.amount)+' ₸</strong></div>';
-            if(r.maxDays){recoveryHtml+='<div class="progress-bar" style="margin:8px 0"><div class="progress-fill" style="width:'+progress+'%"></div></div><div style="font-size:.78rem;color:#7a8ba3">Прошло '+r.day+' из '+r.maxDays+' дней</div>';}
-            if(r.chance){recoveryHtml+='<div style="font-size:.78rem;color:#C8A000;margin-top:4px">Шанс успеха: ~'+r.chance+'%</div>';}
-            recoveryHtml+='</div>';
-        });
-    }else{
-        recoveryHtml='<p style="color:#7a8ba3;font-size:.82rem;text-align:center;padding:12px">Процедуры возврата запускаются после сбора документов</p>';
-    }
-    document.getElementById('recoveryBlocks').innerHTML=recoveryHtml;
+    document.getElementById('timelineList').innerHTML='<div class="tl-item"><div class="tl-dot done"></div><div class="tl-box"><div class="tl-date">'+(a.date||'—')+'</div><div class="tl-title">Заявка создана</div><div class="tl-desc">Клиент добавлен в систему</div></div></div><div class="tl-item"><div class="tl-dot active"></div><div class="tl-box"><div class="tl-date">Сейчас</div><div class="tl-title">Ожидание обработки</div><div class="tl-desc">Специалист свяжется с вами в ближайшее время</div></div></div>';
 
-    document.getElementById('returnedBlock').innerHTML='<div style="display:flex;justify-content:space-between;padding:14px;background:rgba(16,185,129,.06);border:1px solid rgba(16,185,129,.15);border-radius:10px"><div><div style="font-size:.82rem;color:#7a8ba3">Возвращено</div><div style="font-family:Oswald,sans-serif;font-size:1.5rem;font-weight:700;color:#6ee7b7">'+formatMoney(c.returned||0)+' ₸</div></div><div style="text-align:right"><div style="font-size:.82rem;color:#7a8ba3">Ожидается возврат</div><div style="font-family:Oswald,sans-serif;font-size:1.5rem;font-weight:700;color:#C8A000">'+formatMoney(c.potentialReturn||0)+' ₸</div></div></div>';
+    document.getElementById('docsContent').innerHTML='<p style="color:#7a8ba3;font-size:.82rem;text-align:center;padding:12px">Документы будут загружены после назначения специалиста</p>';
 
-    var servicesHtml='';
-    if(c.services&&c.services.length){
-        c.services.forEach(function(s){
-            servicesHtml+='<div class="detail-row"><span class="detail-label">'+s.name+(s.note?' <span style="color:#7a8ba3">('+s.note+')</span>':'')+'</span><span class="detail-value">'+formatMoney(s.amount)+' ₸</span></div>';
-        });
-        if(c.nextPayment){
-            servicesHtml+='<div class="detail-row" style="border-top:2px solid rgba(255,255,255,.08);margin-top:8px;padding-top:12px"><span class="detail-label" style="color:#C8A000"><strong>'+c.nextPayment.name+'</strong></span><span class="detail-value" style="color:#C8A000">'+formatMoney(c.nextPayment.amount)+' ₸</span></div>';
-        }
-    }else{
-        servicesHtml='<p style="color:#7a8ba3;font-size:.82rem;text-align:center;padding:12px">Услуги ещё не назначены</p>';
-    }
-    document.getElementById('servicesList').innerHTML=servicesHtml;
-
-    /* Timeline with editable notes */
-    var tlHtml='';
-    if(c.timeline&&c.timeline.length){
-        c.timeline.forEach(function(t,i){
-            var noteText='';
-            if(EDITS.timelineNotes&&EDITS.timelineNotes[i]!=null&&EDITS.timelineNotes[i]){
-                noteText=EDITS.timelineNotes[i];
-            }else if(t.note){
-                noteText=t.note;
-            }
-            var noteHtml='';
-            if(noteText){
-                noteHtml='<div class="tl-note" onclick="editTimelineNote('+i+')">📝 '+noteText+' <span style="font-size:.65rem;color:#7a8ba3;margin-left:4px">✏️</span></div>';
-            }else{
-                noteHtml='<div class="tl-note" onclick="editTimelineNote('+i+')" style="opacity:.5">➕ Добавить заметку</div>';
-            }
-            tlHtml+='<div class="tl-item"><div class="tl-dot '+(t.status||'pending')+'"></div><div class="tl-content"><div class="tl-date">'+t.date+'</div><div class="tl-title">'+t.title+'</div><div class="tl-desc">'+t.desc+'</div>'+noteHtml+'</div></div>';
-        });
-    }else{
-        tlHtml='<p style="color:#7a8ba3;font-size:.82rem;text-align:center;padding:20px">Таймлайн пока пуст</p>';
-    }
-    document.getElementById('timelineList').innerHTML=tlHtml;
-
-    /* Documents */
-    var docsHtml='';
-    if(c.documents&&c.documents.ours&&c.documents.ours.length){
-        c.documents.ours.forEach(function(d){
-            docsHtml+='<div class="doc-item"><div class="doc-icon">📄</div><div><div class="doc-name">'+d.name+'</div><div class="doc-meta">'+d.date+' · '+(d.size||'—')+'</div></div><button class="doc-download" onclick="alert(\'Скачивание в демо-режиме\')">СКАЧАТЬ</button></div>';
-        });
-    }else{docsHtml='<p style="color:#7a8ba3;font-size:.82rem;text-align:center;padding:20px">Документы пока не загружены</p>';}
-    document.getElementById('docsOurs').innerHTML=docsHtml;
-
-    var scamHtml='';
-    if(c.documents&&c.documents.scammers&&c.documents.scammers.length){
-        c.documents.scammers.forEach(function(d){
-            scamHtml+='<div class="doc-item"><div class="doc-icon">📄</div><div><div class="doc-name">'+d.name+'<span class="doc-fake">ПОДДЕЛКА</span></div><div class="doc-meta">'+(d.note||'')+'</div></div><button class="doc-download" onclick="alert(\'Экспертиза в демо-режиме\')">Анализ</button></div>';
-        });
-    }else{scamHtml='<p style="color:#7a8ba3;font-size:.82rem;text-align:center;padding:20px">Документы мошенников не загружены</p>';}
-    document.getElementById('docsScammers').innerHTML=scamHtml;
-
-    /* Chat */
-    var consultant=c.consultant||{name:'Специалист',role:'Консультант',cases:0,photo:''};
-    document.getElementById('consultantInfo').innerHTML='<span style="display:flex;align-items:center;gap:8px">'+(consultant.photo?'<img src="'+consultant.photo+'" style="width:24px;height:24px;border-radius:50%;object-fit:cover">':'⚖️')+' '+consultant.name+' · '+consultant.role+' · '+consultant.cases+' дел · <span style="color:#10b981">🟢 Онлайн</span></span>';
-
-    var chatHtml='';
-    if(c.chat&&c.chat.length){
-        c.chat.forEach(function(m){
-            var cls=m.from==='client'?'client':'consultant';
-            var avatar=m.from==='client'?'👤':(consultant.photo?'<img src="'+consultant.photo+'" alt="">':'⚖️');
-            chatHtml+='<div class="chat-msg '+cls+'"><div class="chat-avatar" style="background:'+(m.from==='client'?'rgba(184,0,24,.2)':'rgba(16,185,129,.2)')+'">'+avatar+'</div><div><div class="chat-bubble '+cls+'">'+m.text+'</div><div class="chat-date">'+m.date+'</div></div></div>';
-        });
-    }else{
-        chatHtml='<p style="color:#7a8ba3;font-size:.82rem;text-align:center;padding:20px">Нет сообщений</p>';
-    }
-    document.getElementById('chatMessages').innerHTML=chatHtml;
-
-    /* News */
-    renderNews(c);
-}
-
-function renderNews(c){
-    var allNews=[
-        {icon:'🔴',badge:'alert',badgeText:'СРОЧНО',title:'Новая схема мошенничества: фейковые «сотрудники АРРФР»',desc:'Мошенники звонят, представляются сотрудниками АРРФР и требуют оплатить «страховой депозит» для разблокировки средств. АРРФР НЕ взимает такие платежи.',date:'22 июня 2026'},
-        {icon:'🛡️',badge:'success',badgeText:'ЗАЩИТА',title:'Как распознать поддельный документ госоргана',desc:'Герб должен быть чётким, адрес — только .gov.kz, подпись — с ЭЦП. Любой документ с реквизитами на карту физлица — 100% фейк.',date:'21 июня 2026'},
-        {icon:'📊',badge:'info',badgeText:'СТАТИСТИКА',title:'За май 2026 возвращено 18,7 млн ₸ по 43 делам',desc:'Средний чек возврата — 435 000 ₸. 76% дел завершаются полным или частичным возвратом.',date:'20 июня 2026'},
-        {icon:'⚖️',badge:'info',badgeText:'ЗАКОН',title:'Верховный суд РК: новая практика по чарджбэкам',desc:'Суды всё чаще встают на сторону потерпевших. Прецедент: решение по делу AF-2026-0234 — полный возврат 880 000 ₸ через суд.',date:'18 июня 2026'},
-        {icon:'🔍',badge:'alert',badgeText:'ВНИМАНИЕ',title:'Мошенники используют AI-голосовые звонки',desc:'Зафиксированы случаи, когда мошенники клонируют голос «руководителя» через AI. Не доверяйте голосовым звонкам с требованиями оплаты.',date:'15 июня 2026'},
-        {icon:'☎️',badge:'success',badgeText:'ГОРЯЧАЯ ЛИНИЯ',title:'1434 — круглосуточная поддержка',desc:'Если мошенники вышли на связь в выходной или ночью — звоните 1434. Оператор проконсультирует.',date:'14 июня 2026'},
-        {icon:'👨‍⚖️',badge:'info',badgeText:'КЕЙС',title:'Дело AF-2026-0890: полный возврат 1 200 000 ₸ через Kaspi',desc:'Клиентка перевела деньги за товар, поставщик исчез. Чарджбэк одобрен за 28 дней. Все средства возвращены.',date:'12 июня 2026'},
-        {icon:'🤖',badge:'info',badgeText:'ТЕХНОЛОГИИ',title:'AI-советник теперь помогает 24/7',desc:'Наш AI-советник обработал 1 247 запросов за неделю. Среднее время ответа — 12 секунд.',date:'10 июня 2026'}
+    var chatData=[
+        {from:'consultant',text:'Здравствуйте! Ваша заявка принята. Специалист свяжется с вами в ближайшее время.',date:(a.date||'')+' 10:00'},
+        {from:'consultant',text:'Если ситуация срочная — звоните на горячую линию 1434',date:(a.date||'')+' 10:01'}
     ];
-    var h='';
-    allNews.forEach(function(n,i){
-        h+='<div class="news-item" data-reveal>';
-        h+='<div class="news-icon" style="background:'+(n.badge==='alert'?'rgba(239,68,68,.1)':n.badge==='success'?'rgba(16,185,129,.1)':'rgba(99,102,241,.1)')+'">'+n.icon+'</div>';
-        h+='<div class="news-content"><span class="news-badge '+n.badge+'">'+n.badgeText+'</span>';
-        h+='<div class="news-title">'+n.title+'</div>';
-        h+='<div class="news-desc">'+n.desc+'</div>';
-        h+='<div class="news-date">'+n.date+'</div></div></div>';
+    var chatHtml='';
+    chatData.forEach(function(m){
+        var cls=m.from==='client'?'client':'consultant';
+        var avatar=m.from==='client'?'👤':'⚖️';
+        chatHtml+='<div class="chat-msg '+cls+'"><div class="chat-avatar" style="background:'+(m.from==='client'?'rgba(184,0,24,.2)':'rgba(16,185,129,.2)')+'">'+avatar+'</div><div><div class="chat-bubble '+cls+'">'+m.text+'</div><div class="chat-date">'+m.date+'</div></div></div>';
     });
-    document.getElementById('newsList').innerHTML=h;
-}
-
-function formatMoney(n){
-    if(typeof n!=='number')return n;
-    return n.toString().replace(/\B(?=(\d{3})+(?!\d))/g,' ');
+    document.getElementById('chatMessages').innerHTML=chatHtml;
 }
 
 function sendMsg(){
     var input=document.getElementById('chatInput');
     if(!input.value.trim())return;
     var chatBox=document.getElementById('chatMessages');
-    var consultant=CURRENT_DATA&&CURRENT_DATA.consultant?CURRENT_DATA.consultant:{name:'',role:'',cases:0,photo:''};
     chatBox.innerHTML+='<div class="chat-msg client"><div class="chat-avatar" style="background:rgba(184,0,24,.2)">👤</div><div><div class="chat-bubble client">'+input.value.replace(/</g,'&lt;')+'</div><div class="chat-date">Сейчас</div></div></div>';
     input.value='';
     chatBox.scrollTop=chatBox.scrollHeight;
     setTimeout(function(){
-        chatBox.innerHTML+='<div class="chat-msg consultant"><div class="chat-avatar" style="background:rgba(16,185,129,.2);overflow:hidden">'+(consultant.photo?'<img src="'+consultant.photo+'" alt="">':'⚖️')+'</div><div><div class="chat-bubble consultant">Спасибо за сообщение! Мы ответим вам в ближайшее время. Если ситуация срочная — звоните <strong>1434</strong>.</div><div class="chat-date">Только что</div></div></div>';
+        chatBox.innerHTML+='<div class="chat-msg consultant"><div class="chat-avatar" style="background:rgba(16,185,129,.2)">⚖️</div><div><div class="chat-bubble consultant">Спасибо за сообщение! Мы ответим вам в ближайшее время. Если ситуация срочная — звоните <strong>1434</strong>.</div><div class="chat-date">Только что</div></div></div>';
         chatBox.scrollTop=chatBox.scrollHeight;
     },1000);
 }
 
 loadCase();
 </script>
-<script src="/antifraud-kz/assets/js/effects.js"></script>
-<script src="/antifraud-kz/assets/js/nav.js"></script>
 </body>
 </html>

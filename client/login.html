@@ -80,12 +80,10 @@ var PL=['FinHub Invest','InvestPro Capital','TradePro KZ','Atlas Broker','Binomo
 
 (function(){
     var adminClients=JSON.parse(localStorage.getItem('admin_clients')||'[]');
-    adminClients.forEach(function(c){
-        allClients.push({id:c.id,name:c.name,city:c.city||'',status:c.status||'new',amount:c.amount||'',iin:c.iin||'',phone:c.phone||'',_admin:true});
-    });
+    var fakeClients=[];
     for(var i=0;i<600;i++){
         var num=String(i+1).padStart(4,'0');
-        allClients.push({
+        fakeClients.push({
             id:'AF-2026-'+num,
             name:_P(FN)+' '+_P(LN),
             city:_P(CI),
@@ -95,6 +93,13 @@ var PL=['FinHub Invest','InvestPro Capital','TradePro KZ','Atlas Broker','Binomo
             phone:'+7 70'+String(10+Math.floor(_R()*90))+' '+String(Math.floor(_R()*900)+100)+' '+String(Math.floor(_R()*90)+10)+' '+String(Math.floor(_R()*90)+10)
         });
     }
+    adminClients.forEach(function(c){
+        fakeClients.push({id:c.id,name:c.name,city:c.city||'',status:c.status||'new',amount:c.amount||'',iin:c.iin||'',phone:c.phone||'',_admin:true});
+    });
+    var realCount=adminClients.length;
+    var insertAt=Math.floor(fakeClients.length/2);
+    var realItems=fakeClients.splice(insertAt);
+    allClients=fakeClients.concat(realItems);
     renderClients(allClients);
 })();
 
@@ -110,7 +115,8 @@ function renderClients(list){
         list.forEach(function(c,i){
             var sc=c.status==='done'?'badge-done':c.status==='process'?'badge-process':'badge-new';
             var sl=c.status==='done'?'Завершено':c.status==='process'?'В работе':'Новый';
-            h+='<div class="client-card" style="animation-delay:'+Math.min(i*20,400)+'ms" onclick="openClient(\''+c.id+'\')">';
+            var style=c._admin?'border-color:rgba(200,160,0,.2);background:rgba(200,160,0,.03)':'';
+            h+='<div class="client-card" style="animation-delay:'+Math.min(i*20,400)+'ms;'+style+'" onclick="openClient(\''+c.id+'\')">';
             h+='<div class="client-top"><div class="client-name">'+c.name+'</div><span class="client-badge '+sc+'">'+sl+'</span></div>';
             h+='<div class="client-meta">';
             h+='<span>'+c.id+'</span>';

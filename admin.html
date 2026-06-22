@@ -54,8 +54,7 @@ body{background:#000;color:#fff;font-family:'PT Sans',sans-serif;margin:0}
     </div>
     <input type="password" class="login-input" id="loginPass" placeholder="Пароль" onkeydown="if(event.key==='Enter')login()">
     <p id="loginError" style="color:#fca5a5;font-size:.82rem;display:none;margin-bottom:12px">Неверный пароль</p>
-    <button class="login-btn btn-ripple" onclick="login()">Войти</button>
-    <p style="text-align:center;color:#7a8ba3;font-size:.72rem;margin-top:12px">Демо: admin123</p>
+    <button class="login-btn" onclick="login()">Войти</button>
 </div>
 
 <!-- Admin Panel -->
@@ -79,13 +78,19 @@ body{background:#000;color:#fff;font-family:'PT Sans',sans-serif;margin:0}
     <div id="clients" class="section active">
         <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;flex-wrap:wrap;gap:12px">
             <h2>👥 Все клиенты (<span id="clientCount">0</span>)</h2>
-            <button class="btn btn-primary" onclick="showSection('addclient',document.querySelectorAll('.tab')[1])">➕ Добавить клиента</button>
+            <div style="display:flex;gap:8px">
+                <input type="text" id="clientSearch" placeholder="Поиск..." oninput="filterAdminClients()" style="padding:8px 14px;background:rgba(255,255,255,.04);border:1px solid rgba(255,255,255,.08);border-radius:8px;color:#fff;font-size:.82rem;font-family:'PT Sans',sans-serif">
+                <button class="btn btn-primary" onclick="showSection('addclient',document.querySelectorAll('.tab')[1])">➕ Добавить</button>
+            </div>
         </div>
-        <div style="overflow-x:auto">
-            <table class="admin-table">
-                <thead><tr><th>ID</th><th>ФИО</th><th>Телефон</th><th>Сумма</th><th>Статус</th><th>Дата</th><th>Действия</th></tr></thead>
-                <tbody id="clientsTable"></tbody>
-            </table>
+        <div id="clientCards"></div>
+    </div>
+
+    <!-- Client Detail Modal -->
+    <div id="clientModal" style="display:none;position:fixed;inset:0;z-index:100;background:rgba(0,0,0,.7);backdrop-filter:blur(4px);overflow-y:auto;padding:20px" onclick="if(event.target===this)closeModal()">
+        <div style="max-width:600px;margin:40px auto;background:#1A1A1A;border:1px solid rgba(255,255,255,.08);border-radius:20px;padding:28px;position:relative">
+            <button onclick="closeModal()" style="position:absolute;top:16px;right:16px;background:rgba(255,255,255,.05);border:1px solid rgba(255,255,255,.08);border-radius:8px;padding:6px 12px;color:#7a8ba3;cursor:pointer;font-size:.82rem">✕ Закрыть</button>
+            <div id="modalContent"></div>
         </div>
     </div>
 
@@ -141,7 +146,7 @@ body{background:#000;color:#fff;font-family:'PT Sans',sans-serif;margin:0}
 
 <script>
 function login(){
-    if(document.getElementById('loginPass').value==='admin123'){
+    if(document.getElementById('loginPass').value==='1304'){
         document.getElementById('loginScreen').style.display='none';
         document.getElementById('adminPanel').style.display='block';
         loadAll();
@@ -157,21 +162,117 @@ function showSection(id,btn){
 function loadAll(){loadClients();loadApps();loadCases()}
 function loadClients(){
     var clients=JSON.parse(localStorage.getItem('admin_clients')||'[]');
-    renderClientsTable(clients);
-}
-function renderClientsTable(clients){
     document.getElementById('clientCount').textContent=clients.length;
+    renderClientCards(clients);
+}
+
+function renderClientCards(clients){
     var h='';
     clients.forEach(function(c){
-        h+='<tr><td style="color:#7a8ba3;font-size:.75rem">'+c.id+'</td>';
-        h+='<td><strong>'+c.name+'</strong></td>';
-        h+='<td>'+c.phone+'</td>';
-        h+='<td style="color:#C8A000">'+c.amount+'</td>';
-        h+='<td><span class="badge badge-'+c.status+'">'+{new:'Новый',process:'В работе',done:'Завершено'}[c.status]+'</span></td>';
-        h+='<td style="color:#7a8ba3;font-size:.82rem">'+c.date+'</td>';
-        h+='<td><button class="btn btn-secondary" onclick="viewClient(\''+c.id+'\')" style="margin-right:4px">👁</button><button class="btn btn-danger" onclick="deleteClient(\''+c.id+'\')">🗑</button></td></tr>';
+        var sc=c.status==='done'?'badge-done':c.status==='process'?'badge-process':'badge-new';
+        var sl=c.status==='done'?'Завершено':c.status==='process'?'В работе':'Новый';
+        h+='<div onclick="openClientModal(\''+c.id+'\')" style="background:rgba(26,26,26,.5);border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:16px;margin-bottom:8px;cursor:pointer;transition:all .3s;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;gap:8px" onmouseover="this.style.borderColor=\'rgba(184,0,24,.3)\';this.style.transform=\'translateY(-2px)\'" onmouseout="this.style.borderColor=\'rgba(255,255,255,.06)\';this.style.transform=\'none\'">';
+        h+='<div style="flex:1;min-width:200px">';
+        h+='<div style="display:flex;align-items:center;gap:8px;margin-bottom:4px"><strong style="font-size:.95rem">'+c.name+'</strong><span class="badge '+sc+'" style="font-size:.65rem">'+sl+'</span></div>';
+        h+='<div style="display:flex;gap:12px;font-size:.78rem;color:#7a8ba3;flex-wrap:wrap">';
+        h+='<span>'+c.id+'</span>';
+        if(c.phone)h+='<span>📱 '+c.phone+'</span>';
+        if(c.amount)h+='<span style="color:#C8A000">💰 '+c.amount+'</span>';
+        h+='</div></div>';
+        h+='<div style="display:flex;gap:6px">';
+        h+='<button class="btn btn-secondary" style="padding:6px 12px;font-size:.75rem" onclick="event.stopPropagation();changeStatus(\''+c.id+'\')">📊</button>';
+        h+='<button class="btn btn-secondary" style="padding:6px 12px;font-size:.75rem" onclick="event.stopPropagation();addComment(\''+c.id+'\')">💬</button>';
+        h+='<button class="btn btn-danger" style="padding:6px 12px;font-size:.75rem" onclick="event.stopPropagation();deleteClient(\''+c.id+'\')">🗑</button>';
+        h+='</div></div>';
     });
-    document.getElementById('clientsTable').innerHTML=h||'<tr><td colspan="7" style="text-align:center;color:#7a8ba3;padding:24px">Нет клиентов. Добавьте первого!</td></tr>';
+    document.getElementById('clientCards').innerHTML=h||'<p style="text-align:center;color:#7a8ba3;padding:24px">Нет клиентов</p>';
+}
+
+function filterAdminClients(){
+    var q=document.getElementById('clientSearch').value.trim().toLowerCase();
+    var clients=JSON.parse(localStorage.getItem('admin_clients')||'[]');
+    if(q){
+        clients=clients.filter(function(c){
+            return c.name.toLowerCase().indexOf(q)>=0||c.id.toLowerCase().indexOf(q)>=0||c.phone.indexOf(q)>=0;
+        });
+    }
+    renderClientCards(clients);
+}
+
+function openClientModal(id){
+    var clients=JSON.parse(localStorage.getItem('admin_clients')||'[]');
+    var c=clients.find(function(x){return x.id===id});
+    if(!c)return;
+    var h='';
+    h+='<div style="display:flex;align-items:center;gap:12px;margin-bottom:20px">';
+    h+='<div style="width:48px;height:48px;background:linear-gradient(135deg,#B80018,#C8A000);border-radius:14px;display:flex;align-items:center;justify-content:center;font-size:1.2rem;font-weight:700;color:#fff;font-family:Oswald">'+c.name.split(' ').map(function(w){return w[0]}).join('').substring(0,2)+'</div>';
+    h+='<div><div style="font-family:Oswald;font-weight:700;font-size:1.2rem">'+c.name+'</div><div style="font-size:.82rem;color:#7a8ba3">'+c.id+'</div></div></div>';
+
+    h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:10px;margin-bottom:20px">';
+    h+='<div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:14px"><div style="font-size:.72rem;color:#7a8ba3;margin-bottom:4px">Телефон</div><div style="font-weight:700">'+c.phone+'</div></div>';
+    h+='<div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:14px"><div style="font-size:.72rem;color:#7a8ba3;margin-bottom:4px">Сумма</div><div style="font-weight:700;color:#C8A000">'+c.amount+'</div></div>';
+    h+='<div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:14px"><div style="font-size:.72rem;color:#7a8ba3;margin-bottom:4px">ИИН</div><div style="font-weight:700">'+(c.iin||'—')+'</div></div>';
+    h+='<div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:14px"><div style="font-size:.72rem;color:#7a8ba3;margin-bottom:4px">Город</div><div style="font-weight:700">'+(c.city||'—')+'</div></div>';
+    h+='<div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:14px"><div style="font-size:.72rem;color:#7a8ba3;margin-bottom:4px">Платформа</div><div style="font-weight:700">'+(c.platform||'—')+'</div></div>';
+    h+='<div style="background:rgba(255,255,255,.03);border:1px solid rgba(255,255,255,.06);border-radius:12px;padding:14px"><div style="font-size:.72rem;color:#7a8ba3;margin-bottom:4px">Статус</div><div style="font-weight:700">'+(c.status==='done'?'✅ Завершено':c.status==='process'?'⏳ В работе':'🆕 Новый')+'</div></div>';
+    h+='</div>';
+
+    if(c.consultant)h+='<div style="margin-bottom:16px;padding:12px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04);border-radius:10px"><div style="font-size:.78rem;color:#7a8ba3;margin-bottom:4px">Консультант</div><div style="font-weight:600">'+c.consultant+'</div></div>';
+    if(c.desc)h+='<div style="margin-bottom:16px;padding:12px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04);border-radius:10px"><div style="font-size:.78rem;color:#7a8ba3;margin-bottom:4px">Описание</div><div style="font-size:.88rem;line-height:1.5">'+c.desc+'</div></div>';
+    h+='<div style="font-size:.72rem;color:#555;margin-bottom:16px">Создано: '+c.date+'</div>';
+
+    h+='<div style="display:grid;grid-template-columns:1fr 1fr 1fr;gap:8px;margin-bottom:16px">';
+    h+='<button class="btn btn-primary" onclick="changeStatus(\''+c.id+'\');closeModal()" style="padding:10px;font-size:.82rem">📊 Статус</button>';
+    h+='<button class="btn btn-secondary" onclick="editClient(\''+c.id+'\');closeModal()" style="padding:10px;font-size:.82rem">✏️ Редактировать</button>';
+    h+='<button class="btn btn-danger" onclick="if(confirm(\'Удалить?\')){deleteClient(\''+c.id+'\');closeModal()}" style="padding:10px;font-size:.82rem">🗑 Удалить</button>';
+    h+='</div>';
+
+    h+='<div style="display:grid;grid-template-columns:1fr 1fr;gap:8px">';
+    h+='<button class="btn btn-secondary" onclick="addComment(\''+c.id+'\');closeModal()" style="padding:10px;font-size:.82rem">💬 Комментарий</button>';
+    h+='<a href="/antifraud-kz/client/dashboard.html?id='+c.id+'" target="_blank" class="btn btn-secondary" style="padding:10px;font-size:.82rem;text-align:center;text-decoration:none;color:#e8ecf4">👁 Дашборд</a>';
+    h+='</div>';
+
+    document.getElementById('modalContent').innerHTML=h;
+    document.getElementById('clientModal').style.display='block';
+}
+
+function closeModal(){document.getElementById('clientModal').style.display='none';}
+
+function changeStatus(id){
+    var clients=JSON.parse(localStorage.getItem('admin_clients')||'[]');
+    var c=clients.find(function(x){return x.id===id});
+    if(!c)return;
+    var newStatus=prompt('Статус для '+c.name+':\nnew = Новый\nprocess = В работе\ndone = Завершено',c.status);
+    if(!newStatus)return;
+    c.status=newStatus;
+    localStorage.setItem('admin_clients',JSON.stringify(clients));
+    loadClients();
+}
+
+function addComment(id){
+    var clients=JSON.parse(localStorage.getItem('admin_clients')||'[]');
+    var c=clients.find(function(x){return x.id===id});
+    if(!c)return;
+    var comment=prompt('Комментарий для '+c.name+':');
+    if(!comment)return;
+    c.desc=(c.desc?c.desc+'\n':'')+comment;
+    localStorage.setItem('admin_clients',JSON.stringify(clients));
+}
+
+function editClient(id){
+    var clients=JSON.parse(localStorage.getItem('admin_clients')||'[]');
+    var c=clients.find(function(x){return x.id===id});
+    if(!c)return;
+    c.name=prompt('ФИО:',c.name)||c.name;
+    c.phone=prompt('Телефон:',c.phone)||c.phone;
+    c.amount=prompt('Сумма:',c.amount)||c.amount;
+    c.city=prompt('Город:',c.city)||c.city;
+    c.iin=prompt('ИИН:',c.iin)||c.iin;
+    c.platform=prompt('Платформа:',c.platform)||c.platform;
+    c.consultant=prompt('Консультант:',c.consultant)||c.consultant;
+    c.desc=prompt('Описание:',c.desc)||c.desc;
+    localStorage.setItem('admin_clients',JSON.stringify(clients));
+    loadClients();
 }
 function loadApps(){
     var apps=JSON.parse(localStorage.getItem('applications')||'[]');
@@ -236,12 +337,6 @@ document.getElementById('addClientForm').addEventListener('submit',function(e){
         var msg='👤 НОВЫЙ КЛИЕНТ\n\nID: '+id+'\nФИО: '+client.name+'\nТелефон: '+client.phone+'\nСумма: '+client.amount+'\nПлатформа: '+(client.platform||'—')+'\nСтатус: '+client.status;
         fetch('https://api.telegram.org/bot8829750295:AAEdnt-7FPCVuVbgj6tgn7eC2_2LpY5VHCk/sendMessage',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chat_id:'8471070560',text:msg})}).catch(function(){});
 });
-function viewClient(id){
-    var clients=JSON.parse(localStorage.getItem('admin_clients')||'[]');
-    var c=clients.find(function(x){return x.id===id});
-    if(!c)return;
-    alert('ID: '+c.id+'\nФИО: '+c.name+'\nТелефон: '+c.phone+'\nИИН: '+(c.iin||'—')+'\nГород: '+(c.city||'—')+'\nСумма: '+c.amount+'\nПлатформа: '+(c.platform||'—')+'\nКонсультант: '+(c.consultant||'—')+'\nОписание: '+(c.desc||'—')+'\nДата: '+c.date);
-}
 function deleteClient(id){
     if(!confirm('Удалить клиента?'))return;
     var clients=JSON.parse(localStorage.getItem('admin_clients')||'[]');
