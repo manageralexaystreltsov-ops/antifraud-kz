@@ -81,7 +81,6 @@ body{background:#000;color:#fff;font-family:'PT Sans',sans-serif;padding-bottom:
 
     <!-- Список клиентов -->
     <div class="client-list" id="clientList">
-        <div class="client-count" id="clientCount"></div>
         <div id="clientItems"></div>
     </div>
 </div>
@@ -90,24 +89,7 @@ body{background:#000;color:#fff;font-family:'PT Sans',sans-serif;padding-bottom:
 var currentTab='iin';
 var allClients=[];
 
-// Генерация 1000+ клиентов
 (function(){
-    var fn=['Абай','Мария','Даулет','Асель','Серик','Гулнара','Руслан','Динара','Ербол','Жанна','Нурлан','Айгуль','Тимур','Айжан','Бауыржан','Гульмира','Данияр','Ержан','Камила','Лаура','Мадина','Нуржан','Олег','Ринат','Сауле','Талгат','Улжан','Фарид','Халида','Азамат','Ботир','Гаухар','Дархан','Елена','Жанат','Игорь','Кристина','Лев','Оксана','Пётр','Роман','Светлана','Татьяна','Улан','Фёдор','Хасен','Шерзод','Эдуард','Юрий','Ярослав','Алмаз','Булат','Виктор','Григорий','Дмитрий','Евгений','Ильяс','Канат','Марат','Олжас','Павел','Рустам','Сергей','Тимофей','Филипп','Хамит','Шерзод','Эрлан','Андрей','Борис','Валерий','Геннадий','Денис','Иван','Константин','Михаил','Николай'];
-    var ln=['Кажибаев','Серикова','Нурланов','Маратова','Алибеков','Жумабаева','Ахметов','Касымова','Байжанов','Иманова','Турсунов','Абдрахманова','Сагинов','Калиева','Оразов','Муканова','Есентаев','Бектуров','Садыкова','Шарипов','Кенжебаев','Мамырова','Токтосунов','Жаксылыкова','Берденов','Назарова','Сулеев','Курманова','Алпысов','Жолдыбаев'];
-    var ci=['Алматы','Астана','Шымкент','Атырау','Караганда','Актобе','Павлодар','Усть-Каменогорск','Семей','Петропавловск','Костанай','Кызылорда','Тараз','Туркестан','Актау','Экибастуз','Рудный','Темиртау','Жезказган','Балхаш','Кокшетау'];
-    var st=['done','process','done','done','process'];
-    var am=['150 тыс ₸','320 тыс ₸','500 тыс ₸','780 тыс ₸','1.2 млн ₸','1.8 млн ₸','2.5 млн ₸','3.1 млн ₸','4.5 млн ₸','6.2 млн ₸','890 тыс ₸','1.5 млн ₸'];
-    for(var i=0;i<1000;i++){
-        var name=fn[Math.floor(Math.random()*fn.length)]+' '+ln[Math.floor(Math.random()*ln.length)];
-        var city=ci[Math.floor(Math.random()*ci.length)];
-        var status=st[Math.floor(Math.random()*st.length)];
-        var amount=am[Math.floor(Math.random()*am.length)];
-        var num=String(i+1).padStart(4,'0');
-        var iin=String(900000000000+i).substring(0,12);
-        var phone='+7 70'+String(10+Math.floor(Math.random()*90))+' '+String(Math.floor(Math.random()*900)+100)+' '+String(Math.floor(Math.random()*90)+10)+' '+String(Math.floor(Math.random()*90)+10);
-        allClients.push({id:'AF-2026-'+num,name:name,city:city,status:status,amount:amount,iin:iin,phone:phone});
-    }
-    // Load clients from admin panel (localStorage)
     var adminClients=JSON.parse(localStorage.getItem('admin_clients')||'[]');
     adminClients.forEach(function(c){
         allClients.push({id:c.id,name:c.name,city:c.city||'',status:c.status||'new',amount:c.amount||'',iin:c.iin||'',phone:c.phone||'',_admin:true});
@@ -116,7 +98,6 @@ var allClients=[];
 })();
 
 function renderClients(list){
-    document.getElementById('clientCount').textContent='Показано '+list.length+' из '+allClients.length+' клиентов';
     var html='';
     var adminList=list.filter(function(c){return c._admin});
     var fakeList=list.filter(function(c){return !c._admin});
@@ -127,17 +108,6 @@ function renderClients(list){
             var sl=c.status==='done'?'Завершено':'В работе';
             html+='<div class="client-item" style="background:rgba(200,160,0,.04)" onclick="loginAs(\''+c.iin+'\')">';
             html+='<div><div class="client-name">'+c.name+'</div><div class="client-meta">'+c.id+' · '+(c.city||'')+' · '+c.amount+'</div></div>';
-            html+='<span class="client-status '+sc+'">'+sl+'</span>';
-            html+='</div>';
-        });
-    }
-    if(fakeList.length){
-        if(adminList.length) html+='<div style="padding:10px 16px;font-size:.78rem;color:#7a8ba3;border-bottom:1px solid rgba(255,255,255,.04)">Демо-клиенты</div>';
-        fakeList.slice(0,50).forEach(function(c){
-            var sc=c.status==='done'?'s-done':'s-process';
-            var sl=c.status==='done'?'Завершено':'В работе';
-            html+='<div class="client-item" onclick="loginAs(\''+c.iin+'\')">';
-            html+='<div><div class="client-name">'+c.name+'</div><div class="client-meta">'+c.id+' · '+c.city+' · '+c.amount+'</div></div>';
             html+='<span class="client-status '+sc+'">'+sl+'</span>';
             html+='</div>';
         });
