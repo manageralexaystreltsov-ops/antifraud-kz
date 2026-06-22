@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Пошаговые инструкции — Антифрод Центр</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📋</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=PT+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#B80018',gold:'#C8A000',dark:'#111111',darker:'#000000'},fontFamily:{heading:['Oswald','sans-serif'],body:['PT Sans','sans-serif']}}}}</script>
+<style>
+body{background:#000;color:#fff;font-family:'PT Sans',sans-serif;padding-bottom:80px}
+.pb{max-width:800px;margin:0 auto;padding:clamp(20px,5vw,40px) clamp(16px,4vw,16px)}
+.pb h1{font-size:clamp(1.6rem,4vw,2.2rem);font-weight:700;margin-bottom:8px;text-align:center}
+.pb>p{color:#7a8ba3;text-align:center;margin-bottom:32px;font-size:.92rem}
+/* Playbook cards */
+.pb-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(240px,1fr));gap:12px;margin-bottom:32px}
+.pb-card{background:#1A1A1A;border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:20px;cursor:pointer;transition:all .2s}
+.pb-card:hover{border-color:rgba(184,0,24,.3);transform:translateY(-2px)}
+.pb-card.selected{border-color:#B80018;background:rgba(184,0,24,.05)}
+.pb-icon{font-size:2rem;margin-bottom:8px}
+.pb-name{font-weight:700;font-size:.95rem;margin-bottom:4px}
+.pb-desc{font-size:.8rem;color:#7a8ba3;line-height:1.4}
+/* Playbook detail */
+.pb-detail{display:none;animation:fadeUp .4s ease}
+.pb-detail.show{display:block}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.pb-detail-header{display:flex;align-items:center;gap:12px;margin-bottom:20px}
+.pb-detail-icon{font-size:2.5rem}
+.pb-detail-title{font-family:'Oswald',sans-serif;font-size:1.3rem;font-weight:700}
+/* Steps */
+.step{display:flex;gap:12px;margin-bottom:16px;padding:16px;background:rgba(255,255,255,.02);border:1px solid rgba(255,255,255,.04);border-radius:12px}
+.step-num{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:'Oswald',sans-serif;font-weight:700;font-size:.85rem;flex-shrink:0;transition:all .3s}
+.step-num.pending{background:rgba(255,255,255,.06);color:#7a8ba3}
+.step-num.active{background:linear-gradient(135deg,#B80018,#8B0012);color:#fff}
+.step-num.done{background:rgba(16,185,129,.2);color:#6ee7b7}
+.step-content{flex:1}
+.step-title{font-weight:700;font-size:.9rem;margin-bottom:4px}
+.step-desc{font-size:.82rem;color:#7a8ba3;line-height:1.5}
+.step-action{display:inline-block;margin-top:8px;padding:6px 14px;background:rgba(184,0,24,.1);border:1px solid rgba(184,0,24,.2);color:#B80018;border-radius:8px;font-size:.78rem;font-weight:600;cursor:pointer;text-decoration:none;transition:all .2s}
+.step-action:hover{background:rgba(184,0,24,.2);color:#fff}
+.step-action.completed{background:rgba(16,185,129,.1);border-color:rgba(16,185,129,.2);color:#6ee7b7}
+/* Progress */
+.progress-bar{height:4px;background:rgba(255,255,255,.06);border-radius:4px;overflow:hidden;margin:16px 0}
+.progress-fill{height:100%;background:linear-gradient(90deg,#B80018,#C8A000);border-radius:4px;transition:width .5s}
+.progress-text{font-size:.82rem;color:#7a8ba3;text-align:center}
+</style>
+</head>
+<body>
+<div class="pb" style="padding-top:100px">
+    <h1>📋 Пошаговые инструкции</h1>
+    <p>Готовые сценарии действий. Следуйте шагам — мы помогаем на каждом этапе.</p>
+
+    <div class="pb-grid" id="pbGrid">
+        <div class="pb-card" onclick="selectPB('fraud')">
+            <div class="pb-icon">🚨</div>
+            <div class="pb-name">Меня обманули</div>
+            <div class="pb-desc">Полный алгоритм действий при мошенничестве</div>
+        </div>
+        <div class="pb-card" onclick="selectPB('chargeback')">
+            <div class="pb-icon">🏦</div>
+            <div class="pb-name">Чарджбэк</div>
+            <div class="pb-desc">Оспаривание платежа через банк</div>
+        </div>
+        <div class="pb-card" onclick="selectPB('demand')">
+            <div class="pb-icon">💸</div>
+            <div class="pb-name">Просят доплатить</div>
+            <div class="pb-desc">Что делать если требуют «налог» или «комиссию»</div>
+        </div>
+        <div class="pb-card" onclick="selectPB('crypto')">
+            <div class="pb-icon">₿</div>
+            <div class="pb-name">Крипто-мошенничество</div>
+            <div class="pb-desc">Возврат средств с криптоплатформ</div>
+        </div>
+        <div class="pb-card" onclick="selectPB('court')">
+            <div class="pb-icon">⚖️</div>
+            <div class="pb-name">Судебный процесс</div>
+            <div class="pb-desc">Подготовка и ведение дела в суде</div>
+        </div>
+        <div class="pb-card" onclick="selectPB('evidence')">
+            <div class="pb-icon">🔍</div>
+            <div class="pb-name">Сбор доказательств</div>
+            <div class="pb-desc">Что и как фиксировать для дела</div>
+        </div>
+    </div>
+
+    <div class="pb-detail" id="pbDetail"></div>
+</div>
+
+<script>
+var playbooks = {
+    fraud: {
+        icon: '🚨', name: 'Полный алгоритм: меня обманули',
+        steps: [
+            {t:'НЕ ПЕРЕВОДИТЕ больше денег',d:'Любые требования о доплате — это повторное мошенничество. Не отвечайте на сообщения.',action:null},
+            {t:'Заблокируйте карту',d:'Позвоните в банк или заблокируйте через приложение. Чем быстрее — тем лучше.',action:'tel:595'},
+            {t:'Сохраните все доказательства',d:'Сделайте скриншоты переписки, чеки об оплате, выписки по счёту, данные мошенников.',action:null},
+            {t:'Подайте заявление в полицию',d:'Обратитесь в ближайшее отделение или через онлайн-приёмную. Тел: 102',action:'tel:102'},
+            {t:'Обратитесь в АРРФР',d:'Жалоба на нелегальную деятельность. Тел: 1434',action:'tel:1434'},
+            {t:'Оставьте заявку у нас',d:'Мы поможем оформить документы и ускорить процесс.',action:'/antifraud-kz/quiz.html'}
+        ]
+    },
+    chargeback: {
+        icon: '🏦', name: 'Чарджбэк: возврат через банк',
+        steps: [
+            {t:'Определите срок',d:'Чарджбэк доступен от 30 до 120 дней с момента платежа.',action:null},
+            {t:'Соберите документы',d:'Выписка по счёту, скриншоты переписки, договор с мошенниками.',action:null},
+            {t:'Подайте заявление в банк',d:'Заполните форму оспаривания транзакции в отделении или через банкинг.',action:null},
+            {t:'Дождитесь решения',d:'Банк рассматривает от 30 до 90 дней. Контролируйте статус.',action:null},
+            {t:'При отказе — обжалуйте',d:'Подайте жалобу в НБ РК или обратитесь к нам для помощи.',action:'/antifraud-kz/quiz.html'}
+        ]
+    },
+    demand: {
+        icon: '💸', name: 'Просят доплатить — что делать',
+        steps: [
+            {t:'НЕ ПЕРЕВОДИТЕ',d:'Это повторное мошенничество. Каждая «комиссия» — новый шаг обмана.',action:null},
+            {t:'Зафиксируйте требование',d:'Сделайте скриншот сообщения, запишите номер счёта и сумму.',action:null},
+            {t:'Ответьте отказом',d:'Напишите: «Я обратился в банк и правоохранительные органы»',action:null},
+            {t:'Подайте заявку',d:'Мы поможем заблокировать операции и начать возврат.',action:'/antifraud-kz/quiz.html'}
+        ]
+    },
+    crypto: {
+        icon: '₿', name: 'Возврат средств с криптоплатформы',
+        steps: [
+            {t:'Сохраните адрес кошелька',d:'Запишите адрес кошелька и все TXID транзакций.',action:null},
+            {t:'Проверьте на блокчейн-эксплорере',d:'Посмотрите транзакции на Etherscan, BSCScan или Solscan.',action:null},
+            {t:'Обратитесь на биржу',d:'Если средства шли через биржу — подайте заявку на заморозку.',action:null},
+            {t:'Оставьте заявку',d:'Мы поможем отследить средства и обратиться в нужные инстанции.',action:'/antifraud-kz/quiz.html'}
+        ]
+    },
+    court: {
+        icon: '⚖️', name: 'Судебный процесс',
+        steps: [
+            {t:'Соберите все документы',d:'Договор, переписки, чеки, выписки, заключение эксперта.',action:null},
+            {t:'Подготовьте иск',d:'Укажите ответчика, сумму, основания, доказательства.',action:'/antifraud-kz/documents.html'},
+            {t:'Подайте в суд',d:'Оплатите госпошлину и подайте исковое заявление.',action:null},
+            {t:'Участвуйте в заседаниях',d:'Приходите на каждое заседание или наймите представителя.',action:null}
+        ]
+    },
+    evidence: {
+        icon: '🔍', name: 'Сбор доказательств',
+        steps: [
+            {t:'Скриншоты переписки',d:'WhatsApp, Telegram, email — всё что было с мошенниками.',action:null},
+            {t:'Чеки и квитанции',d:'Все подтверждения оплаты: банковские чеки, квитанции, скриншоты.',action:null},
+            {t:'Выписки по счёту',d:'Закажите в банке выписку за весь период взаимодействия.',action:null},
+            {t:'Данные мошенников',d:'Название организации, сайт, номера телефонов, реквизиты счетов.',action:null},
+            {t:'Храните всё',d:'Сделайте резервные копии на флешке или в облаке.',action:null}
+        ]
+    }
+};
+
+function selectPB(id){
+    var pb = playbooks[id];
+    if(!pb)return;
+    var html = '<div class="pb-detail-header"><div class="pb-detail-icon">'+pb.icon+'</div><div class="pb-detail-title">'+pb.name+'</div></div>';
+    html += '<div class="progress-bar"><div class="progress-fill" id="pbProgress" style="width:0%"></div></div>';
+    html += '<div class="progress-text" id="pbProgressText">0 из '+pb.steps.length+' шагов выполнено</div>';
+    pb.steps.forEach(function(s,i){
+        html += '<div class="step" id="step'+i+'"><div class="step-num pending" id="stepNum'+i+'">'+(i+1)+'</div>';
+        html += '<div class="step-content"><div class="step-title">'+s.t+'</div><div class="step-desc">'+s.d+'</div>';
+        if(s.action){
+            if(s.action.indexOf('tel:')===0) html += '<a href="'+s.action+'" class="step-action">📞 Позвонить</a> ';
+            else if(s.action.indexOf('/')===0) html += '<a href="'+s.action+'" class="step-action">📝 Перейти</a> ';
+        }
+        html += '<button class="step-action" onclick="completeStep('+i+','+pb.steps.length+')">✓ Выполнено</button>';
+        html += '</div></div>';
+    });
+    document.getElementById('pbDetail').innerHTML = html;
+    document.getElementById('pbDetail').classList.add('show');
+    document.querySelectorAll('.pb-card').forEach(function(c){c.classList.remove('selected')});
+    event.currentTarget.classList.add('selected');
+    document.getElementById('pbDetail').scrollIntoView({behavior:'smooth',block:'start'});
+}
+
+function completeStep(i,total){
+    var num=document.getElementById('stepNum'+i);
+    num.className='step-num done';
+    num.textContent='✓';
+    var btn=num.parentElement.querySelector('.step-action:last-child');
+    if(btn){btn.textContent='✓ Выполнено';btn.className='step-action completed';btn.disabled=true}
+    var done=0;
+    for(var j=0;j<total;j++){
+        if(document.getElementById('stepNum'+j).classList.contains('done'))done++;
+    }
+    document.getElementById('pbProgress').style.width=(done/total*100)+'%';
+    document.getElementById('pbProgressText').textContent=done+' из '+total+' шагов выполнено';
+}
+</script>
+<script src="/antifraud-kz/assets/js/nav.js"></script>
+</body>
+</html>
