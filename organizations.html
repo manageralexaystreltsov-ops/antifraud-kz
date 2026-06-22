@@ -117,124 +117,163 @@ body{background:#000;color:#fff;font-family:'PT Sans',sans-serif;padding-bottom:
   </div>
 </div>
 
-<script>
-var allOrgs = [];
-var currentFilter = 'all';
-var searchQuery = '';
-
-var typeLabels = {
-  bank: 'Банк',
-  gov: 'Госорган',
-  crypto: 'Крипта',
-  invest: 'Инвестиции',
-  fintech: 'Финтех',
-  shop: 'Магазин',
-  service: 'Услуги',
-  mfo: 'МФО',
-  insurance: 'Страхование',
-  transport: 'Транспорт',
-  company: 'Компания'
-};
-
-function updateStats(list) {
-  var total = list.length;
-  var clean = list.filter(function(o){return o.status === 'clean'}).length;
-  var suspicious = list.filter(function(o){return o.status === 'suspicious'}).length;
-  var black = list.filter(function(o){return o.status === 'black'}).length;
-  document.getElementById('totalCount').textContent = total;
-  document.getElementById('cleanCount').textContent = clean;
-  document.getElementById('suspiciousCount').textContent = suspicious;
-  document.getElementById('blackCount').textContent = black;
-  return {total: total, clean: clean, suspicious: suspicious, black: black};
-}
-
-function statusBadge(status) {
-  var cls = status === 'clean' ? 'badge-clean' : status === 'suspicious' ? 'badge-suspicious' : 'badge-black';
-  var label = status === 'clean' ? 'Безопасно' : status === 'suspicious' ? 'Подозрительно' : 'Чёрный список';
-  return '<span class="badge-status ' + cls + '">' + label + '</span>';
-}
-
-function typeBadge(type) {
-  var label = typeLabels[type] || type;
-  return '<span class="badge-type">' + label + '</span>';
-}
-
-function renderOrgs(list) {
-  var container = document.getElementById('orgList');
-  if (!list.length) {
-    container.innerHTML = '<div class="empty-state"><div class="empty-icon">🔍</div><h3>Ничего не найдено</h3><p>Попробуйте изменить поисковый запрос или сбросить фильтр.</p></div>';
-    document.getElementById('resultCount').textContent = '0 результатов';
-    return;
-  }
-  var stats = updateStats(list);
-  document.getElementById('resultCount').textContent = 'Показано ' + list.length + ' из ' + allOrgs.length + ' организаций';
-  var h = '';
-  list.forEach(function(o) {
-    h += '<div class="org-card">';
-    h += '<div class="org-card-top">';
-    h += '<div class="org-name">' + escapeHtml(o.name) + '</div>';
-    h += '<div class="org-badges">' + typeBadge(o.type) + statusBadge(o.status) + '</div>';
-    h += '</div>';
-    h += '<div class="org-desc">' + escapeHtml(o.desc) + '</div>';
-    h += '<div class="org-meta">';
-    if (o.site) h += '<div class="org-meta-item"><span class="meta-icon">🌐</span><a href="https://' + o.site + '" target="_blank" rel="noopener">' + escapeHtml(o.site) + '</a></div>';
-    if (o.phone && o.phone !== '—') h += '<div class="org-meta-item"><span class="meta-icon">📞</span><span>' + escapeHtml(o.phone) + '</span></div>';
-    h += '</div>';
-    h += '<div class="org-actions">';
-    h += '<a href="/antifraud-kz/quiz.html" class="org-btn btn-report btn-ripple">📝 Сообщить</a>';
-    if (o.site) h += '<a href="https://' + o.site + '" target="_blank" rel="noopener" class="org-btn btn-site btn-ripple">🌐 Сайт</a>';
-    h += '</div>';
-    h += '</div>';
-  });
-  container.innerHTML = h;
-}
-
-function escapeHtml(str) {
-  var div = document.createElement('div');
-  div.appendChild(document.createTextNode(str));
-  return div.innerHTML;
-}
-
-function filterOrgs() {
-  searchQuery = document.getElementById('orgSearch').value.toLowerCase().trim();
-  applyFilters();
-}
-
-function setFilter(filter) {
-  currentFilter = filter;
-  document.querySelectorAll('.filter-btn').forEach(function(b) {
-    b.classList.toggle('active', b.getAttribute('data-filter') === filter);
-  });
-  applyFilters();
-}
-
-function applyFilters() {
-  var list = allOrgs.filter(function(o) {
-    if (currentFilter !== 'all' && o.status !== currentFilter) return false;
-    if (searchQuery) {
-      var q = searchQuery;
-      return o.name.toLowerCase().indexOf(q) >= 0 ||
-             o.desc.toLowerCase().indexOf(q) >= 0 ||
-             (o.type && o.type.toLowerCase().indexOf(q) >= 0) ||
-             (o.site && o.site.toLowerCase().indexOf(q) >= 0) ||
-             (o.phone && o.phone.indexOf(q) >= 0);
-    }
-    return true;
-  });
-  renderOrgs(list);
-}
-
-fetch('/antifraud-kz/data/organizations.json')
-  .then(function(r) { return r.json(); })
-  .then(function(data) {
-    allOrgs = data;
-    renderOrgs(allOrgs);
-  })
-  .catch(function() {
-    document.getElementById('orgList').innerHTML = '<div class="empty-state"><div class="empty-icon">⚠️</div><h3>Ошибка загрузки</h3><p>Не удалось загрузить реестр. Попробуйте обновить страницу.</p></div>';
-  });
-</script>
-<script src="/antifraud-kz/assets/js/effects.js"></script>
 <script src="/antifraud-kz/assets/js/nav.js"></script>
+<script>
+var allOrgs=[
+  {"name":"Halyk Bank","type":"bank","status":"clean","desc":"Крупнейший банк Казахстана","site":"halykbank.kz","phone":"7111"},
+  {"name":"Kaspi Bank","type":"bank","status":"clean","desc":"Лидер цифровых финансов","site":"kaspi.kz","phone":"9999"},
+  {"name":"ForteBank","type":"bank","status":"clean","desc":"Системообразующий банк","site":"fortebank.kz","phone":"7801"},
+  {"name":"Bank RBK","type":"bank","status":"clean","desc":"Универсальный банк","site":"bankrbk.kz","phone":"7800"},
+  {"name":"Jusan Bank","type":"bank","status":"clean","desc":"Современный банк","site":"jusan.kz","phone":"7770"},
+  {"name":"BCC (Банк ЦентрКредит)","type":"bank","status":"clean","desc":"Старейший частный банк","site":"bcc.kz","phone":"7801"},
+  {"name":"Home Credit Bank","type":"bank","status":"clean","desc":"Потребительское кредитование","site":"homecredit.kz","phone":"7800"},
+  {"name":"Altyn Bank","type":"bank","status":"clean","desc":"Дочерний банк","site":"altynbank.kz","phone":"7800"},
+  {"name":"Nurbank","type":"bank","status":"clean","desc":"Региональный банк","site":"nurbank.kz","phone":"7800"},
+  {"name":"Евразийский Банк","type":"bank","status":"clean","desc":"Универсальный банк","site":"eurasian-bank.kz","phone":"7800"},
+  {"name":"ВТБ Казахстан","type":"bank","status":"clean","desc":"Дочерний банк ВТБ","site":"vtb.kz","phone":"7800"},
+  {"name":"Сбербанк Казахстан","type":"bank","status":"clean","desc":"Дочерний банк Сбербанка","site":"sberbank.kz","phone":"7800"},
+  {"name":"АТФБанк","type":"bank","status":"clean","desc":"Универсальный банк","site":"atfbank.kz","phone":"7800"},
+  {"name":"Казкоммерц Банк","type":"bank","status":"clean","desc":"Банк малого бизнеса","site":"kccb.kz","phone":"7800"},
+  {"name":"Банк Цесна","type":"bank","status":"clean","desc":"Розничный банк","site":"cesnabank.kz","phone":"7800"},
+  {"name":"ABO Bank","type":"bank","status":"suspicious","desc":"Новый банк. Проверяется НБ РК.","site":"abobank.kz","phone":"—"},
+  {"name":"Тірек Банк","type":"bank","status":"suspicious","desc":"Ограниченная лицензия. Есть жалобы.","site":"tirekbank.kz","phone":"—"},
+  {"name":"АРРФР","type":"gov","status":"clean","desc":"Госрегулятор финансового рынка","site":"finreg.kz","phone":"7800"},
+  {"name":"Национальный Банк РК","type":"gov","status":"clean","desc":"Центральный банк","site":"nationalbank.kz","phone":"7800"},
+  {"name":"КГД (Комитет госдоходов)","type":"gov","status":"clean","desc":"Налоговая служба","site":"kgd.gov.kz","phone":"7800"},
+  {"name":"АФМ (Агентство финмониторинга)","type":"gov","status":"clean","desc":"Финразведка Казахстана","site":"afm.kz","phone":"7800"},
+  {"name":"МВД РК — Киберпреступность","type":"gov","status":"clean","desc":"Борьба с кибермошенничеством","site":"mvd.gov.kz","phone":"7800"},
+  {"name":"Верховный Суд РК","type":"gov","status":"clean","desc":"Судебная система","site":"supcourt.kz","phone":"7800"},
+  {"name":"Прокуратура РК","type":"gov","status":"clean","desc":"Надзор за исполнением законов","site":"prokuror.gov.kz","phone":"7800"},
+  {"name":"Минфин РК","type":"gov","status":"clean","desc":"Финансовая политика","site":"minfin.gov.kz","phone":"7800"},
+  {"name":"Агентство по защите прав потребителей","type":"gov","status":"clean","desc":"Защита прав потребителей","site":"consumer.gov.kz","phone":"7800"},
+  {"name":"Binance","type":"crypto","status":"clean","desc":"Крупнейшая криптобиржа мира","site":"binance.com","phone":"—"},
+  {"name":"INTEBIT","type":"crypto","status":"clean","desc":"Казахстанская криптобиржа","site":"intebit.kz","phone":"—"},
+  {"name":"AlmaEx","type":"crypto","status":"clean","desc":"Криптобиржа Казахстана","site":"almaex.com","phone":"—"},
+  {"name":"Bybit KZ","type":"crypto","status":"clean","desc":"Криптобиржа с лицензией","site":"bybit.com","phone":"—"},
+  {"name":"OKX","type":"crypto","status":"clean","desc":"Глобальная криптобиржа","site":"okx.com","phone":"—"},
+  {"name":"Coinbase","type":"crypto","status":"clean","desc":"Крупнейшая американская биржа","site":"coinbase.com","phone":"—"},
+  {"name":"Biteubai","type":"crypto","status":"black","desc":"Фейковая криптобиржа. Нет лицензии. Вывод заблокирован.","site":"biteubai.com","phone":"—"},
+  {"name":"KazCrypto","type":"crypto","status":"suspicious","desc":"Криптобиржа без лицензии. Жалобы на заморозку.","site":"kazcrypto.kz","phone":"—"},
+  {"name":"CryptoGain KZ","type":"crypto","status":"black","desc":"Мошенническая платформа. 300% прибыли. Чёрный список АРРФР.","site":"cryptogain.kz","phone":"—"},
+  {"name":"CoinsMarket","type":"crypto","status":"black","desc":"Фейковая биржа. Подставное лицо.","site":"coinsmarket.io","phone":"—"},
+  {"name":"MinePro KZ","type":"crypto","status":"black","desc":"Мошеннический майнинг-пул. 200% за месяц.","site":"minepro.kz","phone":"—"},
+  {"name":"CryptoWave KZ","type":"crypto","status":"suspicious","desc":"Новая платформа. Проверяется АРРФР.","site":"cryptowave.kz","phone":"—"},
+  {"name":"TradeCoin","type":"crypto","status":"suspicious","desc":"P2P-платформа. Жалобы на блокировку.","site":"tradecoin.io","phone":"—"},
+  {"name":"BitHive","type":"crypto","status":"suspicious","desc":"Крипто-пулы. Лицензия не найдена.","site":"bithive.kz","phone":"—"},
+  {"name":"CryptoMax KZ","type":"crypto","status":"black","desc":"Фейковый майнинг. Забирает депозиты.","site":"cryptomax.kz","phone":"—"},
+  {"name":"HashFlow KZ","type":"crypto","status":"black","desc":"Псевдо-майнинг. Схема Понци.","site":"hashflow.kz","phone":"—"},
+  {"name":"DeFi Profit","type":"crypto","status":"black","desc":"500% годовых на DeFi. Фейк.","site":"defiprofit.kz","phone":"—"},
+  {"name":"GoldMint Capital","type":"invest","status":"black","desc":"Фейковая инвесткомпания. Схема Понци.","site":"goldmint.kz","phone":"—"},
+  {"name":"InvestPro Capital","type":"invest","status":"black","desc":"Лжеброкер. Требует «налоги» и «страховки».","site":"investprocapital.com","phone":"—"},
+  {"name":"GlobalTrade FX","type":"invest","status":"black","desc":"Форекс-мошенник. Нет лицензии.","site":"globaltradefx.com","phone":"—"},
+  {"name":"Prime Invest KZ","type":"invest","status":"black","desc":"Лжеброкер. Исчезает с деньгами.","site":"primeinvest.kz","phone":"—"},
+  {"name":"Fortune Capital","type":"invest","status":"suspicious","desc":"Жалобы на задержки выплат.","site":"fortunecapital.kz","phone":"—"},
+  {"name":"AlphaTrade KZ","type":"invest","status":"suspicious","desc":"Форекс-дилер. Лицензия в процессе.","site":"alphatrade.kz","phone":"—"},
+  {"name":"Royal Finance","type":"invest","status":"black","desc":"Финансовая пирамида.","site":"royalfinance.kz","phone":"—"},
+  {"name":"Capital Stars Invest","type":"invest","status":"black","desc":"Хайп-проект. Схема Понци.","site":"capitalstars.co","phone":"—"},
+  {"name":"Доверие Капитал","type":"invest","status":"black","desc":"Займы под 500% годовых.","site":"doverie.kz","phone":"—"},
+  {"name":"WealthBridge Capital","type":"invest","status":"suspicious","desc":"Проверяется КГД.","site":"wealthbridge.kz","phone":"—"},
+  {"name":"Halyk Finance","type":"invest","status":"clean","desc":"Инвестиционный банк","site":"halykfinance.kz","phone":"—"},
+  {"name":"BCC Invest","type":"invest","status":"clean","desc":"Брокерская компания","site":"bccinvest.kz","phone":"—"},
+  {"name":"Freedom Finance","type":"invest","status":"clean","desc":"Брокерская компания","site":"ffin.kz","phone":"—"},
+  {"name":"Samruk-Kazyna","type":"invest","status":"clean","desc":"Национальный холдинг","site":"sk.kz","phone":"—"},
+  {"name":"KASE","type":"invest","status":"clean","desc":"Фондовая биржа","site":"kase.kz","phone":"—"},
+  {"name":"ЕНПФ","type":"invest","status":"clean","desc":"Пенсионный фонд","site":"enpf.kz","phone":"7800"},
+  {"name":"BugiTrader","type":"invest","status":"black","desc":"Фейковый трейдер. Заманивают вебинарами.","site":"bugitrader.kz","phone":"—"},
+  {"name":"WealthPro KZ","type":"invest","status":"black","desc":"Лжеброкер. Фейковые отзывы.","site":"wealthpro.kz","phone":"—"},
+  {"name":"SmartTrade Invest","type":"invest","status":"black","desc":"50% в месяц. Нет лицензии.","site":"smarttrade.kz","phone":"—"},
+  {"name":"ProfitMax KZ","type":"invest","status":"black","desc":"Мошеннический инвестпроект.","site":"profitmax.kz","phone":"—"},
+  {"name":"Gold Trading KZ","type":"invest","status":"black","desc":"Фейковая торговля золотом.","site":"goldtrading.kz","phone":"—"},
+  {"name":"Kaspi Pay","type":"fintech","status":"clean","desc":"Платёжная система","site":"kaspi.kz","phone":"9999"},
+  {"name":"PayBox","type":"fintech","status":"clean","desc":"Платёжный агрегатор","site":"paybox.kz","phone":"—"},
+  {"name":"CloudPay","type":"fintech","status":"clean","desc":"Платёжный сервис","site":"cloudpay.kz","phone":"—"},
+  {"name":"Kassa24","type":"fintech","status":"clean","desc":"Платёжная система","site":"kassa24.kz","phone":"—"},
+  {"name":"QIWI Казахстан","type":"fintech","status":"clean","desc":"Электронный кошелёк","site":"qiwi.kz","phone":"—"},
+  {"name":"PayMe KZ","type":"fintech","status":"clean","desc":"P2P-платежи","site":"payme.kz","phone":"—"},
+  {"name":"FastPay KZ","type":"fintech","status":"suspicious","desc":"Задержки выплат.","site":"fastpay.kz","phone":"—"},
+  {"name":"SMS-Магазин","type":"shop","status":"black","desc":"Товар не отправляет после оплаты.","site":"smsmagazin.kz","phone":"—"},
+  {"name":"TopShop KZ","type":"shop","status":"suspicious","desc":"Жалобы на подделки.","site":"instagram.com/topshop_kz","phone":"—"},
+  {"name":"TechCity","type":"shop","status":"suspicious","desc":"Испорченный товар не принимают.","site":"techcity.kz","phone":"—"},
+  {"name":"MegaDeal KZ","type":"shop","status":"suspicious","desc":"Схемы с предоплатой.","site":"megadeal.kz","phone":"—"},
+  {"name":"Wildberries KZ","type":"shop","status":"clean","desc":"Маркетплейс","site":"wildberries.kz","phone":"—"},
+  {"name":"Kaspi Магазин","type":"shop","status":"clean","desc":"Маркетплейс","site":"kaspi.kz","phone":"9999"},
+  {"name":"Sulpak","type":"shop","status":"clean","desc":"Сеть магазинов электроники","site":"sulpak.kz","phone":"7800"},
+  {"name":"Мечта","type":"shop","status":"clean","desc":"Сеть магазинов","site":"mechta.kz","phone":"7800"},
+  {"name":"Technodom","type":"shop","status":"clean","desc":"Сеть магазинов электроники","site":"technodom.kz","phone":"7800"},
+  {"name":"FakeShop KZ","type":"shop","status":"black","desc":"Фейковый магазин. Кража данных карт.","site":"fakeshop.kz","phone":"—"},
+  {"name":"DiscountKZ","type":"shop","status":"black","desc":"Сайт-клон. Кража данных.","site":"discountkz.kz","phone":"—"},
+  {"name":"Megamarket KZ","type":"shop","status":"suspicious","desc":"Жалобы на мошенников-продавцов.","site":"megamarket.kz","phone":"—"},
+  {"name":"Ozon Казахстан","type":"shop","status":"clean","desc":"Маркетплейс","site":"ozon.kz","phone":"—"},
+  {"name":"AliExpress KZ","type":"shop","status":"clean","desc":"Маркетплейс","site":"aliexpress.kz","phone":"—"},
+  {"name":"Чарджбэк-Эксперт KZ","type":"service","status":"clean","desc":"Сервис возврата платежей","site":"chargeback.kz","phone":"—"},
+  {"name":"Бюро «Фемида»","type":"service","status":"clean","desc":"Юридические услуги","site":"femida.kz","phone":"—"},
+  {"name":"Коллегия адвокатов Алматы","type":"service","status":"clean","desc":"Адвокатские услуги","site":"advokatura.kz","phone":"—"},
+  {"name":"GRATA Law Firm","type":"service","status":"clean","desc":"Крупнейшая юрфирма","site":"gratanet.com","phone":"—"},
+  {"name":"AEQUITAS Law Firm","type":"service","status":"clean","desc":"Юридическая фирма","site":"aequitas.kz","phone":"—"},
+  {"name":"Антифрод 1434","type":"service","status":"clean","desc":"Бесплатная консультация","site":"antifraud.kz","phone":"1434"},
+  {"name":"Казпочта","type":"service","status":"clean","desc":"Почтовый оператор","site":"kazpost.kz","phone":"7800"},
+  {"name":"VIP Taxi Алматы","type":"transport","status":"suspicious","desc":"Завышение тарифов.","site":"viptaxi.kz","phone":"—"},
+  {"name":"BlaBlaCar Казахстан","type":"transport","status":"clean","desc":"Сервис попутчиков","site":"blablacar.kz","phone":"—"},
+  {"name":"Яндекс Такси KZ","type":"transport","status":"clean","desc":"Такси","site":"taxi.yandex.kz","phone":"—"},
+  {"name":"AirAstana","type":"transport","status":"clean","desc":"Авиакомпания","site":"airastana.kz","phone":"7800"},
+  {"name":"SCAT Airlines","type":"transport","status":"clean","desc":"Авиакомпания","site":"scat.kz","phone":"7800"},
+  {"name":"InDrive Казахстан","type":"transport","status":"clean","desc":"Такси","site":"indriver.com","phone":"—"},
+  {"name":"DriveMe KZ","type":"transport","status":"suspicious","desc":"Скрытые платежи.","site":"driveme.kz","phone":"—"},
+  {"name":"ТОО СтройКомфорт","type":"company","status":"suspicious","desc":"Долгострои.","site":"stroycomfort.kz","phone":"—"},
+  {"name":"ТОО KazBuild","type":"company","status":"suspicious","desc":"Жалобы на невыполнение.","site":"kazbuild.kz","phone":"—"},
+  {"name":"ТОО InfoTech KZ","type":"company","status":"clean","desc":"IT-компания","site":"infotech.kz","phone":"—"},
+  {"name":"ТОО Kolesa Group","type":"company","status":"clean","desc":"Медиакомпания","site":"kolesa.kz","phone":"—"},
+  {"name":"ТОО Chocofamily","type":"company","status":"clean","desc":"Медиахолдинг","site":"chocofamily.kz","phone":"—"},
+  {"name":"ТОО BuildHouse","type":"company","status":"black","desc":"Фейковый застройщик.","site":"buildhouse.kz","phone":"—"},
+  {"name":"ТОО КазСтройИнвест","type":"company","status":"black","desc":"Мошеннический застройщик.","site":"kazstroyinvest.kz","phone":"—"},
+  {"name":"ТОО TravelKZ","type":"company","status":"suspicious","desc":"Неоказание услуг.","site":"travelkz.kz","phone":"—"},
+  {"name":"МФО Экспресс Деньги","type":"mfo","status":"suspicious","desc":"Ставка 0.5% в день. Коллекторы.","site":"expresmoney.kz","phone":"—"},
+  {"name":"МФО Zaimer KZ","type":"mfo","status":"suspicious","desc":"Списание без согласия.","site":"zaimer.kz","phone":"—"},
+  {"name":"МФО Solva","type":"mfo","status":"clean","desc":"Микрозаймы онлайн","site":"solva.kz","phone":"—"},
+  {"name":"МФО Moneyman","type":"mfo","status":"clean","desc":"Онлайн-займы","site":"moneyman.kz","phone":"—"},
+  {"name":"МФО Кредит24","type":"mfo","status":"clean","desc":"Займы онлайн","site":"credit24.kz","phone":"—"},
+  {"name":"МФО Zaymigo","type":"mfo","status":"clean","desc":"Микрозаймы","site":"zaymigo.kz","phone":"—"},
+  {"name":"МФО БыстроДеньги","type":"mfo","status":"suspicious","desc":"Агрессивные коллекторы.","site":"bistrodengi.kz","phone":"—"},
+  {"name":"МФО ДеньгиВзаймы","type":"mfo","status":"black","desc":"Пирамида под видом МФО.","site":"dengivzaymy.kz","phone":"—"},
+  {"name":"СК Freedom Insurance","type":"insurance","status":"clean","desc":"Страховая компания","site":"freedominsurance.kz","phone":"—"},
+  {"name":"СК Halyk Life","type":"insurance","status":"clean","desc":"Страхование жизни","site":"halyklife.kz","phone":"—"},
+  {"name":"СК Nomad Life","type":"insurance","status":"clean","desc":"Страховая компания","site":"nomadlife.kz","phone":"—"},
+  {"name":"СК Евразия","type":"insurance","status":"clean","desc":"Страховая компания","site":"eurasia.kz","phone":"—"},
+  {"name":"СК Коммеск-Омир","type":"insurance","status":"clean","desc":"Страхование","site":"kommesk.kz","phone":"—"},
+  {"name":"СК Гарант","type":"insurance","status":"suspicious","desc":"Жалобы на выплаты.","site":"garant.kz","phone":"—"},
+  {"name":"СК Фортуна","type":"insurance","status":"black","desc":"Фейковая страховая.","site":"fortuna.kz","phone":"—"},
+  {"name":"СК Страховщик-24","type":"insurance","status":"suspicious","desc":"Нет лицензии.","site":"strahovshik24.kz","phone":"—"}
+];
+var currentFilter='all',searchQuery='';
+var typeLabels={bank:'Банк',gov:'Госорган',crypto:'Крипта',invest:'Инвестиции',fintech:'Финтех',shop:'Магазин',service:'Услуги',mfo:'МФО',insurance:'Страхование',transport:'Транспорт',company:'Компания'};
+function updateStats(l){var t=l.length,c=l.filter(function(o){return o.status==='clean'}).length,s=l.filter(function(o){return o.status==='suspicious'}).length,b=l.filter(function(o){return o.status==='black'}).length;document.getElementById('totalCount').textContent=t;document.getElementById('cleanCount').textContent=c;document.getElementById('suspiciousCount').textContent=s;document.getElementById('blackCount').textContent=b}
+function statusBadge(s){var cls=s==='clean'?'badge-clean':s==='suspicious'?'badge-suspicious':'badge-black';var lbl=s==='clean'?'Безопасно':s==='suspicious'?'Подозрительно':'Чёрный список';return'<span class="badge-status '+cls+'">'+lbl+'</span>'}
+function typeBadge(t){return'<span class="badge-type">'+(typeLabels[t]||t)+'</span>'}
+function esc(s){var d=document.createElement('div');d.appendChild(document.createTextNode(s||''));return d.innerHTML}
+function renderOrgs(list){
+  var c=document.getElementById('orgList');
+  if(!list.length){c.innerHTML='<div class="empty-state"><div class="empty-icon">🔍</div><h3>Ничего не найдено</h3><p>Попробуйте изменить запрос.</p></div>';document.getElementById('resultCount').textContent='0 результатов';return}
+  updateStats(list);document.getElementById('resultCount').textContent='Показано '+list.length+' из '+allOrgs.length;
+  var h='';list.forEach(function(o){
+    h+='<div class="org-card"><div class="org-card-top"><div class="org-name">'+esc(o.name)+'</div><div class="org-badges">'+typeBadge(o.type)+statusBadge(o.status)+'</div></div>';
+    h+='<div class="org-desc">'+esc(o.desc)+'</div><div class="org-meta">';
+    if(o.site)h+='<div class="org-meta-item"><span class="meta-icon">🌐</span><a href="https://'+o.site+'" target="_blank">'+esc(o.site)+'</a></div>';
+    if(o.phone&&o.phone!=='—')h+='<div class="org-meta-item"><span class="meta-icon">📞</span><span>'+esc(o.phone)+'</span></div>';
+    h+='</div><div class="org-actions"><a href="/antifraud-kz/quiz.html" class="org-btn btn-report">📝 Сообщить</a>';
+    if(o.site)h+='<a href="https://'+o.site+'" target="_blank" class="org-btn btn-site">🌐 Сайт</a>';
+    h+='</div></div>';
+  });c.innerHTML=h;
+}
+function filterOrgs(){searchQuery=document.getElementById('orgSearch').value.toLowerCase().trim();applyFilters()}
+function setFilter(f){currentFilter=f;document.querySelectorAll('.filter-btn').forEach(function(b){b.classList.toggle('active',b.getAttribute('data-filter')===f)});applyFilters()}
+function applyFilters(){
+  var list=allOrgs.filter(function(o){
+    if(currentFilter!=='all'&&o.status!==currentFilter)return false;
+    if(searchQuery){var q=searchQuery;return o.name.toLowerCase().indexOf(q)>=0||o.desc.toLowerCase().indexOf(q)>=0||(o.type&&o.type.indexOf(q)>=0)||(o.site&&o.site.indexOf(q)>=0)}
+    return true;
+  });renderOrgs(list);
+}
+renderOrgs(allOrgs);
+</script>
 </body>
 </html>
