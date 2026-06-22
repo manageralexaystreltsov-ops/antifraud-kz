@@ -106,7 +106,7 @@ function renderClients(list){
         adminList.forEach(function(c){
             var sc=c.status==='done'?'s-done':'s-process';
             var sl=c.status==='done'?'Завершено':'В работе';
-            html+='<div class="client-item" style="background:rgba(200,160,0,.04)" onclick="loginAs(\''+c.iin+'\')">';
+            html+='<div class="client-item" style="background:rgba(200,160,0,.04)" onclick="loginAs(\''+c.id+'\')">';
             html+='<div><div class="client-name">'+c.name+'</div><div class="client-meta">'+c.id+' · '+(c.city||'')+' · '+c.amount+'</div></div>';
             html+='<span class="client-status '+sc+'">'+sl+'</span>';
             html+='</div>';
@@ -137,8 +137,8 @@ function switchTab(tab,btn){
     filterClients();
 }
 
-function loginAs(iin){
-    var c=allClients.find(function(x){return x.iin===iin&&(x._admin||true)});
+function loginAs(id){
+    var c=allClients.find(function(x){return x.id===id});
     if(c){
         localStorage.setItem('currentCase',JSON.stringify({id:c.id,name:c.name,phone:c.phone}));
         window.location.href='/antifraud-kz/client/dashboard.html?id='+c.id;
