@@ -214,7 +214,30 @@ function showSection(id,btn){
 var params=new URLSearchParams(window.location.search);
 var caseId=params.get('id')||'AF-2026-0847';
 
-fetch('/antifraud-kz/data/cases.json').then(function(r){return r.json()}).then(function(data){
+// Also check admin_clients
+    var adminClients=JSON.parse(localStorage.getItem('admin_clients')||'[]');
+    var adminCase=adminClients.find(function(c){return c.id===caseId});
+    if(adminCase){
+        renderCase({
+            id:adminCase.id,
+            client:{name:adminCase.name,phone:adminCase.phone},
+            consultant:{name:adminCase.consultant||'Ожидает назначения',role:'Консультант',phone:'',cases:0},
+            status:adminCase.status==='done'?'done':'process',
+            statusText:adminCase.status==='done'?'Завершено':'В работе',
+            stage:'—',stageName:adminCase.status==='done'?'Завершено':'Новое дело',
+            stageDesc:adminCase.desc||'Ожидает обработки',
+            opened:adminCase.date,lastUpdate:adminCase.date,
+            lost:{bank:0,crypto:0,total:0},
+            recovery:[],returned:0,potentialReturn:0,
+            services:[{name:'Консультация',amount:0,status:'paid',note:'Ожидает'}],
+            nextPayment:null,
+            timeline:[{date:adminCase.date,title:'Заявка создана',desc:'Клиент добавлен в систему',status:'done'}],
+            documents:{ours:[],scammers:[]},
+            chat:[{date:adminCase.date+' 10:00',from:'consultant',text:'Заявка принята. Ожидайте звонка специалиста.'}]
+        });
+        return;
+    }
+    fetch('/antifraud-kz/data/cases.json').then(function(r){return r.json()}).then(function(data){
     var c=data.cases.find(function(x){return x.id===caseId});
     if(!c){document.querySelector('.wrap').innerHTML='<div style="text-align:center;padding:60px"><h2>Дело не найдено</h2></div>';return}
     renderCase(c);

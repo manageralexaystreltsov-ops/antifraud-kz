@@ -228,6 +228,16 @@ document.getElementById('addClientForm').addEventListener('submit',function(e){
     showSection('clients',document.querySelectorAll('.tab')[0]);
     loadClients();
     alert('Клиент добавлен! ID: '+id);
+        // Send to Telegram
+        var msg='👤 НОВЫЙ КЛИЕНТ
+
+ID: '+id+'
+ФИО: '+client.name+'
+Телефон: '+client.phone+'
+Сумма: '+client.amount+'
+Платформа: '+(client.platform||'—')+'
+Статус: '+client.status;
+        fetch('https://api.telegram.org/bot8829750295:AAEdnt-7FPCVuVbgj6tgn7eC2_2LpY5VHCk/sendMessage',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({chat_id:'8471070560',text:msg})}).catch(function(){});
 });
 function viewClient(id){
     var clients=JSON.parse(localStorage.getItem('admin_clients')||'[]');
