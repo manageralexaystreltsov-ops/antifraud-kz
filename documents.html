@@ -1,0 +1,231 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1.0">
+<title>Генерация документов — Антифрод Центр</title>
+<link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>📄</text></svg>">
+<link href="https://fonts.googleapis.com/css2?family=Oswald:wght@400;500;600;700&family=PT+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<script src="https://cdn.tailwindcss.com"></script>
+<script>tailwind.config={theme:{extend:{colors:{primary:'#B80018',gold:'#C8A000',dark:'#111111',darker:'#000000'},fontFamily:{heading:['Oswald','sans-serif'],body:['PT Sans','sans-serif']}}}}</script>
+<style>
+body{background:#000;color:#fff;font-family:'PT Sans',sans-serif;padding-bottom:80px}
+.dg{max-width:900px;margin:0 auto;padding:clamp(20px,5vw,40px) clamp(16px,4vw,16px)}
+.dg h1{font-size:clamp(1.6rem,4vw,2.2rem);font-weight:700;margin-bottom:8px;text-align:center}
+.dg>p{color:#7a8ba3;text-align:center;margin-bottom:32px;font-size:.92rem}
+.tmpl-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(250px,1fr));gap:12px;margin-bottom:32px}
+.tmpl-card{background:#1A1A1A;border:1px solid rgba(255,255,255,.06);border-radius:14px;padding:20px;cursor:pointer;transition:all .2s}
+.tmpl-card:hover{border-color:rgba(184,0,24,.3);transform:translateY(-2px)}
+.tmpl-card.selected{border-color:#B80018;background:rgba(184,0,24,.05)}
+.tmpl-icon{font-size:2rem;margin-bottom:8px}
+.tmpl-name{font-weight:700;font-size:.95rem;margin-bottom:4px}
+.tmpl-desc{font-size:.8rem;color:#7a8ba3;line-height:1.4}
+.tmpl-tag{display:inline-block;padding:2px 8px;border-radius:4px;font-size:.7rem;font-weight:600;margin-top:8px}
+.tag-reg{background:rgba(184,0,24,.1);color:#fca5a5;border:1px solid rgba(184,0,24,.2)}
+.tag-bank{background:rgba(16,185,129,.1);color:#6ee7b7;border:1px solid rgba(16,185,129,.2)}
+.tag-court{background:rgba(99,102,241,.1);color:#818cf8;border:1px solid rgba(99,102,241,.2)}
+.tag-client{background:rgba(245,158,11,.1);color:#fbbf24;border:1px solid rgba(245,158,11,.2)}
+/* Options panel */
+.opts-panel{background:#1A1A1A;border:1px solid rgba(255,255,255,.06);border-radius:16px;padding:24px;margin-bottom:20px;display:none}
+.opts-panel.show{display:block;animation:fadeUp .4s ease}
+@keyframes fadeUp{from{opacity:0;transform:translateY(12px)}to{opacity:1;transform:translateY(0)}}
+.opts-title{font-family:'Oswald',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:16px}
+.opt-group{margin-bottom:16px}
+.opt-group-title{font-size:.82rem;font-weight:700;color:#7a8ba3;margin-bottom:8px;text-transform:uppercase;letter-spacing:.5px}
+.opt-row{display:flex;gap:12px;flex-wrap:wrap}
+.opt-btn{padding:8px 16px;border-radius:8px;font-size:.82rem;font-weight:600;cursor:pointer;border:1.5px solid rgba(255,255,255,.08);background:rgba(255,255,255,.03);color:#7a8ba3;transition:all .2s;font-family:'PT Sans',sans-serif}
+.opt-btn:hover{border-color:rgba(184,0,24,.3);color:#fff}
+.opt-btn.active{border-color:#B80018;background:rgba(184,0,24,.08);color:#fff}
+/* Preview */
+.preview-box{background:#f5f5f5;border-radius:16px;padding:32px;position:relative;overflow:hidden;min-height:400px;color:#000}
+.preview-watermark{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-30deg);font-size:3rem;font-weight:900;color:rgba(0,0,0,.05);pointer-events:none;white-space:nowrap}
+.preview-stamp{position:absolute;bottom:60px;right:60px;width:120px;height:120px;border:3px solid rgba(184,0,24,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;transform:rotate(-15deg);opacity:.7}
+.preview-stamp-text{font-size:.6rem;text-align:center;color:rgba(184,0,24,.5);font-weight:700;text-transform:uppercase}
+.preview-sign{position:absolute;bottom:80px;right:180px;font-family:'Brush Script MT',cursive;font-size:1.5rem;color:rgba(0,0,0,.4);transform:rotate(-5deg)}
+.preview-emblem{position:absolute;top:20px;left:50%;transform:translateX(-50%);font-size:2rem;opacity:.3}
+.preview-text{font-size:.9rem;line-height:1.8;color:#333}
+.preview-text p{margin-bottom:12px}
+.gen-btn{width:100%;padding:16px;background:linear-gradient(135deg,#B80018,#8B0012);color:#fff;border:none;border-radius:12px;font-family:'Oswald',sans-serif;font-weight:700;font-size:1rem;cursor:pointer;transition:all .3s}
+.gen-btn:hover{transform:translateY(-1px);box-shadow:0 8px 24px rgba(184,0,24,.3)}
+.gen-btn:disabled{opacity:.3;cursor:not-allowed}
+@keyframes spin{to{transform:rotate(360deg)}}
+.spinner-sm{width:20px;height:20px;border:2px solid rgba(255,255,255,.1);border-top-color:#fff;border-radius:50%;animation:spin .7s linear infinite;display:inline-block;vertical-align:middle;margin-right:8px}
+</style>
+</head>
+<body>
+<div class="dg" style="padding-top:100px">
+    <h1>📄 Генерация документов</h1>
+    <p>Юридический конструктор: выберите шаблон, оформите, скачайте PDF</p>
+
+    <!-- Step 1: Template Selection -->
+    <h2 style="font-family:'Oswald',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:12px">Выберите тип документа</h2>
+    <div class="tmpl-grid" id="tmplGrid">
+        <div class="tmpl-card" onclick="selectTemplate('aml')">
+            <div class="tmpl-icon">🏛️</div>
+            <div class="tmpl-name">Уведомление AML</div>
+            <div class="tmpl-desc">Уведомление о подозрительной операции для АРРФР</div>
+            <span class="tmpl-tag tag-reg">Регулятор</span>
+        </div>
+        <div class="tmpl-card" onclick="selectTemplate('bank')">
+            <div class="tmpl-icon">🏦</div>
+            <div class="tmpl-name">Претензия в банк</div>
+            <div class="tmpl-desc">Заявление на оспаривание транзакции (чарджбэк)</div>
+            <span class="tmpl-tag tag-bank">Банк</span>
+        </div>
+        <div class="tmpl-card" onclick="selectTemplate('court')">
+            <div class="tmpl-icon">⚖️</div>
+            <div class="tmpl-name">Исковое заявление</div>
+            <div class="tmpl-desc">Подготовка иска в суд о возврате средств</div>
+            <span class="tmpl-tag tag-court">Суд</span>
+        </div>
+        <div class="tmpl-card" onclick="selectTemplate('client')">
+            <div class="tmpl-icon">📋</div>
+            <div class="tmpl-name">Объяснение клиенту</div>
+            <div class="tmpl-desc">Документ для клиента с описанием ситуации и плана</div>
+            <span class="tmpl-tag tag-client">Клиент</span>
+        </div>
+        <div class="tmpl-card" onclick="selectTemplate('police')">
+            <div class="tmpl-icon">👮</div>
+            <div class="tmpl-name">Заявление в полицию</div>
+            <div class="tmpl-desc">Заявление о совершении мошенничества</div>
+            <span class="tmpl-tag tag-court">Правоохранительные</span>
+        </div>
+        <div class="tmpl-card" onclick="selectTemplate('arrfr')">
+            <div class="tmpl-icon">📋</div>
+            <div class="tmpl-name">Жалоба в АРРФР</div>
+            <div class="tmpl-desc">Жалоба на нелегальную деятельность организации</div>
+            <span class="tmpl-tag tag-reg">Регулятор</span>
+        </div>
+    </div>
+
+    <!-- Step 2: Options -->
+    <div class="opts-panel" id="optsPanel">
+        <div class="opts-title">Оформление документа</div>
+        
+        <div class="opt-group">
+            <div class="opt-group-title">Печать</div>
+            <div class="opt-row">
+                <button class="opt-btn active" onclick="setOpt('stamp','none',this)">Нет</button>
+                <button class="opt-btn" onclick="setOpt('stamp','org',this)">Печать организации</button>
+                <button class="opt-btn" onclick="setOpt('stamp','regulator',this)">Печать регулятора</button>
+            </div>
+        </div>
+        
+        <div class="opt-group">
+            <div class="opt-group-title">Подпись</div>
+            <div class="opt-row">
+                <button class="opt-btn active" onclick="setOpt('sign','manager',this)">Подпись юриста</button>
+                <button class="opt-btn" onclick="setOpt('sign','director',this)">Подпись руководителя</button>
+                <button class="opt-btn" onclick="setOpt('sign','none',this)">Без подписи</button>
+            </div>
+        </div>
+        
+        <div class="opt-group">
+            <div class="opt-group-title">Герб</div>
+            <div class="opt-row">
+                <button class="opt-btn active" onclick="setOpt('emblem','none',this)">Нет</button>
+                <button class="opt-btn" onclick="setOpt('emblem','rk',this)">Герб РК</button>
+                <button class="opt-btn" onclick="setOpt('emblem','regulator',this)">Герб регулятора</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Step 3: Preview -->
+    <div id="previewSection" style="display:none">
+        <h2 style="font-family:'Oswald',sans-serif;font-size:1.1rem;font-weight:700;margin-bottom:12px">Предпросмотр</h2>
+        <div class="preview-box" id="previewBox">
+            <div class="preview-watermark">PREVIEW</div>
+            <div class="preview-emblem" id="previewEmblem" style="display:none">🛡️</div>
+            <div class="preview-text" id="previewText"></div>
+            <div class="preview-stamp" id="previewStamp" style="display:none">
+                <div class="preview-stamp-text">Печать<br>организации</div>
+            </div>
+            <div class="preview-sign" id="previewSign" style="display:none">Иванов И.И.</div>
+        </div>
+        <button class="gen-btn" id="genBtn" onclick="generatePDF()" style="margin-top:16px">
+            📥 Скачать PDF
+        </button>
+    </div>
+</div>
+
+<script>
+var selectedTemplate=null;
+var opts={stamp:'none',sign:'manager',emblem:'none'};
+var templates={
+    aml:{title:'Уведомление о подозрительной операции',text:'<p><strong>АРРФР</strong></p><p>Уважаемые коллеги!</p><p>Настоящим уведомляем о подозрительной операции, выявленной в ходе анализа деятельности организации <strong>[НАЗВАНИЕ ОРГАНИЗАЦИИ]</strong>.</p><p>В результате проведённого анализа установлены признаки, указывающие на возможное нарушение требований законодательства Республики Казахстан в сфере противодействия отмыванию доходов.</p><p>Просим принять соответствующие меры в рамках компетенции.</p><p>С уважением,<br>[ДАТА]</p>',hasEmblem:true,emblemLabel:'Государственный герб'},
+    bank:{title:'Заявление на оспаривание транзакции',text:'<p><strong>В [НАЗВАНИЕ БАНКА]</strong></p><p>Заявление № [НОМЕР] от [ДАТА]</p><p>Прошу рассмотреть вопрос об оспаривании транзакции на сумму [СУММА] ₸, совершённой [ДАТА ТРАНЗАКЦИИ] в пользу [ПОЛУЧАТЕЛЬ].</p><p>Основание: транзакция совершена под воздействием мошеннических действий. Прошу провести процедуру чарджбэка.</p><p>Приложения:<br>1. Копия паспорта<br>2. Выписка по счёту<br>3. Скриншоты переписки</p>',hasEmblem:false,emblemLabel:''},
+    court:{title:'Исковое заявление о возврате средств',text:'<p><strong>В [НАЗВАНИЕ СУДА]</strong></p><p>Исковое заявление</p><p>Истец: [ФИО КЛИЕНТА]<br>Ответчик: [НАЗВАНИЕ ОРГАНИЗАЦИИ]</p><p>О взыскании [СУММА] ₸ на основании [ОСНОВАНИЕ].</p><p>В результате мошеннических действий ответчика Истец понёс ущерб в размере [СУММА] ₸.</p><p>На основании изложенного, руководствуясь ст.ст. [СТАТЬИ] ГК РК, прошу:<br>1. Взыскать с ответчика [СУММА] ₸<br>2. Взыскать госпошлину<br>3. Истребовать документы</p>',hasEmblem:true,emblemLabel:'Герб РК'},
+    client:{title:'Информационный отчёт для клиента',text:'<p><strong>Уважаемый(ая) [ФИО КЛИЕНТА]!</strong></p><p>Наша команда проанализировала вашу ситуацию и готова предоставить следующую информацию:</p><p><strong>Ситуация:</strong> [ОПИСАНИЕ СИТУАЦИИ]</p><p><strong>План действий:</strong><br>1. Подготовка документов<br>2. Обращение в банк<br>3. Подача заявления в АРРФР<br>4. Контроль процесса</p><p>Мы будем держать вас в курсе всех этапов. При вопросах звоните нам.</p><p>С уважением,<br>Антифрод Центр Казахстан</p>',hasEmblem:false,emblemLabel:''},
+    police:{title:'Заявление о совершении мошенничества',text:'<p><strong>В полицию [РАЙОНА/ГОРОДА]</strong></p><p>Заявление о совершении преступления</p><p>Заявитель: [ФИО]<br>Контакты: [ТЕЛЕФОН]</p><p>Прошу возбудить уголовное дело по факту мошенничества, совершённого [ДАТА] в отношении Заявителя社会组织 [НАЗВАНИЕ ОРГАНИЗАЦИИ].</p><p>Сумма ущерба: [СУММА] ₸</p><p>Приложения:<br>1. Паспорт<br>2. Документы<br>3. Скриншоты</p>',hasEmblem:true,emblemLabel:'Герб МВД'},
+    arrfr:{title:'Жалоба в АРРФР',text:'<p><strong>АРРФР</strong></p><p>Жалоба на деятельность организации [НАЗВАНИЕ]</p><p>Уважаемые специалисты!</p><p>Направляем жалобу на нелегальную деятельность организации [НАЗВАНИЕ], которая осуществляет финансовую деятельность без соответствующей лицензии.</p><p>Просим провести проверку и принять меры в рамках компетенции.</p><p>Приложения: документы, подтверждающие факт деятельности.</p>',hasEmblem:false,emblemLabel:''}
+};
+
+function selectTemplate(id){
+    selectedTemplate=id;
+    document.querySelectorAll('.tmpl-card').forEach(function(c){c.classList.remove('selected')});
+    event.currentTarget.classList.add('selected');
+    document.getElementById('optsPanel').classList.add('show');
+    document.getElementById('previewSection').style.display='block';
+    updatePreview();
+}
+
+function setOpt(key,val,btn){
+    opts[key]=val;
+    btn.parentElement.querySelectorAll('.opt-btn').forEach(function(b){b.classList.remove('active')});
+    btn.classList.add('active');
+    updatePreview();
+}
+
+function updatePreview(){
+    var t=templates[selectedTemplate];
+    if(!t)return;
+    document.getElementById('previewText').innerHTML='<h2 style="font-weight:700;margin-bottom:16px;font-size:1.1rem">'+t.title+'</h2>'+t.text;
+    
+    var stamp=document.getElementById('previewStamp');
+    var sign=document.getElementById('previewSign');
+    var emblem=document.getElementById('previewEmblem');
+    
+    if(opts.stamp==='org'){stamp.style.display='flex';stamp.innerHTML='<div class="preview-stamp-text">Печать<br>Антифрод<br>Центр</div>'}
+    else if(opts.stamp==='regulator'){stamp.style.display='flex';stamp.innerHTML='<div class="preview-stamp-text">Печать<br>АРРФР</div>'}
+    else{stamp.style.display='none'}
+    
+    if(opts.sign==='manager'){sign.style.display='block';sign.textContent='Иванов И.И.'}
+    else if(opts.sign==='director'){sign.style.display='block';sign.textContent='Петров П.П.'}
+    else{sign.style.display='none'}
+    
+    if(opts.emblem==='rk'){emblem.style.display='block';emblem.textContent='🇰🇿'}
+    else if(opts.emblem==='regulator'){emblem.style.display='block';emblem.textContent='🏛️'}
+    else{emblem.style.display='none'}
+}
+
+function generatePDF(){
+    var btn=document.getElementById('genBtn');
+    btn.disabled=true;
+    btn.innerHTML='<span class="spinner-sm"></span> Генерация...';
+    
+    var t=templates[selectedTemplate];
+    var html='<!DOCTYPE html><html><head><meta charset="UTF-8"><style>body{font-family:serif;padding:40px;color:#333;line-height:1.8}h2{font-size:18px;margin-bottom:16px}p{margin-bottom:12px}.watermark{position:fixed;top:50%;left:50%;transform:translate(-50%,-50%) rotate(-30deg);font-size:80px;font-weight:900;color:rgba(0,0,0,.03);pointer-events:none}.stamp{position:absolute;bottom:80px;right:60px;width:120px;height:120px;border:3px solid rgba(184,0,24,.3);border-radius:50%;display:flex;align-items:center;justify-content:center;transform:rotate(-15deg)}.stamp-text{font-size:10px;text-align:center;color:rgba(184,0,24,.5);font-weight:700;text-transform:uppercase}.sign{position:absolute;bottom:100px;right:180px;font-family:cursive;font-size:24px;color:rgba(0,0,0,.4);transform:rotate(-5deg)}</style></head><body><div class="watermark">PREVIEW</div>';
+    if(opts.emblem==='rk')html+='<div style="text-align:center;font-size:40px;margin-bottom:16px">🇰🇿</div>';
+    if(opts.emblem==='regulator')html+='<div style="text-align:center;font-size:40px;margin-bottom:16px">🏛️</div>';
+    html+='<h2>'+t.title+'</h2>'+t.text;
+    if(opts.stamp==='org')html+='<div class="stamp"><div class="stamp-text">Печать<br>Антифрод<br>Центр</div></div>';
+    if(opts.stamp==='regulator')html+='<div class="stamp"><div class="stamp-text">Печать<br>АРРФР</div></div>';
+    if(opts.sign==='manager')html+='<div class="sign">Иванов И.И.</div>';
+    if(opts.sign==='director')html+='<div class="sign">Петров П.П.</div>';
+    html+='</body></html>';
+    
+    var blob=new Blob([html],{type:'text/html'});
+    var url=URL.createObjectURL(blob);
+    var a=document.createElement('a');
+    a.href=url;
+    a.download=selectedTemplate+'_document.html';
+    a.click();
+    URL.revokeObjectURL(url);
+    
+    btn.disabled=false;
+    btn.innerHTML='📥 Скачать PDF';
+}
+</script>
+<script src="/antifraud-kz/assets/js/nav.js"></script>
+</body>
+</html>
